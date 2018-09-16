@@ -1,0 +1,47 @@
+
+.fa-loader{
+    margin-left: 12px;
+    margin-right: 8px;
+}
+
+/*deja fijo el menu superior*/
+.main-header-fixed{
+    position:fixed;
+    width:100%
+}
+.content-header{
+    padding: 85px .5rem 0;
+}
+
+/*ajustes de logo*/
+.brand-link{
+    display:block;
+}
+
+#brandnavbar{
+    padding: 0px;
+    line-height:2;
+    display:none;
+}
+
+#logo-mainmenu{
+    margin-top:3px;
+}
+
+/*ajustes de menu lateral izquierdo*/
+.main-sidebar{
+    top:58px;
+}
+
+@media (min-width: 992px) {
+    .main-sidebar{
+        top:0px;
+    }
+
+    #brandnavbar{
+        position: relative;
+        display:block;
+    }
+    
+}
+
