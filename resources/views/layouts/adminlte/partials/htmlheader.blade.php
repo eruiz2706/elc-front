@@ -33,7 +33,4 @@
   <link rel="stylesheet" href="{{ URL::asset('css/loader-1.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('css/loader-5.css') }}">
   
-  <!-- leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
-
 </head>

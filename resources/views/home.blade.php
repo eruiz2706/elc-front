@@ -2,6 +2,16 @@
 
 @extends('layouts.adminlte.app')
 
+@section('banner')
+<div class="img-bannerhome" style="background-image: url('{{ URL::asset('rsc/dist/img/banner.jpg') }}');">
+  <!--<div class="inner-bannerhome">
+      <h1>IMAGE SAMPLE</h1>
+      <h2>The Quick Brown Fox jumps Over the lazy dog</h2>
+      <a class="btn" href="#">CLICK HERE</a>
+  </div>-->
+</div>
+@endsection
+
 @section('content')
 
 <div class="container">
@@ -69,7 +79,7 @@
                       <i class="fa fa-inbox"></i> Curso 5
                     </a>
                   </li>
-                
+
                 </ul>
               </div>
               <!-- /.card-body -->
@@ -367,25 +377,4 @@
 @section('scripts')
 @parent
 
-<script>
-    var map = L.map('map').
-        setView([41.66, -4.72],
-        15);
-
-
-L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-maxZoom: 18
-}).addTo(map);
-
-L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-maxZoom: 18
-}).addTo(map);
-
-
-    L.control.scale().addTo(map);
-
-    L.marker([41.66, -4.71],{draggable: true}).addTo(map);
-</script>
 @stop

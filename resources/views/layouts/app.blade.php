@@ -17,27 +17,30 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <!-- toast -->
+    <link rel="stylesheet" href="{{ URL::asset('plugins/toastr/toastr.min.css') }}">
+    <!-- swheetalert -->
+    <link rel="stylesheet" href="{{ URL::asset('plugins/sweetalert/sweetalert.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ URL::asset('rsc//dist/css/adminlte.min.css')}}">
-
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
     <!-- preload -->
     <link rel="stylesheet" href="{{ URL::asset('css/loader-1.css') }}">
 </head>
 <!--<body>-->
+
 <body class="hold-transition login-page">
     <div  id="loader-1" class="loader-wrapper">
             <div id="loader"></div>
     </div>
 
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-        <div class="container">
+        <div class="container"  >
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name') }}
             </a>
@@ -55,7 +58,7 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     <li><a class="nav-link" href="{{ route('login') }}">Acceder</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">Registrate</a></li>
+                    <li><a class="nav-link" href="{{url('registerusu')}}">Registrate</a></li>
                 </ul>
             </div>
         </div>
@@ -69,6 +72,15 @@
 <script src="{{ URL::asset('rsc/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ URL::asset('rsc/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- toast -->
+<script src="{{ URL::asset('plugins/toastr/toastr.js') }}"></script>
+<!-- swheetalert -->
+<script src="{{ URL::asset('plugins/sweetalert/sweetalert.min.js') }}"></script>
+<!-- vue -->
+<script src="{{ URL::asset('js/vue.js') }}"></script>
+<script src="{{ URL::asset('js/axios.js') }}"></script>
+@section('scripts')
+@show
 
 <script>
     window.onload = function() {

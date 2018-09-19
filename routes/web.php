@@ -14,5 +14,8 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/', 'HomeController@index');
 Auth::routes();
+Route::resource('/registerusu', 'backend\RegisterController');
+
+
+Route::get('/', 'HomeController@index')->middleware('auth');
