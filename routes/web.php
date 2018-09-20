@@ -17,16 +17,31 @@
 Auth::routes();
 Route::resource('/registerusu', 'backend\RegisterController');
 
+Route::middleware(['auth'])->group(function(){
 
-Route::get('/', 'HomeController@index')->middleware('auth');
+  Route::get('/', 'HomeController@index');
 
-Route::resource('st/home', 'backend\st\HomeStudyController')->middleware('auth');
-Route::post('st/home/search', 'backend\st\HomeStudyController@search')->middleware('auth');
-Route::resource('st/profile', 'backend\st\ProfileStudyController')->middleware('auth');
-Route::resource('st/room', 'backend\st\RoomStudyController')->middleware('auth');
+  Route::group(['prefix' => 'st'], function() {
+    Route::resource('home', 'backend\st\HomeStudyController');
+    Route::post('home/search', 'backend\st\HomeStudyController@search');
+    Route::get('home/detcourse/{id}', 'backend\st\HomeStudyController@detcourse');
 
-Route::resource('te/home', 'backend\te\HomeTeacherController')->middleware('auth');
+    Route::resource('profile', 'backend\st\ProfileStudyController');
+    Route::post('profile/info', 'backend\st\ProfileStudyController@info');
 
-Route::resource('in/home', 'backend\in\HomeInstiController')->middleware('auth');
+    Route::resource('room', 'backend\st\RoomStudyController');
+  });
 
-Route::resource('fa/home', 'backend\fa\HomeFamilyController')->middleware('auth');
+  Route::group(['prefix' => 'te'], function() {
+    Route::resource('home', 'backend\te\HomeTeacherController');
+  });
+
+  Route::group(['prefix' => 'in'], function() {
+    Route::resource('home', 'backend\in\HomeInstiController');
+  });
+
+  Route::group(['prefix' => 'fa'], function() {
+    Route::resource('home', 'backend\fa\HomeFamilyController');
+  });
+
+});

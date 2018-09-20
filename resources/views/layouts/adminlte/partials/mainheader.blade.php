@@ -136,7 +136,7 @@ $colorbranknavbar   ="bg-primary";
                     <!--<h6 class="widget-user-desc">Desarrollador Web</h6>-->
                   </div>
                   <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="{{URL::asset('img/avatar/'.Auth::user()->id.'.jpg')}}" onerror="this.src='{{URL::asset('img/app/user.png')}}'" alt="User Avatar">
+                  <img class="img-circle elevation-2" src="{{ URL::asset('rsc/dist/img/user1-128x128.jpg') }}"  alt="User Avatar">
                   </div>
                   <div class="card-footer">
                     <div class="row">

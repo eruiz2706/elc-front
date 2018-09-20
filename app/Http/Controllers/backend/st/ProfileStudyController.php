@@ -4,6 +4,8 @@ namespace App\Http\Controllers\backend\st;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class ProfileStudyController extends Controller
 {
@@ -81,5 +83,17 @@ class ProfileStudyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function info(Request $request){
+      $user  =DB::select("select name,email from users
+                            where id =:id"
+                       ,['id'=>Auth::user()->id])[0];
+
+      $jsonresponse=[
+          'status' =>'success',
+          'user'=>$user
+      ];
+      return response()->json($jsonresponse,200);
     }
 }

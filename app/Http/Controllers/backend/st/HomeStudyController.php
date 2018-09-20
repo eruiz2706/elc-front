@@ -93,4 +93,10 @@ class HomeStudyController extends Controller
       ];
       return response()->json($jsonresponse,200);
     }
+
+    public function detcourse($id){
+      $course=['title'=>'programacion orientada a objetos','descrip'=>'en este curso aprenderas'];
+      $course=['title'=>'hoa'];
+      return view('backend.st.home.detcourse',compact('course'));
+    }
 }
