@@ -40,18 +40,6 @@ $colorbranknavbar   ="bg-primary";
         </li>-->
     </ul>
 
-    <!-- SEARCH FORM -->
-    <!--<form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>-->
-
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
@@ -134,8 +122,10 @@ $colorbranknavbar   ="bg-primary";
 
       <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
-            {{ Auth::user()->name }}<i class="fa fa-chevron-down" style="padding-left:15px;"></i>
-
+            <div class="user-block">
+              <img class="img-circle img-bordered-sm" src="{{ URL::asset('rsc/dist/img/user1-128x128.jpg') }}" alt="user image">
+              <i class="fa fa-chevron-down" style="padding-left:15px;"></i>
+            </div>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
@@ -172,14 +162,6 @@ $colorbranknavbar   ="bg-primary";
                 </div>
           </div>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <div class="user-block">
-             <img class="img-circle img-bordered-sm" src="{{ URL::asset('rsc/dist/img/user1-128x128.jpg') }}" alt="user image">
-            </div>
-          </a>
-        </li>
-
     </ul>
 
   </nav>

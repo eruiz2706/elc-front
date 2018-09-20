@@ -14,17 +14,17 @@
     <ul class="list-group list-group-unbordered mb-3">
 
       <li class="list-group-item">
-        <a class="float-left" href="{{url('st/inicio')}}"><ion-icon name="arrow-forward">
+        <a class="float-left" href="{{url('st/home')}}"><ion-icon name="arrow-forward">
           <b>Inicio</b>
         </a>
       </li>
       <li class="list-group-item" >
-        <a class="float-left" href="{{url('st/perfil')}}"><ion-icon name="arrow-forward">
+        <a class="float-left" href="{{url('st/profile')}}"><ion-icon name="arrow-forward">
           <b>Perfil</b>
         </a>
       </li>
       <li class="list-group-item">
-        <a class="float-left" href="{{url('st/sala')}}"><ion-icon name="arrow-forward">
+        <a class="float-left" href="{{url('st/room')}}"><ion-icon name="arrow-forward">
           <b>Sala de estudio</b>
         </a>
       </li>

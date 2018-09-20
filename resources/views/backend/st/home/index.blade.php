@@ -21,7 +21,12 @@
       </div>
 
       <div class="col-md-9" style='padding-top:70px;'>
-          @include('backend.st.inicio.course')
+        <div class="row"  v-if="preload">
+          <div class="d-block mx-auto" >
+            <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
+          </div>
+        </div>
+          @include('backend.st.home.course')
       </div>
   </div>
 </div>
@@ -29,5 +34,5 @@
 
 @section('scripts')
 @parent
-
+<script src="{{ URL::asset('js/be/st/home/index.js') }}"></script>
 @stop

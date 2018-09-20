@@ -4,8 +4,9 @@ namespace App\Http\Controllers\backend\st;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
 
-class SalaStudyController extends Controller
+class HomeStudyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class SalaStudyController extends Controller
      */
     public function index()
     {
-        return view('backend.st.sala.index');
+      return view('backend.st.home.index');
     }
 
     /**
@@ -81,5 +82,15 @@ class SalaStudyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request){
+      $courses  =DB::select("select * from courses");
+
+      $jsonresponse=[
+          'status' =>'success',
+          'data'=>$courses
+      ];
+      return response()->json($jsonresponse,200);
     }
 }

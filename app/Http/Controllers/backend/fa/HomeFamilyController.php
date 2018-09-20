@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\backend\st;
+namespace App\Http\Controllers\backend\fa;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PerfilStudyController extends Controller
+class HomeFamilyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PerfilStudyController extends Controller
      */
     public function index()
     {
-        return view('backend.st.perfil.index');
+        echo "dashboard family";
     }
 
     /**

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\backend\te;
+namespace App\Http\Controllers\backend\st;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class InicioTeacherController extends Controller
+class RoomStudyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class InicioTeacherController extends Controller
      */
     public function index()
     {
-        echo "dashboard teacher";
+        return view('backend.st.room.index');
     }
 
     /**

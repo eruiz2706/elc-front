@@ -23,12 +23,12 @@
       <div class="col-md-9"  style='padding-top:70px;'>
         <div class="row">
             <div class="col-md-12">
-              @include('backend.st.perfil.profile')
+              @include('backend.st.profile.profile')
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                @include('backend.st.perfil.invoice')
+                @include('backend.st.profile.invoice')
             </div>
         </div>
       </div>
@@ -38,5 +38,5 @@
 
 @section('scripts')
 @parent
-
+<script src="{{ URL::asset('js/be/st/profile/index.js') }}"></script>
 @stop

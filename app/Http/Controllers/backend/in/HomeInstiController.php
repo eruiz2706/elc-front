@@ -5,7 +5,7 @@ namespace App\Http\Controllers\backend\in;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DashInstiController extends Controller
+class HomeInstiController extends Controller
 {
     /**
      * Display a listing of the resource.

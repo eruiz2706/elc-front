@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\backend\fa;
+namespace App\Http\Controllers\backend\st;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DashFamilyController extends Controller
+class ProfileStudyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class DashFamilyController extends Controller
      */
     public function index()
     {
-        echo "dashboard family";
+        return view('backend.st.profile.index');
     }
 
     /**
