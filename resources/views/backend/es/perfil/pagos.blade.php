@@ -5,7 +5,12 @@
     <div class="col-12">
       <h4>
         <i class="fa fa-calculator"></i>RENOVAR SUSCRIPCION
+        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;" :disabled="loader_pagar" v-on:click="pagar">
+          <i class="fa fa-credit-card"></i> Pagar
+          <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_pagar"></i>
+        </button>
       </h4>
+
     </div>
     <!-- /.col -->
   </div>
@@ -18,13 +23,6 @@
       <img src="{{ URL::asset('rsc/dist/img/credit/mastercard.png') }}" alt="Mastercard">
       <img src="{{ URL::asset('rsc/dist/img/credit/american-express.png') }}" alt="American Express">
       <img src="{{ URL::asset('rsc/dist/img/credit/paypal2.png') }}" alt="Paypal">
-
-      <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-        plugg
-        dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-      </p>
-
     </div>
     <!-- /.col -->
     <div class="col-6">
@@ -44,15 +42,7 @@
   </div>
   <!-- /.row -->
 
-  <!-- this row will not appear when printing -->
-  <div class="row no-print">
-    <div class="col-12">
-      <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;" :disabled="loader_pagar" v-on:click="pagar">
-        <i class="fa fa-credit-card"></i> Pagar
-        <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_pagar"></i>
-      </button>
-    </div>
-  </div>
+
 </div>
 <!-- /.invoice -->
 
