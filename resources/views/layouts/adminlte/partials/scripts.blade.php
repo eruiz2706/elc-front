@@ -1,3 +1,5 @@
+
+<script>var base_url = '<?php echo url('/'); ?>';</script>
 <!-- jQuery -->
 <script src="{{ URL::asset('rsc/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->

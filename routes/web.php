@@ -15,33 +15,35 @@
     return view('welcome');
 });*/
 Auth::routes();
-Route::resource('/registerusu', 'backend\RegisterController');
+Route::resource('/registro', 'backend\RegistroController');
 
 Route::middleware(['auth'])->group(function(){
 
   Route::get('/', 'HomeController@index');
 
-  Route::group(['prefix' => 'st'], function() {
-    Route::resource('home', 'backend\st\HomeStudyController');
-    Route::post('home/search', 'backend\st\HomeStudyController@search');
-    Route::get('home/detcourse/{id}', 'backend\st\HomeStudyController@detcourse');
+  Route::group(['prefix' => 'es'], function() {
+    Route::resource('inicio', 'backend\es\InicioEsController');
+    Route::post('inicio/busq', 'backend\es\InicioEsController@busqueda');
+    Route::get('inicio/detcurso/{id}', 'backend\es\InicioEsController@detallecurso');
+    Route::get('inicio/curso/{id}', 'backend\es\InicioEsController@curso');
 
-    Route::resource('profile', 'backend\st\ProfileStudyController');
-    Route::post('profile/info', 'backend\st\ProfileStudyController@info');
+    Route::resource('perfil', 'backend\es\PerfilEsController');
+    Route::post('perfil/info', 'backend\es\PerfilEsController@info');
+    Route::post('perfil/pagar', 'backend\es\PerfilEsController@pagar');
 
-    Route::resource('room', 'backend\st\RoomStudyController');
-  });
-
-  Route::group(['prefix' => 'te'], function() {
-    Route::resource('home', 'backend\te\HomeTeacherController');
+    Route::resource('sala', 'backend\es\SalasEsController');
   });
 
   Route::group(['prefix' => 'in'], function() {
-    Route::resource('home', 'backend\in\HomeInstiController');
+    Route::resource('inicio', 'backend\in\InicioInController');
   });
 
-  Route::group(['prefix' => 'fa'], function() {
-    Route::resource('home', 'backend\fa\HomeFamilyController');
+  Route::group(['prefix' => 'pr'], function() {
+    Route::resource('inicio', 'backend\pr\InicioPrController');
+  });
+
+  Route::group(['prefix' => 'pa'], function() {
+    Route::resource('inicio', 'backend\pa\InicioPaController');
   });
 
 });

@@ -35,14 +35,14 @@ class HomeController extends Controller
                           where user_id = :user_id"
                        ,['user_id'=>$user->id])[0];
 
-       if($rol->slug=='study'){
-         return redirect('st/home');
-       }else if($rol->slug=='teacher'){
-         return redirect('te/home');
-       }else if($rol->slug=='institution'){
-         return redirect('in/home');
-       }else if($rol->slug=='family'){
-         return redirect('fa/home');
+       if($rol->slug=='estudiante'){
+        return redirect('es/inicio');
+       }else if($rol->slug=='profesor'){
+         return redirect('pr/inicio');
+       }else if($rol->slug=='instituto'){
+         return redirect('in/inicio');
+       }else if($rol->slug=='pariente'){
+         return redirect('pa/inicio');
        }else{
 
        }

@@ -58,7 +58,7 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     <li><a class="nav-link" href="{{ route('login') }}">Acceder</a></li>
-                    <li><a class="nav-link" href="{{url('registerusu')}}">Registrate</a></li>
+                    <li><a class="nav-link" href="{{url('registro')}}">Registrate</a></li>
                 </ul>
             </div>
         </div>
