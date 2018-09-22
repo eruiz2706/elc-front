@@ -68,7 +68,7 @@ class RegistroController extends Controller
         }
 
         $attributes =[
-            'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d'))));
+            'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
             'nombre'  =>$request->input('email'),
             'email'=>$request->input('email'),
             'password'=>Hash::make($request->input('password'))
