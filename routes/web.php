@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function(){
     Route::post('perfil/info', 'backend\es\PerfilEsController@info');
     Route::post('perfil/pagar', 'backend\es\PerfilEsController@pagar');
 
+    Route::resource('forog', 'backend\es\ForoGeneralController');
+
     Route::resource('sala', 'backend\es\SalasEsController');
   });
 

@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{url('es/sala')}}" class="nav-link">
+          <a href="{{url('es/forog')}}" class="nav-link">
             <i class="fa fa-file-text-o"></i> Sala de estudio
           </a>
         </li>
