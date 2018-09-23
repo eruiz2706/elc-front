@@ -1,4 +1,8 @@
 <div class="row">
+  <div class='col-md-12'>
+
+  </div>
+
   <div class="col-sm-6 col-md-4" v-for="curso in cursos">
     <div class="card" >
       <a href="#" v-on:click.prevent="detcurso(curso.id)">

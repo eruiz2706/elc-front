@@ -18,6 +18,8 @@
   <div class="row">
       <div class="col-md-3">
         @include('backend.es.nav')
+
+        @include('backend.es.navpariente')
       </div>
 
       <div class="col-md-9" style='padding-top:70px;'>

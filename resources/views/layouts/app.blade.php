@@ -49,13 +49,21 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+                    <!--<li class=" dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Inicio<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="#">Dropdown 1</a></li>
+                            <li><a class="nav-link" href="#">Dropdown 2</a></li>
+                            <li><a class="nav-link" href="#">Dropdown 3</a></li>
+                        </ul>
+                    </li>-->
+
+                    <li><a class="nav-link" href="{{ route('login') }}">Inicio</a></li>
+                    <li><a class="nav-link" href="{{ route('login') }}">Sobre Nosotros</a></li>
+                    <li><a class="nav-link" href="{{ route('login') }}">Contacto</a></li>
+
                     <!-- Authentication Links -->
                     <li><a class="nav-link" href="{{ route('login') }}">Acceder</a></li>
                     <li><a class="nav-link" href="{{url('registro')}}">Registrate</a></li>

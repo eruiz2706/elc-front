@@ -28,37 +28,48 @@
         </div>
 
         <div class="row">
+          <div class="col-md-12 mb-3">
+            <h1 class='pl-1' style='border-left:3px solid #007bff'>CURSO PROGRAMACION INTERACTIVA</h1>
+          </div>
+
           <div class="col-12">
             <!-- Main content -->
-            <div class="invoice p-3 mb-3">
+            <div class="invoice p-0 mb-3">
               <!-- title row -->
               <div class="row">
                 <!-- accepted payments column -->
-                <div class="col-md-6">
-                  <img src="{{ URL::asset('rsc/dist/img/photo1.png') }}" alt="Photo" class="img-fluid">
+                <div class="col-md-8">
+                  <iframe class="img-fluid" style='width:100%;height:400px' frameborder="0" allowfullscreen allow="autoplay; encrypted-media"
+                    src="https://www.youtube.com/embed/GCW1LzzdFsU">
+                  </iframe>
+                  <!--<img src="{{ URL::asset('rsc/dist/img/photo1.png') }}" alt="Photo" class="img-fluid">-->
                 </div>
                 <!-- /.col -->
-                <div class="col-6">
-                  <p class="lead"><strong>@{{obj_curso.nombre}}</strong></p>
-
+                <div class="col-md-4">
                   <div class="table-responsive">
                     <table class="table">
-                      <tbody><tr>
-                        <th style="width:50%">DURACIÓN:</th>
-                        <td>$250.30</td>
+                      <tbody>
+                      <tr>
+                          <td>
+                              <img src="{{ URL::asset('rsc/dist/img/photo3.jpg') }}" alt="Ample Admin" class="media-object" style="width: 150px;height: auto;border-radius: 4px;box-shadow: 0 1px 3px rgba(0,0,0,.15);">
+                          </td>
                       </tr>
                       <tr>
-                        <th>FECHA DE INICIO</th>
-                        <td>$10.34</td>
+                        <th>DURACIÓN:</th>
                       </tr>
                       <tr>
-                        <th>&nbsp;</th>
-                        <td>&nbsp;</td>
+                        <td>6 semanas (15 horas de estudio estimadas)</td>
+                      </tr>
+                      <tr>
+                        <th>FECHA INICIO:</th>
+                      </tr>
+                      <tr>
+                        <td>24 de septiembre 2018</td>
                       </tr>
                       <tr>
                         <th colspan='2'>
-                          <button type="button" class="btn btn-primary float-right btn-block" style="margin-right: 5px;">
-                          <i class="fa fa-download"></i> Registrate
+                          <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;">
+                          <i class="fa fa-thumbs-o-up"></i> Unirse
                           </button>
                         </td>
                       </tr>
