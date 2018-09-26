@@ -5,32 +5,35 @@ new Vue({
 
     },
     created : function(){
-      this.row =this.rowbase;
+      this.o_user =this.o_userbase;
     },
     data : {
-      rowbase :{'email':'','password':'','repassword':'','rol':'estudiante'},
-      row:{},
-      errors :[],
-      loader_create :false,
+      o_userbase :{'nombre':'','email':'','password':'','repassword':'','rol':''},
+      o_user:{},
+      errores :[],
+      loader_crear :false,
     },
     computed : {
 
     },
     methods : {
-      cleanform : function(){
-        this.row =this.rowbase;
-        this.errors=[];
-        this.loader_create=false;
-      },create: function(){
-          this.loader_create=true;
+      limpiar : function(){
+        this.o_user =this.o_userbase;
+        this.errores=[];
+        this.loader_crear=false;
+      },crear: function(rol){
+          this.o_user.rol=document.getElementById('rol').value;
+          this.loader_crear=true;
           var url ='registro';
+
           axios.post(url,{
-            email : this.row.email,
-            password :this.row.password,
-            repassword :this.row.repassword,
-            rol :this.row.rol
+            nombre : this.o_user.nombre,
+            email : this.o_user.email,
+            password :this.o_user.password,
+            repassword :this.o_user.repassword,
+            rol :this.o_user.rol
           }).then(response =>{
-              this.cleanform();
+              this.limpiar();
               swal({
                   title:response.data.message,
                   text:response.data.message2,
@@ -39,9 +42,8 @@ new Vue({
                   window.location = "login";
               });
           }).catch(error =>{
-              this.loader_create=false;
-              this.errors=error.response.data.errors;
-              console.log(error.response.data.error);
+              this.loader_crear=false;
+              this.errores=error.response.data.errors;
               toastr.error(error.response.data.message,'',{
                   "timeOut": "2500"
               });

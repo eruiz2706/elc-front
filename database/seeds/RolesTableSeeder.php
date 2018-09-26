@@ -18,23 +18,23 @@ class RolesTableSeeder extends Seeder
     {
          $rol1=Role::create([
               'name' =>'Estudiante',
-              'slug'=>'estudiante',
+              'slug'=>'es',
               'special'=>'all-access'
             ]);
           $rol2=Role::create([
             'name' =>'Profesor',
-            'slug'=>'profesor',
+            'slug'=>'pr',
             'special'=>'all-access'
           ]);
 
           $rol3=Role::create([
             'name' =>'Institucion',
-            'slug'=>'instituto',
+            'slug'=>'in',
             'special'=>'all-access'
           ]);
           $rol4=Role::create([
-            'name' =>'Padres de familia',
-            'slug'=>'pariente',
+            'name' =>'Familiar',
+            'slug'=>'pa',
             'special'=>'all-access'
           ]);
 

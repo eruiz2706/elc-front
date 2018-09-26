@@ -13,12 +13,25 @@ new Vue({
       vrlsuscrip:0,
       user:{'nombre':'','email':'','fecha_vencimiento':''},
       loader_pagar :false,
-      pagos:[]
+      pagos:[],
+      imgavatar :''
     },
     computed : {
 
     },
     methods : {
+      cargarAvatar:function(){
+        var imagen  =$('#imgavatar')[0].files[0];
+        var formData = new FormData();
+        formData.append('avatar',imagen);
+        var url ='perfil/avatar';
+        axios.post(url,formData,{avatar:imagen}).then(response =>{
+            console.log(response.data);
+        }).catch(error =>{
+            this.preload=false;
+            console.log(error.response.data);
+        });
+      },
       getData:function(){
           this.preload=true;
           var url ='perfil/info';

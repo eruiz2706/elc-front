@@ -6,19 +6,19 @@
   <div class="card-body p-0">
     <ul class="nav nav-pills flex-column">
       <li class="nav-item">
-        <a href="{{url('es/sala')}}" class="nav-link">
+        <a href="{{url('es/foro')}}" class="nav-link">
           Programacion interactiva
           <i class="fa fa-angle-double-right"></i>
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{url('es/sala')}}" class="nav-link">
+        <a href="{{url('es/foro')}}" class="nav-link">
           Javascript avanzado
           <i class="fa fa-angle-double-right"></i>
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{url('es/sala')}}" class="nav-link">
+        <a href="{{url('es/foro')}}" class="nav-link">
           Angular5
           <i class="fa fa-angle-double-right"></i>
         </a>

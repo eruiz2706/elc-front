@@ -3,83 +3,63 @@
 @section('content')
 <div class="login-box" id="vue">
     <div class="login-logo">
-        <a href="../../index2.html"><b>{{ config('app.name') }}</b></a>
+        <a href="{{url('/')}}"><b>{{ config('app.name') }}</b></a>
     </div>
-    <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
         <!--<p class="login-box-msg">Registrate</p>-->
-        <h4>Registrate</h4>
-
-      <hr>
-        <form method="post" v-on:submit.prevent="create">
+        <h4>{{$titulo}}</h4>
+        <hr>
+        <form method="post" v-on:submit.prevent="crear()">
             @csrf
-
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio1">
-                  <input type="radio" class="form-check-input" id="radio1" name="optradio" value="estudiante" v-model="row.rol">Estudiante
-                </label>
+            <div class="input-group mb-3">
+              <input id="nombre" name="nombre" type="nombre" class="form-control" placeholder="Nombre completo" value=""   v-model="o_user.nombre">
+              <div class="input-group-append">
+                  <span class="fa fa-tags input-group-text"></span>
               </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio2">
-                  <input type="radio" class="form-check-input" id="radio2" name="optradio" value="profesor" v-model="row.rol">Profesor
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio3">
-                  <input type="radio" class="form-check-input" id="radio3" name="optradio" value="instituto" v-model="row.rol">Institucion
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio4">
-                  <input type="radio" class="form-check-input" id="radio4" name="optradio" value="pariente" v-model="row.rol">Padre de familia
-                </label>
-              </div>
-              <p></p>
+            </div>
+            <label v-if="errores.email">@{{ errores.nombre[0] }}</label>
 
             <div class="input-group mb-3">
-              <input id="email" name="email" type="email" class="form-control" placeholder="Correo electronico" value=""   v-model="row.email">
+              <input id="email" name="email" type="email" class="form-control" placeholder="Correo electronico" value=""   v-model="o_user.email">
               <div class="input-group-append">
                   <span class="fa fa-envelope input-group-text"></span>
               </div>
             </div>
-            <label v-if="errors.email">@{{ errors.email[0] }}</label>
+            <label v-if="errores.email">@{{ errores.email[0] }}</label>
 
             <div class="input-group mb-3">
-              <input id="password" name="password" type="password" class="form-control" placeholder="Contraseña"  v-model="row.password">
+              <input id="password" name="password" type="password" class="form-control" placeholder="Contraseña"  v-model="o_user.password">
               <div class="input-group-append">
                 <span class="fa fa-lock input-group-text"></span>
               </div>
             </div>
-            <label v-if="errors.password">@{{ errors.password[0] }}</label>
+            <label v-if="errores.password">@{{ errores.password[0] }}</label>
 
             <div class="input-group mb-3">
-              <input id="repassword" name="repassword" type="password" class="form-control" placeholder="Confirmar contraseña"  v-model="row.repassword">
+              <input id="repassword" name="repassword" type="password" class="form-control" placeholder="Confirmar contraseña"  v-model="o_user.repassword">
               <div class="input-group-append">
                   <span class="fa fa-lock input-group-text"></span>
               </div>
             </div>
-            <label v-if="errors.repassword">@{{ errors.repassword[0] }}</label>
+            <label v-if="errores.repassword">@{{ errores.repassword[0] }}</label>
 
             <div class="row">
-            <!-- /.col -->
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block btn-flat" :disabled="loader_create">
-                  Registrate
-                  <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_create"></i>
-                </button>
+              <div class="col-12">
+                  <button type="submit" class="btn btn-primary btn-block btn-flat" :disabled="loader_crear">
+                    Registrate
+                    <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_crear"></i>
+                  </button>
+              </div>
             </div>
-            <!-- /.col -->
-            </div>
+            <input id="rol" name="rol" type="hidden" class="form-control" value="{{$rol}}">
         </form>
         <p class="mb-1">
-            <a href="{{ url('login') }}">Ya tienes una cuenta click aqui</a>
+            <a href="{{ url('login') }}">Ya tienes una cuenta ?</a>
         </p>
         </div>
-        <!-- /.login-card-body -->
     </div>
 </div>
-<!-- /.login-box -->
 @endsection
 
 @section('scripts')

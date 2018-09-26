@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend\es;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use DB;
 use Log;
 
@@ -168,6 +169,37 @@ class PerfilEsController extends Controller
           ], 400);
           return response()->json($jsonresponse,400);
         }
+
+    }
+
+    function cargarAvatar(Request $request){
+      //obtenemos el campo file definido en el formulario
+    //  $file = $request->file('avatar')->storage('public');
+  //  return $request;
+      //obtenemos el nombre del archivo
+    //      $tmp_name = $_FILES['avatar']['tmp_name'];
+       $file = $request->file('avatar');
+       //$nombre = $file->getPathName();
+       $nombre='holamundo.'.$file->getClientOriginalExtension();
+
+      //indicamos que queremos guardar un nuevo archivo en el disco local
+      //Storage::disk('local')->put($nombre,  \File::get($file));
+      //$responseImg  =Storage::disk('assets')->put("almacenarimagen.jpg",  \File::get($file));
+      $responseImg  =Storage::disk('public')->put($nombre,  \File::get($file));
+
+      if($responseImg){
+        $jsonresponse=[
+            'status' =>public_path()
+        ];
+        return response()->json($jsonresponse,200);
+      }else{
+        $jsonresponse=[
+            'error' =>'fasdf'
+        ];
+        return response()->json($jsonresponse,400);
+      }
+
+
 
     }
 }

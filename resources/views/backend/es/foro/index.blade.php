@@ -39,12 +39,12 @@
 
               <div class="card-body">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#discussion" data-toggle="tab">Foro</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#progress" data-toggle="tab">Progreso</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#calendar" data-toggle="tab">Calendario</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#homework" data-toggle="tab">Evaluaciones</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#results" data-toggle="tab">Resultados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#test" data-toggle="tab">Tutor</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{url('es/foro')}}">Foro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('es/prog')}}">Progreso</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('es/calend')}}">Calendario</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('es/evalua')}}">Evaluaciones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('es/result')}}">Resultados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('es/tutor')}}">Tutor</a></li>
                   </ul>
               </div>
             </div>

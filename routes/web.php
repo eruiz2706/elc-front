@@ -14,12 +14,18 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Auth::routes();
+#registro de usuario
+
+Route::get('/', 'HomeController@index');
+Route::get('/login', 'HomeController@login');
+
+Route::get('/registro/{rol}', 'backend\RegistroController@index');
 Route::resource('/registro', 'backend\RegistroController');
 
+Auth::routes();
 Route::middleware(['auth'])->group(function(){
 
-  Route::get('/', 'HomeController@index');
+  Route::get('/principal', 'backend\PrincipalController@index');
 
   Route::group(['prefix' => 'es'], function() {
     Route::resource('inicio', 'backend\es\InicioEsController');
@@ -27,14 +33,26 @@ Route::middleware(['auth'])->group(function(){
     Route::get('inicio/detcurso/{id}', 'backend\es\InicioEsController@detallecurso');
     Route::get('inicio/curso/{id}', 'backend\es\InicioEsController@curso');
 
-    Route::resource('perfil', 'backend\es\PerfilEsController');
     Route::post('perfil/info', 'backend\es\PerfilEsController@info');
     Route::post('perfil/pagar', 'backend\es\PerfilEsController@pagar');
+    Route::post('perfil/avatar', 'backend\es\PerfilEsController@cargarAvatar');
+    Route::resource('perfil', 'backend\es\PerfilEsController');
 
     Route::resource('forog', 'backend\es\ForoGeneralController');
 
-    Route::resource('sala', 'backend\es\SalasEsController');
+    Route::resource('foro', 'backend\es\ForoController');
+    Route::resource('prog', 'backend\es\ProgresoController');
+    Route::resource('calend', 'backend\es\CalendarioController');
+    Route::resource('evalua', 'backend\es\EvaluacionesController');
+    Route::resource('result', 'backend\es\ResultadosController');
+    Route::resource('tutor', 'backend\es\TutorController');
+
+    //return view('backend.es.resultado.index');
+
   });
+
+  Route::get('storage/{archivo}','backend\StorageController@index');
+
 
   Route::group(['prefix' => 'in'], function() {
     Route::resource('inicio', 'backend\in\InicioInController');

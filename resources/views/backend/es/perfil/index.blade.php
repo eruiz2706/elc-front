@@ -23,11 +23,12 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form v-on:submit.prevent="updateImage">
+      <form v-on:submit.prevent="cargarAvatar" enctype="multipart/form-data">
+        @csrf
       <div class="modal-body">
           <div class="form-group">
             <label for="exampleFormControlFile1">Example file input</label>
-            <input type="file" class="form-control-file" id="imagusu" >
+            <input type="file" class="form-control-file" id="imgavatar" >
           </div>
       </div>
       <div class="modal-footer">

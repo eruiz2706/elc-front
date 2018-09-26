@@ -22,9 +22,13 @@ class RegistroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($rol)
     {
-        return view('backend.registro.index');
+        $titulo='Soy ';
+        if($rol=='es')$titulo .=' Estudiante';
+        if($rol=='pr')$titulo .=' Profesor';
+        if($rol=='pa')$titulo .=' Familiar';
+        return view('backend.registro.index',compact('rol','titulo'));
     }
 
     /**
@@ -46,9 +50,10 @@ class RegistroController extends Controller
     public function store(Request $request)
     {
         $validator =Validator::make($request->all(),[
-            'email' =>'required|string|email|max:255|unique:users',
-            'password' =>'required|string|min:6',
-            'rol' =>'required'
+          'nombre' =>'required|string',
+          'email' =>'required|string|email|max:255|unique:users',
+          'password' =>'required|string|min:6',
+          'rol' =>'required'
         ]);
 
         if ($validator->fails()) {
@@ -69,7 +74,7 @@ class RegistroController extends Controller
 
         $attributes =[
             'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
-            'nombre'  =>$request->input('email'),
+            'nombre'  =>$request->input('nombre'),
             'email'=>$request->input('email'),
             'password'=>Hash::make($request->input('password'))
         ];

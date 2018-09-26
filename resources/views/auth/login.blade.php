@@ -8,9 +8,10 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-        <p class="login-box-msg">Iniciar Sesion</p>
+        <!--<p class="login-box-msg">Iniciar Sesion</p>-->
+        <h5>Iniciar Sesion</h5>
 
-        <div class="social-auth-links text-center">
+        <!--<div class="social-auth-links text-center">
           <div class='row'>
           <div class='col-md-6'>
           <a href="#" class="btn btn-block btn-primary">
@@ -24,7 +25,7 @@
             Google
           </a>
         </div></div>
-      </div>
+      </div>-->
 
       <hr>
         <form method="POST" action="{{ route('login') }}">

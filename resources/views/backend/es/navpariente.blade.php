@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Invita a tus padres</h3>
+    <h3 class="card-title">Invita a tus familiares</h3>
   </div>
   <!-- /.card-header -->
   <div class="card-body p-3" style="display: block;">
@@ -16,7 +16,7 @@
     </ul>
     <hr>
     <p class="text-muted">
-      Dale este código a tus padres para que puedan ver tu progreso
+      Dale este código a tus familiares para que puedan ver tu progreso
     </p>
     <a class="btn-info btn-sm btn-block" style='text-align:center'>
        1350EDJW

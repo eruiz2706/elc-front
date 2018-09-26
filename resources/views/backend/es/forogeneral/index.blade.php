@@ -20,7 +20,7 @@
     <div class="col-md-3">
       @include('backend.es.nav')
 
-      @include('backend.es.navcursos')
+      @include('backend.es.navcursos')  
     </div>
 
     <div class="col-md-9" style='padding-top:70px;'>

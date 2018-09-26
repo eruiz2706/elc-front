@@ -5,7 +5,7 @@ namespace App\Http\Controllers\backend\es;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SalasEsController extends Controller
+class ProgresoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SalasEsController extends Controller
      */
     public function index()
     {
-        return view('backend.es.sala.index');
+        return view('backend.es.progreso.index');
     }
 
     /**

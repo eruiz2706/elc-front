@@ -26,4 +26,7 @@
   <link rel="stylesheet" href="{{ URL::asset('css/loader-1.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('css/loader-5.css') }}">
 
+  <!-- fullCalendar 2.2.5-->
+  <link rel="stylesheet" href="{{ URL::asset('rsc/plugins/fullcalendar/fullcalendar.min.css') }}">
+  <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.print.css') }}" media="print">
 </head>
