@@ -10,14 +10,18 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 /*Route::get('/', function () {
     return view('welcome');
 });*/
 #registro de usuario
 
 Route::get('/', 'HomeController@index');
+Route::get('/cursos', 'HomeController@cursos');
+Route::get('/acercade', 'HomeController@acercade');
+Route::get('/contacto', 'HomeController@contacto');
+Route::get('/nuevoregistro', 'HomeController@nuevoregistro');
 Route::get('/login', 'HomeController@login');
+
 
 Route::get('/registro/{rol}', 'backend\RegistroController@index');
 Route::resource('/registro', 'backend\RegistroController');

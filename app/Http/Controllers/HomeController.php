@@ -26,9 +26,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-      //return view('auth/login');
       Auth::logout();
-      return redirect('/login');
+      return view('frontend.inicio');
+      //return redirect('/login');
+    }
+
+    public function cursos(){
+      return view('frontend.cursos');
+    }
+
+    public function acercade(){
+      return view('frontend.acercade');
+    }
+
+    public function contacto(){
+      return view('frontend.contacto');
+    }
+
+    public function nuevoregistro(){
+      return view('frontend.registro');
     }
 
 }
