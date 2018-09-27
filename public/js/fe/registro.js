@@ -21,7 +21,7 @@ new Vue({
         this.o_user =this.o_userbase;
         this.errores=[];
         this.loader_crear=false;
-      },crear: function(rol){
+      },crear: function(){
           this.loader_crear=true;
           var url =base_url+'/registro/guardar';
 

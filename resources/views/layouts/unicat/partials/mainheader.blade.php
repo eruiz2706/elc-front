@@ -20,7 +20,7 @@
               </ul>
               <div class="top_bar_login ml-auto">
                 <div class="login_button">
-                  <a href="{{url('/login')}}">Acceder</a>
+                  <a href="{{url('/login')}}">Acceder o Registrarse</a>
                 </div>
               </div>
             </div>
@@ -47,7 +47,6 @@
                 <li><a href="{{url('/cursos')}}">Cursos</a></li>
                 <li><a href="{{url('/acercade')}}">Sobre nosotros</a></li>
                 <li><a href="{{url('/contacto')}}">Contacto</a></li>
-                <li><a href="{{url('/registro')}}">Registrate</a></li>
               </ul>
               <div class="hamburger menu_mm">
                 <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
@@ -72,7 +71,7 @@
       <li class="menu_mm"><a href="{{url('/acercade')}}">Sobre nosotros</a></li>
       <li class="menu_mm"><a href="{{url('/contacto')}}">Contacto</a></li>
       <li class="menu_mm"><a href="{{url('/registro')}}">Registrate</a></li>
-      <li class="menu_mm"><a href="{{url('/login')}}">Acceder</a></li>
+      <li class="menu_mm"><a href="{{url('/login')}}">Acceder o Registrarse</a></li>
     </ul>
   </nav>
 </div>

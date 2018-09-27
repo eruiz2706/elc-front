@@ -77,13 +77,13 @@
               <option value='pa'>Soy un familiar</option>
             </select>
 
-            <input type="text" class="counter_input"  name='nombre' placeholder="Nombre" required="required" v-model="o_user.nombre">
+            <input type="text" class="counter_input"  name='nombre' placeholder="Nombre" autocomplete="off" required="required" v-model="o_user.nombre">
             <label v-if="errores.nombre" class="text-danger">@{{ errores.nombre[0] }}</label>
 
-            <input type="text" class="counter_input" name='email' placeholder="Email" required="required" v-model="o_user.email">
+            <input type="text" class="counter_input" name='email' placeholder="Email" autocomplete="off" required="required" v-model="o_user.email">
             <label v-if="errores.email" class="text-danger">@{{ errores.email[0] }}</label>
 
-            <input type="password" class="counter_input" name='password' placeholder="Contraseña" required="required" v-model="o_user.password">
+            <input type="password" class="counter_input" name='password' autocomplete="off" placeholder="Contraseña" required="required" v-model="o_user.password">
             <label v-if="errores.password" class="text-danger">@{{ errores.password[0] }}</label>
 
             <button type="submit" class="counter_form_button"  :disabled="loader_crear">

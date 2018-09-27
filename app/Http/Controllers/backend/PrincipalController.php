@@ -20,8 +20,9 @@ class PrincipalController extends Controller
                           left join role_user ru on(r.id=ru.role_id)
                           where user_id = :user_id"
                        ,['user_id'=>$user->id])[0];
-
-      if($rol->slug=='es'){
+      if($rol->slug=='ad'){
+        return redirect('ad/inicio');
+      }else if($rol->slug=='es'){
         return redirect('es/inicio');
       }else if($rol->slug=='pr'){
          return redirect('pr/inicio');

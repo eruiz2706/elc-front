@@ -37,6 +37,11 @@ class RolesTableSeeder extends Seeder
             'slug'=>'pa',
             'special'=>'all-access'
           ]);
+          $rol5=Role::create([
+            'name' =>'Administrador',
+            'slug'=>'ad',
+            'special'=>'all-access'
+          ]);
 
           /*USUARIO */
           $user1=User::create([
@@ -81,6 +86,16 @@ class RolesTableSeeder extends Seeder
           RoleUser::create([
             'user_id' =>$user4->id,
             'role_id' =>$rol4->id
+          ]);
+          $user5=User::create([
+            'nombre' =>'Administrador',
+            'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
+            'email'=>'administrador@gmail.com',
+            'password'=>Hash::make('123456')
+          ]);
+          RoleUser::create([
+            'user_id' =>$user5->id,
+            'role_id' =>$rol5->id
           ]);
 
           Precio::create([

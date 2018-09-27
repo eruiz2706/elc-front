@@ -72,14 +72,14 @@
             @csrf
             <div class="counter_form_title">Iniciar sesiòn</div>
 
-            <input type="email" class="counter_input"  id="email" name="email"  placeholder="Email" required="required">
+            <input type="email" class="counter_input"  id="email" name="email"  autocomplete="off" placeholder="Email" required="required">
             @if ($errors->has('email'))
                 <span class="text-danger">
                     <strong>{{ $errors->first('email') }}</strong>
                 </span>
             @endif
 
-            <input type="password" class="counter_input" id="password" name="password" placeholder="Contraseña" required="required">
+            <input type="password" class="counter_input" id="password" name="password" autocomplete="off" placeholder="Contraseña" required="required">
             @if ($errors->has('password'))
                 <span class="text-danger">
                     <strong>{{ $errors->first('password') }}</strong>
@@ -89,6 +89,10 @@
             <button type="submit" class="counter_form_button">
               Acceder
             </button>
+
+            <br>
+            <a href="{{ url('/registro') }}" class="text-left text-info">REGISTRATE</a>
+
           </form>
         </div>
       </div>

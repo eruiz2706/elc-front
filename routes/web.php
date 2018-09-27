@@ -12,7 +12,7 @@
 */
 /*Route::get('/', function () {
     return view('welcome');
-});*/  
+});*/
 
 ################# rutas frontend #################
 Route::get('/', 'HomeController@index');
@@ -27,7 +27,24 @@ Auth::routes();
 Route::middleware(['auth'])->group(function(){
 
   Route::get('/principal', 'backend\PrincipalController@index');
+  Route::get('storage/{archivo}','backend\StorageController@index');
 
+  ################# rutas administrador #################
+  Route::group(['prefix' => 'ad'], function() {
+    Route::get('inicio', 'backend\ad\InicioController@index');
+  });
+
+  ################# rutas institucion #################
+  Route::group(['prefix' => 'in'], function() {
+    Route::get('inicio', 'backend\in\InicioController@index');;
+  });
+
+  ################# rutas profesor #################
+  Route::group(['prefix' => 'pr'], function() {
+    Route::get('inicio', 'backend\pr\InicioController@index');;
+  });
+
+  ################# rutas estudiante #################
   Route::group(['prefix' => 'es'], function() {
     Route::resource('inicio', 'backend\es\InicioEsController');
     Route::post('inicio/busq', 'backend\es\InicioEsController@busqueda');
@@ -47,24 +64,12 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('evalua', 'backend\es\EvaluacionesController');
     Route::resource('result', 'backend\es\ResultadosController');
     Route::resource('tutor', 'backend\es\TutorController');
-
     //return view('backend.es.resultado.index');
-
   });
 
-  Route::get('storage/{archivo}','backend\StorageController@index');
-
-
-  Route::group(['prefix' => 'in'], function() {
-    Route::resource('inicio', 'backend\in\InicioInController');
-  });
-
-  Route::group(['prefix' => 'pr'], function() {
-    Route::resource('inicio', 'backend\pr\InicioPrController');
-  });
-
+  ################# rutas familiar #################
   Route::group(['prefix' => 'pa'], function() {
-    Route::resource('inicio', 'backend\pa\InicioPaController');
+    Route::get('inicio', 'backend\pa\InicioController@index');;
   });
 
 });
