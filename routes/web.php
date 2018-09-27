@@ -13,20 +13,17 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-#registro de usuario
 
+################# rutas frontend #################
 Route::get('/', 'HomeController@index');
 Route::get('/cursos', 'HomeController@cursos');
 Route::get('/acercade', 'HomeController@acercade');
 Route::get('/contacto', 'HomeController@contacto');
-Route::get('/nuevoregistro', 'HomeController@nuevoregistro');
+Route::get('/registro', 'HomeController@registro');
+Route::post('/registro/guardar', 'HomeController@guardarRegistro');
 Route::get('/login', 'HomeController@login');
-
-
-Route::get('/registro/{rol}', 'backend\RegistroController@index');
-Route::resource('/registro', 'backend\RegistroController');
-
 Auth::routes();
+
 Route::middleware(['auth'])->group(function(){
 
   Route::get('/principal', 'backend\PrincipalController@index');

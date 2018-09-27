@@ -7,7 +7,7 @@
 
 <body>
 
-<div class="super_container">
+<div class="super_container" id="vue">
 
 	<!-- Header -->
   <head>

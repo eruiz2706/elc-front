@@ -8,3 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/plugins/OwlCarousel2-2.2.1/animate.css') }}">
+<!-- toast -->
+<link rel="stylesheet" href="{{ URL::asset('plugins/toastr/toastr.min.css') }}">
+<!-- swheetalert -->
+<link rel="stylesheet" href="{{ URL::asset('plugins/sweetalert/sweetalert.css') }}">

@@ -68,18 +68,28 @@
     <div class="counter_form">
       <div class="row fill_height">
         <div class="col fill_height">
-          <form class="counter_form_content d-flex flex-column align-items-center justify-content-center" action="#">
+          <form class="counter_form_content d-flex flex-column align-items-center justify-content-center" method="post" v-on:submit.prevent="crear()">
             <div class="counter_form_title">Registrate</div>
-            <input type="text" class="counter_input" placeholder="Nombre:" required="required">
-            <input type="text" class="counter_input" placeholder="Email:" required="required">
-            <input type="password" class="counter_input" placeholder="Contraseña:" required="required">
-            <select name="counter_select" id="counter_select" class="counter_input counter_options">
-              <option>Seleccione el tipo</option>
-              <option>Soy un estudiante</option>
-              <option>Soy un profesor</option>
-              <option>Soy una institucion</option>
+            <select name="counter_select" id="counter_select" class="counter_input counter_options" required="required" v-model="o_user.rol">
+              <option value=''>Seleccione el tipo</option>
+              <option value='es'>Soy un estudiante</option>
+              <option value='pr'>Soy un profesor</option>
+              <option value='pa'>Soy un familiar</option>
             </select>
-            <button type="submit" class="counter_form_button">Guardar</button>
+
+            <input type="text" class="counter_input"  name='nombre' placeholder="Nombre" required="required" v-model="o_user.nombre">
+            <label v-if="errores.nombre" class="text-danger">@{{ errores.nombre[0] }}</label>
+
+            <input type="text" class="counter_input" name='email' placeholder="Email" required="required" v-model="o_user.email">
+            <label v-if="errores.email" class="text-danger">@{{ errores.email[0] }}</label>
+
+            <input type="password" class="counter_input" name='password' placeholder="Contraseña" required="required" v-model="o_user.password">
+            <label v-if="errores.password" class="text-danger">@{{ errores.password[0] }}</label>
+
+            <button type="submit" class="counter_form_button"  :disabled="loader_crear">
+              Registrate
+              <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader" v-if="loader_crear"></i>
+            </button>
           </form>
         </div>
       </div>
@@ -108,3 +118,8 @@
 
 
 @endsection
+
+@section('scripts')
+  @parent
+  <script src="{{ URL::asset('js/fe/registro.js') }}"></script>
+@stop

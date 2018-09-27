@@ -22,9 +22,8 @@ new Vue({
         this.errores=[];
         this.loader_crear=false;
       },crear: function(rol){
-          this.o_user.rol=document.getElementById('rol').value;
           this.loader_crear=true;
-          var url ='registro';
+          var url =base_url+'/registro/guardar';
 
           axios.post(url,{
             nombre : this.o_user.nombre,
