@@ -12,7 +12,7 @@
 */
 /*Route::get('/', function () {
     return view('welcome');
-});*/
+});*/  
 
 ################# rutas frontend #################
 Route::get('/', 'HomeController@index');
