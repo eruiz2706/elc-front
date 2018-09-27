@@ -6,48 +6,63 @@
         <i class="fa fa-user"></i>DATOS PERSONALES
       </h4>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
                   <img class="img-fluid" src="{{ URL::asset('rsc/dist/img/photo1.png') }}" alt="Photo">
                   <button type="button" class="btn btn-block btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal">Cargar Imagen</button>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-8">
           <div class="table-responsive">
             <table class="table">
-              <tbody><tr>
-                <th>Nombre:</th>
-                <td>@{{user.nombre}}</td>
+              <tbody>
+              <tr>
+                <td>
+                  <p><strong>Nombre:</strong></p>
+                  @{{user.nombre}}
+                </td>
               </tr>
               <tr>
-                <th>Telefono</th>
-                <td>657-03-49</td>
+                <td>
+                  <p><strong>Telefono:</strong></p>
+                  657-03-49
+                </td>
               </tr>
               <tr>
-                <th>Ciudad</th>
-                <td>Cali valle del cauca</td>
+                <td>
+                  <p><strong>Ciudad:</strong></p>
+                  Cali valle del cauca
+                </td>
               </tr>
               <tr>
-                <th>Direccion</th>
-                <td>Carrera 10#14-88</td>
+                <td>
+                  <p><strong>Direccion:</strong></p>
+                  Carrera 10#14-88
+                </td>
               </tr>
               <tr>
-                <th>Email</th>
-                <td>@{{user.email}}</td>
+                <td>
+                  <p><strong>Email:</strong></p>
+                  @{{user.email}}
+                </td>
               </tr>
               <tr>
-                <th>Facebook</th>
-                <td></td>
+                <td>
+                  <p><strong>Facebook:</strong></p>
+                </td>
               </tr>
               <tr>
-                <th>Linkedin</th>
-                <td></td>
+                <td>
+                  <p><strong>Linkedin:</strong></p>
+                </td>
               </tr>
               <tr>
-                <th>Biografia</th>
-                <td>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has </td>
+                <td>
+                  <p><strong>Biografia:</strong></p>
+                  is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                </td>
               </tr>
               <tr>
-                <th><button type="button" class="btn btn-block btn-outline-primary btn-sm">Editar</button></th>
+                <th><button type="button" class="btn btn-outline-primary btn-sm">Editar</button></th>
                 <td><button type="button" class="btn btn-outline-primary btn-sm float-right">Cambiar Contraseña</button></td>
               </tr>
             </tbody></table>
