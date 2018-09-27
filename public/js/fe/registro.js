@@ -43,6 +43,7 @@ new Vue({
           }).catch(error =>{
               this.loader_crear=false;
               this.errores=error.response.data.errors;
+              console.log(error.response.data.error);
               toastr.error(error.response.data.message,'',{
                   "timeOut": "2500"
               });
