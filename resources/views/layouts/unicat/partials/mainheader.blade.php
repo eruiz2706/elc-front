@@ -38,7 +38,8 @@
           <div class="header_content d-flex flex-row align-items-center justify-content-start">
             <div class="logo_container">
               <a href="#">
-                <div class="logo_text">Aula Virtu<span>al</span></div>
+              <!--<div class="logo_text">Aula Virtu<span>al</span></div>-->
+                <img id="logo-mainmenu" src="{{ URL::asset('img/app/logo.png') }}" style="width:150px">
               </a>
             </div>
             <nav class="main_nav_contaner ml-auto">
