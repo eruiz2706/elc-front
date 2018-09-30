@@ -38,18 +38,6 @@
 
 <div class="callout">
   <div class="row">
-    <div class="col-md-4">
-      <img style='width:250px;height:200px;' class="img-fluid" src="{{ URL::asset(Auth::user()->imagen) }}" alt="Avatar user" id="logo-user">
-      <form method="post" enctype="multipart/form-data" id="uploadForm" v-on:submit.prevent="actualizarImg()">
-        @csrf
-        <input type="file" class="form-control-file border" id="file_avatar" >
-        <button type="submit" class="btn btn-block btn-outline-primary btn-sm" :disabled="loader_img"  >
-          Cargar Imagen
-          <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_img"></i>
-        </button>
-      </form>
-    </div>
-
     <div class="col-md-8">
           <div class="table-responsive">
             <table class="table">
@@ -150,6 +138,18 @@
               </tr>
             </tbody></table>
           </div>
+    </div>
+
+    <div class="col-md-4">
+      <img style='width:250px;height:200px;' class="img-fluid" src="{{ URL::asset(Auth::user()->imagen) }}" alt="Avatar user" id="logo-user">
+      <form method="post" enctype="multipart/form-data" id="uploadForm" v-on:submit.prevent="actualizarImg()">
+        @csrf
+        <input type="file" class="form-control-file border" id="file_avatar" >
+        <button type="submit" class="btn btn-block btn-outline-primary btn-sm" :disabled="loader_img"  >
+          Cargar Imagen
+          <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_img"></i>
+        </button>
+      </form>
     </div>
   </div>
 </div>
