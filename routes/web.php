@@ -29,6 +29,18 @@ Route::middleware(['auth'])->group(function(){
   Route::get('/principal', 'backend\PrincipalController@index');
   Route::get('storage/{archivo}','backend\StorageController@index');
 
+  ################# rutas compartidas #################
+  Route::get('foro','backend\ForoController@index');
+  Route::post('foro/data','backend\ForoController@getData');
+  Route::post('foro/publicar','backend\ForoController@publicacion');
+  Route::post('foro/datacoment','backend\ForoController@getComentarios');
+  Route::post('foro/comentar','backend\ForoController@agregarComentario');
+  Route::get('perfil','backend\PerfilController@index');
+  Route::post('perfil/actimg','backend\PerfilController@actualizarImagen');
+  Route::post('perfil/cambiocl','backend\PerfilController@cambioClave');
+  Route::post('perfil/data','backend\PerfilController@getData');
+  Route::post('perfil/act','backend\PerfilController@actualizar');
+
   ################# rutas administrador #################
   Route::group(['prefix' => 'ad'], function() {
     Route::get('inicio', 'backend\ad\InicioController@index');

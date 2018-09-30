@@ -21,15 +21,15 @@ class PrincipalController extends Controller
                           where user_id = :user_id"
                        ,['user_id'=>$user->id])[0];
       if($rol->slug=='ad'){
-        return redirect('ad/inicio');
+        return redirect('foro');
       }else if($rol->slug=='es'){
         return redirect('es/inicio');
       }else if($rol->slug=='pr'){
-         return redirect('pr/inicio');
+         return redirect('foro');
        }else if($rol->slug=='in'){
-         return redirect('in/inicio');
+         return redirect('foro');
        }else if($rol->slug=='pa'){
-         return redirect('pa/inicio');
+         return redirect('foro');
        }else{
          return redirect('login');
        }

@@ -20,8 +20,16 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('nombre');
-            $table->integer('estado')->default(0);
+            $table->integer('estado')->default(1);
+            $table->string('uniqid')->nullable();
+            $table->string('imagen')->default('img/app/avatar.jpg');
             $table->date('fecha_vencimiento')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('ciudad')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->text('biografia')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

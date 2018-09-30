@@ -44,7 +44,6 @@
                     <li class="nav-item"><a class="nav-link" href="{{url('es/calend')}}">Calendario</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('es/evalua')}}">Evaluaciones</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('es/result')}}">Resultados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('es/tutor')}}">Tutor</a></li>
                   </ul>
               </div>
             </div>

@@ -71,7 +71,8 @@ class HomeController extends Controller
           'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
           'nombre'  =>$request->input('nombre'),
           'email'=>$request->input('email'),
-          'password'=>Hash::make($request->input('password'))
+          'password'=>Hash::make($request->input('password')),
+          'uniqid'=>uniqid('',true)
       ];
       $params=[
         'rol'=>$request->input('rol')

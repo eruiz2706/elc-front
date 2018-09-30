@@ -4,16 +4,12 @@
         @include('layouts.adminlte.partials.htmlheader')
     @show
 
-<!--<body class="sidebar-mini sidebar-collapse">-->
-<!--<body class="hold-transition sidebar-mini">-->
-<!--<body class="hold-transition sidebar-collapse" oncontextmenu="return false">-->
 <body class="hold-transition sidebar-collapse">
         <div  id="loader-body" class="loader-wrapper loader1">
                 <div class="loader"></div>
         </div>
 
 <div class="wrapper" id="main">
-
     @include('layouts.adminlte.partials.mainheader')
     @yield('banner')
 

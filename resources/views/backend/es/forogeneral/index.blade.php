@@ -20,7 +20,7 @@
     <div class="col-md-3">
       @include('backend.es.nav')
 
-      @include('backend.es.navcursos')  
+      @include('backend.es.navcursos')
     </div>
 
     <div class="col-md-9" style='padding-top:70px;'>
@@ -33,9 +33,7 @@
 
               <div class="card-body">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#discussion" data-toggle="tab">Foro Genenral</a></li>
                     <li class="nav-item"><a class="nav-link" href="#progress" data-toggle="tab">Calendario general</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#homework" data-toggle="tab">Tareas</a></li>
                     <li class="nav-item"><a class="nav-link" href="#test" data-toggle="tab">Resultados generales</a></li>
                     <li class="nav-item"><a class="nav-link" href="#calendar" data-toggle="tab">Diccionario</a></li>
                     <li class="nav-item"><a class="nav-link" href="#results" data-toggle="tab">Preguntas frecuentes</a></li>

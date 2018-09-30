@@ -70,7 +70,6 @@
       <li class="menu_mm"><a href="{{url('/cursos')}}">Cursos</a></li>
       <li class="menu_mm"><a href="{{url('/acercade')}}">Sobre nosotros</a></li>
       <li class="menu_mm"><a href="{{url('/contacto')}}">Contacto</a></li>
-      <li class="menu_mm"><a href="{{url('/registro')}}">Registrate</a></li>
       <li class="menu_mm"><a href="{{url('/login')}}">Acceder o Registrarse</a></li>
     </ul>
   </nav>
