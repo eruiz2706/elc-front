@@ -1,12 +1,11 @@
   <nav class="main-header navbar navbar-expand border-bottom bg-primary main-header-fixed">
     <ul class="navbar-nav">
       <li class="nav-item">
-          <a id="brandnavbar" href="index3.html" class="brand-link navbar-light bg-primary">
 
-            <img id="logo-mainmenu" src="{{ URL::asset('rsc/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                  style="opacity: .8">
-            <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
-          </a>
+
+            <img id="logo-mainmenu" src="{{ URL::asset('img/app/logo2.png') }}" alt="AdminLTE Logo" class="brand-image ">
+            <!--<span class="brand-text font-weight-light">{{ config('app.name') }}</span>-->
+
         </li>
     </ul>
 

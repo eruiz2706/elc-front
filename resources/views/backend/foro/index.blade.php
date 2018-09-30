@@ -12,10 +12,16 @@
   <div class="row">
       <div class="col-md-3">
         @include('backend.nav.index')
-  </div>
+
+        @if(Session::get('rol')=='es')
+          @include('backend.es.navcursos')
+        @endif
+</div>
 
       <div class="col-md-9" style='padding-top:70px;'>
         @include('backend.foro.partials.publicacion')
+
+
       </div>
   </div>
 </div>
