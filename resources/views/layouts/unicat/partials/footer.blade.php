@@ -12,7 +12,7 @@
               <div class="footer_section footer_about">
                 <div class="footer_logo_container">
                   <a href="#">
-                    <div class="footer_logo_text">Aula Virtu<span>al</span></div>
+                    <div class="footer_logo_text">EL<span>C</span></div>
                   </a>
                 </div>
                 <div class="footer_about_text">
