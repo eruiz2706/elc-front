@@ -67,7 +67,7 @@
               <div class="course">
                 <div class="course_image"><img src="{{ URL::asset('rfend/images/course_4.jpg') }}" alt=""></div>
                 <div class="course_body">
-                  <h3 class="course_title"><a href="course.html">Software Training</a></h3>
+                  <h3 class="course_title"><a href="course.html">Preparacion Pre-icfes</a></h3>
                   <div class="course_teacher">Mr. John Taylor</div>
                 </div>
               </div>
@@ -78,7 +78,7 @@
               <div class="course">
                 <div class="course_image"><img src="{{ URL::asset('rfend/images/course_5.jpg') }}" alt=""></div>
                 <div class="course_body">
-                  <h3 class="course_title"><a href="course.html">Developing Mobile Apps</a></h3>
+                  <h3 class="course_title"><a href="course.html">Ingles Nivel1</a></h3>
                   <div class="course_teacher">Ms. Lucius</div>
                 </div>
               </div>
@@ -89,7 +89,7 @@
               <div class="course">
                 <div class="course_image"><img src="{{ URL::asset('rfend/images/course_6.jpg') }}" alt=""></div>
                 <div class="course_body">
-                  <h3 class="course_title"><a href="course.html">Starting a Startup</a></h3>
+                  <h3 class="course_title"><a href="course.html">Ingles Nivel2</a></h3>
                   <div class="course_teacher">Mr. Charles</div>
                 </div>
               </div>
