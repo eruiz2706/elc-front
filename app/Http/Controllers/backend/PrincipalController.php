@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use DB;
+use Session;
 
 class PrincipalController extends Controller
 {
@@ -20,17 +21,11 @@ class PrincipalController extends Controller
                           left join role_user ru on(r.id=ru.role_id)
                           where user_id = :user_id"
                        ,['user_id'=>$user->id])[0];
-      if($rol->slug=='ad'){
+      if($rol->slug !=''){
+        Session::put('rol',$rol->slug);
         return redirect('foro');
-      }else if($rol->slug=='es'){
-        return redirect('es/inicio');
-      }else if($rol->slug=='pr'){
-         return redirect('foro');
-       }else if($rol->slug=='in'){
-         return redirect('foro');
-       }else if($rol->slug=='pa'){
-         return redirect('foro');
-       }else{
+      }else{
+         Session::flush();
          return redirect('login');
        }
     }

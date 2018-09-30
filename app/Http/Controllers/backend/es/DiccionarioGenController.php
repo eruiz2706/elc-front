@@ -5,9 +5,9 @@ namespace App\Http\Controllers\backend\es;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EvaluacionesController extends Controller
+class DiccionarioGenController extends Controller
 {
   public function index(Request $reques){
-    return view('backend.es.evaluaciones.index');
+    return view('backend.es.diccionarioG.index');
   }
 }

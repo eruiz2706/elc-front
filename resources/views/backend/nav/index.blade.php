@@ -22,6 +22,14 @@
             <i class="fa fa-inbox"></i> Inicio
           </a>
         </li>
+
+        @if(Session::get('rol')=='es')
+        <li class="nav-item active">
+          <a href="{{url('es/calendg')}}" class="nav-link">
+            <i class="fa fa-inbox"></i> Sala de estudio
+          </a>
+        </li>
+        @endif
     </ul>
   </div>
   <!-- /.card-body -->

@@ -58,25 +58,16 @@ Route::middleware(['auth'])->group(function(){
 
   ################# rutas estudiante #################
   Route::group(['prefix' => 'es'], function() {
-    Route::resource('inicio', 'backend\es\InicioEsController');
-    Route::post('inicio/busq', 'backend\es\InicioEsController@busqueda');
-    Route::get('inicio/detcurso/{id}', 'backend\es\InicioEsController@detallecurso');
-    Route::get('inicio/curso/{id}', 'backend\es\InicioEsController@curso');
+    Route::get('foro','backend\es\ForoController@index');
+    Route::get('progres','backend\es\ProgresoController@index');
+    Route::get('calend','backend\es\CalendarioController@index');
+    Route::get('evaluac','backend\es\EvaluacionesController@index');
+    Route::get('result','backend\es\ResultadosController@index');
 
-    Route::post('perfil/info', 'backend\es\PerfilEsController@info');
-    Route::post('perfil/pagar', 'backend\es\PerfilEsController@pagar');
-    Route::post('perfil/avatar', 'backend\es\PerfilEsController@cargarAvatar');
-    Route::resource('perfil', 'backend\es\PerfilEsController');
-
-    Route::resource('forog', 'backend\es\ForoGeneralController');
-
-    Route::resource('foro', 'backend\es\ForoController');
-    Route::resource('prog', 'backend\es\ProgresoController');
-    Route::resource('calend', 'backend\es\CalendarioController');
-    Route::resource('evalua', 'backend\es\EvaluacionesController');
-    Route::resource('result', 'backend\es\ResultadosController');
-    Route::resource('tutor', 'backend\es\TutorController');
-    //return view('backend.es.resultado.index');
+    Route::get('calendg','backend\es\CalendarioGenController@index');
+    Route::get('resultg','backend\es\ResultadosGenController@index');
+    Route::get('dicciong','backend\es\DiccionarioGenController@index');
+    Route::get('preguntfg','backend\es\PreguntasFrecGenController@index');
   });
 
   ################# rutas familiar #################

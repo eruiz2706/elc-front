@@ -8,20 +8,27 @@
 @endsection
 
 @section('content')
-<div class="container">
-  <div class="row">
-      <div class="col-md-3">
-        @include('backend.nav.index')
-  </div>
 
-      <div class="col-md-9" style='padding-top:70px;'>
-        @include('backend.foro.partials.publicacion')
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-3">
+      @include('backend.nav.index')
+
+      @include('backend.es.navcursos')
+    </div>
+
+    <div class="col-md-9" style='padding-top:70px;'>
+      <div class="row">
+            @include('backend.es.navtabgeneral')
+
       </div>
+    </div>
   </div>
 </div>
 @endsection
 
 @section('scripts')
 @parent
-<script src="{{ URL::asset('js/be/foro/index.js') }}"></script>
+
 @stop

@@ -20,7 +20,7 @@
 
     <div class="col-md-9" style='padding-top:70px;'>
       <div class="row">
-            @include('backend.es.navtabgrupo')
+            @include('backend.es.navtabgeneral')
 
             <div class="col-md-12">
             <div class="card card-primary">
