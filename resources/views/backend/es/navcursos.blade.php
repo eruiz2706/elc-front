@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Cursos Inscritos</h3>
+    <h3 class="card-title">Cursos</h3>
 
   </div>
   <div class="card-body p-0">
@@ -24,6 +24,15 @@
         </a>
       </li>
     </ul>
+  </div>
+  <div class='card-footer'>
+    <ul class="nav nav-pills flex-column">
+    <li class="nav-item active">
+      <a href="{{url('/principal')}}" class="nav-link">
+        <i class="fa fa-plus-square-o"></i> Ofertas de cursos
+      </a>
+    </li>
+  </ul>
   </div>
   <!-- /.card-body -->
 </div>

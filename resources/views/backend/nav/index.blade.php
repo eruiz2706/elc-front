@@ -19,7 +19,7 @@
     <ul class="nav nav-pills flex-column">
         <li class="nav-item active">
           <a href="{{url('/principal')}}" class="nav-link">
-            <i class="fa fa-inbox"></i> Inicio
+            <i class="fa fa-inbox"></i> Novedades
           </a>
         </li>
 
