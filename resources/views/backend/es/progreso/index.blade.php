@@ -38,6 +38,9 @@
             <div class="card-body">
               Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
             </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-outline-primary btn-sm">Finalizar</button>
+            </div>
           </div>
         </div>
       </div>
@@ -47,7 +50,7 @@
           <div class="card-header">
             <h4 class="card-title">
               <a data-toggle="collapse" data-parent="#accordion" href="#colapse2" class="collapsed" aria-expanded="false">
-                Leccion 1
+                Leccion 2
               </a>
             </h4>
           </div>

@@ -9,7 +9,7 @@ $act5=(Request::path() == 'es/result') ? 'active' : '';
 <div class="col-md-12">
   <div class="card card-primary">
     <div class="card-header">
-      <h3 class="card-title">Programacion Interactiva</h3>
+      <h3 class="card-title">Preparacion Pre-icfes</h3>
 
       <div class="card-tools">
         <div class="user-block" style="width:80px;">
