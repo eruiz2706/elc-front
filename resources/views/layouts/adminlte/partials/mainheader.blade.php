@@ -97,24 +97,20 @@
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-              <div class="card card-widget widget-user">
-                  <div class="widget-user-header bg-info-active">
+              <div class="card ">
+                  <div class="card-body">
                     <h5 class="widget-user-desc">{{ Auth::user()->nombre}}</h5>
                     <h6 class="widget-user-desc">Ultimo ingreso : 2018-05-26</h6>
-                  </div>
-                  <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="{{ URL::asset(Auth::user()->imagen) }}"  alt="User avatar">
-                  </div>
-                  <div class="card-footer">
+                    <h6 class="widget-user-desc">Tiempo de uso : 2 horas</h6>
                     <div class="row">
                       <div class="col-sm-6 border-right">
-                          <button class="btn btn-block btn-outline-primary" onclick="window.location.href='{{url('/perfil')}}'">
+                          <button class="btn btn-block btn-outline-primary btn-sm" onclick="window.location.href='{{url('/perfil')}}'">
                             Perfil
                           </button>
                       </div>
                       <!-- /.col -->
                       <div class="col-sm-6 border-right">
-                          <button class="btn btn-block btn-outline-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                          <button class="btn btn-block btn-outline-primary btn-sm" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Cerrar Sesion
                           </button>
 
@@ -124,8 +120,9 @@
                       </div>
 
                     </div>
-                    <!-- /.row -->
                   </div>
+
+
                 </div>
           </div>
         </li>
