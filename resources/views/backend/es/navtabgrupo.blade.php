@@ -1,10 +1,10 @@
-<?
+@php
 $act1=(Request::path() == 'es/foro') ? 'active' : '';
 $act2=(Request::path() == 'es/progres') ? 'active' : '';
 $act3=(Request::path() == 'es/calend') ? 'active' : '';
 $act4=(Request::path() == 'es/evaluac') ? 'active' : '';
 $act5=(Request::path() == 'es/result') ? 'active' : '';
-?>
+@endphp
 
 <div class="col-md-12">
   <div class="card card-primary">
