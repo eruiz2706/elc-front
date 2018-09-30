@@ -1,9 +1,9 @@
-<?php
+@php
 $active1=(Request::path() == 'es/calendg') ? 'active' : '';
 $active2=(Request::path() == 'es/resultg') ? 'active' : '';
 $active3=(Request::path() == 'es/dicciong') ? 'active' : '';
 $active4=(Request::path() == 'es/preguntfg') ? 'active' : '';
-?>
+@endphp
 
 <div class="col-md-12">
   <div class="card card-primary">
