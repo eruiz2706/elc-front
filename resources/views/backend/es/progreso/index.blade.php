@@ -111,9 +111,9 @@ La última opción del menú debajo de plugins en el dashboard de WordPress es e
           <div id="colapse2" class="panel-collapse in collapse" style="">
             <div class="card-body">
 
-                os plugins de WordPress son piezas de software que pueden ser cargados para extender y expandir la funcionabilidad de tu sitio WordPress.<br><br>
+              los plugins de WordPress son piezas de software que pueden ser cargados para extender y expandir la funcionabilidad de tu sitio WordPress.<br><br>
 
-  Nota: Una de las principales ventajas de usar una versión self-hosted de WordPress de WordPress.org es la habilidad de cargar y usar plugins en tu sitio WordPress.<br><br>
+  <b>Nota: Una de las principales ventajas de usar una versión self-hosted de WordPress de WordPress.org es la habilidad de cargar y usar plugins en tu sitio WordPress.</b><br><br>
 
   Ya que WordPress es un software de código abierto, todas estas son herramientas de terceros que complementan lo que WordPress puede hacer.<br><br>
 
@@ -128,7 +128,7 @@ La última opción del menú debajo de plugins en el dashboard de WordPress es e
 
   También hay plugins de WordPress Premium o de pago.<br><br>
 
-  ¿Por qué querrías pagar por un plugin? Bueno, hay muchas razones:<br><br>
+  <b>¿Por qué querrías pagar por un plugin? Bueno, hay muchas razones:</b><br><br>
 
   Mientras que hay muchos plugins gratuitos disponibles desde el directorio de plugins, los plugins de pago usualmente ofrecen personal de apoyo de tiempo completo y desarrolladores que trabajan en mantener la seguridad y la compatibilidad de los plugins con la última versión de WordPress, así como también con otros temas y plugins.<br><br>
 
