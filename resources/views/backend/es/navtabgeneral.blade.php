@@ -14,7 +14,7 @@ $act4=(Request::path() == 'es/preguntfg') ? 'active' : '';
         <div class="user-block" style="width:80px;">
          <img class="img-circle img-bordered-sm" src="{{ URL::asset('rsc/dist/img/user1-128x128.jpg') }}" alt="user image">
         </div>
-      </div>
+      </div>  
     </div>
 
     <div class="card-body">
