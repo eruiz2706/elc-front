@@ -58,6 +58,9 @@
             <div class="card-body">
               Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
             </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-outline-primary btn-sm">Finalizar</button>
+            </div>
           </div>
         </div>
       </div>
