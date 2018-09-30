@@ -84,7 +84,7 @@
     <div class="row">
       <div class="col">
         <div class="section_title_container text-center">
-          <h2 class="section_title">Why Choose Us</h2>
+          <h2 class="section_title">¿Por què unirte?</h2>
           <div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem</p></div>
         </div>
       </div>

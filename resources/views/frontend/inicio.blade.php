@@ -86,7 +86,7 @@
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
           <div class="feature_icon"><img src="{{ URL::asset('rfend/images/icon_3.png') }}" alt=""></div>
-          <h3 class="feature_title">Aprendizaje en linea</h3>
+          <h3 class="feature_title">Aprendizaje activo</h3>
           <div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
         </div>
       </div>
@@ -95,7 +95,7 @@
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
           <div class="feature_icon"><img src="{{ URL::asset('rfend/images/icon_4.png') }}" alt=""></div>
-          <h3 class="feature_title">Logros cumplidos</h3>
+          <h3 class="feature_title">Educaciòn de calidad</h3>
           <div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
         </div>
       </div>
