@@ -5,9 +5,9 @@
     <div class="col-12">
       <h4>
         <i class="fa fa-calculator"></i>RENOVAR SUSCRIPCION
-        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;" :disabled="loader_pagar" v-on:click="pagar">
+        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;" >
           <i class="fa fa-credit-card"></i> Pagar
-          <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_pagar"></i>
+
         </button>
       </h4>
 
@@ -26,13 +26,13 @@
     </div>
     <!-- /.col -->
     <div class="col-6">
-      <p class="lead">Vence : @{{user.fecha_vencimiento}}</p>
+      <p class="lead">Vence : 2018-09-01</p>
       <div class="table-responsive">
         <table class="table">
           <tbody>
             <tr>
               <th>Total:</th>
-              <td>$@{{vrlsuscrip}}</td>
+              <td>50000</td>
             </tr>
           </tbody>
         </table>
@@ -70,10 +70,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="pago in pagos">
-          <td>@{{pago.fecha_creacion}}</td>
-          <td>@{{pago.fecha_vencimiento}}</td>
-          <td>$@{{pago.valor}}</td>
+        <tr >
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
         </tbody>
       </table>

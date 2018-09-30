@@ -25,6 +25,10 @@
         <div class="row">
             <div class="col-md-12">
               @include('backend.perfil.partials.perfil')
+
+              @if(Session::get('rol')=='es')
+                @include('backend.perfil.partials.pagos')
+              @endif
             </div>
         </div>
       </div>
