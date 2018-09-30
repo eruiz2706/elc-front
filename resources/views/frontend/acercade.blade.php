@@ -44,7 +44,7 @@
       <div class="col-lg-4 about_col about_col_left">
         <div class="about_item">
           <div class="about_item_image"><img src="{{ URL::asset('rfend/images/about_1.jpg') }}" alt=""></div>
-          <div class="about_item_title"><a href="#">Nuestra Historia</a></div>
+          <div class="about_item_title"><a href="#">Quienes somos</a></div>
           <div class="about_item_text">
             <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
           </div>
@@ -55,7 +55,7 @@
       <div class="col-lg-4 about_col about_col_middle">
         <div class="about_item">
           <div class="about_item_image"><img src="{{ URL::asset('rfend/images/about_2.jpg') }}" alt=""></div>
-          <div class="about_item_title"><a href="#">Nuestra mision</a></div>
+          <div class="about_item_title"><a href="#">Como funciona</a></div>
           <div class="about_item_text">
             <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
           </div>
@@ -66,7 +66,7 @@
       <div class="col-lg-4 about_col about_col_right">
         <div class="about_item">
           <div class="about_item_image"><img src="{{ URL::asset('rfend/images/about_3.jpg') }}" alt=""></div>
-          <div class="about_item_title"><a href="#">Nuestra vision</a></div>
+          <div class="about_item_title"><a href="#">Vinculate</a></div>
           <div class="about_item_text">
             <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
           </div>
