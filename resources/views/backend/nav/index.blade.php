@@ -12,7 +12,7 @@
     <h3 class="profile-username text-center">
       <a href="{{url('/perfil')}}" style='color:#6c757d!important'>{{ Auth::user()->nombre}}</a>
     </h3>
-    <p class="text-muted text-center">
+    <p class="text-muted text-center" style="margin-top:-10px">
       <a href="{{url('/perfil')}}" style='color:#6c757d!important'>AJ132550</a>
     </p>
 
