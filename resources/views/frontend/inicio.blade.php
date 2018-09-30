@@ -68,7 +68,7 @@
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
           <div class="feature_icon"><img src="{{ URL::asset('rfend/images/icon_1.png') }}" alt=""></div>
-          <h3 class="feature_title">The Experts</h3>
+          <h3 class="feature_title">Expertos</h3>
           <div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
         </div>
       </div>
@@ -77,7 +77,7 @@
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
           <div class="feature_icon"><img src="{{ URL::asset('rfend/images/icon_2.png') }}" alt=""></div>
-          <h3 class="feature_title">Book & Library</h3>
+          <h3 class="feature_title">Documentaciòn en linea</h3>
           <div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
         </div>
       </div>
@@ -86,7 +86,7 @@
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
           <div class="feature_icon"><img src="{{ URL::asset('rfend/images/icon_3.png') }}" alt=""></div>
-          <h3 class="feature_title">Best Courses</h3>
+          <h3 class="feature_title">Aprendizaje en linea</h3>
           <div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
         </div>
       </div>
@@ -95,7 +95,7 @@
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
           <div class="feature_icon"><img src="{{ URL::asset('rfend/images/icon_4.png') }}" alt=""></div>
-          <h3 class="feature_title">Award & Reward</h3>
+          <h3 class="feature_title">Logros cumplidos</h3>
           <div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
         </div>
       </div>
