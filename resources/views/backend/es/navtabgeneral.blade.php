@@ -6,18 +6,18 @@ $active4=(Request::path() == 'es/preguntfg') ? 'active' : '';
 @endphp
 
 <div class="col-md-12">
-  <div class="card card-primary">
-    <div class="card-header">
-      <h3 class="card-title">Resumen</h3>
+  <div class="card">
+    <div class="card-header"  style='height:85px'>
+      <h2>Resumen</h2>
 
       <div class="card-tools">
-        <div class="user-block" style="width:80px;">
-         <img class="img-circle img-bordered-sm" src="{{ URL::asset('rsc/dist/img/user1-128x128.jpg') }}" alt="user image">
-        </div>
+        <!--<div style="width:80px;">
+         <img class="img-circle img-bordered-sm img-fluid" src="{{ URL::asset('rsc/dist/img/user1-128x128.jpg') }}" alt="user image">
+       </div>-->
       </div>
     </div>
 
-    <div class="card-body">
+    <div class="card-body"  style='padding:0px'>
       <ul class="nav nav-pills">
         <li class="nav-item"><a class="nav-link <?=$active1?>" href="{{url('es/calendg')}}">Calendario</a></li>
         <li class="nav-item"><a class="nav-link <?=$active2?>" href="{{url('es/resultg')}}">Resultados</a></li>

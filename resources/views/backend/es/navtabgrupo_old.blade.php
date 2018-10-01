@@ -59,18 +59,18 @@ $act5=(Request::path() == 'es/result') ? 'active' : '';
 </div>
 
 <div class="col-md-12">
-  <div class="card">
-    <div class="card-header" style='height:85px'>
-      <h2>Preparacion Pre-icfes pre-icfes pre-icfess</h2>
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Preparacion Pre-icfes</h3>
 
       <div class="card-tools">
-        <div style="width:80px;">
-         <img class="img-circle img-bordered-sm img-fluid" src="{{ URL::asset('rsc/dist/img/user1-128x128.jpg') }}" style='cursor:pointer' alt="user image" onclick="$('#modalchatprofe').modal('show');">
+        <div class="user-block" style="width:80px;">
+         <img class="img-circle img-bordered-sm" src="{{ URL::asset('rsc/dist/img/user1-128x128.jpg') }}" style='cursor:pointer' alt="user image" onclick="$('#modalchatprofe').modal('show');">
         </div>
       </div>
     </div>
 
-    <div class="card-body" style='padding:0px'>
+    <div class="card-body">
       <ul class="nav nav-pills">
         <li class="nav-item"><a class="nav-link <?=$act1?>" href="{{url('es/foro')}}">Foro</a></li>
         <li class="nav-item"><a class="nav-link <?=$act2?>" href="{{url('es/progres')}}">Progreso</a></li>

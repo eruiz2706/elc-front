@@ -1,8 +1,7 @@
 @extends('layouts.adminlte.app')
 
 @section('banner')
-<div class="img-bannerhome" style="background-image: url('{{ URL::asset('img/app/slide.jpg') }}');">
-</div>
+  @include('backend.elementos.bannertop')
 @endsection
 
 @section('content')
