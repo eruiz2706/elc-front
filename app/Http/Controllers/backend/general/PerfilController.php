@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\backend\general;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,7 +15,7 @@ use Log;
 class PerfilController extends Controller
 {
     public function index(){
-      return view('backend.perfil.index');
+      return view('backend.general.perfil.index');
     }
 
     public function actualizarImagen(Request $request){

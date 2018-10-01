@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\backend\general;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +14,7 @@ use Session;
 class ForoController extends Controller
 {
     function index(){
-      return view('backend.foro.index');
+      return view('backend.general.foro.index');
     }
 
     public function getData(Request $request){

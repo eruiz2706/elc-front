@@ -1,7 +1,7 @@
 @extends('layouts.adminlte.app')
 
 @section('banner')
-    @include('backend.elementos.bannertop')
+  @include('backend.partials.bannertop')
 @endsection
 
 @section('content')

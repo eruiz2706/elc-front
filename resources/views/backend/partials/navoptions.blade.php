@@ -1,3 +1,4 @@
+@if(Session::get('rol')=='es')
 <div class="card">
   <div class="card-header">
     <h3 class="card-title">Cursos</h3>
@@ -25,7 +26,7 @@
   <div class='card-footer'>
     <ul class="nav nav-pills flex-column">
     <li class="nav-item active">
-      <a href="{{url('/principal')}}" class="nav-link">
+      <a href="{{url('es/cursos')}}" class="nav-link">
         <i class="fa fa-plus-square-o"></i> Ofertas de cursos
       </a>
     </li>
@@ -33,3 +34,4 @@
   </div>
   <!-- /.card-body -->
 </div>
+@endif

@@ -1,7 +1,7 @@
 @extends('layouts.adminlte.app')
 
 @section('banner')
-    @include('backend.elementos.bannertop')
+  @include('backend.partials.bannertop')
 @endsection
 
 @section('content')
@@ -10,14 +10,14 @@
 
   <div class="row">
     <div class="col-md-3">
-      @include('backend.nav.index')
+      @include('backend.partials.navuser')
 
-      @include('backend.es.navcursos')
+      @include('backend.partials.navoptions')
     </div>
 
     <div class="col-md-9" style='padding-top:70px;'>
       <div class="row">
-            @include('backend.es.navtabgrupo')
+            @include('backend.partials.tabcontent')   
 
             <div class="col-md-12">
             <div class="card card-widget">

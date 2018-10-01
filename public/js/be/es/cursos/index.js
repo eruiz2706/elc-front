@@ -18,7 +18,7 @@ new Vue({
     methods : {
       getBusqueda:function(){
           this.preload=true;
-          var url ='inicio/busq';
+          var url ='cursos/busq';
           axios.post(url,{}).then(response =>{
               this.cursos=response.data.cursos;
               this.preload=false;
@@ -29,7 +29,7 @@ new Vue({
           });
       },
       detcurso:function(id){
-        window.location ='inicio/detcurso/'+id;
+        window.location ='cursos/detcurso/'+id;
       }
     }
 });

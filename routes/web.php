@@ -30,16 +30,16 @@ Route::middleware(['auth'])->group(function(){
   Route::get('storage/{archivo}','backend\StorageController@index');
 
   ################# rutas compartidas #################
-  Route::get('foro','backend\ForoController@index');
-  Route::post('foro/data','backend\ForoController@getData');
-  Route::post('foro/publicar','backend\ForoController@publicacion');
-  Route::post('foro/datacoment','backend\ForoController@getComentarios');
-  Route::post('foro/comentar','backend\ForoController@agregarComentario');
-  Route::get('perfil','backend\PerfilController@index');
-  Route::post('perfil/actimg','backend\PerfilController@actualizarImagen');
-  Route::post('perfil/cambiocl','backend\PerfilController@cambioClave');
-  Route::post('perfil/data','backend\PerfilController@getData');
-  Route::post('perfil/act','backend\PerfilController@actualizar');
+  Route::get('foro','backend\general\ForoController@index');
+  Route::post('foro/data','backend\general\ForoController@getData');
+  Route::post('foro/publicar','backend\general\ForoController@publicacion');
+  Route::post('foro/datacoment','backend\general\ForoController@getComentarios');
+  Route::post('foro/comentar','backend\general\ForoController@agregarComentario');
+  Route::get('perfil','backend\general\PerfilController@index');
+  Route::post('perfil/actimg','backend\general\PerfilController@actualizarImagen');
+  Route::post('perfil/cambiocl','backend\general\PerfilController@cambioClave');
+  Route::post('perfil/data','backend\general\PerfilController@getData');
+  Route::post('perfil/act','backend\general\PerfilController@actualizar');
 
   ################# rutas administrador #################
   Route::group(['prefix' => 'ad'], function() {
@@ -68,6 +68,10 @@ Route::middleware(['auth'])->group(function(){
     Route::get('resultg','backend\es\ResultadosGenController@index');
     Route::get('dicciong','backend\es\DiccionarioGenController@index');
     Route::get('preguntfg','backend\es\PreguntasFrecGenController@index');
+
+    Route::get('cursos','backend\es\CursosController@index');
+    Route::post('cursos/busq','backend\es\CursosController@listacursos');
+
   });
 
   ################# rutas familiar #################
