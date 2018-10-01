@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('cursos','backend\es\CursosController@index');
     Route::post('cursos/busq','backend\es\CursosController@listacursos');
+    Route::get('cursos/detcurso/{id}','backend\es\CursosController@verCurso');
 
   });
 

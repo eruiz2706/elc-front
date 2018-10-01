@@ -27,4 +27,13 @@ class CursosController extends Controller
     ];
     return response()->json($jsonresponse,200);
   }
+
+  public function verCurso(Request $request,$id){
+    $idcurso=$id;
+    return view('backend.es.cursos.detcurso',compact('idcurso'));
+  }
+
+  public function curso(Request $request){
+
+  }
 }
