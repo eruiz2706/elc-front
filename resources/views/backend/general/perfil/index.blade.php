@@ -8,11 +8,9 @@
 <div class="container">
   <div class="row">
       <div class="col-md-3">
-        @include('backend.nav.index')
+        @include('backend.partials.navuser')
 
-        @if(Session::get('rol')=='es')
-          @include('backend.es.navcursos')
-        @endif
+        @include('backend.partials.navoptions')
       </div>
 
       <div class="col-md-9"  style='padding-top:70px;' >
@@ -23,10 +21,10 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-              @include('backend.perfil.partials.perfil')
+              @include('backend.general.perfil.partials.perfil')
 
               @if(Session::get('rol')=='es')
-                @include('backend.perfil.partials.pagos')
+                @include('backend.general.perfil.partials.pagos')
               @endif
             </div>
         </div>
@@ -37,5 +35,5 @@
 
 @section('scripts')
 @parent
-<script src="{{ URL::asset('js/be/perfil/index.js') }}"></script>
+<script src="{{ URL::asset('js/be/general/perfil/index.js') }}"></script>
 @stop
