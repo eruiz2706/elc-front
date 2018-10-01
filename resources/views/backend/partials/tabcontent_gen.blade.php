@@ -7,14 +7,8 @@ $active4=(Request::path() == 'es/preguntfg') ? 'active' : '';
 
 <div class="col-md-12">
   <div class="card">
-    <div class="card-header"  style='height:85px'>
+    <div class="card-header"  style='height:60px'>
       <h2>Resumen</h2>
-
-      <div class="card-tools">
-        <!--<div style="width:80px;">
-         <img class="img-circle img-bordered-sm img-fluid" src="{{ URL::asset('rsc/dist/img/user1-128x128.jpg') }}" alt="user image">
-       </div>-->
-      </div>
     </div>
 
     <div class="card-body"  style='padding:0px'>

@@ -42,9 +42,11 @@
 
 <div class="row">
   <div class='col-md-12'>
-    <div class="card ">
-          <!-- /.card-header -->
-          <div class="card-body card-primary card-outline">
+    <div class="card  card-primary card-outline">
+          <div class="card-header"  style='height:60px'>
+            <h2>Novedades</h2>
+          </div>
+          <div class="card-body">
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
