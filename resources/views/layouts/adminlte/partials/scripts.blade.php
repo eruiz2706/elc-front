@@ -16,8 +16,6 @@
 <script src="{{ URL::asset('rsc/plugins/select2/select2.full.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ URL::asset('rsc/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="{{ URL::asset('rsc/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <!-- Slimscroll -->
 <script src="{{ URL::asset('rsc/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <!-- FastClick -->
@@ -28,6 +26,11 @@
 <script src="{{ URL::asset('plugins/sweetalert/sweetalert.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ URL::asset('rsc/dist/js/adminlte.js') }}"></script>
+<!-- fullCalendar 2.2.5 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="{{ URL::asset('rsc/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
 <!-- vue -->
 <script src="{{ URL::asset('js/vue.js') }}"></script>
 <script src="{{ URL::asset('js/axios.js') }}"></script>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>

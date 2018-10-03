@@ -13,10 +13,12 @@ use Session;
 
 class ForoController extends Controller
 {
+    /*muestra la vista del foro*/
     function index(){
       return view('backend.general.foro.index');
     }
 
+    /*trae el listado de los ultimos 20 foros publicados*/
     public function getData(Request $request){
       $foros   =DB::select("select
                               f.id,u.nombre as nombreuser,u.imagen as imagenuser,f.descripcion,f.fecha_creacion,f.comentarios
@@ -31,6 +33,7 @@ class ForoController extends Controller
       return response()->json($jsonresponse,200);
     }
 
+    /*metodo para agregar nueva publicacion*/
     public function publicacion(Request $request){
       $id     =Auth::user()->id;
 
@@ -70,6 +73,7 @@ class ForoController extends Controller
       }
     }
 
+    /*metodo para traer los comentarios de un foro*/
     public function getComentarios(Request $request){
       $comentarios   =DB::select("select
                                     descripcion,fecha_creacion,u.imagen,u.nombre
@@ -84,6 +88,7 @@ class ForoController extends Controller
       return response()->json($jsonresponse,200);
     }
 
+    /*agregar comentarios a un foro*/
     public function agregarComentario(Request $request){
       $validator =Validator::make($request->all(),[
         'comentario' =>'required|string'

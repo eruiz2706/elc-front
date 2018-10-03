@@ -48,7 +48,8 @@ Route::middleware(['auth'])->group(function(){
 
   ################# rutas institucion #################
   Route::group(['prefix' => 'in'], function() {
-    Route::get('inicio', 'backend\in\InicioController@index');;
+    Route::get('cursos', 'backend\in\CursosController@index');
+    Route::get('cursos/crear', 'backend\in\CursosController@crear');
   });
 
   ################# rutas profesor #################

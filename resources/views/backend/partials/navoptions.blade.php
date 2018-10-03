@@ -35,3 +35,26 @@
   <!-- /.card-body -->
 </div>
 @endif
+
+@if(Session::get('rol')=='in')
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Administracion</h3>
+
+  </div>
+  <div class="card-body p-0">
+    <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a href="{{url('in/cursos/crear')}}" class="nav-link">
+          Crear Cursos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{url('in/cursos')}}" class="nav-link">
+          Listar Cursos
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+@endif

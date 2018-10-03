@@ -5,6 +5,10 @@ $active3=(Request::path() == 'es/dicciong') ? 'active' : '';
 $active4=(Request::path() == 'es/preguntfg') ? 'active' : '';
 @endphp
 
+<!--<div class="col-sm-6">
+  <h1 class="m-0 text-dark">Dashboard</h1>
+</div>-->
+
 <div class="col-md-12">
   <div class="card">
     <div class="card-header"  style='height:60px'>

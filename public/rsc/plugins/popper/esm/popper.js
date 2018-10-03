@@ -1,3 +1,4 @@
+
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
  * @version 1.14.3
@@ -1187,6 +1188,7 @@ function applyStyleOnLoad(reference, popper, options, modifierOptions, state) {
   // modifiers will be able to edit `placement` if needed
   // and refer to originalPlacement to know the original value
   var placement = computeAutoPlacement(options.placement, referenceOffsets, popper, reference, options.modifiers.flip.boundariesElement, options.modifiers.flip.padding);
+
 
   popper.setAttribute('x-placement', placement);
 

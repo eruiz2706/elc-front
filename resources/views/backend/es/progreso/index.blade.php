@@ -17,7 +17,7 @@
 
     <div class="col-md-9" style='padding-top:70px;'>
       <div class="row">
-            @include('backend.partials.tabcontent') 
+            @include('backend.partials.tabcontent')
       </div>
 
       <h4>Modulo 1</h4>

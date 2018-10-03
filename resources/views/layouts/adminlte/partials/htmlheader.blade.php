@@ -18,15 +18,13 @@
   <link rel="stylesheet" href="{{ URL::asset('plugins/toastr/toastr.min.css') }}">
   <!-- swheetalert -->
   <link rel="stylesheet" href="{{ URL::asset('plugins/sweetalert/sweetalert.css') }}">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="{{ URL::asset('rsc/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- preload -->
   <link rel="stylesheet" href="{{ URL::asset('css/loader-1.css') }}">
-  <link rel="stylesheet" href="{{ URL::asset('css/loader-5.css') }}">
+  <!-- fullCalendar 2.2.5 -->
+    <link rel="stylesheet" href="{{ URL::asset('rsc/plugins/fullcalendar/fullcalendar.min.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('rsc/plugins/fullcalendar/fullcalendar.print.css') }}" media="print">
 
-  <!-- fullCalendar 2.2.5-->
-  <link rel="stylesheet" href="{{ URL::asset('rsc/plugins/fullcalendar/fullcalendar.min.css') }}">
-  <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.print.css') }}" media="print">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
 </head>

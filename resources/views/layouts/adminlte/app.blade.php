@@ -5,11 +5,12 @@
     @show
 
 <body class="hold-transition sidebar-collapse">
-        <div  id="loader-body" class="loader-wrapper loader1">
-                <div class="loader"></div>
-        </div>
 
-<div class="wrapper" id="main">
+    <div  id="loader-body" class="loader-wrapper loader1">
+        <div class="loader"></div>
+    </div>
+
+    <div class="wrapper" id="main">
     @include('layouts.adminlte.partials.mainheader')
     @yield('banner')
 
@@ -32,8 +33,6 @@
         </div>
         <!-- /.content-header -->
 
-
-
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid" >
@@ -47,11 +46,9 @@
     @include('layouts.adminlte.partials.footer')
 
 </div>
-<!-- ./wrapper -->
-
-    @section('scripts')
-        @include('layouts.adminlte.partials.scripts')
-    @show
-
+  <!-- ./wrapper -->
+  @section('scripts')
+      @include('layouts.adminlte.partials.scripts')
+  @show
 </body>
 </html>
