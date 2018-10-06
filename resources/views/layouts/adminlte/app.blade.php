@@ -12,7 +12,9 @@
 
     <div class="wrapper" id="main">
     @include('layouts.adminlte.partials.mainheader')
-    @yield('banner')
+
+    <div class="img-bannerhome" style="background-image: url('{{ URL::asset('rfend/images/counter_background.jpg') }}');"></div>
+
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" id="vue">

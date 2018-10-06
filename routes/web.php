@@ -30,36 +30,37 @@ Route::middleware(['auth'])->group(function(){
   Route::get('storage/{archivo}','backend\StorageController@index');
 
   ################# rutas compartidas #################
-  Route::get('foro','backend\general\ForoController@index');
-  Route::post('foro/data','backend\general\ForoController@getData');
-  Route::post('foro/publicar','backend\general\ForoController@publicacion');
-  Route::post('foro/datacoment','backend\general\ForoController@getComentarios');
-  Route::post('foro/comentar','backend\general\ForoController@agregarComentario');
-  Route::get('perfil','backend\general\PerfilController@index');
-  Route::post('perfil/actimg','backend\general\PerfilController@actualizarImagen');
-  Route::post('perfil/cambiocl','backend\general\PerfilController@cambioClave');
-  Route::post('perfil/data','backend\general\PerfilController@getData');
-  Route::post('perfil/act','backend\general\PerfilController@actualizar');
+  Route::get('foro','backend\modulos\ForoController@index');
+  Route::post('foro/data','backend\modulos\ForoController@getData');
+  Route::post('foro/publicar','backend\modulos\ForoController@publicacion');
+  Route::post('foro/datacoment','backend\modulos\ForoController@getComentarios');
+  Route::post('foro/comentar','backend\modulos\ForoController@agregarComentario');
 
-  ################# rutas administrador #################
-  Route::group(['prefix' => 'ad'], function() {
-    Route::get('inicio', 'backend\ad\InicioController@index');
-  });
+  Route::get('perfil','backend\modulos\PerfilController@index');
+  Route::post('perfil/actimg','backend\modulos\PerfilController@actualizarImagen');
+  Route::post('perfil/cambiocl','backend\modulos\PerfilController@cambioClave');
+  Route::post('perfil/data','backend\modulos\PerfilController@getData');
+  Route::post('perfil/act','backend\modulos\PerfilController@actualizar');
 
-  ################# rutas institucion #################
-  Route::group(['prefix' => 'in'], function() {
-    Route::get('cursos', 'backend\in\CursosController@index');
-    Route::get('cursos/crear', 'backend\in\CursosController@crear');
-  });
+  Route::get('cursos','backend\modulos\CursosController@index');
+  Route::get('cursos/crear', 'backend\modulos\CursosController@crear');
+  Route::post('cursos/guardar', 'backend\modulos\CursosController@guardar');
+  Route::post('cursos/lista', 'backend\modulos\CursosController@lista');
+  Route::get('cursos/abrir/{id}', 'backend\modulos\CursosController@abrir');
 
-  ################# rutas profesor #################
-  Route::group(['prefix' => 'pr'], function() {
-    Route::get('inicio', 'backend\pr\InicioController@index');;
-  });
+  Route::get('foroc', 'backend\modulos\ForoCursoController@index');
+  Route::post('foroc/data','backend\modulos\ForoCursoController@getData');
+  Route::post('foroc/publicar','backend\modulos\ForoCursoController@publicacion');
+  Route::post('foroc/datacoment','backend\modulos\ForoCursoController@getComentarios');
+  Route::post('foroc/comentar','backend\modulos\ForoCursoController@agregarComentario');
+
+  Route::get('ofertados','backend\modulos\OfertadosController@index');
+  Route::post('ofertados/busq','backend\modulos\OfertadosController@listacursos');
+  Route::get('ofertados/det/{id}','backend\modulos\OfertadosController@verCurso');
+  Route::post('ofertados/suscrip','backend\modulos\OfertadosController@suscripcion');
 
   ################# rutas estudiante #################
   Route::group(['prefix' => 'es'], function() {
-    Route::get('foro','backend\es\ForoController@index');
     Route::get('progres','backend\es\ProgresoController@index');
     Route::get('calend','backend\es\CalendarioController@index');
     Route::get('evaluac','backend\es\EvaluacionesController@index');
@@ -70,15 +71,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('dicciong','backend\es\DiccionarioGenController@index');
     Route::get('preguntfg','backend\es\PreguntasFrecGenController@index');
 
-    Route::get('cursos','backend\es\CursosController@index');
-    Route::post('cursos/busq','backend\es\CursosController@listacursos');
-    Route::get('cursos/detcurso/{id}','backend\es\CursosController@verCurso');
-
   });
 
-  ################# rutas familiar #################
-  Route::group(['prefix' => 'pa'], function() {
-    Route::get('inicio', 'backend\pa\InicioController@index');;
-  });
 
 });

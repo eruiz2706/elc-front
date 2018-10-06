@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCursosTable extends Migration
+class CreateCursosUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateCursosTable extends Migration
      */
     public function up()
     {
-        Schema::create('cursos', function (Blueprint $table) {
+        Schema::create('cursos_user', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('curso_id')->unsigned()->index();
+            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('nombre', 150);
-            $table->date('fecha_inicio')->nullable();
-            $table->string('duracion',150)->nullable();
-            $table->string('urlvideo',300)->nullable();
-            $table->boolean('visibilidad')->default(false);
-            $table->text('plan_estudio')->nullable();
-            $table->dateTime('fecha_creacion')->nullable();
+            $table->dateTime('fecha_creacion');
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ class CreateCursosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('cursos_user');
     }
 }
