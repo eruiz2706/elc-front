@@ -29,5 +29,5 @@
 
 @section('scripts')
 @parent
-<script src="{{ URL::asset('js/be/general/perfil/index.js') }}"></script>
+<script src="{{ URL::asset('js/be/modulos/perfil/index.js') }}"></script>
 @stop

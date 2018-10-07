@@ -1,6 +1,6 @@
 @php
 $act1=(Request::path() == 'foroc') ? 'active' : '';
-$act2=(Request::path() == 'progres') ? 'active' : '';
+$act2=(Request::path() == 'modulos') ? 'active' : '';
 $act3=(Request::path() == 'calend') ? 'active' : '';
 $act4=(Request::path() == 'evaluac') ? 'active' : '';
 $act5=(Request::path() == 'result') ? 'active' : '';
@@ -81,7 +81,7 @@ $act5=(Request::path() == 'result') ? 'active' : '';
     <div class="card-body" style='padding:0px'>
       <ul class="nav nav-pills">
         <li class="nav-item"><a class="nav-link <?=$act1?>" href="{{url('foroc')}}">Foro</a></li>
-        <li class="nav-item"><a class="nav-link <?=$act2?>" href="{{url('progres')}}">Lecciones</a></li>
+        <li class="nav-item"><a class="nav-link <?=$act2?>" href="{{url('modulos')}}">Modulos</a></li>
         <li class="nav-item"><a class="nav-link <?=$act3?>" href="{{url('calend')}}">Calendario</a></li>
         <li class="nav-item"><a class="nav-link <?=$act4?>" href="{{url('evaluac')}}">Evaluaciones</a></li>
         <li class="nav-item"><a class="nav-link <?=$act5?>" href="{{url('result')}}">Resultados</a></li>

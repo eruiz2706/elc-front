@@ -14,19 +14,23 @@ class CursosTableSeeder extends Seeder
     {
         Curso::create([
             'user_id'=>1,
-            'nombre' =>'Programacion orientada a objetos'
+            'nombre' =>'Programacion orientada a objetos',
+            'visibilidad'=>true
         ]);
         Curso::create([
             'user_id'=>1,
-            'nombre' =>'Angular 5'
+            'nombre' =>'Angular 5',
+            'visibilidad'=>true
         ]);
         Curso::create([
             'user_id'=>1,
-            'nombre' =>'Javascript avanzado'
+            'nombre' =>'Javascript avanzado',
+            'visibilidad'=>true
         ]);
         Curso::create([
             'user_id'=>1,
-            'nombre' =>'Laravel 5.7 novedades'
+            'nombre' =>'Laravel 5.7 novedades',
+            'visibilidad'=>true
         ]);
     }
 }

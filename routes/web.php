@@ -27,9 +27,8 @@ Auth::routes();
 Route::middleware(['auth'])->group(function(){
 
   Route::get('/principal', 'backend\PrincipalController@index');
-  Route::get('storage/{archivo}','backend\StorageController@index');
+  //Route::get('storage/{archivo}','backend\StorageController@index');
 
-  ################# rutas compartidas #################
   Route::get('foro','backend\modulos\ForoController@index');
   Route::post('foro/data','backend\modulos\ForoController@getData');
   Route::post('foro/publicar','backend\modulos\ForoController@publicacion');
@@ -58,6 +57,12 @@ Route::middleware(['auth'])->group(function(){
   Route::post('ofertados/busq','backend\modulos\OfertadosController@listacursos');
   Route::get('ofertados/det/{id}','backend\modulos\OfertadosController@verCurso');
   Route::post('ofertados/suscrip','backend\modulos\OfertadosController@suscripcion');
+
+  Route::get('modulos','backend\modulos\ModulosController@index');
+  Route::post('modulos/lista', 'backend\modulos\ModulosController@lista');
+  Route::get('modulos/crear', 'backend\modulos\ModulosController@crear');
+  Route::post('modulos/guardar', 'backend\modulos\ModulosController@guardar');
+  Route::post('modulos/progreso', 'backend\modulos\ModulosController@progreso');
 
   ################# rutas estudiante #################
   Route::group(['prefix' => 'es'], function() {
