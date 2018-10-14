@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*Route::get('/', function () {
-    return view('welcome');
+/*Route::get('/home', function () {
+   return header('Location: www.google.com');
 });*/
 
 ################# rutas frontend #################
@@ -31,6 +31,9 @@ Route::middleware(['lang'])->group(function(){
   Route::post('/registro/guardar', 'HomeController@guardarRegistro');
   Route::get('/login', 'HomeController@login');
   Auth::routes();
+
+  Route::get('/redirect', 'SocialController@redirect');
+  Route::get('/callback', 'SocialController@callback');
 });
 
 

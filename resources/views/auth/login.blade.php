@@ -92,7 +92,7 @@
 
             <br>
             <a href="{{ url('/registro') }}" class="text-left text-info">REGISTRATE</a>
-
+            <a href="{{ url('/redirect') }}" class="text-left text-info">FACEBOOK_ID</a>
           </form>
         </div>
       </div>
