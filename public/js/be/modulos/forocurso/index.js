@@ -22,6 +22,14 @@ new Vue({
 
     },
     methods : {
+      border:function(role){
+        var clase='';
+        if(role=='ad')clase='img-bordered-danger';
+        if(role=='in')clase='img-bordered-success';
+        if(role=='pr')clase='img-bordered-info';
+        if(role=='pa')clase='img-bordered-warning';
+        return clase;
+      },
       getData:function(){
           this.preload=true;
           var url =base_url+'/foroc/data';

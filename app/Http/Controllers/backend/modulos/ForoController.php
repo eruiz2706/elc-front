@@ -32,9 +32,11 @@ class ForoController extends Controller
     /*trae el listado de los ultimos 20 foros publicados*/
     public function getData(Request $request){
       $foros   =DB::select("select
-                              f.id,u.nombre as nombreuser,u.imagen as imagenuser,f.descripcion,f.fecha_creacion,f.comentarios
+                              f.id,u.nombre as nombreuser,u.imagen as imagenuser,f.descripcion,f.fecha_creacion,f.comentarios,r.slug as role
                               from foros f
                               left join users u on(f.user_id=u.id)
+                              left join role_user ru on(u.id=ru.user_id)
+                              left join roles r on(ru.role_id=r.id)
                               order by fecha_creacion desc
                               limit 20
                               ");
@@ -87,9 +89,11 @@ class ForoController extends Controller
     /*metodo para traer los comentarios de un foro*/
     public function getComentarios(Request $request){
       $comentarios   =DB::select("select
-                                    descripcion,fecha_creacion,u.imagen,u.nombre
+                                    descripcion,fecha_creacion,u.imagen,u.nombre,r.slug as role
                                     from comentarios_foro cf
                                     left join users u on(cf.user_id=u.id)
+                                    left join role_user ru on(u.id=ru.user_id)
+                                    left join roles r on(ru.role_id=r.id)
                                     where foro_id= :foro_id
                                     order by cf.fecha_creacion desc
                               ",['foro_id'=>$request->idforo]);

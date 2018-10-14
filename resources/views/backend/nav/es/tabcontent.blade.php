@@ -59,9 +59,9 @@ $act5=(Request::path() == 'result') ? 'active' : '';
 </div>
 
 <div class="col-md-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header" style='height:85px'>
-      <h2>
+  <div class="card">
+    <div class="card-header card-header-cuorse">
+      <h2 class="card-title-course">
         @if(Session::get('o_curso') !=null)
           {{Session::get('o_curso')->nombre}}
         @endif

@@ -36,12 +36,16 @@ class CursosController extends Controller
 
   /*metodo que inicializa el curso al que voy a ingresar*/
   public function abrir($id){
+    $rol  =Session::get('rol');
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
                           where c.id= :id"
                      ,['id'=>$id])[0];
     Session::put('o_curso',$curso);
+    if($rol =='in'){
+      return redirect('modulos');
+    }
     return redirect('foroc');
   }
 

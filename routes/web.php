@@ -15,14 +15,24 @@
 });*/
 
 ################# rutas frontend #################
-Route::get('/', 'HomeController@index');
-Route::get('/cursos', 'HomeController@cursos');
-Route::get('/acercade', 'HomeController@acercade');
-Route::get('/contacto', 'HomeController@contacto');
-Route::get('/registro', 'HomeController@registro');
-Route::post('/registro/guardar', 'HomeController@guardarRegistro');
-Route::get('/login', 'HomeController@login');
-Auth::routes();
+Route::get('lang/{lang}', function ($lang) {
+    session(['lang' => $lang]);
+    return \Redirect::back();
+})->where([
+    'lang' => 'en|es'
+]);
+
+Route::middleware(['lang'])->group(function(){
+  Route::get('/', 'HomeController@index');
+  Route::get('/cursosd', 'HomeController@cursos');
+  Route::get('/acercade', 'HomeController@acercade');
+  Route::get('/contacto', 'HomeController@contacto');
+  Route::get('/registro', 'HomeController@registro');
+  Route::post('/registro/guardar', 'HomeController@guardarRegistro');
+  Route::get('/login', 'HomeController@login');
+  Auth::routes();
+});
+
 
 Route::middleware(['auth'])->group(function(){
 

@@ -16,7 +16,7 @@
                   </a>
                 </div>
                 <div class="footer_about_text">
-                  <p>Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</p>
+                  <p>The place for english and culture</p>
                 </div>
                 <div class="footer_social">
                   <ul>
@@ -34,11 +34,11 @@
 
               <!-- Footer Contact -->
               <div class="footer_section footer_contact">
-                <div class="footer_title">Contáctenos</div>
+                <div class="footer_title">{{ trans('frontend.contact') }}</div>
                 <div class="footer_contact_info">
                   <ul>
                     <li>Email: aulacirtual@gmail.com</li>
-                    <li>Telefono:  +(88) 111 555 666</li>
+                    <li>{{ trans('frontend.telephone') }} :  +(88) 111 555 666</li>
                     <li>Calle 8 #5-25 Cali, Valle del cauca</li>
                   </ul>
                 </div>
@@ -50,13 +50,13 @@
 
               <!-- Footer links -->
               <div class="footer_section footer_links">
-                <div class="footer_title">Menu</div>
+                <div class="footer_title">{{ trans('frontend.navigation') }}</div>
                 <div class="footer_links_container">
                   <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="contact.html">Sobre nosotros</a></li>
-                    <li><a href="about.html">Cursos</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><a href="{{url('/')}}">{{ trans('frontend.nav.home') }}</a></li>
+                    <li><a href="{{url('/acercade')}}">{{ trans('frontend.nav.about') }}</a></li>
+                    <li><a href="{{url('/cursosd')}}">{{ trans('frontend.nav.courses') }}</a></li>
+                    <li><a href="{{url('/contacto')}}">{{ trans('frontend.nav.contact') }}</a></li>
                   </ul>
                 </div>
               </div>
@@ -76,8 +76,8 @@
           </div>-->
           <div class="ml-lg-auto cr_links">
             <ul class="cr_list">
-              <li><a href="#">Terminos de uso</a></li>
-              <li><a href="#">Politicas de privacidad</a></li>
+              <li><a href="#">{{ trans('frontend.terms_use') }}</a></li>
+              <li><a href="#">{{ trans('frontend.policies') }}</a></li>
             </ul>
           </div>
         </div>

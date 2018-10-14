@@ -23,7 +23,7 @@
           </div>
           <div class="card-comment"  v-for="comentario in a_comentarios">
             <!-- User image -->
-            <img class="img-circle img-sm" v-bind:src="base_url+'/'+comentario.imagen" alt="User Image">
+            <img class="user-img-foro img-circle img-sm" v-bind:class="border(comentario.role)" v-bind:src="base_url+'/'+comentario.imagen" alt="User Image">
 
             <div class="comment-text">
               <span class="username">
@@ -45,9 +45,9 @@
 
 <div class="row">
   <div class='col-md-12'>
-    <div class="card  card-primary card-outline">
-          <div class="card-header"  style='height:60px'>
-            <h2>Novedades</h2>
+    <div class="card">
+          <div class="card-header no-border"  style='height:40px'>
+            <h2>Ultimas noticias</h2>
           </div>
           <div class="card-body">
             <div class="row">
@@ -76,8 +76,8 @@
     <div class="card card-widget">
       <div class="card-header">
         <div class="user-block">
-          <img class="img-circle" v-bind:src="base_url+'/'+foro.imagenuser" alt="User Image">
-          <span class="username"><a href="#">@{{foro.nombreuser}} </a></span>
+          <img class="user-img-foro img-circle"  v-bind:class="border(foro.role)"  v-bind:src="base_url+'/'+foro.imagenuser" alt="User Image">
+          <span class="username">@{{foro.nombreuser}}</span>
           <span class="description">@{{foro.fecha_creacion}}</span>
         </div>
       </div>

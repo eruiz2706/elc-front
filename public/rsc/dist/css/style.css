@@ -124,3 +124,53 @@
 .content-header{
   padding-top: 8px;
 }
+
+/*estilos tab*/
+.nav-pills .nav-link{
+  border-radius:0;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+  color :#6c757d;
+  background-color:transparent;
+  border-bottom:5px solid #eee;
+  border-bottom-color : #007bff
+}
+
+/*header card curso actual*/
+.card-header-cuorse{
+  height: 90px;
+  background-color:#007bff
+}
+.card-title-course{
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0;
+  color:white;
+}
+
+/*estilos bordes color*/
+.callout-cours{
+  border-left:5px solid #eee;border-left-color : #007bff;
+}
+
+/*estilos bordes logos*/
+.profile-user-img{
+  border :2px solid #adb5bd;
+}
+
+.user-img-foro{
+  padding:1px;border:2px solid  #adb5bd;
+}
+
+.img-bordered-success{
+  border:2px solid  #1e7e34;
+}
+.img-bordered-warning{
+  border:2px solid  #d39e00;
+}
+.img-bordered-info{
+  border:2px solid  #117a8b;
+}
+.img-bordered-danger{
+  border:2px solid  #bd2130;
+}

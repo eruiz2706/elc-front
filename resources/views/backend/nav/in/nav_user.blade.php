@@ -3,7 +3,7 @@
   <div class="card-body box-profile">
     <div class="text-center">
       <a href="{{url('/perfil')}}">
-        <img class="profile-user-img img-fluid img-circle"
+        <img class="profile-user-img img-fluid img-circle img-bordered-success"
              src="{{ URL::asset(Auth::user()->imagen) }}"
              alt="User avatar">
       </a>
@@ -19,7 +19,7 @@
     <ul class="nav nav-pills flex-column">
         <li class="nav-item active">
           <a href="{{url('principal')}}" class="nav-link">
-            <i class="fa fa-inbox"></i> Novedades
+            <i class="fa fa-inbox"></i> Ultimas noticias
           </a>
         </li>
     </ul>

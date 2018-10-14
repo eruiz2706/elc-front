@@ -32,9 +32,11 @@ class ForoCursoController extends Controller
   public function getData(Request $request){
     $idcurso =Session::get('o_curso')->id;
     $foros   =DB::select("select
-                            f.id,u.nombre as nombreuser,u.imagen as imagenuser,f.descripcion,f.fecha_creacion,f.comentarios
+                            f.id,u.nombre as nombreuser,u.imagen as imagenuser,f.descripcion,f.fecha_creacion,f.comentarios,r.slug as role
                             from forocurso f
                             left join users u on(f.user_id=u.id)
+                            left join role_user ru on(u.id=ru.user_id)
+                            left join roles r on(ru.role_id=r.id)
                             where curso_id = :curso_id
                             order by fecha_creacion desc
                             limit 30",
@@ -90,9 +92,11 @@ class ForoCursoController extends Controller
   /*metodo para traer los comentarios de un foro*/
   public function getComentarios(Request $request){
     $comentarios   =DB::select("select
-                                  descripcion,fecha_creacion,u.imagen,u.nombre
+                                  descripcion,fecha_creacion,u.imagen,u.nombre,r.slug as role
                                   from comentarios_forocurso cf
                                   left join users u on(cf.user_id=u.id)
+                                  left join role_user ru on(u.id=ru.user_id)
+                                  left join roles r on(ru.role_id=r.id)
                                   where foro_id= :foro_id
                                   order by cf.fecha_creacion desc
                             ",['foro_id'=>$request->idforo]);
