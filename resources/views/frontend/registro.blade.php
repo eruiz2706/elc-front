@@ -77,7 +77,7 @@
               <option value='pa'>Soy un familiar</option>
             </select>
 
-            <input type="text" class="counter_input"  name='nombre' placeholder="Nombre" autocomplete="off" required="required" v-model="o_user.nombre">
+            <input type="text" class="counter_input" name='nombre' placeholder="Nombre" autocomplete="off" required="required" v-model="o_user.nombre">
             <label v-if="errores.nombre" class="text-danger">@{{ errores.nombre[0] }}</label>
 
             <input type="text" class="counter_input" name='email' placeholder="Email" autocomplete="off" required="required" v-model="o_user.email">
@@ -90,6 +90,22 @@
               Registrate
               <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader" v-if="loader_crear"></i>
             </button>
+
+            <p>- OR -</p>
+            <div class="social-auth-links text-center mb-3">
+              <div class='row'>
+              <div class='col-md-6'>
+                <a href="#" class="btn  btn-primary" v-on:click.prevent="crearRedes('facebook')">
+                  <i class="fa fa-facebook mr-2"></i> Facebook
+                </a>
+              </div>
+              <div class='col-md-6'>
+                <a href="#" class="btn  btn-danger" v-on:click.prevent="crearRedes('google')">
+                  <i class="fa fa-google mr-2"></i> Google
+                </a>
+              </div>
+              </div>
+            </div>
           </form>
         </div>
       </div>

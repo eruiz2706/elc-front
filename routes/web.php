@@ -13,7 +13,6 @@
 /*Route::get('/home', function () {
    return header('Location: www.google.com');
 });*/
-
 ################# rutas frontend #################
 Route::get('lang/{lang}', function ($lang) {
     session(['lang' => $lang]);
@@ -32,8 +31,9 @@ Route::middleware(['lang'])->group(function(){
   Route::get('/login', 'HomeController@login');
   Auth::routes();
 
-  Route::get('/redirect', 'SocialController@redirect');
-  Route::get('/callback', 'SocialController@callback');
+  Route::get('/redirect/{provider}/{type?}/{modo?}', 'SocialController@redirect');
+  Route::get('/callback/{provider}', 'SocialController@callback');
+  Route::get('/callback/{provider}/{rol}', 'SocialController@callback_register');
 });
 
 

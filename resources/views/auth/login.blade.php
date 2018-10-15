@@ -66,8 +66,8 @@
     </div>
 
     <div class="counter_form">
-      <div class="row fill_height">
-        <div class="col fill_height">
+      <div class="row ">
+        <div class="col ">
           <form class="counter_form_content d-flex flex-column align-items-center justify-content-center" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="counter_form_title">Iniciar sesiòn</div>
@@ -90,9 +90,23 @@
               Acceder
             </button>
 
-            <br>
-            <a href="{{ url('/registro') }}" class="text-left text-info">REGISTRATE</a>
-            <a href="{{ url('/redirect') }}" class="text-left text-info">FACEBOOK_ID</a>
+            <p>- OR -</p>
+            <div class="social-auth-links text-center mb-3">
+              <div class='row'>
+              <div class='col-md-6'>
+                <a href="{{ url('/redirect/facebook') }}" class="btn  btn-primary">
+                  <i class="fa fa-facebook mr-2"></i> Facebook
+                </a>
+              </div>
+              <div class='col-md-6'>
+                <a href="{{ url('/redirect/google') }}" class="btn  btn-danger">
+                  <i class="fa fa-google mr-2"></i> Google
+                </a>
+              </div>
+              </div>
+            </div>
+            <a href="{{ url('/registro') }}" class="text-left float-left">Registrate</a>
+            <!--<a href="{{ url('/registro') }}" class="text-left float-left">Olvidaste tu contraseña?</a>-->
           </form>
         </div>
       </div>

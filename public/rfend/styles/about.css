@@ -116,11 +116,11 @@ p a:hover::after
 }
 ::selection
 {
-	
+
 }
 p::selection
 {
-	
+
 }
 h1{font-size: 48px;}
 h2{font-size: 36px;}
@@ -137,14 +137,14 @@ h1, h2, h3, h4, h5, h6
 	color: #384158;
 	margin-bottom: 0;
 }
-h1::selection, 
-h2::selection, 
-h3::selection, 
-h4::selection, 
-h5::selection, 
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
 h6::selection
 {
-	
+
 }
 .form-control
 {
@@ -713,9 +713,9 @@ section
 	font-size: 14px !important;
 	font-weight: 400 !important;
 	color: rgba(0,0,0,0.4) !important;
-} 
+}
 .menu .search_input:-ms-input-placeholder
-{ 
+{
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px !important;
 	font-weight: 400 !important;
@@ -823,7 +823,7 @@ section
 }
 .about_col_left
 {
-	padding-right: 25px;	
+	padding-right: 25px;
 }
 .about_col_right
 {
@@ -916,7 +916,7 @@ section
 }
 .elements_accordions
 {
-	
+
 }
 .accordion_container
 {
@@ -1267,7 +1267,9 @@ section
 	color: #384158;
 	text-transform: uppercase;
 	line-height: 0.75;
-	margin-bottom: 41px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	/*margin-bottom: 41px;*/
 }
 .counter_input
 {
@@ -1323,10 +1325,10 @@ section
 	font-size: 14px !important;
 	font-weight: 400 !important;
 	color: #b5b8be !important;
-} 
+}
 .counter_input:-ms-input-placeholder,
 .counter_text_input:-ms-input-placeholder
-{ 
+{
 	font-size: 14px !important;
 	font-weight: 400 !important;
 	color: #b5b8be !important;
@@ -1350,7 +1352,8 @@ section
 	outline: none;
 	background: #14bdee;
 	cursor: pointer;
-	margin-top: 30px;
+	/*margin-top: 30px;*/
+	margin-top: 10px;
 	box-shadow: 0px 5px 40px rgba(29,34,47,0.15);
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;

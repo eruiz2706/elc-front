@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Hash;
+use Validator;
 use Socialite;
 use Auth;
 use App\User;
@@ -11,35 +13,54 @@ use DB;
 
 class SocialController extends Controller
 {
-    public function redirect(){
-      return Socialite::driver('facebook')->redirect();
+    public function redirect($provider,$type='',$modo=''){
+
+      session(['f_type' =>$type]);
+      session(['f_modo' =>$modo]);
+      return Socialite::driver($provider)->redirect();
     }
 
-    public function callback(){
-      $social_user =Socialite::driver('facebook')->user();
+    public function callback($provider){
+      $social_user =Socialite::driver($provider)->user();
       //echo $user->getId()."\r\n";
       //echo $user->getAvatar()."\r\n";
-      if ($user = User::where('email', $social_user->email)->first()) {
-            return $this->authAndRedirect($user); // Login y redirección
-        } else {
-            // En caso de que no exista creamos un nuevo usuario con sus datos.
-            $rol  =DB::select("select id from roles
-                                where slug = :slug"
-                               ,['slug'=>'es']);
 
-            $user = User::create([
-                'nombre' => $social_user->name,
-                'email' => $social_user->email,
-                'avatar' => $social_user->avatar,
-            ]);
+      $type=session('f_type');
 
-            DB::table('role_user')->insert([
-              'user_id' =>$user->id,
-              'role_id' =>$rol[0]->id
-            ]);
+      if($type=='registro'){
+          if ($user = User::where('email', $social_user->email)->first()) {
+              return $this->authAndRedirect($user); // Login y redirección
+          } else {
+              $modo=session('f_modo');
 
-            return $this->authAndRedirect($user); // Login y redirección
+              $role  =DB::select("select id from roles
+                                  where slug = :slug"
+                                 ,['slug'=>$modo]);
+
+              if(!empty($role)){
+                $user = User::create([
+                    'nombre' => $social_user->name,
+                    'email' => $social_user->email,
+                    'password'=>Hash::make(substr( md5(microtime()), 1, 8)),
+                ]);
+
+                DB::table('role_user')->insert([
+                  'user_id' =>$user->id,
+                  'role_id' =>$role[0]->id
+                ]);
+
+                return $this->authAndRedirect($user);
+              }
+
+              return redirect()->to('registro#');          
+          }
+      }else{
+        if ($user = User::where('email', $social_user->email)->first()) {
+          return $this->authAndRedirect($user); // Login y redirección
         }
+        return redirect()->to('registro#');
+      }
+
     }
 
     // Login y redirección

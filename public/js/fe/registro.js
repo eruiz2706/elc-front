@@ -5,11 +5,11 @@ new Vue({
 
     },
     created : function(){
-      this.o_user =this.o_userbase;
+
     },
     data : {
       o_userbase :{'nombre':'','email':'','password':'','repassword':'','rol':''},
-      o_user:{},
+      o_user:{'nombre':'','email':'','password':'','repassword':'','rol':''},
       errores :[],
       loader_crear :false,
     },
@@ -24,7 +24,6 @@ new Vue({
       },crear: function(){
           this.loader_crear=true;
           var url =base_url+'/registro/guardar';
-
           axios.post(url,{
             nombre : this.o_user.nombre,
             email : this.o_user.email,
@@ -43,11 +42,24 @@ new Vue({
           }).catch(error =>{
               this.loader_crear=false;
               this.errores=error.response.data.errors;
-              console.log(error.response.data.error);
               toastr.error(error.response.data.message,'',{
                   "timeOut": "2500"
               });
           });
+      },
+      crearRedes:function(provider){
+        var modo =document.getElementById('counter_select').value;
+
+        if(modo==''){
+          swal({
+              title:'',
+              text:'Debe seleccionar el tipo',
+              type: "error"
+          });
+          return;
+        }
+        var url=base_url+"/redirect/"+provider+"/registro/"+modo;
+        window.location.href =url;
       }
     }
 });

@@ -66,7 +66,6 @@ class HomeController extends Controller
               'message' =>'Debe validar los campos obligatorios'
           ], 400);
       }
-
       $attributes =[
           'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
           'nombre'  =>$request->input('nombre'),
