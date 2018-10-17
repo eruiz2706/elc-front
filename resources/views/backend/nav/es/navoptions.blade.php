@@ -32,7 +32,7 @@
     <ul class="nav nav-pills flex-column">
       <li class="nav-item">
         <a href="{{url('ofertados')}}" class="nav-link">
-          Ofertas cursos
+          <i class="fa fa-plus-square-o"></i> Ofertas  de cursos
         </a>
       </li>
     </ul>

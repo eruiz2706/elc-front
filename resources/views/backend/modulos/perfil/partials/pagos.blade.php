@@ -5,10 +5,24 @@
     <div class="col-12">
       <h4>
         <i class="fa fa-calculator"></i>RENOVAR SUSCRIPCION
-        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;" >
-          <i class="fa fa-credit-card"></i> Pagar
-
-        </button>
+        <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+           <input name="merchantId"    type="hidden"  value="508029"   >
+           <input name="accountId"     type="hidden"  value="512321" >
+           <input name="description"   type="hidden"  value="PagoSuscripcion"  >
+           <input name="referenceCode" type="hidden"  value="Pago002" >
+           <input name="amount"        type="hidden"  value="50000"   >
+           <input name="tax"           type="hidden"  value="0"  >
+           <input name="taxReturnBase" type="hidden"  value="0" >
+           <input name="currency"      type="hidden"  value="COP" >
+           <input name="signature"     type="hidden"  value="f2e299f76c665feb81a50df18e4f2eaf"  >
+           <input name="test"          type="hidden"  value="1" >
+           <input name="buyerEmail"    type="hidden"  value="eruiz2706@gmail.com" >
+           <input name="responseUrl"    type="hidden"  value="http://www.test.com/response" >
+           <input name="confirmationUrl"    type="hidden"  value="http://www.test.com/confirmation" >
+           <button name="Submit"        type="submit"  class="btn btn-primary float-right" style="margin-right: 5px;" >
+              <i class="fa fa-credit-card"></i> Pagar
+           </button>
+        </form>
       </h4>
 
     </div>
