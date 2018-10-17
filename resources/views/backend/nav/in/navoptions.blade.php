@@ -6,7 +6,7 @@
   <div class="card-body p-0">
     <ul class="nav nav-pills flex-column">
       <li class="nav-item">
-        <a href="{{url('cursos/crear')}}" class="nav-link">
+        <a href="{{url('cursos/v_crear')}}" class="nav-link">
           Crear curso
         </a>
       </li>

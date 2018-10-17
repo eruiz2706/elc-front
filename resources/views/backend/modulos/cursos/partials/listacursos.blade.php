@@ -23,7 +23,7 @@
           @{{curso.nombre}}
         </td>
         <td>
-          <a href="#" class="text-muted">
+          <a href="#" class="text-muted" v-bind:href="base_url+'/cursos/v_editar/'+curso.id">
             <i class="fa fa-edit"></i> Editar
           </a><br>
           <a href="#" v-bind:href="base_url+'/cursos/abrir/'+curso.id" class="text-muted">

@@ -19,6 +19,7 @@ class CreateCursosTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('nombre', 150);
             $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_finalizacion')->nullable();
             $table->string('duracion',150)->nullable();
             $table->string('urlvideo',300)->nullable();
             $table->boolean('visibilidad')->default(false);

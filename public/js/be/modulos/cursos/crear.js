@@ -6,8 +6,8 @@ new Vue({
 
     },
     data : {
-      o_basecurso:{'nombre':'','fecha_inicio':'','duracion':'','urlvideo':'','visibilidad':false,'plan_estudio':''},
-      o_curso:{'nombre':'','fecha_inicio':'','duracion':'','urlvideo':'','visibilidad':false,'plan_estudio':''},
+      o_basecurso:{'nombre':'','fecha_inicio':'','fecha_finalizacion':'','duracion':'','urlvideo':'','visibilidad':false},
+      o_curso:{'nombre':'','fecha_inicio':'','fecha_finalizacion':'','duracion':'','urlvideo':'','visibilidad':false},
       e_curso:[],
       loader_guardar :false,
     },
@@ -17,18 +17,17 @@ new Vue({
     methods : {
       guardar:function(){
         this.loader_guardar=true;
-        this.o_curso.plan_estudio=$('#summernote').summernote('code');
-
         var url =base_url+'/cursos/guardar';
         axios.post(url,this.o_curso).then(response =>{
             this.loader_guardar=false;
             this.e_curso=[];
             this.o_curso=this.o_basecurso;
-            $('#summernote').summernote('code','');
             swal({
                 title:response.data.message,
                 text:response.data.message2,
                 type: "success"
+            },function(){
+              window.location.href=base_url+'/cursos';
             });
         }).catch(error =>{
             this.loader_guardar=false;

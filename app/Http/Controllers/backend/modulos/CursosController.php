@@ -18,18 +18,26 @@ class CursosController extends Controller
   public function index(){
     $rol  =Session::get('rol');
     if($rol !='in'){
-      echo "no pertenece a ningun rol redireccionar";
+      return "no pertenece a ningun rol redireccionar";
     }
     return view('backend.modulos.cursos.view_list');
   }
 
   /*vista para crear un curso*/
-  public function crear(){
+  public function view_crear(){
     $rol  =Session::get('rol');
     if($rol !='in'){
-      echo "no pertenece a ningun rol redireccionar";
+      return  "no pertenece a ningun rol redireccionar";
     }
     return view('backend.modulos.cursos.view_crear');
+  }
+
+  public function view_config(){
+    $rol  =Session::get('rol');
+    if($rol !='in'){
+      return  "no pertenece a ningun rol redireccionar";
+    }
+    return view('backend.modulos.cursos.view_config');
   }
 
 
@@ -44,7 +52,7 @@ class CursosController extends Controller
                      ,['id'=>$id])[0];
     Session::put('o_curso',$curso);
     if($rol =='in'){
-      return redirect('modulos');
+      return redirect('cursos/v_config');
     }
     return redirect('foroc');
   }
@@ -54,7 +62,9 @@ class CursosController extends Controller
     $id     =Auth::user()->id;
 
     $validator =Validator::make($request->all(),[
-      'nombre' =>'required|string'
+      'nombre' =>'required|string',
+      'fecha_inicio' =>'required',
+      'fecha_finalizacion' =>'required'
     ]);
 
     if ($validator->fails()) {
@@ -70,10 +80,8 @@ class CursosController extends Controller
         'user_id'=>$id,
         'nombre'=>$request->nombre,
         'fecha_inicio'=>$request->fecha_inicio,
-        'duracion'=>$request->duracion,
-        'urlvideo'=>$request->urlvideo,
+        'fecha_finalizacion'=>$request->fecha_finalizacion,
         'visibilidad'=>$request->visibilidad,
-        'plan_estudio'=>$request->plan_estudio,
         'fecha_creacion'=>date('Y-m-d H:i:s')
       ]);
 
@@ -107,5 +115,65 @@ class CursosController extends Controller
         'cursos'=>$cursos
     ];
     return response()->json($jsonresponse,200);
+  }
+
+  public function view_editar($id){
+      $rol  =Session::get('rol');
+      if($rol !='in'){
+        return "no pertenece a ningun rol redireccionar";
+      }
+      return view('backend.modulos.cursos.view_edit',compact('id'));
+  }
+  public function editar($id){
+    $curso   =DB::select("select
+                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad
+                            from cursos
+                            where id = :id",
+                          ['id'=>$id])[0];
+    $jsonresponse=[
+        'curso'=>$curso
+    ];
+    return response()->json($jsonresponse,200);
+  }
+
+  /*actualizar curso*/
+  public function actualizar(Request $request){
+    $validator =Validator::make($request->all(),[
+      'nombre' =>'required|string',
+      'fecha_inicio' =>'required',
+      'fecha_finalizacion' =>'required'
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'errors' => $validator->messages(),
+        ], 400);
+    }
+
+    ############guardar datos ########
+    DB::beginTransaction();
+    try{
+      DB::table('cursos')->where('id',$request->id)->update([
+        'nombre'=>$request->nombre,
+        'fecha_inicio'=>$request->fecha_inicio,
+        'fecha_finalizacion'=>$request->fecha_finalizacion,
+        'visibilidad'=>$request->visibilidad
+      ]);
+
+      DB::commit();
+      return response()->json([
+          'message' => 'Registro actualizado correctamente!',
+          'message2' => 'Click para continuar!'
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('actualizacion curso : '.$e->getMessage());
+        DB::rollback();
+        //$e->getMessage();
+
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar actualizacion el registro'
+        ], 400);
+    }
   }
 }

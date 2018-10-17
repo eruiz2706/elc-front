@@ -55,10 +55,14 @@ Route::middleware(['auth'])->group(function(){
   Route::post('perfil/act','backend\modulos\PerfilController@actualizar');
 
   Route::get('cursos','backend\modulos\CursosController@index');
-  Route::get('cursos/crear', 'backend\modulos\CursosController@crear');
+  Route::get('cursos/v_crear', 'backend\modulos\CursosController@view_crear');
   Route::post('cursos/guardar', 'backend\modulos\CursosController@guardar');
+  Route::get('cursos/v_editar/{id}', 'backend\modulos\CursosController@view_editar');
+  Route::get('cursos/editar/{id}', 'backend\modulos\CursosController@editar');
+  Route::post('cursos/actualizar', 'backend\modulos\CursosController@actualizar');
   Route::post('cursos/lista', 'backend\modulos\CursosController@lista');
   Route::get('cursos/abrir/{id}', 'backend\modulos\CursosController@abrir');
+  Route::get('cursos/v_config', 'backend\modulos\CursosController@view_config');
 
   Route::get('foroc', 'backend\modulos\ForoCursoController@index');
   Route::post('foroc/data','backend\modulos\ForoCursoController@getData');

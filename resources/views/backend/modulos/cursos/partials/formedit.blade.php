@@ -1,7 +1,8 @@
+
 <div class="col-md-12">
   <div class="card  card-primary card-outline">
     <div class="card-header no-border" style="height: 60px;">
-      <h2>Crear Curso</h2>
+      <h2>Editar Curso</h2>
     </div>
     <div class="card-body">
       <div class="form-group">
@@ -36,16 +37,17 @@
         </div>
       </div>
 
-      <button type="button" class="btn btn-primary btn-sm float-right" :disabled="loader_guardar" v-on:click.prevent='guardar()'>
-        Guardar
-        <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_guardar"></i>
+      <button type="button" class="btn btn-primary btn-sm float-right" :disabled="loader_actualizar" v-on:click.prevent='actualizar()'>
+        Actualizar
+        <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_actualizar"></i>
       </button>
     </div>
+    <input type='hidden' name='id' id='id' value="{{$id}}"></input>
   </div>
 </div>
 
 
 @section('scripts')
 @parent
-<script src="{{ URL::asset('js/be/modulos/cursos/crear.js') }}"></script>
+<script src="{{ URL::asset('js/be/modulos/cursos/edit.js') }}"></script>
 @stop

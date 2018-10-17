@@ -43,57 +43,55 @@
   </div>
 </div>
 
-<div class="row">
-  <div class='col-md-12'>
-    <div class="card">
-          <div class="card-header no-border"  style='height:40px'>
-            <h2>Ultimas noticias</h2>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <textarea class="form-control" rows="3" placeholder="Escribe tu comentario aqui" name='p_descripcion' v-model="o_publicar.comentario"  v-bind:class="[e_publicar.comentario ? 'is-invalid' : '']"></textarea>
-                  <span class="text-danger" v-if="e_publicar.comentario">@{{ e_publicar.comentario[0] }}</span>
-                </div>
-              </div>
-            </div>
-            <button type="button" class="btn btn-primary btn-sm float-right"  :disabled="loader_publicar" v-on:click.prevent='publicacion()'>
-              Publicar
-              <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_publicar"></i>
-            </button>
-          </div>
-        </div>
-  </div>
 
-  <div class="col-md-12" v-if="preload">
-    <div class="d-block mx-auto" >
-      <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
-    </div>
+<div class="card">
+  <div class="card-header no-border"  style='height:40px'>
+    <h2>Ultimas noticias</h2>
   </div>
-
-  <div class="col-md-12" v-for="(foro,indexforo) in a_foros">
-    <div class="card card-widget">
-      <div class="card-header">
-        <div class="user-block">
-          <img class="user-img-foro img-circle"  v-bind:class="border(foro.role)"  v-bind:src="base_url+'/'+foro.imagenuser" alt="User Image">
-          <span class="username">@{{foro.nombreuser}}</span>
-          <span class="description">@{{foro.fecha_creacion}}</span>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <textarea class="form-control" rows="3" placeholder="Escribe tu comentario aqui" name='p_descripcion' v-model="o_publicar.comentario"  v-bind:class="[e_publicar.comentario ? 'is-invalid' : '']"></textarea>
+          <span class="text-danger" v-if="e_publicar.comentario">@{{ e_publicar.comentario[0] }}</span>
         </div>
       </div>
-      <div class="card-body">
-        <p v-html = "foro.descripcion"></p>
-        <span class="float-right text-muted"><a href="#" v-on:click.prevent="openComentarios(foro.id,indexforo)">@{{foro.comentarios}} comentarios</a></span>
-      </div>
-      <div class="card-footer">
-          <div class="img-push">
-            <input type="text" class="form-control form-control-sm" placeholder="Escribe una respuesta"  v-on:click="openComentarios(foro.id,indexforo)">
-          </div>
-      </div>
-
     </div>
+    <button type="button" class="btn btn-primary btn-sm float-right"  :disabled="loader_publicar" v-on:click.prevent='publicacion()'>
+      Publicar
+      <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_publicar"></i>
+    </button>
   </div>
 </div>
+
+<div class="col-md-12" v-if="preload">
+  <div class="d-block mx-auto" >
+    <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
+  </div>
+</div>
+
+<div class="col-md-12" v-for="(foro,indexforo) in a_foros">
+  <div class="card card-widget">
+    <div class="card-header">
+      <div class="user-block">
+        <img class="user-img-foro img-circle"  v-bind:class="border(foro.role)"  v-bind:src="base_url+'/'+foro.imagenuser" alt="User Image">
+        <span class="username">@{{foro.nombreuser}}</span>
+        <span class="description">@{{foro.fecha_creacion}}</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p v-html = "foro.descripcion"></p>
+      <span class="float-right text-muted"><a href="#" v-on:click.prevent="openComentarios(foro.id,indexforo)">@{{foro.comentarios}} comentarios</a></span>
+    </div>
+    <div class="card-footer">
+        <div class="img-push">
+          <input type="text" class="form-control form-control-sm" placeholder="Escribe una respuesta"  v-on:click="openComentarios(foro.id,indexforo)">
+        </div>
+    </div>
+
+  </div>
+</div>
+
 
 @section('scripts')
 @parent
