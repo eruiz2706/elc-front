@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="col-md-12">
-        <img style='width:350px;height:300px;' class="img-fluid" id="logo-curso" v-bind:src="base_url+'/'+o_curso.imagen">
+        <img style='width:300px;height:300px;' class="img-fluid" id="logo-curso" v-bind:src="base_url+'/'+o_curso.imagen">
     </div>
   </div>
   <div class="card-footer">

@@ -19,10 +19,8 @@
                   <div class="form-group">
                     <select class="form-control">
                       <option>Buscar por estado</option>
-                      <option>option 2</option>
-                      <option>option 3</option>
-                      <option>option 4</option>
-                      <option>option 5</option>
+                      <option>Abierto</option>
+                      <option>Cerrado</option>
                     </select>
                   </div>
                   </div>
@@ -35,7 +33,7 @@
   <div class="col-sm-6 col-md-4" v-for="curso in cursos">
     <div class="card" >
       <a href="#" v-on:click.prevent="detcurso(curso.id)">
-      <img class="card-img-top" src="{{ URL::asset('rfend/images/course_4.jpg') }}" alt="@{{curso.nombre}}">
+      <img class="card-img-top" v-bind:src="base_url+'/'+curso.imagen" alt="@{{curso.nombre}}">
       </a>
       <div class="card-body">
         <h5 class="card-title">@{{curso.nombre}} </h5>

@@ -21,7 +21,7 @@ new Vue({
     methods : {
       getCurso:function(){
           this.preload=true;
-          var url =base_url+'/ofertados/curso/'+this.id_curso;
+          var url =base_url+'/ofertados/e_curso/'+this.id_curso;
           axios.get(url,{}).then(response =>{
               this.o_curso=response.data.curso;
               this.preload=false;

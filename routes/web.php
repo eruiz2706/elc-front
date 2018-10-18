@@ -74,7 +74,7 @@ Route::middleware(['auth'])->group(function(){
   Route::post('cursos/u_configplan', 'backend\modulos\CursosController@upd_configplan');
   Route::post('cursos/u_configvideo', 'backend\modulos\CursosController@upd_configvideo');
   Route::post('cursos/u_configlogo', 'backend\modulos\CursosController@upd_configlogo');
- 
+
   Route::get('foroc', 'backend\modulos\ForoCursoController@index');
   Route::post('foroc/data','backend\modulos\ForoCursoController@getData');
   Route::post('foroc/publicar','backend\modulos\ForoCursoController@publicacion');
@@ -85,6 +85,7 @@ Route::middleware(['auth'])->group(function(){
   Route::post('ofertados/busq','backend\modulos\OfertadosController@listacursos');
   Route::get('ofertados/det/{id}','backend\modulos\OfertadosController@verCurso');
   Route::post('ofertados/suscrip','backend\modulos\OfertadosController@suscripcion');
+  Route::get('ofertados/e_curso/{id}','backend\modulos\OfertadosController@edit_curso');
 
   Route::get('modulos','backend\modulos\ModulosController@index');
   Route::post('modulos/lista', 'backend\modulos\ModulosController@lista');

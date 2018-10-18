@@ -34,12 +34,25 @@ class OfertadosController extends Controller
     public function listacursos(Request $request){
       $id       =Auth::user()->id;
       $cursos   =DB::select("select
-                              id,nombre
+                              id,nombre,imagen
                               from cursos
                               where visibilidad=true
                               ");
       $jsonresponse=[
           'cursos'=>$cursos
+      ];
+      return response()->json($jsonresponse,200);
+    }
+
+    public function edit_curso($id){
+      $curso   =DB::select("select
+                              c.id,c.nombre,c.imagen,c.plan_estudio,c.urlvideo,
+                              c.fecha_inicio,c.fecha_finalizacion,u.imagen as img_usercrea
+                              from cursos c
+                              left join users u on(c.user_id=u.id)
+                              where c.visibilidad=true and c.id = :id",['id'=>$id])[0];
+      $jsonresponse=[
+          'curso'=>$curso
       ];
       return response()->json($jsonresponse,200);
     }
