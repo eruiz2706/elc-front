@@ -59,6 +59,12 @@ return [
             'root' => storage_path('app/public/avatar'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
+        ], 
+        'public_cursos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/cursos'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
         ],
 
         's3' => [

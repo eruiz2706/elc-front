@@ -4,9 +4,10 @@ namespace App\Http\Controllers\backend\modulos;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+ 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use DB;
 use Session;
 use Validator;
@@ -175,5 +176,98 @@ class CursosController extends Controller
             'error' =>'Hubo una inconsistencias al intentar actualizacion el registro'
         ], 400);
     }
+  }
+
+  public function edit_config(){
+    $idcurso  =Session::get('o_curso')->id;
+    $curso  =DB::select("select c.id,urlvideo,plan_estudio,imagen
+                          from cursos c
+                          where c.id= :id"
+                     ,['id'=>$idcurso])[0];
+
+
+    $jsonresponse=[
+        'curso'=>$curso
+    ];
+    return response()->json($jsonresponse,200);
+
+  }
+
+  public function upd_configplan(Request $request){
+    $idcurso  =Session::get('o_curso')->id;
+    DB::beginTransaction();
+    try{
+      DB::table('cursos')->where('id',$idcurso)->update([
+        'plan_estudio'=>$request->plan_estudio
+      ]);
+
+      DB::commit();
+      return response()->json([
+          'message' => 'Registro actualizado correctamente!',
+          'message2' => 'Click para continuar!'
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('actualizacion curso : '.$e->getMessage());
+        DB::rollback();
+        //$e->getMessage();
+
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar actualizacion el registro'
+        ], 400);
+    }
+  }
+  public function upd_configvideo(Request $request){
+    $idcurso  =Session::get('o_curso')->id;
+    DB::beginTransaction();
+    try{
+      DB::table('cursos')->where('id',$idcurso)->update([
+        'urlvideo'=>$request->urlvideo
+      ]);
+
+      DB::commit();
+      return response()->json([
+          'message' => 'Registro actualizado correctamente!',
+          'message2' => 'Click para continuar!'
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('actualizacion curso : '.$e->getMessage());
+        DB::rollback();
+        //$e->getMessage();
+
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar actualizacion el registro'
+        ], 400);
+    }
+  }
+
+  public function upd_configlogo(Request $request){
+    $idcurso  =Session::get('o_curso')->id;
+
+    if($request->file('avatar') != null){
+      $file   =$request->file('avatar');
+      $nombre =Auth::user()->uniqid.'.'.$file->getClientOriginalExtension();
+      $id     =Auth::user()->id;
+
+      $responseImg  =Storage::disk('public_cursos')->put($nombre,  \File::get($file));
+      if($responseImg){
+          DB::table('cursos')->where('id',$idcurso)->update([
+            'imagen' =>'img/cursos/'.$nombre
+          ]);
+
+         $jsonresponse=[
+             'message'=>'Se cargo la imagen correctamente',
+             'message2' => 'Click para continuar!'
+         ];
+         return response()->json($jsonresponse,200);
+       }else{
+         $jsonresponse=[
+             'error' =>'Hubo un inconveniente al cargar la imagen'
+         ];
+         return response()->json($jsonresponse,400);
+       }
+    }
+
   }
 }

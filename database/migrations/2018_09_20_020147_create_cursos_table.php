@@ -24,6 +24,7 @@ class CreateCursosTable extends Migration
             $table->string('urlvideo',300)->nullable();
             $table->boolean('visibilidad')->default(false);
             $table->text('plan_estudio')->nullable();
+            $table->string('imagen')->default('img/app/curso.jpg');
             $table->dateTime('fecha_creacion')->nullable();
             $table->timestamps();
         });

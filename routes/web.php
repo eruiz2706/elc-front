@@ -13,6 +13,13 @@
 /*Route::get('/home', function () {
    return header('Location: www.google.com');
 });*/
+/*
+v_ => para las vistas
+c_ => para cuando
+e_ => para v_editar
+u_ => para actualizar
+*/
+
 ################# rutas frontend #################
 Route::get('lang/{lang}', function ($lang) {
     session(['lang' => $lang]);
@@ -63,7 +70,11 @@ Route::middleware(['auth'])->group(function(){
   Route::post('cursos/lista', 'backend\modulos\CursosController@lista');
   Route::get('cursos/abrir/{id}', 'backend\modulos\CursosController@abrir');
   Route::get('cursos/v_config', 'backend\modulos\CursosController@view_config');
-
+  Route::get('cursos/e_config', 'backend\modulos\CursosController@edit_config');
+  Route::post('cursos/u_configplan', 'backend\modulos\CursosController@upd_configplan');
+  Route::post('cursos/u_configvideo', 'backend\modulos\CursosController@upd_configvideo');
+  Route::post('cursos/u_configlogo', 'backend\modulos\CursosController@upd_configlogo');
+ 
   Route::get('foroc', 'backend\modulos\ForoCursoController@index');
   Route::post('foroc/data','backend\modulos\ForoCursoController@getData');
   Route::post('foroc/publicar','backend\modulos\ForoCursoController@publicacion');
