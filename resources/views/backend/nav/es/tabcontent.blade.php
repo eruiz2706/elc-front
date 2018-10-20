@@ -1,10 +1,3 @@
-@php
-$act1=(Request::path() == 'foroc') ? 'active' : '';
-$act2=(Request::path() == 'modulos') ? 'active' : '';
-$act3=(Request::path() == 'calend') ? 'active' : '';
-$act4=(Request::path() == 'evaluac') ? 'active' : '';
-$act5=(Request::path() == 'result') ? 'active' : '';
-@endphp
 <div class="modal fade" id="modalchatprofe" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -62,16 +55,16 @@ $act5=(Request::path() == 'result') ? 'active' : '';
   <div class="card">
     <div class="card-header card-header-cuorse">
       <h2 class="card-title-course">
-        @if(Session::get('o_curso') !=null)
-          {{Session::get('o_curso')->nombre}}
+        @if(isset($curso))
+          {{$curso->nombre}}
         @endif
       </h2>
 
       <div class="card-tools">
         <div style="width:80px;">
-          @if(Session::get('o_curso') !=null)
-            @if(Session::get('o_curso')->imagenprof !='')
-              <img class="img-circle img-bordered-sm img-fluid" src="{{ URL::asset(Session::get('o_curso')->imagenprof) }}" style='cursor:pointer' alt="user image" onclick="$('#modalchatprofe').modal('show');">
+          @if(isset($curso))
+            @if($curso->imagenprof !='')
+              <img class="img-circle img-bordered-sm img-fluid" src="{{ URL::asset($curso->imagenprof) }}" style='cursor:pointer' alt="user image" onclick="$('#modalchatprofe').modal('show');">
             @endif
           @endif
         </div>
@@ -80,12 +73,12 @@ $act5=(Request::path() == 'result') ? 'active' : '';
 
     <div class="card-body" style='padding:0px'>
       <ul class="nav nav-pills">
-        <li class="nav-item"><a class="nav-link <?=$act1?>" href="{{url('foroc')}}">Foro</a></li>
-        <li class="nav-item"><a class="nav-link <?=$act2?>" href="{{url('modulos')}}">Modulos</a></li>
-        <li class="nav-item"><a class="nav-link <?=$act3?>" href="{{url('calend')}}">Calendario</a></li>
-        <li class="nav-item"><a class="nav-link <?=$act4?>" href="{{url('evaluac')}}">Evaluaciones</a></li>
-        <li class="nav-item"><a class="nav-link <?=$act5?>" href="{{url('result')}}">Resultados</a></li>
-        <li class="nav-item"><a class="nav-link <?=$act5?>" href="{{url('result')}}">Miembros</a></li>
+        <li class="nav-item"><a class="nav-link @if(isset($tab_foro)) active @endif" href="{{url('foroc')}}">Foro</a></li>
+        <li class="nav-item"><a class="nav-link @if(isset($tab_modul)) active @endif" href="{{url('modulos')}}">Modulos</a></li>
+        <li class="nav-item"><a class="nav-link @if(isset($tab_calend)) active @endif" href="{{url('calend')}}">Calendario</a></li>
+        <li class="nav-item"><a class="nav-link @if(isset($tab_eval)) active @endif" href="{{url('evaluac')}}">Evaluaciones</a></li>
+        <li class="nav-item"><a class="nav-link @if(isset($tab_resul)) active @endif" href="{{url('result')}}">Resultados</a></li>
+        <li class="nav-item"><a class="nav-link @if(isset($tab_miem)) active @endif" href="{{url('result')}}">Miembros</a></li>
       </ul>
     </div>
   </div>

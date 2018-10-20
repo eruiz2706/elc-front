@@ -75,6 +75,7 @@
   </div>
 </div>
 
+<input type='hidden' name='id' id='id' value="{{$curso->id}}"></input>
 @section('scripts')
 @parent
 <script src="{{ URL::asset('js/be/modulos/cursos/config.js') }}"></script>

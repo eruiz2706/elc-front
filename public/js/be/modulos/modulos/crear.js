@@ -3,9 +3,10 @@ new Vue({
     ready: function(){
     },
     created : function(){
-
+      this.idcurso=document.getElementById('id').value;
     },
     data : {
+      idcurso:0,
       o_basemodulo:{'nombre':''},
       o_modulo:{'nombre':''},
       e_modulo:[],
@@ -17,7 +18,7 @@ new Vue({
     methods : {
       guardar:function(){
         this.loader_guardar=true;
-
+        this.o_modulo.idcurso=this.idcurso;
         var url =base_url+'/modulos/guardar';
         axios.post(url,this.o_modulo).then(response =>{
             this.loader_guardar=false;
@@ -28,7 +29,7 @@ new Vue({
                 text:response.data.message2,
                 type: "success"
             },function(){
-                window.location.href=base_url+'/modulos';
+                window.location.href=base_url+'/modulos/'+document.getElementById('id').value;
             });
         }).catch(error =>{
             this.loader_guardar=false;

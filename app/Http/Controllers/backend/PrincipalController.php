@@ -15,8 +15,6 @@ class PrincipalController extends Controller
 
     function index(){
       Session::put('rol','');
-      Session::put('navcursos','');
-      Session::put('o_curso','');
 
       $id   =Auth::user()->id;
       $user =Auth::user();

@@ -92,6 +92,7 @@
   </div>
 </div>
 
+<input type='hidden' name='idcurso' id='idcurso' value="{{$curso->id}}"></input>
 @section('scripts')
 @parent
 <script src="{{ URL::asset('js/be/modulos/forocurso/index.js') }}"></script>

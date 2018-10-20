@@ -28,10 +28,10 @@
           @{{modulo.nombre}}
         </td>
         <td>
-          <a href="#" class="text-muted">
+          <a href="#" v-on:click.prevent="editar(modulo.id)" class="text-muted">
             <i class="fa fa-edit"></i> Editar
           </a>
-          <a href="#" v-bind:href="base_url+'/modulos/abrir/'+modulo.id" class="text-muted">
+          <a href="#" v-on:click.prevent="lecciones(modulo.id)" class="text-muted">
             <i class="fa fa-folder-open-o"></i> Lecciones
           </a>
         </td>
@@ -41,7 +41,7 @@
   </div>
 </div>
 
-
+<input type='hidden' name='id' id='id' value="{{$curso->id}}"></input>
 @section('scripts')
 @parent
 <script src="{{ URL::asset('js/be/modulos/modulos/lista.js') }}"></script>

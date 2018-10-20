@@ -18,7 +18,7 @@ class CreateLeccionesTable extends Migration
             $table->integer('modulo_id')->unsigned()->index();
             $table->foreign('modulo_id')->references('id')->on('modulos')->onDelete('cascade');
             $table->string('nombre',300);
-            $table->text('descripcion');
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }

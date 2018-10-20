@@ -13,39 +13,84 @@ use Session;
 
 class ModulosController extends Controller
 {
-  /*muestra la vista*/
-  function index(){
+  ############################## VISTAS ##############################
+  //lista de modulos de un curso
+  function view_lista($idcurso){
+    $tab_mod='';
+    $user   =Auth::user();
+    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
+                          from cursos c
+                          left join users u on(c.user_id=u.id)
+                          where c.id= :idcurso and user_id = :user_id"
+                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
+    if(!empty($curso)){
+      $curso  =$curso[0];
+    }
+
     $rol  =Session::get('rol');
-    if($rol=='ad'){
-        //return view('backend.modulos.modulos.view_ad');
-    }else if($rol=='in'){
-        return view('backend.modulos.modulos.view_in');
-    }else if($rol=='pr'){
-      //return view('backend.modulos.foro.view_pr');
-    }else if($rol=='es'){
-      return view('backend.modulos.modulos.view_es');
+    if($rol=='in'){
+        return view('backend.modulos.modulos.view_lista',compact('curso','tab_mod'));
     }else{
       echo "no pertenece a ningun rol redireccionar";
     }
   }
 
-  /*vista para crear un modulo*/
-  public function crear(){
+  //vista para crear un nuevo modulo
+  public function view_crear($idcurso){
+    $tab_mod='';
+    $user   =Auth::user();
+    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
+                          from cursos c
+                          left join users u on(c.user_id=u.id)
+                          where c.id= :idcurso and user_id = :user_id"
+                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
+    if(!empty($curso)){
+      $curso  =$curso[0];
+    }
+
     $rol  =Session::get('rol');
     if($rol !='in'){
       echo "no pertenece a ningun rol redireccionar";
     }
-    return view('backend.modulos.modulos.viewcrear_in');
+    return view('backend.modulos.modulos.viewcrear',compact('curso','tab_mod','idcurso'));
   }
 
-  public function abrirLeccion(){
+  //vista para editar un modulo
+  public function view_editar($idcurso,$id){
+    $tab_mod='';
+    $user   =Auth::user();
+    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
+                          from cursos c
+                          left join users u on(c.user_id=u.id)
+                          where c.id= :idcurso and user_id = :user_id"
+                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
+    if(!empty($curso)){
+      $curso  =$curso[0];
+    }
 
+    $rol  =Session::get('rol');
+    if($rol !='in'){
+      echo "no pertenece a ningun rol redireccionar";
+    }
+    return view('backend.modulos.modulos.viewedit',compact('curso','tab_mod','idcurso','id'));
   }
 
-  /*guardar curso*/
+
+  ############################## METODOS ##############################
+  //listado de modulos de un curso
+  public function lista(Request $request){
+    $modulos   =DB::select("select id,nombre
+                              from modulos
+                              where curso_id = :curso_id",
+                          ['curso_id'=>$request->idcurso]);
+    $jsonresponse=[
+        'modulos'=>$modulos
+    ];
+    return response()->json($jsonresponse,200);
+  }
+
+  //guardar un nuevo modulo de un curso
   public function guardar(Request $request){
-    $idcurso =Session::get('o_curso')->id;
-
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string'
     ]);
@@ -60,7 +105,7 @@ class ModulosController extends Controller
     DB::beginTransaction();
     try{
       DB::table('modulos')->insert([
-        'curso_id'=>$idcurso,
+        'curso_id'=>$request->idcurso,
         'nombre'=>$request->nombre
       ]);
 
@@ -81,18 +126,54 @@ class ModulosController extends Controller
     }
   }
 
-  /*lista de cursos*/
-  public function lista(Request $request){
-    $idcurso =Session::get('o_curso')->id;
-    $modulos   =DB::select("select nombre
-                              from modulos
-                              where curso_id = :curso_id",
-                          ['curso_id'=>$idcurso]);
+  //datos de edicion de un modulo
+  public function editar($id){
+    $modulo   =DB::select("select
+                            id,nombre
+                            from modulos
+                            where id = :id",
+                          ['id'=>$id])[0];
     $jsonresponse=[
-        'modulos'=>$modulos
+        'modulo'=>$modulo
     ];
     return response()->json($jsonresponse,200);
   }
+
+  public function actualizar(Request $request){
+    $validator =Validator::make($request->all(),[
+      'nombre' =>'required|string'
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'errors' => $validator->messages(),
+        ], 400);
+    }
+
+    //guardar datos
+    DB::beginTransaction();
+    try{
+      DB::table('modulos')->where('id',$request->id)->update([
+        'nombre'=>$request->nombre
+      ]);
+
+      DB::commit();
+      return response()->json([
+          'message' => 'Registro actualizado correctamente!',
+          'message2' => 'Click para continuar!'
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('actualizacion modulo : '.$e->getMessage());
+        DB::rollback();
+        //$e->getMessage();
+
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar actualizacion el registro'
+        ], 400);
+    }
+  }
+
 
   public function progreso(Request $request){
       $idcurso =Session::get('o_curso')->id;

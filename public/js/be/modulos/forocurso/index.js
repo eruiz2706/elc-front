@@ -4,6 +4,7 @@ new Vue({
     ready: function(){
     },
     created : function(){
+      this.idcurso =document.getElementById('idcurso').value;
       this.getData();
     },
     data : {
@@ -34,7 +35,7 @@ new Vue({
           this.preload=true;
           var url =base_url+'/foroc/data';
           console.log(url);
-          axios.post(url,{}).then(response =>{
+          axios.post(url,{idcurso:this.idcurso}).then(response =>{
               this.preload=false;
               this.a_foros=response.data.foros;
           }).catch(error =>{
@@ -44,6 +45,7 @@ new Vue({
       },
       publicacion:function(){
           this.loader_publicar=true;
+          this.o_publicar.idcurso=this.idcurso;
           var url =base_url+'/foroc/publicar';
           axios.post(url,this.o_publicar).then(response =>{
               //this.a_foros.unshift({'nombreuser':'cargfasdf'});

@@ -13,8 +13,15 @@ use Session;
 
 class ForoCursoController extends Controller
 {
-  public function index(){
+  public function index($idcurso){
+    $tab_foro='';
     $rol  =Session::get('rol');
+    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
+                              from cursos c
+                              left join users u on(c.user_id=u.id)
+                              where c.id= :id"
+                         ,['id'=>$idcurso])[0];
+
     if($rol=='ad'){
         //return view('backend.modulos.foro.view_ad');
     }else if($rol=='in'){
@@ -22,7 +29,7 @@ class ForoCursoController extends Controller
     }else if($rol=='pr'){
       return view('backend.modulos.forocurso.view_pr');
     }else if($rol=='es'){
-      return view('backend.modulos.forocurso.view_es');
+      return view('backend.modulos.forocurso.view_es',compact('curso','tab_foro','idcurso'));
     }else{
       echo "no pertenece a ningun rol redireccionar";
     }
@@ -30,7 +37,6 @@ class ForoCursoController extends Controller
 
   /*trae el listado de las ultimas 30 publicacion*/
   public function getData(Request $request){
-    $idcurso =Session::get('o_curso')->id;
     $foros   =DB::select("select
                             f.id,u.nombre as nombreuser,u.imagen as imagenuser,f.descripcion,f.fecha_creacion,f.comentarios,r.slug as role
                             from forocurso f
@@ -40,7 +46,7 @@ class ForoCursoController extends Controller
                             where curso_id = :curso_id
                             order by fecha_creacion desc
                             limit 30",
-                          ['curso_id'=>$idcurso]);
+                          ['curso_id'=>$request->idcurso]);
     $jsonresponse=[
         'foros'=>$foros
     ];
@@ -49,7 +55,6 @@ class ForoCursoController extends Controller
 
   /*metodo para agregar nueva publicacion*/
   public function publicacion(Request $request){
-    $idcurso =Session::get('o_curso')->id;
     $id     =Auth::user()->id;
 
     $validator =Validator::make($request->all(),[
@@ -66,7 +71,7 @@ class ForoCursoController extends Controller
     DB::beginTransaction();
     try{
       DB::table('forocurso')->insert([
-        'curso_id'=>$idcurso,
+        'curso_id'=>$request->idcurso,
         'user_id'=>$id,
         'fecha_creacion'=>date('Y-m-d H:i:s'),
         'descripcion'=>nl2br($request->comentario)
