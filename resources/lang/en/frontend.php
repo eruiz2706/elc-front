@@ -12,8 +12,12 @@ return [
         'contact'   => 'Contact',
         'lang'   => 'Language',
         'login'   => 'Register or Login',
+        'register'=>'Register',
         'coursesdet'=>'Course details'
     ],
+    'sign_up'=>'Sign up',
+    'log_in'=>'Login',
+    'enter'=>'Enter',
     'question' =>'Do you have any question ?',
     'terms_use' =>'Terms of use',
     'policies' =>'Privacy policies',
@@ -66,5 +70,10 @@ return [
       'feature' =>'Characteristics',
       'start_date' =>'Start date',
       'end_date' =>'End date'
+    ],
+    'page_register'  => [
+      'form_name' =>'Name',
+      'form_email' =>'Email',
+      'form_pass' =>'Password'
     ],
 ];

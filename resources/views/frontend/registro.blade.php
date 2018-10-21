@@ -17,8 +17,8 @@
         <div class="col">
           <div class="breadcrumbs">
             <ul>
-              <li><a href="{{url('/')}}">Inicio</a></li>
-              <li>Registro</li>
+              <li><a href="{{url('/')}}">{{ trans('frontend.nav.home') }}</a></li>
+              <li>{{ trans('frontend.nav.register') }}</li>
             </ul>
           </div>
         </div>
@@ -34,31 +34,12 @@
     <div class="row">
       <div class="col-lg-6">
         <div class="counter_content">
-          <h2 class="counter_title">Registrate</h2>
+          <h2 class="counter_title">{{ trans('frontend.sign_up') }}</h2>
           <div class="counter_text"><p>Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dumy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
 
           <!-- Milestones -->
 
           <div class="milestones d-flex flex-md-row flex-column align-items-center justify-content-between">
-            <!--<div class="milestone">
-              <div class="milestone_counter" data-end-value="15">0</div>
-              <div class="milestone_text">years</div>
-            </div>
-
-            <div class="milestone">
-              <div class="milestone_counter" data-end-value="120" data-sign-after="k">0</div>
-              <div class="milestone_text">years</div>
-            </div>
-
-            <div class="milestone">
-              <div class="milestone_counter" data-end-value="670" data-sign-after="+">0</div>
-              <div class="milestone_text">years</div>
-            </div>
-
-            <div class="milestone">
-              <div class="milestone_counter" data-end-value="320">0</div>
-              <div class="milestone_text">years</div>
-            </div>-->
           </div>
         </div>
 
@@ -69,7 +50,7 @@
       <div class="row fill_height">
         <div class="col fill_height">
           <form class="counter_form_content d-flex flex-column align-items-center justify-content-center" method="post" v-on:submit.prevent="crear()">
-            <div class="counter_form_title">Registrate</div>
+            <div class="counter_form_title">{{ trans('frontend.sign_up') }}</div>
             <select name="counter_select" id="counter_select" class="counter_input counter_options" required="required" v-model="o_user.rol">
               <option value=''>Seleccione el tipo</option>
               <option value='es'>Soy un estudiante</option>
@@ -77,17 +58,17 @@
               <option value='pa'>Soy un familiar</option>
             </select>
 
-            <input type="text" class="counter_input" name='nombre' placeholder="Nombre" autocomplete="off" required="required" v-model="o_user.nombre">
+            <input type="text" class="counter_input" name='nombre' placeholder="{{ trans('frontend.page_register.form_name') }}" autocomplete="off" required="required" v-model="o_user.nombre">
             <label v-if="errores.nombre" class="text-danger">@{{ errores.nombre[0] }}</label>
 
-            <input type="text" class="counter_input" name='email' placeholder="Email" autocomplete="off" required="required" v-model="o_user.email">
+            <input type="text" class="counter_input" name='email' placeholder="{{ trans('frontend.page_register.form_email') }}" autocomplete="off" required="required" v-model="o_user.email">
             <label v-if="errores.email" class="text-danger">@{{ errores.email[0] }}</label>
 
-            <input type="password" class="counter_input" name='password' autocomplete="off" placeholder="Contraseña" required="required" v-model="o_user.password">
+            <input type="password" class="counter_input" name='password' autocomplete="off" placeholder="{{ trans('frontend.page_register.form_pass') }}" required="required" v-model="o_user.password">
             <label v-if="errores.password" class="text-danger">@{{ errores.password[0] }}</label>
 
             <button type="submit" class="counter_form_button"  :disabled="loader_crear">
-              Registrate
+              {{ trans('frontend.sign_up') }}
               <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader" v-if="loader_crear"></i>
             </button>
 

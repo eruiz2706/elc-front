@@ -12,8 +12,12 @@ return [
         'contact'   => 'Contacto',
         'lang'   => 'Idioma',
         'login'   => 'Acceder o Registrarse',
+        'register'=>'Register',
         'coursesdet'=>'Detalle curso'
     ],
+    'sign_up'=>'Registrate',
+    'log_in'=>'Iniciar sesiòn',
+    'enter'=>'Ingresar',
     'question' =>'¿ Tienes alguna pregunta ?',
     'terms_use'=>'Terminos de uso',
     'policies' =>'Políticas de privacidad',
@@ -66,5 +70,10 @@ return [
       'feature' =>'Caracteristicas',
       'start_date' =>'Fecha inicio',
       'end_date' =>'Fecha finalizacion'
+    ],
+    'page_register'  => [
+      'form_name' =>'Nombre',
+      'form_email' =>'Email',
+      'form_pass' =>'Contraseña'
     ],
 ];
