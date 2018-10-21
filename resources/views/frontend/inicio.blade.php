@@ -57,11 +57,9 @@
     <div class="row">
       <div class="col">
         <div class="section_title_container text-center">
-          <h2 class="section_title">Bienvenido a ELC</h2>
+          <h2 class="section_title">{{ trans('frontend.page_home.welcome') }}</h2>
           <div class="section_subtitle">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem
-            </p>
+            <p>{{ trans('frontend.page_home.welcome_descrip') }}</p>
           </div>
         </div>
       </div>
@@ -72,8 +70,8 @@
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
           <div class="feature_icon"><img src="{{ URL::asset('rfend/images/icon_1.png') }}" alt=""></div>
-          <h3 class="feature_title">Expertos</h3>
-          <div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
+          <h3 class="feature_title">{{ trans('frontend.page_home.feature1') }}</h3>
+          <div class="feature_text"><p>{{ trans('frontend.page_home.feature1_descrip') }}</p></div>
         </div>
       </div>
 
@@ -81,8 +79,8 @@
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
           <div class="feature_icon"><img src="{{ URL::asset('rfend/images/icon_2.png') }}" alt=""></div>
-          <h3 class="feature_title">Documentaciòn en linea</h3>
-          <div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
+          <h3 class="feature_title">{{ trans('frontend.page_home.feature2') }}</h3>
+          <div class="feature_text"><p>{{ trans('frontend.page_home.feature2_descrip') }}</p></div>
         </div>
       </div>
 
@@ -90,8 +88,8 @@
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
           <div class="feature_icon"><img src="{{ URL::asset('rfend/images/icon_3.png') }}" alt=""></div>
-          <h3 class="feature_title">Aprendizaje activo</h3>
-          <div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
+          <h3 class="feature_title">{{ trans('frontend.page_home.feature3') }}</h3>
+          <div class="feature_text"><p>{{ trans('frontend.page_home.feature3_descrip') }}</p></div>
         </div>
       </div>
 
@@ -99,8 +97,8 @@
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
           <div class="feature_icon"><img src="{{ URL::asset('rfend/images/icon_4.png') }}" alt=""></div>
-          <h3 class="feature_title">Educaciòn de calidad</h3>
-          <div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
+          <h3 class="feature_title">{{ trans('frontend.page_home.feature4') }}</h3>
+          <div class="feature_text"><p>{{ trans('frontend.page_home.feature4_descrip') }}</p></div>
         </div>
       </div>
 
@@ -116,8 +114,8 @@
     <div class="row">
       <div class="col">
         <div class="section_title_container text-center">
-          <h2 class="section_title">Cursos Recientes</h2>
-          <div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem</p></div>
+          <h2 class="section_title">{{ trans('frontend.page_home.course') }}</h2>
+          <div class="section_subtitle"><p>{{ trans('frontend.page_home.course_descrip') }}</p></div>
         </div>
       </div>
     </div>
@@ -207,7 +205,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <div class="courses_button trans_200"><a href="#">Ver mas cursos</a></div>
+        <div class="courses_button trans_200"><a href="{{url('/cursosd')}}">{{ trans('frontend.page_home.button_course') }}</a></div>
       </div>
     </div>
   </div>
@@ -224,8 +222,8 @@
 
           <!-- Newsletter Content -->
           <div class="newsletter_content text-lg-left text-center">
-            <div class="newsletter_title">Lorem ipsum</div>
-            <div class="newsletter_subtitle">Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</div>
+            <div class="newsletter_title">{{ trans('frontend.page_home.newsletter_title') }}</div>
+            <div class="newsletter_subtitle">{{ trans('frontend.page_home.newsletter_subtitle') }}</div>
           </div>
         </div>
       </div>

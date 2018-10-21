@@ -16,8 +16,8 @@
         <div class="col">
           <div class="breadcrumbs">
             <ul>
-              <li><a href="{{url('/')}}">Inicio</a></li>
-              <li>Sobre Nosotros</li>
+              <li><a href="{{url('/')}}">{{ trans('frontend.nav.home') }}</a></li>
+              <li>{{ trans('frontend.nav.about') }}</li>
             </ul>
           </div>
         </div>
@@ -33,7 +33,7 @@
     <div class="row">
       <div class="col">
         <div class="section_title_container text-center">
-          <h2 class="section_title">Sobre nosotros</h2>
+          <h2 class="section_title">{{ trans('frontend.page_about.section_title') }}</h2>
           <div class="section_subtitle"><p></p></div>
         </div>
       </div>
@@ -44,9 +44,9 @@
       <div class="col-lg-4 about_col about_col_left">
         <div class="about_item">
           <div class="about_item_image"><img src="{{ URL::asset('rfend/images/about_1.jpg') }}" alt=""></div>
-          <div class="about_item_title"><a href="#">Quienes somos</a></div>
+          <div class="about_item_title"><a href="#">{{ trans('frontend.page_about.about_item1_title') }}</a></div>
           <div class="about_item_text">
-            <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
+            <p>{{ trans('frontend.page_about.about_item1_text') }}</p>
           </div>
         </div>
       </div>
@@ -55,9 +55,9 @@
       <div class="col-lg-4 about_col about_col_middle">
         <div class="about_item">
           <div class="about_item_image"><img src="{{ URL::asset('rfend/images/about_2.jpg') }}" alt=""></div>
-          <div class="about_item_title"><a href="#">Como funciona</a></div>
+          <div class="about_item_title"><a href="#">{{ trans('frontend.page_about.about_item2_title') }}</a></div>
           <div class="about_item_text">
-            <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
+            <p>{{ trans('frontend.page_about.about_item1_text') }}</p>
           </div>
         </div>
       </div>
@@ -66,9 +66,9 @@
       <div class="col-lg-4 about_col about_col_right">
         <div class="about_item">
           <div class="about_item_image"><img src="{{ URL::asset('rfend/images/about_3.jpg') }}" alt=""></div>
-          <div class="about_item_title"><a href="#">Vinculate</a></div>
+          <div class="about_item_title"><a href="#">{{ trans('frontend.page_about.about_item3_title') }}</a></div>
           <div class="about_item_text">
-            <p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
+            <p>{{ trans('frontend.page_about.about_item3_text') }}</p>
           </div>
         </div>
       </div>
@@ -84,8 +84,10 @@
     <div class="row">
       <div class="col">
         <div class="section_title_container text-center">
-          <h2 class="section_title">¿Por què unirte?</h2>
-          <div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem</p></div>
+          <h2 class="section_title">{{ trans('frontend.page_about.feature_title') }}</h2>
+          <div class="section_subtitle">
+            <p>{{ trans('frontend.page_about.feature_descrip') }}</p>
+          </div>
         </div>
       </div>
     </div>

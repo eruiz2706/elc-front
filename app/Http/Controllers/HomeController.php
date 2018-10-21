@@ -31,20 +31,24 @@ class HomeController extends Controller
     public function index()
     {
       Auth::logout();
-      return view('frontend.inicio');
+      $link_inic='';
+      return view('frontend.inicio',compact('link_inic'));
       //return redirect('/login');
     }
 
     public function cursos(){
-      return view('frontend.cursos');
+      $link_curs='';
+      return view('frontend.cursos',compact('link_curs'));
     }
 
     public function acercade(){
-      return view('frontend.acercade');
+      $link_acerca='';
+      return view('frontend.acercade',compact('link_acerca'));
     }
 
     public function contacto(){
-      return view('frontend.contacto');
+      $link_contac='';
+      return view('frontend.contacto',compact('link_contac'));
     }
 
     public function registro(){

@@ -16,8 +16,8 @@
         <div class="col">
           <div class="breadcrumbs">
             <ul>
-              <li><a href="{{url('/')}}">Inicio</a></li>
-              <li>Cursos</li>
+              <li><a href="{{url('/')}}">{{ trans('frontend.nav.home') }}</a></li>
+              <li>{{ trans('frontend.nav.courses') }}</li>
             </ul>
           </div>
         </div>
@@ -34,7 +34,7 @@
     <div class="row">
 			<div class="col">
 				<div class="section_title_container text-center">
-					<h2 class="section_title">Cursos</h2>
+					<h2 class="section_title">{{ trans('frontend.page_courses.section_title') }}</h2>
 					<div class="section_subtitle"><p></p></div>
 				</div>
 			</div>
@@ -56,7 +56,7 @@
               <option>Abierto</option>
               <option>Inscripcion abierta</option>
             </select>
-            <button action="submit" class="courses_search_button ml-auto">Buscar</button>
+            <button action="submit" class="courses_search_button ml-auto">{{ trans('frontend.page_courses.button_search') }}</button>
           </form>
         </div>
         <div class="courses_container">
@@ -157,8 +157,8 @@
 
           <!-- Newsletter Content -->
           <div class="newsletter_content text-lg-left text-center">
-            <div class="newsletter_title">Lorem ipsum</div>
-            <div class="newsletter_subtitle">Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</div>
+            <div class="newsletter_title">{{ trans('frontend.page_courses.newsletter_title') }}</div>
+            <div class="newsletter_subtitle">{{ trans('frontend.page_courses.newsletter_subtitle') }}</div>
           </div>
         </div>
       </div>

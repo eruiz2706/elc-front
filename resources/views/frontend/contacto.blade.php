@@ -16,8 +16,8 @@
         <div class="col">
           <div class="breadcrumbs">
             <ul>
-              <li><a href="{{url('/')}}">Inicio</a></li>
-              <li>Contacto</li>
+              <li><a href="{{url('/')}}">{{ trans('frontend.nav.home') }}</a></li>
+              <li>{{ trans('frontend.nav.contact') }}</li>
             </ul>
           </div>
         </div>
@@ -50,22 +50,22 @@
         <!-- Contact Form -->
         <div class="col-lg-6">
           <div class="contact_form">
-            <div class="contact_info_title">Formulario de contacto</div>
+            <div class="contact_info_title">{{ trans('frontend.page_contact.contact_form_title') }}</div>
             <form action="#" class="comment_form">
               <div>
-                <div class="form_title">Name</div>
+                <div class="form_title">{{ trans('frontend.page_contact.form_name') }}</div>
                 <input type="text" class="comment_input" required="required">
               </div>
               <div>
-                <div class="form_title">Email</div>
+                <div class="form_title">{{ trans('frontend.page_contact.form_email') }}</div>
                 <input type="text" class="comment_input" required="required">
               </div>
               <div>
-                <div class="form_title">Message</div>
+                <div class="form_title">{{ trans('frontend.page_contact.form_message') }}</div>
                 <textarea class="comment_input comment_textarea" required="required"></textarea>
               </div>
               <div>
-                <button type="submit" class="comment_button trans_200">Enviar</button>
+                <button type="submit" class="comment_button trans_200">{{ trans('frontend.page_contact.button_send') }}</button>
               </div>
             </form>
           </div>
@@ -74,24 +74,16 @@
         <!-- Contact Info -->
         <div class="col-lg-6">
           <div class="contact_info">
-            <div class="contact_info_title">Informacion de contacto</div>
+            <div class="contact_info_title">{{ trans('frontend.page_contact.contact_info_title') }}</div>
             <div class="contact_info_text">
-              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a distribution of letters.</p>
+              <p>{{ trans('frontend.page_contact.contact_info_text') }}</p>
             </div>
             <div class="contact_info_location">
-              <div class="contact_info_location_title">New York Office</div>
+              <div class="contact_info_location_title">Cali colombia</div>
               <ul class="location_list">
-                <li>T8/480 Collins St, Melbourne VIC 3000, New York</li>
-                <li>1-234-567-89011</li>
-                <li>info.deercreative@gmail.com</li>
-              </ul>
-            </div>
-            <div class="contact_info_location">
-              <div class="contact_info_location_title">Australia Office</div>
-              <ul class="location_list">
-                <li>Forrest Ray, 191-103 Integer Rd, Corona Australia</li>
-                <li>1-234-567-89011</li>
-                <li>info.deercreative@gmail.com</li>
+                <li>Avenida 3 ·5-27</li>
+                <li>01 8000 913 14 98</li>
+                <li>elc@gmail.com</li>
               </ul>
             </div>
           </div>
@@ -111,8 +103,8 @@
 
           <!-- Newsletter Content -->
           <div class="newsletter_content text-lg-left text-center">
-            <div class="newsletter_title">Lorem ipsum</div>
-            <div class="newsletter_subtitle">Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</div>
+            <div class="newsletter_title">{{ trans('frontend.page_courses.newsletter_title') }}</div>
+            <div class="newsletter_subtitle">{{ trans('frontend.page_courses.newsletter_subtitle') }}</div>
           </div>
         </div>
       </div>

@@ -57,17 +57,17 @@
         <div class="col">
           <div class="header_content d-flex flex-row align-items-center justify-content-start">
             <div class="logo_container">
-              <a href="#">
+              <a href="{{url('/')}}">
               <!--<div class="logo_text">Aula Virtu<span>al</span></div>-->
                 <img id="logo-mainmenu" src="{{ URL::asset('img/app/logo.png') }}" style="width:150px">
               </a>
             </div>
             <nav class="main_nav_contaner ml-auto">
               <ul class="main_nav">
-                <li class="active"><a href="{{url('/')}}">{{ trans('frontend.nav.home') }}</a></li>
-                <li><a href="{{url('/cursosd')}}">{{ trans('frontend.nav.courses') }}</a></li>
-                <li><a href="{{url('/acercade')}}">{{ trans('frontend.nav.about') }}</a></li>
-                <li><a href="{{url('/contacto')}}">{{ trans('frontend.nav.contact') }}</a></li>
+                <li class="@if(isset($link_inic)) active @endif"><a href="{{url('/')}}">{{ trans('frontend.nav.home') }}</a></li>
+                <li class="@if(isset($link_curs)) active @endif"><a href="{{url('/cursosd')}}">{{ trans('frontend.nav.courses') }}</a></li>
+                <li class="@if(isset($link_acerca)) active @endif"><a href="{{url('/acercade')}}">{{ trans('frontend.nav.about') }}</a></li>
+                <li class="@if(isset($link_contac)) active @endif"><a href="{{url('/contacto')}}">{{ trans('frontend.nav.contact') }}</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#exampleModal">{{ trans('frontend.nav.lang') }}</a></li>
               </ul>
               <div class="hamburger menu_mm">
