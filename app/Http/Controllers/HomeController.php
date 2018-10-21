@@ -30,15 +30,47 @@ class HomeController extends Controller
      */
     public function index()
     {
+      $cursos   =DB::select("select
+                              c.id,c.nombre,c.imagen,u.nombre as usercrea
+                              from cursos c
+                              left join users u on(c.user_id=u.id)
+                              where visibilidad=true
+                              limit 3");
+
       Auth::logout();
       $link_inic='';
-      return view('frontend.inicio',compact('link_inic'));
+      return view('frontend.inicio',compact('link_inic','cursos'));
       //return redirect('/login');
     }
 
-    public function cursos(){
+    public function cursos($estado=''){
+      $fecha  =date('Y-m-d');
+      $cursos=DB::table('cursos as c')
+                  ->join('users as u', 'c.user_id', '=', 'u.id');
+
+
+      /*if($estado =='AB'){
+        $cursos =$cursos->where('c.fecha_inicio','>=',$fecha);
+      }
+      if($estado =='EC'){
+        $cursos =$cursos->where('c.fecha_finalizacion','<=',$fecha)
+                ;
+      }
+      if($estado =='FI'){
+        $cursos =$cursos->where('c.fecha_finalizacion','>',$fecha);
+      }*/
+
+      $cursos =$cursos->where('visibilidad',true)
+                  ->select('c.id','c.nombre', 'c.imagen', 'u.nombre as usercrea')
+                  ->paginate(6);
+
       $link_curs='';
-      return view('frontend.cursos',compact('link_curs'));
+      return view('frontend.cursos',compact('link_curs','cursos'));
+    }
+
+    public function cursosdet($id){
+      $link_curs='';
+      return view('frontend.cursodet',compact('link_curs','id'));
     }
 
     public function acercade(){
@@ -96,4 +128,24 @@ class HomeController extends Controller
           ], 400);
       }
     }
+
+    public function getCursodet($id){
+      $curso   =DB::select("select
+                              c.id,c.nombre,c.imagen,u.nombre as usercrea,c.urlvideo,
+                              c.plan_estudio,u.imagen as imgusucrea,c.fecha_inicio,
+                              c.fecha_finalizacion
+                              from cursos c
+                              left join users u on(c.user_id=u.id)
+                              where visibilidad=true and c.id = :id",['id'=>$id]);
+
+      if(!empty($curso)){
+        $curso  =$curso[0];
+      }
+
+      $jsonresponse=[
+          'curso'=>$curso
+      ];
+      return response()->json($jsonresponse,200);
+    }
+
 }

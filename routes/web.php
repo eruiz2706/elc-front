@@ -30,11 +30,12 @@ Route::get('lang/{lang}', function ($lang) {
 
 Route::middleware(['lang'])->group(function(){
   Route::get('/', 'HomeController@index');
-  Route::get('/cursosd', 'HomeController@cursos');
+  Route::get('/cursosd/{estado?}', 'HomeController@cursos');
+  Route::get('/cursodet/{id}', 'HomeController@cursosdet');
+  Route::get('/getcursodet/{id}', 'HomeController@getCursodet');
   Route::get('/acercade', 'HomeController@acercade');
   Route::get('/contacto', 'HomeController@contacto');
   Route::get('/registro', 'HomeController@registro');
-  Route::post('/registro/guardar', 'HomeController@guardarRegistro');
   Route::get('/login', 'HomeController@login');
   Auth::routes();
 

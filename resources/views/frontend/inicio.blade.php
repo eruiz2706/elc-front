@@ -64,8 +64,8 @@
         </div>
       </div>
     </div>
-    <div class="row features_row">
 
+    <div class="row features_row">
       <!-- Features Item -->
       <div class="col-lg-3 feature_col">
         <div class="feature text-center trans_400">
@@ -119,89 +119,27 @@
         </div>
       </div>
     </div>
+
+
     <div class="row courses_row">
 
       <!-- Course -->
+      @foreach($cursos as $curso)
       <div class="col-lg-4 course_col">
         <div class="course">
-          <div class="course_image"><img src="{{ URL::asset('rfend/images/course_4.jpg') }}" alt=""></div>
-          <div class="course_body">
-            <h3 class="course_title"><a href="course.html">Preparacion Pre-icfes</a></h3>
-            <div class="course_teacher">Mr. John Taylor</div>
-            <!--<div class="course_text">
-              <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-            </div>-->
+          <div class="course_image">
+            <a href="{{url('cursodet/'.$curso->id)}}">
+            <img src="{{ URL::asset($curso->imagen) }}" alt="">
+            </a>
           </div>
-          <!--<div class="course_footer">
-            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-              <div class="course_info">
-                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                <span>20 Student</span>
-              </div>
-              <div class="course_info">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <span>5 Ratings</span>
-              </div>
-              <div class="course_price ml-auto">$130</div>
-            </div>
-          </div>-->
+          <div class="course_body">
+            <h3 class="course_title"><a href="{{url('cursodet/'.$curso->id)}}">{{$curso->nombre}}</a></h3>
+            <div class="course_teacher">{{$curso->usercrea}}</div>
+            <div class="course_price ml-auto">Abierto</div>
+          </div>
         </div>
       </div>
-
-      <!-- Course -->
-      <div class="col-lg-4 course_col">
-        <div class="course">
-          <div class="course_image"><img src="{{ URL::asset('rfend/images/course_8.jpg') }}" alt=""></div>
-          <div class="course_body">
-            <h3 class="course_title"><a href="course.html">Ingles Nivel1</a></h3>
-            <div class="course_teacher">Ms. Lucius</div>
-            <!--<div class="course_text">
-              <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-            </div>-->
-          </div>
-          <!--<div class="course_footer">
-            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-              <div class="course_info">
-                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                <span>20 Student</span>
-              </div>
-              <div class="course_info">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <span>5 Ratings</span>
-              </div>
-              <div class="course_price ml-auto">Free</div>
-            </div>
-          </div>-->
-        </div>
-      </div>
-
-      <!-- Course -->
-      <div class="col-lg-4 course_col">
-        <div class="course">
-          <div class="course_image"><img src="{{ URL::asset('rfend/images/course_7.jpg') }}" alt=""></div>
-          <div class="course_body">
-            <h3 class="course_title"><a href="course.html">Ingles nivel2</a></h3>
-            <div class="course_teacher">Mr. Charles</div>
-            <!--<div class="course_text">
-              <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-            </div>-->
-          </div>
-          <!--<div class="course_footer">
-            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-              <div class="course_info">
-                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                <span>20 Student</span>
-              </div>
-              <div class="course_info">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <span>5 Ratings</span>
-              </div>
-              <div class="course_price ml-auto"><span>$320</span>$220</div>
-            </div>
-          </div>-->
-        </div>
-      </div>
-
+      @endforeach
     </div>
     <div class="row">
       <div class="col">
@@ -212,23 +150,7 @@
 </div>
 
 <!-- Newsletter -->
+@include('frontend.partials.newsletter')
 
-<div class="newsletter">
-  <div class="newsletter_background parallax-window" data-parallax="scroll" data-image-src="{{ URL::asset('rfend/images/newsletter.jpg') }}" data-speed="0.8"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
-
-          <!-- Newsletter Content -->
-          <div class="newsletter_content text-lg-left text-center">
-            <div class="newsletter_title">{{ trans('frontend.page_home.newsletter_title') }}</div>
-            <div class="newsletter_subtitle">{{ trans('frontend.page_home.newsletter_subtitle') }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 @endsection

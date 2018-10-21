@@ -46,101 +46,66 @@
         <div class="courses_search_container">
           <form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
             <select id="courses_search_select" class="courses_search_select courses_search_input">
-              <option>Todas las categorias</option>
-              <option>Categoria1</option>
-              <option>Categoria2</option>
-              <option>Categoria3</option>
-            </select>
-            <select id="courses_search_select" class="courses_search_select courses_search_input">
-              <option>Seleccione el estado</option>
-              <option>Abierto</option>
-              <option>Inscripcion abierta</option>
+              <option value=''>Seleccione el estado</option>
+              <option value='AB'>Abierto</option>
+              <option value='EC'>En curso</option>
+              <option value='FI'>Finalizado</option>
             </select>
             <button action="submit" class="courses_search_button ml-auto">{{ trans('frontend.page_courses.button_search') }}</button>
           </form>
         </div>
+
+
         <div class="courses_container">
           <div class="row courses_row">
 
             <!-- Course -->
+            @foreach($cursos as $curso)
             <div class="col-lg-4 course_col">
               <div class="course">
-                <div class="course_image"><img src="{{ URL::asset('rfend/images/course_4.jpg') }}" alt=""></div>
+                <div class="course_image">
+                  <a href="{{url('cursodet/'.$curso->id)}}">
+                  <img src="{{ URL::asset($curso->imagen) }}" alt="">
+                  </a>
+                </div>
                 <div class="course_body">
-                  <h3 class="course_title"><a href="course.html">Preparacion Pre-icfes</a></h3>
-                  <div class="course_teacher">Mr. John Taylor</div>
+                  <h3 class="course_title"><a href="{{url('cursodet/'.$curso->id)}}">{{$curso->nombre}}</a></h3>
+                  <div class="course_teacher">{{$curso->usercrea}}</div>
+                  <div class="course_price ml-auto">Abierto</div>
                 </div>
               </div>
             </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-              <div class="course">
-                <div class="course_image"><img src="{{ URL::asset('rfend/images/course_5.jpg') }}" alt=""></div>
-                <div class="course_body">
-                  <h3 class="course_title"><a href="course.html">Ingles Nivel1</a></h3>
-                  <div class="course_teacher">Ms. Lucius</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-              <div class="course">
-                <div class="course_image"><img src="{{ URL::asset('rfend/images/course_6.jpg') }}" alt=""></div>
-                <div class="course_body">
-                  <h3 class="course_title"><a href="course.html">Ingles Nivel2</a></h3>
-                  <div class="course_teacher">Mr. Charles</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-              <div class="course">
-                <div class="course_image"><img src="{{ URL::asset('rfend/images/course_7.jpg') }}" alt=""></div>
-                <div class="course_body">
-                  <h3 class="course_title"><a href="course.html">Learn Basic German Fast</a></h3>
-                  <div class="course_teacher">Mr. John Taylor</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-              <div class="course">
-                <div class="course_image"><img src="{{ URL::asset('rfend/images/course_8.jpg') }}" alt=""></div>
-                <div class="course_body">
-                  <h3 class="course_title"><a href="course.html">Business Groud Up</a></h3>
-                  <div class="course_teacher">Ms. Lucius</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-              <div class="course">
-                <div class="course_image"><img src="{{ URL::asset('rfend/images/course_9.jpg') }}" alt=""></div>
-                <div class="course_body">
-                  <h3 class="course_title"><a href="course.html">Java Technology</a></h3>
-                  <div class="course_teacher">Mr. Charles</div>
-                </div>
-              </div>
-            </div>
+            @endforeach
 
           </div>
-          <div class="row pagination_row">
-            <div class="col">
-              <div class="pagination_container d-flex flex-row align-items-center justify-content-start">
-                <ul class="pagination_list">
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                </ul>
+
+          @if ($cursos->lastPage() > 1)
+            <div class="row pagination_row">
+              <div class="col">
+                <div class="pagination_container d-flex flex-row align-items-center justify-content-start">
+                  <ul class="pagination_list">
+                    <li class="{{ ($cursos->currentPage() == 1) ? ' disabled' : '' }} ">
+                        <a href="{{ $cursos->url(1) }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    @for ($i = 1; $i <= $cursos->lastPage(); $i++)
+                        <li class="{{ ($cursos->currentPage() == $i) ? ' active' : '' }} ">
+                            <a href="{{ $cursos->url($i) }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+                    <li class="{{ ($cursos->currentPage() == $cursos->lastPage()) ? ' disabled' : '' }} ">
+                        <a href="{{ $cursos->url($cursos->currentPage()+1) }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
+          @endif
         </div>
       </div>
 
@@ -148,21 +113,7 @@
   </div>
 </div>
 
-<div class="newsletter">
-  <div class="newsletter_background parallax-window" data-parallax="scroll" data-image-src="{{ URL::asset('rfend/images/newsletter.jpg') }}" data-speed="0.8"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
+<!-- Newsletter -->
+@include('frontend.partials.newsletter')
 
-          <!-- Newsletter Content -->
-          <div class="newsletter_content text-lg-left text-center">
-            <div class="newsletter_title">{{ trans('frontend.page_courses.newsletter_title') }}</div>
-            <div class="newsletter_subtitle">{{ trans('frontend.page_courses.newsletter_subtitle') }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 @endsection
