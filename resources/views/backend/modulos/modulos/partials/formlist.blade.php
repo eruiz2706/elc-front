@@ -13,7 +13,7 @@
     <div class="card-tools">
       <div class="btn-group">
         <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <i class="fa  fa-ellipsis-v"></i>
+          <i class="fa  fa-bars"></i>
         </button>
         <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
           <a href="#" class="dropdown-item" v-on:click.prevent="redirectCrear()">Nuevo modulo</a>

@@ -75,7 +75,7 @@ $act5=(Request::path() == 'result') ? 'active' : '';
         <li class="nav-item"><a class="nav-link <?=$act4?>" href="{{url('evaluac')}}">Evaluaciones</a></li>
         <li class="nav-item"><a class="nav-link <?=$act3?>" href="{{url('calend')}}">Calendario</a></li>
         <li class="nav-item"><a class="nav-link <?=$act5?>" href="{{url('result')}}">Resultados</a></li>
-        <li class="nav-item"><a class="nav-link <?=$act5?>" href="{{url('result')}}">Miembros</a></li>
+        <li class="nav-item"><a class="nav-link <?=$act5?>" href="{{url('result')}}">integrantes</a></li>
       </ul>
     </div>
   </div>

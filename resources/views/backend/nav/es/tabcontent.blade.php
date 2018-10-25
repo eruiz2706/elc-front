@@ -78,7 +78,7 @@
         <li class="nav-item"><a class="nav-link @if(isset($tab_calend)) active @endif" href="{{url('calend')}}">Calendario</a></li>
         <li class="nav-item"><a class="nav-link @if(isset($tab_eval)) active @endif" href="{{url('evaluac')}}">Evaluaciones</a></li>
         <li class="nav-item"><a class="nav-link @if(isset($tab_resul)) active @endif" href="{{url('result')}}">Resultados</a></li>
-        <li class="nav-item"><a class="nav-link @if(isset($tab_miem)) active @endif" href="{{url('result')}}">Miembros</a></li>
+        <li class="nav-item"><a class="nav-link @if(isset($tab_miem)) active @endif" href="{{url('result')}}">integrantes</a></li>
       </ul>
     </div>
   </div>

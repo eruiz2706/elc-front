@@ -124,6 +124,8 @@ Route::middleware(['auth'])->group(function(){
   Route::post('preguntas/guardar', 'backend\modulos\PreguntasController@guardar');
   Route::post('preguntas/actualizar', 'backend\modulos\PreguntasController@actualizar');
 
+  Route::get('integrantes/{idcurso}','backend\modulos\IntegrantesController@view_lista');
+  Route::post('integrantes/lista', 'backend\modulos\IntegrantesController@lista');
 
   Route::get('ofertados','backend\modulos\OfertadosController@index');
   Route::post('ofertados/busq','backend\modulos\OfertadosController@listacursos');
