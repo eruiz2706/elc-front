@@ -104,7 +104,9 @@ class RolesTableSeeder extends Seeder
           ]);
 
           Precio::create([
-            'valor'=>50000
+            'valor'=>50000,
+            'fecha_creacion'=>date('Y-m-d'),
+            'user_id'=>$user1->id
           ]);
     }
 }

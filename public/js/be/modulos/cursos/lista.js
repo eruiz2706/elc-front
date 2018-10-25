@@ -7,7 +7,7 @@ new Vue({
     },
     data : {
       preload:false,
-      a_curso:[],
+      a_cursos:[],
     },
     computed : {
 
@@ -16,22 +16,29 @@ new Vue({
       listado:function(){
         var url =base_url+'/cursos/lista';
         this.preload=true;
-        axios.post(url,this.o_curso).then(response =>{
+        axios.post(url,{}).then(response =>{
             this.preload=false;
-            this.a_curso=response.data.cursos;
+            this.a_cursos=response.data.cursos;
         }).catch(error =>{
             this.preload=false;
-            this.a_curso=[];
+            this.a_cursos=[];
             if(error.response.data.errors){
-              this.e_curso=error.response.data.errors;
+              //this.e_curso=error.response.data.errors;
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
                   "timeOut": "2500"
               });
             }
-            console.log(error.response.data);
+
         });
       },
+      redirectEdit:function(cursoid){
+        window.location.href=base_url+'/cursos/v_editar/'+cursoid;
+      },
+      redirectAbrir:function(cursoid){
+        window.location.href=base_url+'/cursos/abrir/'+cursoid;
+      },
+
     }
 });

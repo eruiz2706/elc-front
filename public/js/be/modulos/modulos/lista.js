@@ -3,9 +3,8 @@ new Vue({
     ready: function(){
     },
     created : function(){
-      this.id=document.getElementById('id').value;
+      this.idcurso=document.getElementById('idcurso').value;
       this.listado();
-      console.log('fafd');
     },
     data : {
       id : 0,
@@ -19,29 +18,28 @@ new Vue({
       listado:function(){
         var url =base_url+'/modulos/lista';
         this.preload=true;
-        axios.post(url,{idcurso:this.id}).then(response =>{
+        axios.post(url,{idcurso:this.idcurso}).then(response =>{
             this.preload=false;
             this.a_modulos=response.data.modulos;
         }).catch(error =>{
             this.preload=false;
-            this.modulos=[];
+            this.a_modulos=[];
             if(error.response.data.errors){
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
-                  "timeOut": "2500"
+                  "timeOut": "3500"
               });
             }
-            console.log(error.response.data);
         });
       },
-      crear:function(){
-        window.location.href=base_url+'/modulos/'+this.id+'/v_crear';
+      redirectCrear:function(){
+        window.location.href=base_url+'/modulos/v_crear/'+this.idcurso;
       },
-      editar:function(idmodulo){
-        window.location.href=base_url+'/modulos/'+this.id+'/v_editar/'+idmodulo;
-      },lecciones:function(idmodulo){
-        window.location.href=base_url+'/lecciones/'+this.id+'/'+idmodulo;
+      redirectEdit:function(id){
+        window.location.href=base_url+'/modulos/v_editar/'+this.idcurso+'/'+id;
+      },redirectLecciones:function(id){
+        window.location.href=base_url+'/lecciones/'+this.idcurso+'/'+id;
       },
 
     }

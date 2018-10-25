@@ -8,7 +8,7 @@ new Vue({
       this.idmodulo=document.getElementById('idmodulo').value;
       this.idcurso=document.getElementById('idcurso').value;
       this.id=document.getElementById('id').value;
-      this.getCurso();
+      this.getLeccion();
     },
     data : {
       loader_actualizar:false,
@@ -23,21 +23,23 @@ new Vue({
 
     },
     methods : {
-      getCurso:function(){
+      getLeccion:function(){
+
           this.preload=true;
           var url =base_url+'/lecciones/editar/'+this.id;
           axios.get(url,{}).then(response =>{
               this.o_leccion=response.data.leccion;
+              $('#summernote').summernote('code',this.o_leccion.descripcion);
               this.preload=false;
           }).catch(error =>{
               this.preload=false;
-              console.log(error.response.data);
           });
       },
       actualizar:function(){
         this.loader_actualizar=true;
         var url =base_url+'/lecciones/actualizar';
         this.o_leccion.id=this.id;
+        this.o_leccion.descripcion=$('#summernote').summernote('code');
         axios.post(url,this.o_leccion).then(response =>{
             this.loader_actualizar=false;
             this.e_leccion=[];
@@ -57,7 +59,7 @@ new Vue({
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
-                  "timeOut": "2500"
+                  "timeOut": "3500"
               });
             }
         });

@@ -9,12 +9,7 @@
     </div>
 
     <div class="col-md-9" style='padding-top:70px;'>
-      @include('backend.modulos.cursos.partials.listacursos')
+      @include('backend.modulos.cursos.partials.formlist')
     </div>
 </div>
 @endsection
-
-@section('scripts')
-@parent
-<script src="{{ URL::asset('js/be/modulos/cursos/lista.js') }}"></script>
-@stop

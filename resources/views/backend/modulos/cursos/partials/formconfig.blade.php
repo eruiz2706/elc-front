@@ -13,13 +13,13 @@
       <input type="text" class="form-control" name='urlvideo' v-model="o_curso.urlvideo">
     </div>
     <div class="col-md-12">
-      <iframe class="img-fluid" style='width:100%;height:300px' frameborder="0" allowfullscreen allow="autoplay; encrypted-media"
-        v-bind:src="o_curso.urlvideo">
+      <iframe class="img-fluid" style='width:100%;height:223px' frameborder="0" allowfullscreen allow="autoplay; encrypted-media"
+        v-bind:src="replaceurlYoutube(o_curso.urlvideo)" >
       </iframe>
     </div>
   </div>
   <div class="card-footer">
-    <button type="button" class="btn btn-primary" :disabled="loader_updvideo" v-on:click="upd_urlvideo()">
+    <button type="button" class="btn btn-outline-primary btn-sm" :disabled="loader_updvideo" v-on:click="upd_urlvideo()">
       Actualizar
       <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_updvideo"></i>
     </button>
@@ -34,19 +34,20 @@
       Logo
     </h4>
   </div>
-  <div class="card-body">
+  <div class="card-body mb-2">
     <div class="form-group">
-    <label for="exampleInputFile">Logo (Dimensiones 125x125)</label>
+    <label for="exampleInputFile">Logo (Dimensiones 750*425)</label>
       <div class="input-group">
         <input type="file" class="form-control-file border" id="file_avatar" >
       </div>
     </div>
     <div class="col-md-12">
-        <img style='width:300px;height:300px;' class="img-fluid" id="logo-curso" v-bind:src="base_url+'/'+o_curso.imagen">
+        <img style='width:345px;height:223px;' class="img-fluid" id="logo-curso" v-bind:src="base_url+'/'+o_curso.imagen">
     </div>
+
   </div>
   <div class="card-footer">
-    <button type="button" class="btn btn-primary" :disabled="loader_updlogo" v-on:click="upd_urllogo()">
+    <button type="button" class="btn btn-outline-primary btn-sm" :disabled="loader_updlogo" v-on:click="upd_urllogo()">
       Actualizar
       <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_updlogo"></i>
     </button>
@@ -68,7 +69,7 @@
     </div>
   </div>
   <div class="card-footer">
-    <button type="button" class="btn btn-primary" :disabled="loader_updplan" v-on:click="upd_planestudio()">
+    <button type="button" class="btn btn-outline-primary btn-sm" :disabled="loader_updplan" v-on:click="upd_planestudio()">
       Actualizar
       <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_updplan"></i>
     </button>

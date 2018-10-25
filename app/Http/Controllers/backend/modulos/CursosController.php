@@ -20,7 +20,7 @@ class CursosController extends Controller
   public function view_list(){
     $rol  =Session::get('rol');
     if($rol !='in'){
-      return "no pertenece a ningun rol redireccionar";
+      return view('layouts.errors.access_denied');
     }
     return view('backend.modulos.cursos.view_list');
   }
@@ -29,7 +29,7 @@ class CursosController extends Controller
   public function view_crear(){
     $rol  =Session::get('rol');
     if($rol !='in'){
-      return  "no pertenece a ningun rol redireccionar";
+      return view('layouts.errors.access_denied');
     }
     return view('backend.modulos.cursos.view_crear');
   }
@@ -38,7 +38,7 @@ class CursosController extends Controller
   public function view_editar($id){
       $rol  =Session::get('rol');
       if($rol !='in'){
-        return "no pertenece a ningun rol redireccionar";
+        return view('layouts.errors.access_denied');
       }
       return view('backend.modulos.cursos.view_edit',compact('id'));
   }
@@ -48,7 +48,7 @@ class CursosController extends Controller
     $user =Auth::user();
     $rol  =Session::get('rol');
     if($rol !='in'){
-      return  "no pertenece a ningun rol redireccionar";
+      return view('layouts.errors.access_denied');
     }
 
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
@@ -58,8 +58,9 @@ class CursosController extends Controller
                      ,['id'=>$id,'user_id'=>$user->id]);
 
     if(empty($curso)){
-      return "no existe el curso";
+      return view('layouts.errors.not_page');
     }
+
     $curso    =$curso[0];
     $tab_conf ='';
     return view('backend.modulos.cursos.view_config',compact('curso','tab_conf'));
@@ -71,10 +72,10 @@ class CursosController extends Controller
   public function lista(Request $request){
     $user     =Auth::user();
     $cursos   =DB::select("select
-                            id,nombre
+                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,fecha_creacion
                             from cursos
                             where user_id = :user_id
-                            order by fecha_inicio desc",
+                            order by fecha_creacion desc",
                           ['user_id'=>$user->id]);
     $jsonresponse=[
         'cursos'=>$cursos
@@ -84,12 +85,12 @@ class CursosController extends Controller
 
   //guardar un nuevo curso
   public function guardar(Request $request){
-    $id     =Auth::user()->id;
+    $user     =Auth::user();
 
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'fecha_inicio' =>'required',
-      'fecha_finalizacion' =>'required'
+      'fecha_finalizacion' =>'required',
     ]);
 
     if ($validator->fails()) {
@@ -102,17 +103,18 @@ class CursosController extends Controller
     DB::beginTransaction();
     try{
       DB::table('cursos')->insert([
-        'user_id'=>$id,
         'nombre'=>$request->nombre,
         'fecha_inicio'=>$request->fecha_inicio,
         'fecha_finalizacion'=>$request->fecha_finalizacion,
         'visibilidad'=>$request->visibilidad,
-        'fecha_creacion'=>date('Y-m-d H:i:s')
+        'inscripcion'=>$request->inscripcion,
+        'fecha_creacion'=>date('Y-m-d H:i:s'),
+        'user_id'=>$user->id
       ]);
 
       DB::commit();
       return response()->json([
-          'message' => 'Registro guardado correctamente!',
+          'message' => 'Registro creado correctamente!',
           'message2' => 'Click para continuar!'
       ]);
     }
@@ -120,9 +122,8 @@ class CursosController extends Controller
         Log::info('creacion curso : '.$e->getMessage());
         DB::rollback();
         //$e->getMessage();
-
         return response()->json([
-            'error' =>'Hubo una inconsistencias al intentar guardar el registro'
+            'error' =>'Hubo una inconsistencias al intentar crear el registro'.$e->getMessage()
         ], 400);
     }
   }
@@ -130,7 +131,7 @@ class CursosController extends Controller
   //datos de edicion de un curso
   public function editar($id){
     $curso   =DB::select("select
-                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad
+                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,inscripcion
                             from cursos
                             where id = :id",
                           ['id'=>$id])[0];
@@ -142,6 +143,7 @@ class CursosController extends Controller
 
   //actualizar datos curso
   public function actualizar(Request $request){
+    $user     =Auth::user();
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'fecha_inicio' =>'required',
@@ -154,14 +156,16 @@ class CursosController extends Controller
         ], 400);
     }
 
-    //guardar datos
     DB::beginTransaction();
     try{
       DB::table('cursos')->where('id',$request->id)->update([
         'nombre'=>$request->nombre,
         'fecha_inicio'=>$request->fecha_inicio,
         'fecha_finalizacion'=>$request->fecha_finalizacion,
-        'visibilidad'=>$request->visibilidad
+        'visibilidad'=>$request->visibilidad,
+        'inscripcion'=>$request->inscripcion,
+        'fecha_modific'=>date('Y-m-d H:i:s'),
+        'userm_id'=>$user->id
       ]);
 
       DB::commit();
@@ -185,10 +189,10 @@ class CursosController extends Controller
   public function abrir($id){
     $rol  =Session::get('rol');
 
-    if($rol =='in'){
-      return redirect('cursos/v_config/'.$id);
+    if($rol !='in'){
+      return view('layouts.errors.access_denied');
     }
-    return redirect('foroc/'.$id);
+    return redirect('cursos/v_config/'.$id);
   }
 
   public function edit_config($id){
@@ -206,10 +210,13 @@ class CursosController extends Controller
   }
 
   public function upd_configplan(Request $request,$id){
+    $user     =Auth::user();
     DB::beginTransaction();
     try{
       DB::table('cursos')->where('id',$id)->update([
-        'plan_estudio'=>$request->plan_estudio
+        'plan_estudio'=>$request->plan_estudio,
+        'fecha_modific'=>date('Y-m-d H:i:s'),
+        'userm_id'=>$user->id
       ]);
 
       DB::commit();
@@ -230,10 +237,13 @@ class CursosController extends Controller
   }
 
   public function upd_configvideo(Request $request,$id){
+    $user     =Auth::user();
     DB::beginTransaction();
     try{
       DB::table('cursos')->where('id',$id)->update([
-        'urlvideo'=>$request->urlvideo
+        'urlvideo'=>str_replace("watch?v=","embed/", $request->urlvideo),
+        'fecha_modific'=>date('Y-m-d H:i:s'),
+        'userm_id'=>$user->id
       ]);
 
       DB::commit();
@@ -254,7 +264,7 @@ class CursosController extends Controller
   }
 
   public function upd_configlogo(Request $request,$id){
-
+    $user     =Auth::user();
     if($request->file('avatar') != null){
       $file   =$request->file('avatar');
       $nombre =Auth::user()->uniqid.'.'.$file->getClientOriginalExtension();
@@ -262,7 +272,9 @@ class CursosController extends Controller
       $responseImg  =Storage::disk('public_cursos')->put($nombre,  \File::get($file));
       if($responseImg){
           DB::table('cursos')->where('id',$id)->update([
-            'imagen' =>'img/cursos/'.$nombre
+            'imagen' =>'img/cursos/'.$nombre,
+            'fecha_modific'=>date('Y-m-d H:i:s'),
+            'userm_id'=>$user->id
           ]);
 
          $jsonresponse=[

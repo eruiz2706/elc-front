@@ -24,7 +24,7 @@ new Vue({
     },
     data : {
       id : 0,
-      o_curso:{},
+      o_curso:{'urlvideo':'','plan_estudio':''},
       loader_updplan:false,
       loader_updvideo:false,
       loader_updlogo:false
@@ -33,6 +33,13 @@ new Vue({
 
     },
     methods : {
+      replaceurlYoutube:function(dirurl){
+        if(typeof dirurl !== 'undefined'){
+          var cadena  =dirurl+"";
+          return cadena.replace("watch?v=", "embed/");
+        }
+        return "";
+      },
       getConfig:function(){
           this.preload=true;
           var url =base_url+'/cursos/e_config/'+this.id;
@@ -40,10 +47,8 @@ new Vue({
               this.o_curso=response.data.curso;
               $('#summernote').summernote('code',this.o_curso.plan_estudio);
               this.preload=false;
-              console.log(this.o_curso);
           }).catch(error =>{
               this.preload=false;
-              console.log(error.response.data);
           });
       },
       upd_planestudio:function(){

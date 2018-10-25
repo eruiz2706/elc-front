@@ -11,7 +11,7 @@
     <div class="col-md-9" style='padding-top:70px;'>
         @include('backend.nav.in.tabcontent')
 
-        @include('backend.modulos.modulos.partials.lista')
+        @include('backend.modulos.modulos.partials.formlist')
     </div>
 </div>
 @endsection

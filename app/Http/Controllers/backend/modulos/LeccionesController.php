@@ -19,41 +19,44 @@ class LeccionesController extends Controller
   function view_lista($idcurso,$idmodulo){
     $tab_mod='';
     $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if($rol !='in'){
+      return view('layouts.errors.access_denied');
+    }
+
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
                           where c.id= :id"
                      ,['id'=>$idcurso]);
-
-    if(!empty($curso)){
-      $curso  =$curso[0];
+    if(empty($curso)){
+      return view('layouts.errors.not_page');
     }
 
-    $rol  =Session::get('rol');
-    if($rol=='in'){
-        return view('backend.modulos.lecciones.view_lista',compact('idmodulo','curso','tab_mod'));
-    }else{
-      echo "no pertenece a ningun rol redireccionar";
-    }
+    $curso  =$curso[0];
+    return view('backend.modulos.lecciones.view_list',compact('idmodulo','curso','tab_mod'));
+
   }
 
   //vista para crear una nueva leccion
   public function view_crear($idcurso,$idmodulo){
     $tab_mod='';
     $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if($rol !='in'){
+      return view('layouts.errors.access_denied');
+    }
+
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
                           where c.id= :idcurso and user_id = :user_id"
                      ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
-    if(!empty($curso)){
-      $curso  =$curso[0];
-    }
+     if(empty($curso)){
+       return view('layouts.errors.not_page');
+     }
 
-    $rol  =Session::get('rol');
-    if($rol !='in'){
-      echo "no pertenece a ningun rol redireccionar";
-    }
+    $curso  =$curso[0];
     return view('backend.modulos.lecciones.view_crear',compact('idmodulo','curso','tab_mod','idcurso'));
   }
 
@@ -62,19 +65,20 @@ class LeccionesController extends Controller
 
     $tab_mod='';
     $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if($rol !='in'){
+      return view('layouts.errors.access_denied');
+    }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
                           where c.id= :idcurso and user_id = :user_id"
                      ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
-    if(!empty($curso)){
-      $curso  =$curso[0];
-    }
+     if(empty($curso)){
+       return view('layouts.errors.not_page');
+     }
 
-    $rol  =Session::get('rol');
-    if($rol !='in'){
-      echo "no pertenece a ningun rol redireccionar";
-    }
+    $curso  =$curso[0];
     return view('backend.modulos.lecciones.view_edit',compact('curso','tab_mod','idmodulo','id'));
   }
 
@@ -82,7 +86,7 @@ class LeccionesController extends Controller
   ############################## METODOS ##############################
   //listado de modulos de un curso
   public function lista(Request $request){
-    $lecciones  =DB::select("select l.id,l.nombre,l.descripcion
+    $lecciones  =DB::select("select l.id,l.nombre,l.descripcion,l.fecha_creacion,l.tiempolectura
                             from lecciones l
                             where modulo_id = :idmodulo"
                      ,['idmodulo'=>$request->idmodulo]);
@@ -95,6 +99,7 @@ class LeccionesController extends Controller
 
   //guardar un nuevo modulo de un curso
   public function guardar(Request $request){
+    $user   =Auth::user();
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string'
     ]);
@@ -105,18 +110,20 @@ class LeccionesController extends Controller
         ], 400);
     }
 
-    ############guardar datos ########
     DB::beginTransaction();
     try{
       DB::table('lecciones')->insert([
         'modulo_id'=>$request->idmodulo,
         'nombre'=>$request->nombre,
-        'descripcion'=>''
+        'descripcion'=>$request->descripcion,
+        'tiempolectura'=>$request->tiempolectura,
+        'fecha_creacion'=>date('Y-m-d H:i:s'),
+        'user_id'=>$user->id
       ]);
 
       DB::commit();
       return response()->json([
-          'message' => 'Registro guardado correctamente!',
+          'message' => 'Registro creado correctamente!',
           'message2' => 'Click para continuar!'
       ]);
     }
@@ -126,7 +133,7 @@ class LeccionesController extends Controller
         //$e->getMessage();
 
         return response()->json([
-            'error' =>'Hubo una inconsistencias al intentar guardar el registro.'.$e->getMessage()
+            'error' =>'Hubo una inconsistencias al intentar crear el registro.'.$e->getMessage()
         ], 400);
     }
   }
@@ -134,7 +141,7 @@ class LeccionesController extends Controller
   //datos de edicion de un modulo
   public function editar($id){
     $leccion   =DB::select("select
-                            id,nombre
+                            id,nombre,descripcion,tiempolectura
                             from lecciones
                             where id = :id",
                           ['id'=>$id])[0];
@@ -146,6 +153,7 @@ class LeccionesController extends Controller
   }
 
   public function actualizar(Request $request){
+    $user   =Auth::user();
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string'
     ]);
@@ -160,7 +168,11 @@ class LeccionesController extends Controller
     DB::beginTransaction();
     try{
       DB::table('lecciones')->where('id',$request->id)->update([
-        'nombre'=>$request->nombre
+        'nombre'=>$request->nombre,
+        'descripcion'=>$request->descripcion,
+        'tiempolectura'=>$request->tiempolectura,
+        'fecha_modific'=>date('Y-m-d H:i:s'),
+        'userm_id'=>$user->id
       ]);
 
       DB::commit();
@@ -175,7 +187,7 @@ class LeccionesController extends Controller
         //$e->getMessage();
 
         return response()->json([
-            'error' =>'Hubo una inconsistencias al intentar actualizacion el registro'
+            'error' =>'Hubo una inconsistencias al intentar actualizar el registro'
         ], 400);
     }
   }

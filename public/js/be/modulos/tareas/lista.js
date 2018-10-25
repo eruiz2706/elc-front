@@ -5,11 +5,10 @@ new Vue({
     created : function(){
       this.idcurso=document.getElementById('idcurso').value;
       this.listado();
-      console.log('fafd');
     },
     data : {
       idcurso : 0,
-      preload:false,
+      preload:true,
       a_tareas:[],
     },
     computed : {
@@ -29,17 +28,16 @@ new Vue({
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
-                  "timeOut": "2500"
+                  "timeOut": "3500"
               });
             }
-            console.log(error.response.data);
         });
       },
-      crear:function(){
+      redirectCrear:function(){
         window.location.href=base_url+'/tareas/v_crear/'+this.idcurso;
       },
-      editar:function(idtarea){
-        window.location.href=base_url+'/tareas/v_editar/'+this.idcurso+'/'+idtarea;
+      redirectEdit:function(id){
+        window.location.href=base_url+'/tareas/v_editar/'+this.idcurso+'/'+id;
       }
 
     }

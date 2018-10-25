@@ -18,40 +18,42 @@ class TareasController extends Controller
   function view_lista($idcurso){
     $tab_tar='';
     $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if($rol !='in'){
+      return view('layouts.errors.access_denied');
+    }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
                           where c.id= :idcurso and user_id = :user_id"
                      ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
-    if(!empty($curso)){
-      $curso  =$curso[0];
-    }
+     if(empty($curso)){
+       return view('layouts.errors.not_page');
+     }
 
-    $rol  =Session::get('rol');
-    if($rol=='in'){
-        return view('backend.modulos.tareas.view_lista',compact('curso','tab_tar'));
-    }else{
-      echo "no pertenece a ningun rol redireccionar";
-    }
+     $curso  =$curso[0];
+    return view('backend.modulos.tareas.view_list',compact('curso','tab_tar'));
+
   }
 
   //vista para crear un nuevo modulo
   public function view_crear($idcurso){
     $tab_tar='';
     $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if($rol !='in'){
+      return view('layouts.errors.access_denied');
+    }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
                           where c.id= :idcurso and user_id = :user_id"
                      ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
-    if(!empty($curso)){
-      $curso  =$curso[0];
-    }
+     if(empty($curso)){
+       return view('layouts.errors.not_page');
+     }
 
-    $rol  =Session::get('rol');
-    if($rol !='in'){
-      echo "no pertenece a ningun rol redireccionar";
-    }
+    $curso  =$curso[0];
     return view('backend.modulos.tareas.view_crear',compact('curso','tab_tar','idcurso'));
   }
 
@@ -78,9 +80,10 @@ class TareasController extends Controller
   ############################## METODOS ##############################
   //listado de modulos de un curso
   public function lista(Request $request){
-    $tareas   =DB::select("select id,nombre
+    $tareas   =DB::select("select id,nombre,fecha_vencimiento,calificacion,fecha_creacion
                               from tareas
-                              where curso_id = :curso_id",
+                              where curso_id = :curso_id
+                              order by fecha_creacion desc",
                           ['curso_id'=>$request->idcurso]);
     $jsonresponse=[
         'tareas'=>$tareas
@@ -90,8 +93,11 @@ class TareasController extends Controller
 
   //guardar un nuevo modulo de un curso
   public function guardar(Request $request){
+    $user   =Auth::user();
     $validator =Validator::make($request->all(),[
-      'nombre' =>'required|string'
+      'nombre' =>'required|string',
+      'calificacion' =>'required',
+      'fecha_vencimiento' =>'required',
     ]);
 
     if ($validator->fails()) {
@@ -106,12 +112,16 @@ class TareasController extends Controller
       DB::table('tareas')->insert([
         'curso_id'=>$request->idcurso,
         'nombre'=>$request->nombre,
-        'descripcion'=>''
+        'descripcion'=>$request->descripcion,
+        'calificacion' =>$request->calificacion,
+        'fecha_vencimiento' =>$request->fecha_vencimiento,
+        'fecha_creacion'=>date('Y-m-d H:i:s'),
+        'user_id'=>$user->id
       ]);
 
       DB::commit();
       return response()->json([
-          'message' => 'Registro guardado correctamente!',
+          'message' => 'Registro creado correctamente!',
           'message2' => 'Click para continuar!'
       ]);
     }
@@ -121,7 +131,7 @@ class TareasController extends Controller
         //$e->getMessage();
 
         return response()->json([
-            'error' =>'Hubo una inconsistencias al intentar guardar el registro'
+            'error' =>'Hubo una inconsistencias al intentar crear el registro'
         ], 400);
     }
   }
@@ -129,7 +139,7 @@ class TareasController extends Controller
   //datos de edicion de un modulo
   public function editar($id){
     $tarea   =DB::select("select
-                            id,nombre
+                            id,nombre,calificacion,fecha_vencimiento,descripcion
                             from tareas
                             where id = :id",
                           ['id'=>$id])[0];
@@ -140,8 +150,11 @@ class TareasController extends Controller
   }
 
   public function actualizar(Request $request){
+    $user   =Auth::user();
     $validator =Validator::make($request->all(),[
-      'nombre' =>'required|string'
+      'nombre' =>'required|string',
+      'calificacion' =>'required',
+      'fecha_vencimiento' =>'required',
     ]);
 
     if ($validator->fails()) {
@@ -154,7 +167,12 @@ class TareasController extends Controller
     DB::beginTransaction();
     try{
       DB::table('tareas')->where('id',$request->id)->update([
-        'nombre'=>$request->nombre
+        'nombre'=>$request->nombre,
+        'descripcion'=>$request->descripcion,
+        'calificacion' =>$request->calificacion,
+        'fecha_vencimiento' =>$request->fecha_vencimiento,
+        'fecha_modific'=>date('Y-m-d H:i:s'),
+        'userm_id'=>$user->id
       ]);
 
       DB::commit();
@@ -169,7 +187,7 @@ class TareasController extends Controller
         //$e->getMessage();
 
         return response()->json([
-            'error' =>'Hubo una inconsistencias al intentar actualizacion el registro'
+            'error' =>'Hubo una inconsistencias al intentar actualizar el registro'
         ], 400);
     }
   }

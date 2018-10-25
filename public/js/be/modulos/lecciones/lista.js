@@ -6,11 +6,10 @@ new Vue({
       this.idcurso=document.getElementById('idcurso').value;
       this.idmodulo=document.getElementById('idmodulo').value;
       this.listado();
-      console.log('fafd');
     },
     data : {
       id : 0,
-      preload:false,
+      preload:true,
       a_leccion:[],
     },
     computed : {
@@ -30,17 +29,17 @@ new Vue({
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
-                  "timeOut": "2500"
+                  "timeOut": "3500"
               });
             }
             console.log(error.response.data);
         });
       },
-      crear:function(){
-        window.location.href=base_url+'/lecciones/'+this.idcurso+'/'+this.idmodulo+'/v_crear';
+      redirectCrear:function(){
+        window.location.href=base_url+'/lecciones/v_crear/'+this.idcurso+'/'+this.idmodulo;
       },
-      editar:function(idleccion){
-        window.location.href=base_url+'/lecciones/'+this.idcurso+'/'+this.idmodulo+'/v_editar/'+idleccion;
+      redirectEdit:function(id){
+        window.location.href=base_url+'/lecciones/v_editar/'+this.idcurso+'/'+this.idmodulo+'/'+id;
       }
     }
 });

@@ -15,11 +15,11 @@ class CreateForoTable extends Migration
     {
         Schema::create('foros', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('descripcion');
+            $table->integer('comentarios')->default(0);
+            $table->dateTime('fecha_creacion');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->text('descripcion');
-            $table->dateTime('fecha_creacion');
-            $table->integer('comentarios')->default(0);
             $table->timestamps();
         });
     }

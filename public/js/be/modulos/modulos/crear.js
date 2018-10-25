@@ -3,7 +3,7 @@ new Vue({
     ready: function(){
     },
     created : function(){
-      this.idcurso=document.getElementById('id').value;
+      this.idcurso=document.getElementById('idcurso').value;
     },
     data : {
       idcurso:0,
@@ -29,7 +29,7 @@ new Vue({
                 text:response.data.message2,
                 type: "success"
             },function(){
-                window.location.href=base_url+'/modulos/'+document.getElementById('id').value;
+                window.location.href=base_url+'/modulos/'+document.getElementById('idcurso').value;
             });
         }).catch(error =>{
             this.loader_guardar=false;
@@ -41,7 +41,6 @@ new Vue({
                   "timeOut": "2500"
               });
             }
-            console.log(error.response.data);
         });
       },
     }

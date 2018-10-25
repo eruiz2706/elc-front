@@ -7,8 +7,8 @@ new Vue({
     },
     data : {
       idcurso:0,
-      o_basetarea:{'nombre':''},
-      o_tarea:{'nombre':''},
+      o_basetarea:{'nombre':'','calificacion':0,'fecha_vencimiento':'','descripcion':''},
+      o_tarea:{'nombre':'','calificacion':0,'fecha_vencimiento':'','descripcion':''},
       e_tarea:[],
       loader_guardar :false,
     },
@@ -19,6 +19,7 @@ new Vue({
       guardar:function(){
         this.loader_guardar=true;
         this.o_tarea.idcurso=this.idcurso;
+        this.o_tarea.descripcion=$('#summernote').summernote('code');
         var url =base_url+'/tareas/guardar';
         axios.post(url,this.o_tarea).then(response =>{
             this.loader_guardar=false;
@@ -35,14 +36,13 @@ new Vue({
         }).catch(error =>{
             this.loader_guardar=false;
             if(error.response.data.errors){
-              this.e_modulo=error.response.data.errors;
+              this.e_tarea=error.response.data.errors;
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
                   "timeOut": "2500"
               });
             }
-            console.log(error.response.data);
         });
       },
     }

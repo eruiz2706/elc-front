@@ -9,8 +9,8 @@ new Vue({
     data : {
       idmodulo:0,
       idcurso:0,
-      o_baseleccion:{'nombre':''},
-      o_leccion:{'nombre':''},
+      o_baseleccion:{'nombre':'','descripcion':'','tiempolectura':0},
+      o_leccion:{'nombre':'','descripcion':'','tiempolectura':0},
       e_leccion:[],
       loader_guardar :false,
     },
@@ -21,10 +21,10 @@ new Vue({
       guardar:function(){
         this.loader_guardar=true;
         this.o_leccion.idmodulo=this.idmodulo;
+        this.o_leccion.descripcion=$('#summernote').summernote('code');
         var url =base_url+'/lecciones/guardar';
         axios.post(url,this.o_leccion).then(response =>{
             this.loader_guardar=false;
-            this.o_leccion=[];
             this.o_leccion=this.o_baseleccion;
             swal({
                 title:response.data.message,
@@ -42,10 +42,9 @@ new Vue({
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
-                  "timeOut": "2500"
+                  "timeOut": "3500"
               });
             }
-            console.log(error.response.data);
         });
       },
     }

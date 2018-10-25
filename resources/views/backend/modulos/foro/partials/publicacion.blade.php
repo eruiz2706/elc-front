@@ -6,7 +6,7 @@
         <div class="input-group">
             <input type="text" name="message" placeholder="Escribe una respuesta" class="form-control" v-model='o_comentario.comentario' v-bind:class="[e_comentarios.comentario ? 'is-invalid' : '']">
             <span class="input-group-append">
-              <button type="button" class="btn btn-primary" :disabled="loader_responder"  v-on:click.prevent='agregarComentario()'>
+              <button type="button" class="btn btn-outline-primary btn-sm" :disabled="loader_responder"  v-on:click.prevent='agregarComentario()'>
                 Responder
                 <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_responder"></i>
               </button>
@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary btn-sm float-right"  :disabled="loader_publicar" v-on:click.prevent='publicacion()'>
+    <button type="button" class="btn btn-outline-primary btn-sm float-right"  :disabled="loader_publicar" v-on:click.prevent='publicacion()'>
       Publicar
       <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_publicar"></i>
     </button>

@@ -40,7 +40,11 @@ class HomeController extends Controller
       Auth::logout();
       $link_inic='';
       return view('frontend.inicio',compact('link_inic','cursos'));
-      //return redirect('/login');
+    }
+
+    public function noaccess(){
+      Auth::logout();
+      return view('frontend.noaccess');
     }
 
     public function cursos($estado=''){

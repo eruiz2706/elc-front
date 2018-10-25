@@ -15,12 +15,13 @@ class CreateComentariosForocursoTable extends Migration
     {
         Schema::create('comentarios_forocurso', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('foro_id')->unsigned()->index();
             $table->foreign('foro_id')->references('id')->on('forocurso')->onDelete('cascade');
             $table->text('descripcion');
+
             $table->dateTime('fecha_creacion');
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -6,12 +6,19 @@
   </div>
 </div>
 
-<div class="card">
+<div class="card" v-if="!preload">
   <div class="card-header no-border">
     <h3 class="card-title">Lista de lecciones</h3>
 
-    <div class='card-tools'>
-      <button type="button" class="btn float-right btn-primary btn-sm" v-on:click.prevent="crear()">Crear leccion</button>
+    <div class="card-tools">
+      <div class="btn-group">
+        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <i class="fa  fa-ellipsis-v"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
+          <a href="#" class="dropdown-item" v-on:click.prevent="redirectCrear()">Nueva leccion</a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card-body p-0">
@@ -19,6 +26,8 @@
       <thead>
       <tr>
         <th>Nombre</th>
+        <th>Tiempo de lectura</th>
+        <th>Creado</th>
         <th>Opciones</th>
       </tr>
       </thead>
@@ -28,7 +37,13 @@
           @{{leccion.nombre}}
         </td>
         <td>
-          <a href="#" v-on:click.prevent="editar(leccion.id)" class="text-muted">
+          @{{leccion.tiempolectura}} minutos
+        </td>
+        <td>
+          @{{leccion.fecha_creacion}}
+        </td>
+        <td>
+          <a href="#" v-on:click.prevent="redirectEdit(leccion.id)" class="text-muted">
             <i class="fa fa-edit"></i> Editar
           </a>
         </td>

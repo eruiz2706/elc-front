@@ -25,7 +25,7 @@ class ForoController extends Controller
       }else if($rol=='es'){
         return view('backend.modulos.foro.view_es');
       }else{
-        echo "no pertenece a ningun rol redireccionar";
+        return view('layouts.errors.access_denied');
       }
     }
 

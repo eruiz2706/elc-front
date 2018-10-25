@@ -16,6 +16,13 @@ class CreatePreciosTable extends Migration
         Schema::create('precios', function (Blueprint $table) {
             $table->increments('id');
             $table->double('valor');
+
+            $table->dateTime('fecha_creacion');
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->dateTime('fecha_modific')->nullable();
+            $table->integer('userm_id')->unsigned()->nullable()->index();
+            $table->foreign('userm_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

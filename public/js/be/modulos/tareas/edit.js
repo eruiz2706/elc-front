@@ -15,7 +15,7 @@ new Vue({
       idcurso :0,
       o_tarea:{},
       e_tarea:[],
-      preload :false,
+      preload :true,
     },
     computed : {
 
@@ -26,10 +26,10 @@ new Vue({
           var url =base_url+'/tareas/editar/'+this.id;
           axios.get(url,{}).then(response =>{
               this.o_tarea=response.data.tarea;
+              $('#summernote').summernote('code',this.o_tarea.descripcion);
               this.preload=false;
           }).catch(error =>{
               this.preload=false;
-              console.log(error.response.data);
           });
       },
       actualizar:function(){
@@ -50,11 +50,11 @@ new Vue({
         }).catch(error =>{
             this.loader_actualizar=false;
             if(error.response.data.errors){
-              this.e_modulo=error.response.data.errors;
+              this.e_tarea=error.response.data.errors;
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
-                  "timeOut": "2500"
+                  "timeOut": "3500"
               });
             }
         });

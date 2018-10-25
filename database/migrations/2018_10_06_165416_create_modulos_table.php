@@ -18,6 +18,12 @@ class CreateModulosTable extends Migration
             $table->integer('curso_id')->unsigned()->index();
             $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
             $table->string('nombre',300);
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->dateTime('fecha_creacion');
+            $table->integer('userm_id')->unsigned()->nullable()->index();
+            $table->foreign('userm_id')->references('id')->on('users')->onDelete('cascade');
+            $table->dateTime('fecha_modific')->nullable();
             $table->timestamps();
         });
     }

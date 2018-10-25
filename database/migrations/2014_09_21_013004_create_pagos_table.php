@@ -16,10 +16,13 @@ class CreatePagosTable extends Migration
         Schema::create('pagos', function (Blueprint $table) {
             $table->increments('id');
             $table->double('valor');
-            $table->date('fecha_creacion');
             $table->date('fecha_vencimiento');
+            $table->dateTime('fecha_creacion');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->dateTime('fecha_modific')->nullable();
+            $table->integer('userm_id')->unsigned()->nullable()->index();
+            $table->foreign('userm_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 

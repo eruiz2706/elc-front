@@ -37,6 +37,7 @@ Route::middleware(['lang'])->group(function(){
   Route::get('/contacto', 'HomeController@contacto');
   Route::get('/registro', 'HomeController@registro');
   Route::get('/login', 'HomeController@login');
+  Route::get('/noaccess', 'HomeController@noaccess');
   Auth::routes();
 
   Route::get('/redirect/{provider}/{type?}/{modo?}', 'SocialController@redirect');
@@ -83,8 +84,8 @@ Route::middleware(['auth'])->group(function(){
   Route::post('foroc/comentar','backend\modulos\ForoCursoController@agregarComentario');
 
   Route::get('modulos/{idcurso}','backend\modulos\ModulosController@view_lista');
-  Route::get('modulos/{idcurso}/v_crear', 'backend\modulos\ModulosController@view_crear');
-  Route::get('modulos/{idcurso}/v_editar/{id}', 'backend\modulos\ModulosController@view_editar');
+  Route::get('modulos/v_crear/{idcurso}', 'backend\modulos\ModulosController@view_crear');
+  Route::get('modulos/v_editar/{idcurso}/{id}', 'backend\modulos\ModulosController@view_editar');
   Route::post('modulos/lista', 'backend\modulos\ModulosController@lista');
   Route::post('modulos/guardar', 'backend\modulos\ModulosController@guardar');
   Route::get('modulos/editar/{id}', 'backend\modulos\ModulosController@editar');
@@ -93,8 +94,8 @@ Route::middleware(['auth'])->group(function(){
 
   Route::get('lecciones/editar/{id}', 'backend\modulos\LeccionesController@editar');
   Route::get('lecciones/{idcurso}/{idmodulo}','backend\modulos\LeccionesController@view_lista');
-  Route::get('lecciones/{idcurso}/{idmodulo}/v_crear', 'backend\modulos\LeccionesController@view_crear');
-  Route::get('lecciones/{idcurso}/{idmodulo}/v_editar/{id}', 'backend\modulos\LeccionesController@view_editar');
+  Route::get('lecciones/v_crear/{idcurso}/{idmodulo}', 'backend\modulos\LeccionesController@view_crear');
+  Route::get('lecciones/v_editar/{idcurso}/{idmodulo}/{id}', 'backend\modulos\LeccionesController@view_editar');
   Route::post('lecciones/lista', 'backend\modulos\LeccionesController@lista');
   Route::post('lecciones/guardar', 'backend\modulos\LeccionesController@guardar');
   Route::post('lecciones/actualizar', 'backend\modulos\LeccionesController@actualizar');

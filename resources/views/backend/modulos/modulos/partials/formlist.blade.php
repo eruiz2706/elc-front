@@ -8,7 +8,7 @@
 
 <div class="card" v-if="!preload">
   <div class="card-header no-border">
-    <h3 class="card-title">Lista de tareas</h3>
+    <h3 class="card-title">Lista de modulos</h3>
 
     <div class="card-tools">
       <div class="btn-group">
@@ -16,39 +16,34 @@
           <i class="fa  fa-ellipsis-v"></i>
         </button>
         <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
-          <a href="#" class="dropdown-item" v-on:click.prevent="redirectCrear()">Nueva tarea</a>
+          <a href="#" class="dropdown-item" v-on:click.prevent="redirectCrear()">Nuevo modulo</a>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-body p-0">
-    <table class="table table-striped table-valign-middle">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-striped table-valign-middle ">
       <thead>
       <tr>
         <th>Nombre</th>
-        <th>Calificacion</th>
-        <th>Vencimiento</th>
         <th>Creado</th>
         <th>Opciones</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="tarea in a_tareas">
+      <tr v-for="modulo in a_modulos">
         <td>
-          @{{tarea.nombre}}
+          @{{modulo.nombre}}
         </td>
         <td>
-          @{{tarea.calificacion}}
+          @{{modulo.fecha_creacion}}
         </td>
         <td>
-          @{{tarea.fecha_vencimiento}}
-        </td>
-        <td>
-          @{{tarea.fecha_creacion}}
-        </td>
-        <td>
-          <a href="#" v-on:click.prevent="redirectEdit(tarea.id)" class="text-muted">
+          <a href="#" v-on:click.prevent="redirectEdit(modulo.id)" class="text-muted">
             <i class="fa fa-edit"></i> Editar
+          </a>
+          <a href="#" v-on:click.prevent="redirectLecciones(modulo.id)" class="text-muted">
+            <i class="fa fa-folder-open-o"></i> Lecciones
           </a>
         </td>
       </tr>
@@ -60,5 +55,5 @@
 <input type='hidden' name='idcurso' id='idcurso' value="{{$curso->id}}"></input>
 @section('scripts')
 @parent
-<script src="{{ URL::asset('js/be/modulos/tareas/lista.js') }}"></script>
+<script src="{{ URL::asset('js/be/modulos/modulos/lista.js') }}"></script>
 @stop

@@ -7,7 +7,7 @@ new Vue({
     created : function(){
       this.idcurso=document.getElementById('idcurso').value;
       this.id=document.getElementById('id').value;
-      this.getCurso();
+      this.getModulo();
     },
     data : {
       loader_actualizar:false,
@@ -15,13 +15,13 @@ new Vue({
       idcurso :0,
       o_modulo:{},
       e_modulo:[],
-      preload :false,
+      preload :true,
     },
     computed : {
 
     },
     methods : {
-      getCurso:function(){
+      getModulo:function(){
           this.preload=true;
           var url =base_url+'/modulos/editar/'+this.id;
           axios.get(url,{}).then(response =>{
@@ -29,7 +29,6 @@ new Vue({
               this.preload=false;
           }).catch(error =>{
               this.preload=false;
-              console.log(error.response.data);
           });
       },
       actualizar:function(){
@@ -53,7 +52,7 @@ new Vue({
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
-                  "timeOut": "2500"
+                  "timeOut": "3500"
               });
             }
         });

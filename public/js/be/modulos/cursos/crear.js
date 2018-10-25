@@ -3,11 +3,10 @@ new Vue({
     ready: function(){
     },
     created : function(){
-
     },
     data : {
-      o_basecurso:{'nombre':'','fecha_inicio':'','fecha_finalizacion':'','duracion':'','urlvideo':'','visibilidad':false},
-      o_curso:{'nombre':'','fecha_inicio':'','fecha_finalizacion':'','duracion':'','urlvideo':'','visibilidad':false},
+      o_basecurso:{'nombre':'','fecha_inicio':'','fecha_finalizacion':'','duracion':'','urlvideo':'','visibilidad':false,'inscripcion':true},
+      o_curso:{'nombre':'','fecha_inicio':'','fecha_finalizacion':'','duracion':'','urlvideo':'','visibilidad':false,'inscripcion':true},
       e_curso:[],
       loader_guardar :false,
     },
@@ -36,10 +35,9 @@ new Vue({
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
-                  "timeOut": "2500"
+                  "timeOut": "3500"
               });
             }
-            console.log(error.response.data);
         });
       },
     }
