@@ -1,3 +1,5 @@
+
+
 new Vue({
     el : '#vue',
     ready: function(){
@@ -40,5 +42,8 @@ new Vue({
             }
         });
       },
+      openbsq:function(){
+        $('#modalbsq').modal('show');
+      }
     }
 });

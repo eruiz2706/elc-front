@@ -28,7 +28,7 @@
         <th>Nombre</th>
         <th>Tiempo de lectura</th>
         <th>Creado</th>
-        <th>Opciones</th>
+        <th>Acciones</th>
       </tr>
       </thead>
       <tbody>

@@ -10,16 +10,27 @@
   <div class="card-header no-border">
     <h3 class="card-title">Lista de examenes</h3>
 
-    <div class='card-tools'>
-      <button type="button" class="btn float-right btn-primary btn-sm" v-on:click.prevent="crear()">Crear examen</button>
+    <div class="card-tools">
+      <div class="btn-group">
+        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <i class="fa  fa-bars"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
+          <a href="#" class="dropdown-item" v-on:click.prevent="redirectCrear()">Nuevo examen</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="card-body p-0">
-    <table class="table table-striped table-valign-middle">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-striped table-valign-middle ">
       <thead>
       <tr>
         <th>Nombre</th>
-        <th>Opciones</th>
+        <th>Duracion</th>
+        <th>Calificacion sobre</th>
+        <th>Inicia</th>
+        <th>Creado</th>
+        <th>Acciones</th>
       </tr>
       </thead>
       <tbody>
@@ -28,10 +39,22 @@
           @{{ejercicio.nombre}}
         </td>
         <td>
-          <a href="#" v-on:click.prevent="editar(ejercicio.id)" class="text-muted">
+          @{{ejercicio.duracion}} minutos
+        </td>
+        <td>
+          @{{ejercicio.calificacion}}
+        </td>
+        <td>
+          @{{ejercicio.fecha_inicio}}
+        </td>
+        <td>
+          @{{ejercicio.fecha_creacion}}
+        </td>
+        <td>
+          <a href="#" v-on:click.prevent="redirectEdit(ejercicio.id)" class="text-muted">
             <i class="fa fa-edit"></i> Editar
-          </a>
-          <a href="#" v-on:click.prevent="preguntas(ejercicio.id)" class="text-muted">
+          </a><br>
+          <a href="#" v-on:click.prevent="redirectPreguntas(ejercicio.id)" class="text-muted">
             <i class="fa fa-edit"></i> Preguntas
           </a>
         </td>

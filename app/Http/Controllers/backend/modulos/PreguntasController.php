@@ -18,40 +18,42 @@ class PreguntasController extends Controller
   function view_lista($idcurso,$idejerc){
     $tab_ejer='';
     $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if($rol !='in'){
+      return view('layouts.errors.access_denied');
+    }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
                           where c.id= :idcurso and user_id = :user_id"
                      ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
-    if(!empty($curso)){
-      $curso  =$curso[0];
-    }
+   if(empty($curso)){
+     return view('layouts.errors.not_page');
+   }
 
-    $rol  =Session::get('rol');
-    if($rol=='in'){
-        return view('backend.modulos.preguntas.view_lista',compact('curso','tab_ejer','idejerc'));
-    }else{
-      echo "no pertenece a ningun rol redireccionar";
-    }
+   $curso  =$curso[0];
+   return view('backend.modulos.preguntas.view_list',compact('curso','tab_ejer','idejerc'));
+
   }
 
   //vista para crear un nuevo modulo
   public function view_crear($idcurso,$idejerc){
     $tab_ejer='';
     $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if($rol !='in'){
+      return view('layouts.errors.access_denied');
+    }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
                           where c.id= :idcurso and user_id = :user_id"
                      ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
-    if(!empty($curso)){
-      $curso  =$curso[0];
-    }
+     if(empty($curso)){
+       return view('layouts.errors.not_page');
+     }
 
-    $rol  =Session::get('rol');
-    if($rol !='in'){
-      echo "no pertenece a ningun rol redireccionar";
-    }
+    $curso  =$curso[0];
     return view('backend.modulos.preguntas.view_crear',compact('curso','tab_ejer','idcurso','idejerc'));
   }
 
@@ -92,7 +94,8 @@ class PreguntasController extends Controller
   //guardar un nuevo modulo de un curso
   public function guardar(Request $request){
     $validator =Validator::make($request->all(),[
-      'nombre' =>'required|string'
+      'nombre' =>'required|string',
+      'tipo' =>'required|string'
     ]);
 
     if ($validator->fails()) {

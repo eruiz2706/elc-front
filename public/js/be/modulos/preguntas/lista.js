@@ -36,10 +36,10 @@ new Vue({
             console.log(error.response.data);
         });
       },
-      crear:function(){
+      redirectCrear:function(){
         window.location.href=base_url+'/preguntas/v_crear/'+this.idcurso+'/'+this.idejerc;
       },
-      editar:function(idpregunta){
+      redirectEdit:function(idpregunta){
         window.location.href=base_url+'/preguntas/v_editar/'+this.idcurso+'/'+this.idejerc+'/'+idpregunta;
       }
     }

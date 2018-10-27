@@ -19,6 +19,9 @@ class CreateEjerciciosTable extends Migration
           $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
           $table->string('nombre',300);
           $table->text('descripcion')->nullable();
+          $table->integer('duracion')->default(0);
+          $table->integer('calificacion')->default(0);
+          $table->date('fecha_inicio')->nullable();
           $table->integer('user_id')->unsigned()->index();
           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
           $table->dateTime('fecha_creacion');

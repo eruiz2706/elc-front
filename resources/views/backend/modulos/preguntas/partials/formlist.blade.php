@@ -10,8 +10,15 @@
   <div class="card-header no-border">
     <h3 class="card-title">Lista de preguntas</h3>
 
-    <div class='card-tools'>
-      <button type="button" class="btn float-right btn-primary btn-sm" v-on:click.prevent="crear()">Crear pregunta</button>
+    <div class="card-tools">
+      <div class="btn-group">
+        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <i class="fa  fa-bars"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
+          <a href="#" class="dropdown-item" v-on:click.prevent="redirectCrear()">Nueva pregunta</a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card-body p-0">
@@ -19,7 +26,8 @@
       <thead>
       <tr>
         <th>Nombre</th>
-        <th>Opciones</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
       </tr>
       </thead>
       <tbody>
@@ -28,7 +36,7 @@
           @{{pregunta.nombre}}
         </td>
         <td>
-          <a href="#" v-on:click.prevent="editar(pregunta.id)" class="text-muted">
+          <a href="#" v-on:click.prevent="redirectEdit(pregunta.id)" class="text-muted">
             <i class="fa fa-edit"></i> Editar
           </a>
         </td>

@@ -96,7 +96,7 @@ class TareasController extends Controller
     $user   =Auth::user();
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
-      'calificacion' =>'required',
+      'calificacion' =>'required|integer|min:1',
       'fecha_vencimiento' =>'required',
     ]);
 
@@ -153,7 +153,7 @@ class TareasController extends Controller
     $user   =Auth::user();
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
-      'calificacion' =>'required',
+      'calificacion' =>'required|integer|min:1',
       'fecha_vencimiento' =>'required',
     ]);
 

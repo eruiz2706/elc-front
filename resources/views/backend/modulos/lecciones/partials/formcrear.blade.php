@@ -17,6 +17,7 @@
         <span class="text-danger" v-if="e_leccion.nombre">@{{ e_leccion.nombre[0] }}</span>
       </div>
 
+
       <div class="form-group">
       <label>Tiempo de lectura(Minutos)</label>
         <input type="number" class="form-control" name='tiempo' min="0" max="1000"  v-model='o_leccion.tiempolectura'>

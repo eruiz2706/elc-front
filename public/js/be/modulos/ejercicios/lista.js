@@ -28,20 +28,19 @@ new Vue({
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
-                  "timeOut": "2500"
+                  "timeOut": "3500"
               });
             }
-            console.log(error.response.data);
         });
       },
-      crear:function(){
+      redirectCrear:function(){
         window.location.href=base_url+'/ejercicios/v_crear/'+this.idcurso;
       },
-      editar:function(idejercicio){
-        window.location.href=base_url+'/ejercicios/v_editar/'+this.idcurso+'/'+idejercicio;
+      redirectEdit:function(id){
+        window.location.href=base_url+'/ejercicios/v_editar/'+this.idcurso+'/'+id;
       },
-      preguntas:function(idejercicio){
-        window.location.href=base_url+'/preguntas/'+this.idcurso+'/'+idejercicio;
+      redirectPreguntas:function(id){
+        window.location.href=base_url+'/preguntas/'+this.idcurso+'/'+id;
       }
 
     }

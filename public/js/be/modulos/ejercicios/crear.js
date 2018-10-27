@@ -7,8 +7,8 @@ new Vue({
     },
     data : {
       idcurso:0,
-      o_baseejercicio:{'nombre':''},
-      o_ejercicio:{'nombre':''},
+      o_baseejercicio:{'nombre':'','fecha_inicio':'','duracion':0,'calificacion':0,'descripcion':''},
+      o_ejercicio:{'nombre':'','fecha_inicio':'','duracion':0,'calificacion':0,'descripcion':''},
       e_ejercicio:[],
       loader_guardar :false,
     },
@@ -19,6 +19,7 @@ new Vue({
       guardar:function(){
         this.loader_guardar=true;
         this.o_ejercicio.idcurso=this.idcurso;
+        this.o_ejercicio.descripcion=$('#summernote').summernote('code');
         var url =base_url+'/ejercicios/guardar';
         axios.post(url,this.o_ejercicio).then(response =>{
             this.loader_guardar=false;
@@ -35,14 +36,13 @@ new Vue({
         }).catch(error =>{
             this.loader_guardar=false;
             if(error.response.data.errors){
-              this.e_modulo=error.response.data.errors;
+              this.e_ejercicio=error.response.data.errors;
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
-                  "timeOut": "2500"
+                  "timeOut": "3500"
               });
             }
-            console.log(error.response.data);
         });
       },
     }

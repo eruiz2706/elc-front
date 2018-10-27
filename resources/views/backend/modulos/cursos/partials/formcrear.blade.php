@@ -1,3 +1,21 @@
+<!-- Modal -->
+<div class="modal fade" id="modalbsq" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class='modal-header'>
+
+      </div>
+      <div class="modal-body" style="height:300px;overflow-y: auto;">
+
+      </div>
+      <div class='modal-footer'>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="col-md-12">
   <div class="alert alert-info alert-dismissible">
     <h5><i class="icon fa fa-info"></i>Informacion</h5>
@@ -28,6 +46,16 @@
         <input type="date" class="form-control" name='fecha_finalizacion' v-model='o_curso.fecha_finalizacion'  v-bind:class="[e_curso.fecha_finalizacion ? 'is-invalid' : '']">
         <span class="text-danger" v-if="e_curso.fecha_finalizacion">@{{ e_curso.fecha_finalizacion[0] }}</span>
       </div>
+
+      <!--<div class="form-group">
+        <label>Profesor(email)</label>
+        <div class="input-group">
+          <input type="text" class="form-control" name='fecha_finalizacion' v-model='o_curso.fecha_finalizacion'  v-bind:class="[e_curso.fecha_finalizacion ? 'is-invalid' : '']">
+          <div class="input-group-append">
+            <span class="input-group-text" v-on:click.prevent="openbsq()"><i class="fa fa-clock-o"></i></span>
+          </div>
+        </div>
+      </div>-->
 
       <div class='form-group'>
         <label>Acceso al curso</label>

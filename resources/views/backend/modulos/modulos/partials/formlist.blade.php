@@ -27,7 +27,7 @@
       <tr>
         <th>Nombre</th>
         <th>Creado</th>
-        <th>Opciones</th>
+        <th>Acciones</th>
       </tr>
       </thead>
       <tbody>
