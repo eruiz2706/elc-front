@@ -9,7 +9,6 @@
     <table class="table table-striped table-valign-middle">
       <thead>
       <tr>
-        <th>#</th>
         <th>Verdadera</th>
         <th>Respuesta</th>
         <th>Puntaje</th>
@@ -22,9 +21,6 @@
       </thead>
       <tbody>
         <tr v-for='(fila,index) in a_resp_multiple'>
-          <td>
-            @{{index}}
-          </td>
           <td>
             <input type="checkbox"  v-model='fila.option'>
           </td>

@@ -10,7 +10,6 @@
     <table class="table table-striped table-valign-middle">
       <thead>
       <tr>
-        <th>#</th>
         <th>Verdadera</th>
         <th>Respuesta</th>
         <th>Puntaje</th>
@@ -23,11 +22,8 @@
       </thead>
       <tbody>
         <tr v-for='(fila,index) in a_resp_unica'>
-          <td>
-            @{{index}}
-          </td>
-          <td>
-            <input type="radio" class="form-check-input float-center" v-bind:id="fila.id" v-bind:value="fila.id" v-model='radio_unica'>
+          <td>&nbsp;&nbsp;
+              <input type="radio" class="form-check-input float-center" v-bind:id="fila.id" v-bind:value="fila.id" v-model='radio_unica'>
           </td>
           <td>
             <textarea class="form-control" rows="2" v-model='fila.respuesta'></textarea>

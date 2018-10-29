@@ -26,9 +26,10 @@
       <thead>
       <tr>
         <th>Nombre</th>
-        <th>Calificacion</th>
         <th>Vencimiento</th>
         <th>Creado</th>
+        <th>Calificacion sobre</th>
+        <th>Entregas</th>
         <th>Acciones</th>
       </tr>
       </thead>
@@ -38,17 +39,23 @@
           @{{tarea.nombre}}
         </td>
         <td>
-          @{{tarea.calificacion}}
-        </td>
-        <td>
           @{{tarea.fecha_vencimiento}}
         </td>
         <td>
           @{{tarea.fecha_creacion}}
         </td>
         <td>
+          @{{tarea.calificacion}}
+        </td>
+        <td>
+          0/12
+        </td>
+        <td>
           <a href="#" v-on:click.prevent="redirectEdit(tarea.id)" class="text-muted">
             <i class="fa fa-edit"></i> Editar
+          </a><br>
+          <a href="#" class="text-muted">
+            <i class="fa fa-eye"></i> Ver
           </a>
         </td>
       </tr>

@@ -35,12 +35,15 @@
 
           <div class="form-group">
             <label>
-              Texto Audio   
-              <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='addRespMultiple()'>
+              Texto para audio(Ingles)
+              <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='playAudio()'>
                 <i class="fa fa-play" ></i>
+              </button>&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-outline-danger btn-sm" v-on:click.prevent='stopAudio()'>
+                <i class="fa fa-stop" ></i>
               </button>
             </label>
-            <textarea class="form-control" rows="2"></textarea>
+            <textarea class="form-control" rows="8" v-model="o_pregunta.texto_audio"></textarea>
           </div>
         </div>
       </div>
@@ -51,9 +54,11 @@
         <label>Tipo respuesta  <code>*</code></label>
         <select class="form-control" name='tipo' v-model='o_pregunta.tipo' @change="viewtipo()" v-bind:class="[e_pregunta.tipo ? 'is-invalid' : '']">
           <option value=''>Seleccione el tipo</option>
+          <option value='abierta'>Abierta</option>
           <option value='unica'>Unica</option>
           <option value='multiple'>Multiple</option>
           <option value='relacionar'>Relacionar</option>
+          <option value='rellenar'>Rellenar</option>
         </select>
         <span class="text-danger" v-if="e_pregunta.tipo">@{{ e_pregunta.tipo[0] }}</span>
       </div>
@@ -71,10 +76,14 @@
 <input type='hidden' name='idejerc' id='idejerc' value="{{$idejerc}}"></input>
 @section('scripts')
 @parent
+<script src="{{ URL::asset('plugins/artyom/artyom.window.min.js') }}"></script>
 <script src="{{ URL::asset('js/be/modulos/preguntas/crear.js') }}"></script>
 <script>
+  const artyom = new Artyom();
+
+
   $('#summernote').summernote({
-    height: 250
+    height: 200
   });
 </script>
 @stop

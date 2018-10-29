@@ -18,6 +18,7 @@ class CreateCursosTable extends Migration
             $table->string('nombre', 150); //nombre del curso
             $table->date('fecha_inicio')->nullable(); //fecha de inicio del curso
             $table->date('fecha_finalizacion')->nullable(); //fecha de finalizacion
+            $table->date('fecha_limite')->nullable(); //fecha limite para ver notas
             $table->string('urlvideo',300)->default('')->nullable(); //url youtube del curso
             $table->boolean('visibilidad')->default(false); //si va a estar visible en la oferta de cursos
             $table->boolean('inscripcion')->default(false); // si va a permitir inscripcion por los estudiantes

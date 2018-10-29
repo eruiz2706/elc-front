@@ -3,13 +3,13 @@
 @section('content')
 <div class="row">
     <div class="col-md-3">
-      @include('backend.nav.es.nav_user')
+      @include('backend.nav.nav_user')
 
-      @include('backend.nav.es.navoptions')
+      @include('backend.nav.navoptions')
     </div>
 
     <div class="col-md-9" style='padding-top:70px;'>
-        @include('backend.nav.es.tabcontent')
+        @include('backend.nav.tabcontent')
 
         @include('backend.modulos.modulos.partials.progreso')
     </div>

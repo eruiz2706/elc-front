@@ -80,7 +80,6 @@ class ModulosController extends Controller
     return view('backend.modulos.modulos.viewedit',compact('curso','tab_mod','idcurso','id'));
   }
 
-
   ############################## METODOS ##############################
   //listado de modulos de un curso
   public function lista(Request $request){
@@ -183,27 +182,5 @@ class ModulosController extends Controller
             'error' =>'Hubo una inconsistencias al intentar actualizacion el registro'
         ], 400);
     }
-  }
-
-
-  public function progreso(Request $request){
-      $idcurso =Session::get('o_curso')->id;
-      $modulos   =DB::select("select id,nombre
-                                from modulos
-                                where curso_id = :curso_id",
-                            ['curso_id'=>$idcurso]);
-      foreach($modulos as $mod){
-        $lecciones=DB::select("select
-                              id,nombre,descripcion
-                              from lecciones
-                              where modulo_id= :modulo_id"
-                           ,['modulo_id'=>$mod->id]);
-        $mod->lecciones=$lecciones;
-      }
-
-      $jsonresponse=[
-          'modulos'=>$modulos
-      ];
-      return response()->json($jsonresponse,200);
   }
 }

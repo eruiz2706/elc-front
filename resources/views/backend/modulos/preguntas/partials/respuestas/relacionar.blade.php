@@ -9,7 +9,6 @@
     <table class="table table-striped table-valign-middle">
       <thead>
       <tr>
-        <th>#</th>
         <th>Respuesta</th>
         <th>Corresponde a</th>
         <th>Puntaje</th>
@@ -22,9 +21,6 @@
       </thead>
       <tbody>
         <tr v-for='(fila,index) in a_resp_relacionar'>
-          <td>
-            @{{index}}
-          </td>
           <td>
             <textarea class="form-control" rows="2" v-model='fila.respuesta'></textarea>
           </td>

@@ -19,14 +19,14 @@ class TareasController extends Controller
     $tab_tar='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
-    if($rol !='in'){
+    if($rol !='pr'){
       return view('layouts.errors.access_denied');
     }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
      if(empty($curso)){
        return view('layouts.errors.not_page');
      }
@@ -41,14 +41,14 @@ class TareasController extends Controller
     $tab_tar='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
-    if($rol !='in'){
+    if($rol !='pr'){
       return view('layouts.errors.access_denied');
     }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
      if(empty($curso)){
        return view('layouts.errors.not_page');
      }
@@ -61,19 +61,21 @@ class TareasController extends Controller
   public function view_editar($idcurso,$id){
     $tab_tar='';
     $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if($rol !='pr'){
+      return view('layouts.errors.access_denied');
+    }
+
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
-    if(!empty($curso)){
-      $curso  =$curso[0];
-    }
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
+     if(empty($curso)){
+       return view('layouts.errors.not_page');
+     }
 
-    $rol  =Session::get('rol');
-    if($rol !='in'){
-      echo "no pertenece a ningun rol redireccionar";
-    }
+    $curso  =$curso[0];
     return view('backend.modulos.tareas.view_edit',compact('curso','tab_tar','idcurso','id'));
   }
 

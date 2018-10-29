@@ -6,11 +6,11 @@
   </div>
 </div>
 
-<div class="card" v-if="!preload">
+<div class="card" v-if="preload">
   <div class="card-header no-border">
     <h3 class="card-title">Lista de modulos</h3>
 
-    <div class="card-tools">
+    <div class="card-tools" v-if="preload">
       <div class="btn-group">
         <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <i class="fa  fa-bars"></i>

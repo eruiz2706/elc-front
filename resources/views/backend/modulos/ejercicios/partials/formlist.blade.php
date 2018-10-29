@@ -27,9 +27,9 @@
       <tr>
         <th>Nombre</th>
         <th>Duracion</th>
-        <th>Calificacion sobre</th>
         <th>Inicia</th>
         <th>Creado</th>
+        <th>Realizado</th>
         <th>Acciones</th>
       </tr>
       </thead>
@@ -42,13 +42,13 @@
           @{{ejercicio.duracion}} minutos
         </td>
         <td>
-          @{{ejercicio.calificacion}}
-        </td>
-        <td>
           @{{ejercicio.fecha_inicio}}
         </td>
         <td>
           @{{ejercicio.fecha_creacion}}
+        </td>
+        <td>
+          0/12
         </td>
         <td>
           <a href="#" v-on:click.prevent="redirectEdit(ejercicio.id)" class="text-muted">

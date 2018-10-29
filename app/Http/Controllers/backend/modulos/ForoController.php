@@ -13,20 +13,15 @@ use Session;
 
 class ForoController extends Controller
 {
+
     /*muestra la vista del foro*/
     function index(){
       $rol  =Session::get('rol');
-      if($rol=='ad'){
-          return view('backend.modulos.foro.view_ad');
-      }else if($rol=='in'){
-          return view('backend.modulos.foro.view_in');
-      }else if($rol=='pr'){
-        return view('backend.modulos.foro.view_pr');
-      }else if($rol=='es'){
-        return view('backend.modulos.foro.view_es');
-      }else{
+      if($rol==''){
         return view('layouts.errors.access_denied');
       }
+
+      return view('backend.modulos.foro.view_list');
     }
 
     /*trae el listado de los ultimos 20 foros publicados*/

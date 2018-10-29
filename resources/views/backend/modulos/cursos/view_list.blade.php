@@ -3,9 +3,9 @@
 @section('content')
 <div class="row">
     <div class="col-md-3">
-      @include('backend.nav.in.nav_user')
+      @include('backend.nav.nav_user')
 
-      @include('backend.nav.in.navoptions')
+      @include('backend.nav.navoptions')
     </div>
 
     <div class="col-md-9" style='padding-top:70px;'>

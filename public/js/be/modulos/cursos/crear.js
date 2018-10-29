@@ -7,8 +7,8 @@ new Vue({
     created : function(){
     },
     data : {
-      o_basecurso:{'nombre':'','fecha_inicio':'','fecha_finalizacion':'','duracion':'','urlvideo':'','visibilidad':false,'inscripcion':true},
-      o_curso:{'nombre':'','fecha_inicio':'','fecha_finalizacion':'','duracion':'','urlvideo':'','visibilidad':false,'inscripcion':true},
+      o_basecurso:{'nombre':'','fecha_inicio':'','fecha_finalizacion':'','fecha_limite':'','duracion':'','urlvideo':'','visibilidad':false,'inscripcion':true,'profesor':'','profesor2':''},
+      o_curso:{'nombre':'','fecha_inicio':'','fecha_finalizacion':'','fecha_limite':'','duracion':'','urlvideo':'','visibilidad':false,'inscripcion':true,'profesor':'','profesor2':''},
       e_curso:[],
       loader_guardar :false,
     },

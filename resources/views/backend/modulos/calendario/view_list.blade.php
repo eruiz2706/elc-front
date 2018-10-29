@@ -3,15 +3,15 @@
 @section('content')
 <div class="row">
     <div class="col-md-3">
-      @include('backend.nav.pr.nav_user')
+      @include('backend.nav.nav_user')
 
-      @include('backend.nav.pr.navoptions')
+      @include('backend.nav.navoptions')
     </div>
 
     <div class="col-md-9" style='padding-top:70px;'>
-      @include('backend.nav.pr.tabcontent')
+        @include('backend.nav.tabcontent')
 
-      @include('backend.modulos.forocurso.partials.publicacion')
+        @include('backend.modulos.calendario.partials.formlist')
     </div>
 </div>
 @endsection

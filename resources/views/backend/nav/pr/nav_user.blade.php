@@ -22,6 +22,11 @@
             <i class="fa fa-inbox"></i> Ultimas noticias
           </a>
         </li>
+        <li class="nav-item active">
+          <a href="{{url('manualuso')}}" class="nav-link">
+            <i class="fa fa-book"></i> Manual de usu
+          </a>
+        </li>
     </ul>
   </div>
   <!-- /.card-body -->

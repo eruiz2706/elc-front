@@ -103,6 +103,18 @@ class RolesTableSeeder extends Seeder
             'role_id' =>$rol5->id
           ]);
 
+          $user6=User::create([
+            'nombre' =>'Profesor2',
+            'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
+            'email'=>'profesor2@gmail.com',
+            'password'=>Hash::make('123456'),
+            'uniqid'=>uniqid('',true)
+          ]);
+          RoleUser::create([
+            'user_id' =>$user6->id,
+            'role_id' =>$rol2->id
+          ]);
+
           Precio::create([
             'valor'=>50000,
             'fecha_creacion'=>date('Y-m-d'),

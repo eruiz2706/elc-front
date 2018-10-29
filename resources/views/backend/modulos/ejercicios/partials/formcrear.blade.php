@@ -30,12 +30,6 @@
       </div>
 
       <div class="form-group">
-      <label>Calificacion sobre <code>*</code></label>
-        <input type="number" class="form-control" name='calificacion' min="0" max="1000"  v-model='o_ejercicio.calificacion' v-bind:class="[e_ejercicio.calificacion ? 'is-invalid' : '']">
-        <span class="text-danger" v-if="e_ejercicio.calificacion">@{{ e_ejercicio.calificacion[0] }}</span>
-      </div>
-
-      <div class="form-group">
         <div id="summernote"></div>
       </div>
 

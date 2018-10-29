@@ -19,14 +19,14 @@ class PreguntasController extends Controller
     $tab_ejer='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
-    if($rol !='in'){
+    if($rol !='pr'){
       return view('layouts.errors.access_denied');
     }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
    if(empty($curso)){
      return view('layouts.errors.not_page');
    }
@@ -41,14 +41,14 @@ class PreguntasController extends Controller
     $tab_ejer='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
-    if($rol !='in'){
+    if($rol !='pr'){
       return view('layouts.errors.access_denied');
     }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
      if(empty($curso)){
        return view('layouts.errors.not_page');
      }
@@ -71,7 +71,7 @@ class PreguntasController extends Controller
     }
 
     $rol  =Session::get('rol');
-    if($rol !='in'){
+    if($rol !='pr'){
       echo "no pertenece a ningun rol redireccionar";
     }
     return view('backend.modulos.preguntas.view_edit',compact('curso','tab_ejer','idcurso','idejerc','id'));

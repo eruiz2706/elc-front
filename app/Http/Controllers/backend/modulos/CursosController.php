@@ -47,6 +47,7 @@ class CursosController extends Controller
   public function view_config($id){
     $user =Auth::user();
     $rol  =Session::get('rol');
+
     if($rol !='in'){
       return view('layouts.errors.access_denied');
     }
@@ -86,11 +87,14 @@ class CursosController extends Controller
   //guardar un nuevo curso
   public function guardar(Request $request){
     $user     =Auth::user();
+    $idprof   ='';
+    $idprof2  ='';
 
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'fecha_inicio' =>'required',
       'fecha_finalizacion' =>'required',
+      'fecha_limite' =>'required',
     ]);
 
     if ($validator->fails()) {
@@ -99,18 +103,68 @@ class CursosController extends Controller
         ], 400);
     }
 
+    if($request->profesor !=''){
+      $profesor =DB::select("select u.id
+                    from users u
+                    left join role_user ru on(u.id=ru.user_id)
+                    left join roles r on(ru.role_id=r.id)
+                    where u.email = :email and r.slug='pr'",
+                    ['email'=>$request->profesor]);
+      if(empty($profesor)){
+        return response()->json([
+            'errors' => ['profesor'=>['El email no esta asociado a un usuario profesor']]
+        ], 400);
+      }else{
+        $idprof =$profesor[0]->id;
+      }
+    }
+
+    if($request->profesor2 !=''){
+      $profesor2 =DB::select("select u.id
+                    from users u
+                    left join role_user ru on(u.id=ru.user_id)
+                    left join roles r on(ru.role_id=r.id)
+                    where u.email = :email and r.slug='pr'",
+                    ['email'=>$request->profesor2]);
+      if(empty($profesor2)){
+        return response()->json([
+            'errors' => ['profesor2'=>['El email no esta asociado a un usuario profesor']]
+        ], 400);
+      }else{
+        $idprof2 =$profesor2[0]->id;
+      }
+    }
+
     //guardar datos
     DB::beginTransaction();
     try{
-      DB::table('cursos')->insert([
+      $idcurso=DB::table('cursos')->insertGetId([
         'nombre'=>$request->nombre,
         'fecha_inicio'=>$request->fecha_inicio,
         'fecha_finalizacion'=>$request->fecha_finalizacion,
+        'fecha_limite'=>$request->fecha_limite,
         'visibilidad'=>$request->visibilidad,
         'inscripcion'=>$request->inscripcion,
         'fecha_creacion'=>date('Y-m-d H:i:s'),
         'user_id'=>$user->id
       ]);
+
+      if($idprof !=''){
+        DB::table('cursos_user')->insert([
+          'user_id'=>$idprof,
+          'curso_id'=>$idcurso,
+          'slugrol'=>'pr',
+          'fecha_creacion'=>date('Y-m-d H:i:s')
+        ]);
+      }
+      if($idprof2 !=''){
+        DB::table('cursos_user')->insert([
+          'user_id'=>$idprof2,
+          'curso_id'=>$idcurso,
+          'slugrol'=>'pr',
+          'fecha_creacion'=>date('Y-m-d H:i:s')
+        ]);
+      }
 
       DB::commit();
       return response()->json([
@@ -131,12 +185,29 @@ class CursosController extends Controller
   //datos de edicion de un curso
   public function editar($id){
     $curso   =DB::select("select
-                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,inscripcion
+                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,inscripcion,fecha_limite
                             from cursos
                             where id = :id",
                           ['id'=>$id])[0];
+
+    $curso_prof=DB::select("select cu.user_id,u.email
+                            from cursos_user cu
+                            left join users u on(cu.user_id=u.id)
+                            where cu.curso_id= :curso_id
+                            order by cu.id",
+                          ['curso_id'=>$id]);
+    $profesor='';
+    $profesor2='';
+    $con=0;
+    foreach($curso_prof as $c_prof){
+      if($con==0)$profesor=$c_prof->email;
+      if($con==1)$profesor2=$c_prof->email;
+      $con++;
+    }
     $jsonresponse=[
-        'curso'=>$curso
+        'curso'=>$curso,
+        'profesor'=>$profesor,
+        'profesor2'=>$profesor2,
     ];
     return response()->json($jsonresponse,200);
   }
@@ -144,6 +215,9 @@ class CursosController extends Controller
   //actualizar datos curso
   public function actualizar(Request $request){
     $user     =Auth::user();
+    $idprof   ='';
+    $idprof2  ='';
+
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'fecha_inicio' =>'required',
@@ -154,6 +228,38 @@ class CursosController extends Controller
         return response()->json([
             'errors' => $validator->messages(),
         ], 400);
+    }
+
+    if($request->profesor !=''){
+      $profesor =DB::select("select u.id
+                    from users u
+                    left join role_user ru on(u.id=ru.user_id)
+                    left join roles r on(ru.role_id=r.id)
+                    where u.email = :email and r.slug='pr'",
+                    ['email'=>$request->profesor]);
+      if(empty($profesor)){
+        return response()->json([
+            'errors' => ['profesor'=>['El email no esta asociado a un usuario profesor']]
+        ], 400);
+      }else{
+        $idprof =$profesor[0]->id;
+      }
+    }
+
+    if($request->profesor2 !=''){
+      $profesor2 =DB::select("select u.id
+                    from users u
+                    left join role_user ru on(u.id=ru.user_id)
+                    left join roles r on(ru.role_id=r.id)
+                    where u.email = :email and r.slug='pr'",
+                    ['email'=>$request->profesor2]);
+      if(empty($profesor2)){
+        return response()->json([
+            'errors' => ['profesor2'=>['El email no esta asociado a un usuario profesor']]
+        ], 400);
+      }else{
+        $idprof2 =$profesor2[0]->id;
+      }
     }
 
     DB::beginTransaction();
@@ -167,6 +273,28 @@ class CursosController extends Controller
         'fecha_modific'=>date('Y-m-d H:i:s'),
         'userm_id'=>$user->id
       ]);
+
+      DB::table('cursos_user')->where([
+        ['curso_id','=',$request->id],
+        ['slugrol','=','pr']
+        ])->delete();
+
+      if($idprof !=''){
+        DB::table('cursos_user')->insert([
+          'user_id'=>$idprof,
+          'curso_id'=>$request->id,
+          'slugrol'=>'pr',
+          'fecha_creacion'=>date('Y-m-d H:i:s')
+        ]);
+      }
+      if($idprof2 !=''){
+        DB::table('cursos_user')->insert([
+          'user_id'=>$idprof2,
+          'curso_id'=>$request->id,
+          'slugrol'=>'pr',
+          'fecha_creacion'=>date('Y-m-d H:i:s')
+        ]);
+      }
 
       DB::commit();
       return response()->json([
@@ -189,10 +317,13 @@ class CursosController extends Controller
   public function abrir($id){
     $rol  =Session::get('rol');
 
-    if($rol !='in'){
+    if($rol=='in'){
+        return redirect('cursos/v_config/'.$id);
+    }else if(in_array($rol,['pr','es'])){
+      return redirect('foroc/'.$id);
+    }else{
       return view('layouts.errors.access_denied');
     }
-    return redirect('cursos/v_config/'.$id);
   }
 
   public function edit_config($id){

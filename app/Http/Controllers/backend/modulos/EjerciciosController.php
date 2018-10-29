@@ -19,14 +19,14 @@ class EjerciciosController extends Controller
     $tab_ejer='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
-    if($rol !='in'){
+    if($rol !='pr'){
       return view('layouts.errors.access_denied');
     }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
     if(empty($curso)){
        return view('layouts.errors.not_page');
     }
@@ -41,14 +41,14 @@ class EjerciciosController extends Controller
     $tab_ejer='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
-    if($rol !='in'){
+    if($rol !='pr'){
       return view('layouts.errors.access_denied');
     }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
      if(empty($curso)){
        return view('layouts.errors.not_page');
      }
@@ -64,14 +64,14 @@ class EjerciciosController extends Controller
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                           from cursos c
                           left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
     if(!empty($curso)){
       $curso  =$curso[0];
     }
 
     $rol  =Session::get('rol');
-    if($rol !='in'){
+    if($rol !='pr'){
       echo "no pertenece a ningun rol redireccionar";
     }
     return view('backend.modulos.ejercicios.view_edit',compact('curso','tab_ejer','idcurso','id'));
@@ -81,7 +81,7 @@ class EjerciciosController extends Controller
   ############################## METODOS ##############################
   //listado de modulos de un curso
   public function lista(Request $request){
-    $ejercicios   =DB::select("select id,nombre,descripcion,duracion,calificacion,fecha_inicio,fecha_creacion
+    $ejercicios   =DB::select("select id,nombre,descripcion,duracion,fecha_inicio,fecha_creacion
                               from ejercicios
                               where curso_id = :curso_id",
                           ['curso_id'=>$request->idcurso]);
@@ -97,8 +97,7 @@ class EjerciciosController extends Controller
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'fecha_inicio' =>'required',
-      'duracion' =>'required|integer|min:10',
-      'calificacion' =>'required|integer|min:1',
+      'duracion' =>'required|integer|min:10'
     ]);
 
     if ($validator->fails()) {
@@ -114,7 +113,6 @@ class EjerciciosController extends Controller
         'nombre'=>$request->nombre,
         'descripcion'=>$request->descripcion,
         'duracion'=>$request->duracion,
-        'calificacion'=>$request->calificacion,
         'fecha_inicio'=>$request->fecha_inicio,
         'fecha_creacion'=>date('Y-m-d H:i:s'),
         'user_id'=>$user->id
@@ -140,7 +138,7 @@ class EjerciciosController extends Controller
   //datos de edicion de un modulo
   public function editar($id){
     $ejercicio   =DB::select("select
-                            id,nombre,descripcion,duracion,calificacion,fecha_inicio,fecha_creacion
+                            id,nombre,descripcion,duracion,fecha_inicio,fecha_creacion
                             from ejercicios
                             where id = :id",
                           ['id'=>$id])[0];
@@ -155,8 +153,7 @@ class EjerciciosController extends Controller
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'fecha_inicio' =>'required',
-      'duracion' =>'required|integer|min:10',
-      'calificacion' =>'required|integer|min:1',
+      'duracion' =>'required|integer|min:10'
     ]);
 
     if ($validator->fails()) {
@@ -172,7 +169,6 @@ class EjerciciosController extends Controller
         'nombre'=>$request->nombre,
         'descripcion'=>$request->descripcion,
         'duracion'=>$request->duracion,
-        'calificacion'=>$request->calificacion,
         'fecha_inicio'=>$request->fecha_inicio,
         'fecha_modific'=>date('Y-m-d H:i:s'),
         'userm_id'=>$user->id

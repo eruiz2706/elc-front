@@ -24,6 +24,8 @@ new Vue({
           var url =base_url+'/cursos/editar/'+this.id_curso;
           axios.get(url,{}).then(response =>{
               this.o_curso=response.data.curso;
+              this.o_curso.profesor=response.data.profesor;
+              this.o_curso.profesor2=response.data.profesor2;
               this.preload=false;
           }).catch(error =>{
               this.preload=false;

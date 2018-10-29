@@ -7,8 +7,8 @@ new Vue({
     },
     data : {
       idcurso:0,
-      o_baseejercicio:{'nombre':'','fecha_inicio':'','duracion':0,'calificacion':0,'descripcion':''},
-      o_ejercicio:{'nombre':'','fecha_inicio':'','duracion':0,'calificacion':0,'descripcion':''},
+      o_baseejercicio:{'nombre':'','fecha_inicio':'','duracion':0,'descripcion':''},
+      o_ejercicio:{'nombre':'','fecha_inicio':'','duracion':0,'descripcion':''},
       e_ejercicio:[],
       loader_guardar :false,
     },

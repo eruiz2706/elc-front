@@ -15,6 +15,7 @@ class PrincipalController extends Controller
 
     function index(){
       Session::put('rol','');
+      Session::put('navcursos','');
       $user =Auth::user();
 
       //se consulta el rol al que esta asociado el usuario
@@ -22,23 +23,19 @@ class PrincipalController extends Controller
                           from roles r
                           left join role_user ru on(r.id=ru.role_id)
                           where user_id = :user_id"
-                       ,['user_id'=>$user->id]);                       
+                       ,['user_id'=>$user->id]);
       if(!empty($rol)){
         $rol  =$rol[0];
         if($rol->slug !=''){
-          $cursos  =DB::select("select
-                                c.id,c.nombre
-                                from cursos_user cu
-                                left join cursos c on(cu.curso_id=c.id)
-                                where cu.user_id = :user_id
-                                order by cu.fecha_creacion desc"
-                           ,['user_id'=>$user->id]);
-          Session::put('navcursos',$cursos);
           Session::put('rol',$rol->slug);
           return redirect('foro');
         }
       }
 
       return redirect()->to('/noaccess');
+    }
+
+    function manual(){
+      return view('backend/modulos/manual/index');
     }
 }

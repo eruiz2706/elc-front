@@ -46,9 +46,10 @@ Route::middleware(['lang'])->group(function(){
 });
 
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth','navcursos'])->group(function(){
 
   Route::get('/principal', 'backend\PrincipalController@index');
+  Route::get('/manualuso', 'backend\PrincipalController@manual');
   //Route::get('storage/{archivo}','backend\StorageController@index');
 
   Route::get('foro','backend\modulos\ForoController@index');
@@ -90,7 +91,9 @@ Route::middleware(['auth'])->group(function(){
   Route::post('modulos/guardar', 'backend\modulos\ModulosController@guardar');
   Route::get('modulos/editar/{id}', 'backend\modulos\ModulosController@editar');
   Route::post('modulos/actualizar', 'backend\modulos\ModulosController@actualizar');
-  Route::post('modulos/progreso', 'backend\modulos\ModulosController@progreso');//verificar
+
+  Route::get('progreso/{idcurso}', 'backend\modulos\ProgresoController@view_lista');
+
 
   Route::get('lecciones/editar/{id}', 'backend\modulos\LeccionesController@editar');
   Route::get('lecciones/{idcurso}/{idmodulo}','backend\modulos\LeccionesController@view_lista');
@@ -123,6 +126,9 @@ Route::middleware(['auth'])->group(function(){
   Route::post('preguntas/lista', 'backend\modulos\PreguntasController@lista');
   Route::post('preguntas/guardar', 'backend\modulos\PreguntasController@guardar');
   Route::post('preguntas/actualizar', 'backend\modulos\PreguntasController@actualizar');
+
+  Route::get('calendario/{idcurso}','backend\modulos\CalendarioController@view_lista');
+  Route::post('calendario/lista', 'backend\modulos\CalendarioController@lista');
 
   Route::get('integrantes/{idcurso}','backend\modulos\IntegrantesController@view_lista');
   Route::post('integrantes/lista', 'backend\modulos\IntegrantesController@lista');

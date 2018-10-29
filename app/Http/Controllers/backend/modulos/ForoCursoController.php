@@ -16,23 +16,17 @@ class ForoCursoController extends Controller
   public function index($idcurso){
     $tab_foro='';
     $rol  =Session::get('rol');
+
+    if(!in_array($rol,['pr','es'])){
+      return view('layouts.errors.access_denied');
+    }
+
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
                               from cursos c
                               left join users u on(c.user_id=u.id)
                               where c.id= :id"
                          ,['id'=>$idcurso])[0];
-
-    if($rol=='ad'){
-        //return view('backend.modulos.foro.view_ad');
-    }else if($rol=='in'){
-        return view('backend.modulos.forocurso.view_in');
-    }else if($rol=='pr'){
-      return view('backend.modulos.forocurso.view_pr');
-    }else if($rol=='es'){
-      return view('backend.modulos.forocurso.view_es',compact('curso','tab_foro','idcurso'));
-    }else{
-      echo "no pertenece a ningun rol redireccionar";
-    }
+    return view('backend.modulos.forocurso.view_list',compact('curso','tab_foro','idcurso'));
   }
 
   /*trae el listado de las ultimas 30 publicacion*/

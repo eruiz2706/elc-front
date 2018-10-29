@@ -3,13 +3,12 @@
 @section('content')
 <div class="row">
     <div class="col-md-3">
-      @include('backend.nav.pr.nav_user')
+      @include('backend.nav.nav_user')
 
-      @include('backend.nav.pr.navoptions')
+      @include('backend.nav.navoptions')
     </div>
-
     <div class="col-md-9" style='padding-top:70px;'>
-      @include('backend.modulos.foro.partials.publicacion')
+      @include('backend.modulos.manual.partials.lista')
     </div>
 </div>
 @endsection
