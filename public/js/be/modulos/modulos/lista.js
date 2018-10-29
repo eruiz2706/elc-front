@@ -3,6 +3,7 @@ new Vue({
     ready: function(){
     },
     created : function(){
+
       this.idcurso=document.getElementById('idcurso').value;
       this.listado();
     },
@@ -21,6 +22,7 @@ new Vue({
         axios.post(url,{idcurso:this.idcurso}).then(response =>{
             this.preload=false;
             this.a_modulos=response.data.modulos;
+
         }).catch(error =>{
             this.preload=false;
             this.a_modulos=[];
@@ -31,6 +33,7 @@ new Vue({
                   "timeOut": "3500"
               });
             }
+
         });
       },
       redirectCrear:function(){

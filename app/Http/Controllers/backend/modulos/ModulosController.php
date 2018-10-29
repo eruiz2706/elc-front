@@ -16,6 +16,7 @@ class ModulosController extends Controller
   ############################## VISTAS ##############################
   //lista de modulos de un curso
   function view_lista($idcurso){
+
     $tab_mod='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
