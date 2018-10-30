@@ -24,7 +24,7 @@
         </li>
         <li class="nav-item active">
           <a href="{{url('manualuso')}}" class="nav-link">
-            <i class="fa fa-book"></i> Manual de usu
+            <i class="fa fa-book"></i> Manual de uso
           </a>
         </li>
     </ul>

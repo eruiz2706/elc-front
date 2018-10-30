@@ -177,7 +177,7 @@ class CursosController extends Controller
         DB::rollback();
         //$e->getMessage();
         return response()->json([
-            'error' =>'Hubo una inconsistencias al intentar crear el registro'.$e->getMessage()
+            'error' =>'Hubo una inconsistencias al intentar crear el registro'
         ], 400);
     }
   }

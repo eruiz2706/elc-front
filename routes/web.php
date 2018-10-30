@@ -93,7 +93,8 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('modulos/actualizar', 'backend\modulos\ModulosController@actualizar');
 
   Route::get('progreso/{idcurso}', 'backend\modulos\ProgresoController@view_lista');
-
+  Route::post('progreso/lista', 'backend\modulos\ProgresoController@lista');
+    Route::post('progreso/guardar', 'backend\modulos\ProgresoController@guardar');
 
   Route::get('lecciones/editar/{id}', 'backend\modulos\LeccionesController@editar');
   Route::get('lecciones/{idcurso}/{idmodulo}','backend\modulos\LeccionesController@view_lista');
