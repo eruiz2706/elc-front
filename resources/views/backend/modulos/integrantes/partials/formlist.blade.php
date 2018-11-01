@@ -4,7 +4,25 @@
   </div>
 </div>
 
-<div class="card" v-if="!preload">
+<div class='row'>
+  <div class='col-md-6 col-sm-12' v-for="integrante in a_integrantes">
+    <div class="card" v-if="!preload" >
+      <div class="card-body">
+        <div class="post">
+          <div class="user-block">
+            <img class="img-circle img-bordered" v-bind:src="base_url+'/'+integrante.imagen" alt="user image">
+            <span class="username">
+              <a>@{{integrante.nombre}}</a>
+            </span>
+            <span class="description">@{{integrante.perfil}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="card" v-if="!preload">
   <div class="card-body table-responsive p-0">
     <table class="table table-striped table-valign-middle ">
       <thead>
@@ -27,7 +45,7 @@
       </tbody>
     </table>
   </div>
-</div>
+</div>-->
 
 <input type='hidden' name='idcurso' id='idcurso' value="{{$curso->id}}"></input>
 @section('scripts')

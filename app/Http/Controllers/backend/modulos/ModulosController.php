@@ -84,9 +84,11 @@ class ModulosController extends Controller
   ############################## METODOS ##############################
   //listado de modulos de un curso
   public function lista(Request $request){
-    $modulos   =DB::select("select id,nombre,fecha_creacion
-                              from modulos
-                              where curso_id = :curso_id",
+    $modulos   =DB::select("select m.id,m.nombre,m.fecha_creacion,count(l.id) as numlec
+                              from modulos m
+                              left join lecciones l on(m.id=l.modulo_id)
+                              where curso_id = :curso_id
+                              group by m.id,m.nombre,m.fecha_creacion",
                           ['curso_id'=>$request->idcurso]);
     $jsonresponse=[
         'modulos'=>$modulos

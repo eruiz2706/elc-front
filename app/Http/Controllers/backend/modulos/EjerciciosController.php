@@ -19,7 +19,7 @@ class EjerciciosController extends Controller
     $tab_ejer='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
-    if($rol !='pr'){
+    if(!in_array($rol,['pr','es'])){
       return view('layouts.errors.access_denied');
     }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
@@ -32,7 +32,8 @@ class EjerciciosController extends Controller
     }
 
     $curso  =$curso[0];
-    return view('backend.modulos.ejercicios.view_list',compact('curso','tab_ejer'));
+    if($rol=='pr')return view('backend.modulos.ejercicios.view_list',compact('curso','tab_ejer'));
+    if($rol=='es')return view('backend.modulos.ejercicios.view_list_es',compact('curso','tab_ejer'));
 
   }
 
@@ -79,7 +80,6 @@ class EjerciciosController extends Controller
 
 
   ############################## METODOS ##############################
-  //listado de modulos de un curso
   public function lista(Request $request){
     $ejercicios   =DB::select("select id,nombre,descripcion,duracion,fecha_inicio,fecha_creacion
                               from ejercicios
@@ -90,6 +90,18 @@ class EjerciciosController extends Controller
     ];
     return response()->json($jsonresponse,200);
   }
+
+  public function lista_es(Request $request){
+    $ejercicios   =DB::select("select id,nombre,descripcion,duracion,fecha_inicio,fecha_creacion
+                              from ejercicios
+                              where curso_id = :curso_id",
+                          ['curso_id'=>$request->idcurso]);
+    $jsonresponse=[
+        'ejercicios'=>$ejercicios
+    ];
+    return response()->json($jsonresponse,200);
+  }
+
 
   //guardar un nuevo modulo de un curso
   public function guardar(Request $request){

@@ -94,7 +94,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
 
   Route::get('progreso/{idcurso}', 'backend\modulos\ProgresoController@view_lista');
   Route::post('progreso/lista', 'backend\modulos\ProgresoController@lista');
-    Route::post('progreso/guardar', 'backend\modulos\ProgresoController@guardar');
+  Route::post('progreso/guardar', 'backend\modulos\ProgresoController@guardar');
 
   Route::get('lecciones/editar/{id}', 'backend\modulos\LeccionesController@editar');
   Route::get('lecciones/{idcurso}/{idmodulo}','backend\modulos\LeccionesController@view_lista');
@@ -108,6 +108,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::get('tareas/v_crear/{idcurso}', 'backend\modulos\TareasController@view_crear');
   Route::get('tareas/v_editar/{idcurso}/{id}', 'backend\modulos\TareasController@view_editar');
   Route::post('tareas/lista', 'backend\modulos\TareasController@lista');
+  Route::post('tareas/lista_es', 'backend\modulos\TareasController@lista_es');
   Route::post('tareas/guardar', 'backend\modulos\TareasController@guardar');
   Route::get('tareas/editar/{id}', 'backend\modulos\TareasController@editar');
   Route::post('tareas/actualizar', 'backend\modulos\TareasController@actualizar');
@@ -116,6 +117,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::get('ejercicios/v_crear/{idcurso}', 'backend\modulos\EjerciciosController@view_crear');
   Route::get('ejercicios/v_editar/{idcurso}/{id}', 'backend\modulos\EjerciciosController@view_editar');
   Route::post('ejercicios/lista', 'backend\modulos\EjerciciosController@lista');
+  Route::post('ejercicios/lista_es', 'backend\modulos\EjerciciosController@lista_es');
   Route::post('ejercicios/guardar', 'backend\modulos\EjerciciosController@guardar');
   Route::get('ejercicios/editar/{id}', 'backend\modulos\EjerciciosController@editar');
   Route::post('ejercicios/actualizar', 'backend\modulos\EjerciciosController@actualizar');

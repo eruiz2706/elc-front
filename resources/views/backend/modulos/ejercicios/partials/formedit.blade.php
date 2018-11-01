@@ -14,7 +14,7 @@
 <div class="col-md-12" v-show="!preload">
   <div class="card">
     <div class="card-header no-border" style="height: 60px;">
-      <h2>Editar ejercicio</h2>
+      <h2>Editar examen</h2>
     </div>
     <div class="card-body">
       <div class="form-group">

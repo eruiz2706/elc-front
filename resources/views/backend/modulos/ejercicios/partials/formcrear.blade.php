@@ -8,7 +8,7 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-header no-border" style="height: 60px;">
-      <h2>Nuevo ejercicio</h2>
+      <h2>Nuevo examen</h2>
     </div>
     <div class="card-body">
       <div class="form-group">

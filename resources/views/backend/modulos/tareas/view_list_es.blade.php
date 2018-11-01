@@ -9,9 +9,9 @@
     </div>
 
     <div class="col-md-9" style='padding-top:70px;'>
-      @include('backend.nav.tabcontent')
+        @include('backend.nav.tabcontent')
 
-      @include('backend.modulos.progreso.partials.formlist_pr')
+        @include('backend.modulos.tareas.partials.formlist_es')
     </div>
 </div>
 @endsection

@@ -1,6 +1,6 @@
 
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-6 col-sm-12">
 <div class="card">
   <div class="card-header">
     <h4 class="card-title">
@@ -27,7 +27,7 @@
 </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-6 col-sm-12">
 <div class="card">
   <div class="card-header">
     <h4 class="card-title">

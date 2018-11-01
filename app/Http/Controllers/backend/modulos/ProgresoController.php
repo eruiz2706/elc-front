@@ -19,7 +19,8 @@ class ProgresoController extends Controller
     $tab_prog='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
-    if($rol !='es'){
+
+    if(!in_array($rol,['es','pr'])){
       return view('layouts.errors.access_denied');
     }
 
@@ -33,7 +34,8 @@ class ProgresoController extends Controller
     }
 
     $curso  =$curso[0];
-    return view('backend.modulos.progreso.view_list',compact('curso','tab_prog'));
+    if($rol=='es')return view('backend.modulos.progreso.view_list',compact('curso','tab_prog'));
+    if($rol=='pr')return view('backend.modulos.progreso.view_list_pr',compact('curso','tab_prog'));
   }
 
   ############################## METODOS ##############################

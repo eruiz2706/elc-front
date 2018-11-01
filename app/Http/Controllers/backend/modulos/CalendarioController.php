@@ -19,7 +19,7 @@ class CalendarioController extends Controller
     $tab_calen='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
-    if($rol !='pr'){
+    if(!in_array($rol,['pr','es'])){
       return view('layouts.errors.access_denied');
     }
 

@@ -19,7 +19,7 @@ class TareasController extends Controller
     $tab_tar='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
-    if($rol !='pr'){
+    if(!in_array($rol,['pr','es'])){
       return view('layouts.errors.access_denied');
     }
     $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
@@ -31,8 +31,9 @@ class TareasController extends Controller
        return view('layouts.errors.not_page');
      }
 
-     $curso  =$curso[0];
-    return view('backend.modulos.tareas.view_list',compact('curso','tab_tar'));
+    $curso  =$curso[0];
+    if($rol=='pr')return view('backend.modulos.tareas.view_list',compact('curso','tab_tar'));
+    if($rol=='es')return view('backend.modulos.tareas.view_list_es',compact('curso','tab_tar'));
 
   }
 
@@ -80,9 +81,20 @@ class TareasController extends Controller
   }
 
   ############################## METODOS ##############################
-  //listado de modulos de un curso
   public function lista(Request $request){
-    $tareas   =DB::select("select id,nombre,fecha_vencimiento,calificacion,fecha_creacion
+    $tareas   =DB::select("select id,nombre,fecha_vencimiento,calificacion,fecha_creacion,descripcion
+                              from tareas
+                              where curso_id = :curso_id
+                              order by fecha_creacion desc",
+                          ['curso_id'=>$request->idcurso]);
+    $jsonresponse=[
+        'tareas'=>$tareas
+    ];
+    return response()->json($jsonresponse,200);
+  }
+
+  public function lista_es(Request $request){
+    $tareas   =DB::select("select id,nombre,fecha_vencimiento,calificacion,fecha_creacion,descripcion
                               from tareas
                               where curso_id = :curso_id
                               order by fecha_creacion desc",

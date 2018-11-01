@@ -6,51 +6,32 @@
   </div>
 </div>
 
-<div class="card" v-if="!preload">
-  <div class="card-header no-border">
-    <h3 class="card-title">Lista de tareas</h3>
-
-    <div class="card-tools">
-      <div class="btn-group">
-        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <i class="fa  fa-bars"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
-          <a href="#" class="dropdown-item" v-on:click.prevent="redirectCrear()">Nueva tarea</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="card" v-if="!preload" v-for="tarea in a_tareas">
   <div class="card-header no-border">
     <h5 class="card-title">@{{tarea.nombre}}</h5>
-    <div class="card-tools">
-      <div class="btn-group">
-        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <i class="fa  fa-bars"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
-          <a href="#" class="dropdown-item" v-on:click.prevent="redirectEdit(tarea.id)">Editar</a>
-        </div>
-      </div>
-    </div>
 
     <div class='row'>
       <div class="col-md-4 col-sm-6">
-        <b>Creado :</b> @{{tarea.fecha_creacion}}
+        <b><i class="fa  fa-clock-o"></i> Vence :</b> @{{tarea.fecha_vencimiento}}
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Vence :</b> @{{tarea.fecha_vencimiento}}
+        <b>Calificacion Sobre :</b> @{{tarea.calificacion}}
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Califacion Sobre :</b> @{{tarea.calificacion}}
+        <b>Estado :</b>
+        <small class="badge badge-danger">Pendiente por Entregar</small>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Entregas :</b> 0/12
+        <b>Nota :</b>
       </div>
     </div>
+  </div>
+  <div class="card-body">
+    <button type="button" class="btn btn-outline-primary btn-sm float-left">
+      Entregar
+    </button>
+  </div>
+
 </div>
 
 <!--<div class="card" v-if="!preload">
@@ -114,5 +95,5 @@
 <input type='hidden' name='idcurso' id='idcurso' value="{{$curso->id}}"></input>
 @section('scripts')
 @parent
-<script src="{{ URL::asset('js/be/modulos/tareas/lista.js') }}"></script>
+<script src="{{ URL::asset('js/be/modulos/tareas/lista_es.js') }}"></script>
 @stop
