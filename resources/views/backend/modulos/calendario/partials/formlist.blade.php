@@ -5,7 +5,7 @@
 </div>
 
 <div class="callout callout-info">
-  <h5><i class="icon fa fa-info"></i> Informacion!</h5>
+  <i class="icon fa fa-info"></i> 
   Las siguientes etiquetas corresponden al tipo de actividad
   <span class="badge badge-info">Tareas</span>
   <span class="badge badge-success">Evaluaciones</span>

@@ -8,6 +8,8 @@
       @include('backend.nav.navoptions')
     </div>
     <div class="col-md-9" style='padding-top:70px;'>
+      @include('backend.nav.tabcontent')
+
       @include('backend.modulos.cursos.partials.formedit')
     </div>
 </div>

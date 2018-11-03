@@ -27,6 +27,11 @@
             <i class="fa fa-book"></i> Manual de uso
           </a>
         </li>
+        <li class="nav-item active">
+          <a href="{{url('ofertados')}}" class="nav-link">
+            <i class="fa fa-plus-square-o"></i> Ofertas  de cursos
+          </a>
+        </li>
     </ul>
   </div>
   <!-- /.card-body -->

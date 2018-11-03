@@ -86,12 +86,12 @@
       <div class="progress-group">
           Modulo 1 : Introduccion
           <span class="float-right"><b>5</b>/20
-            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modalcomentforo">
+            <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modalcomentforo">
               <i class="fa fa-eye"></i>
             </button>
           </span>
-          <div class="progress progress-sm">
-            <div class="progress-bar bg-primary" style="width: 80%">80%</div>
+          <div class="progress progress">
+            <div class="progress-bar bg-primary" style="width: 80%">Progreso estudiantes 80%</div>
           </div>
         </div>
     </h3>
@@ -259,13 +259,13 @@
     <h3 class="card-title" >
       <div class="progress-group">
           Modulo 2 : Primeros pasos
-          <span class="float-right"><b>8</b>/20
-            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modalcomentforo">
+          <span class="float-right"><b>6</b>/20
+            <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modalcomentforo">
               <i class="fa fa-eye"></i>
             </button>
           </span>
-          <div class="progress progress-sm">
-            <div class="progress-bar bg-primary" style="width: 40%">40%</div>
+          <div class="progress progress">
+            <div class="progress-bar bg-primary" style="width: 60%">Progreso estudiantes 60%</div>
           </div>
         </div>
     </h3>

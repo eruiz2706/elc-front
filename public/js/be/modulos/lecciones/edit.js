@@ -63,6 +63,9 @@ new Vue({
               });
             }
         });
+      },
+      redirectVolver:function(){
+        window.location.href=base_url+'/lecciones/'+this.idcurso+'/'+this.idmodulo;
       }
     }
 });

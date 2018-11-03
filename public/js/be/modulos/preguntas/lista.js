@@ -41,6 +41,9 @@ new Vue({
       },
       redirectEdit:function(idpregunta){
         window.location.href=base_url+'/preguntas/v_editar/'+this.idcurso+'/'+this.idejerc+'/'+idpregunta;
+      },
+      redirectVolver:function(){
+        window.location.href=base_url+'/ejercicios/'+this.idcurso;
       }
     }
 });

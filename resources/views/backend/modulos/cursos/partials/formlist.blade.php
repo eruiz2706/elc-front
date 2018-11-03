@@ -5,8 +5,8 @@
 </div>
 
 <div class="card" v-if="!preload">
-  <div class="card-header no-border">
-    <h3 class="card-title">Lista de cursos</h3>
+  <div class="card-header card-header-cuorse">
+    <h2 class="card-title-course">Lista de cursos</h2>
   </div>
 </div>
 
@@ -14,17 +14,8 @@
   <div class="card-header no-border">
     <div class="card-tools float-left">
       <button type="button" class="btn btn-tool" v-on:click.prevent="redirectAbrir(curso.id)">
-            Abrir <i class="fa  fa-folder-open-o"></i>
+            Ingresar <i class="fa fa-folder-open"></i>
       </button>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <i class="fa  fa-bars"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
-          <a href="#" class="dropdown-item" v-on:click.prevent="redirectEdit(curso.id)">Editar</a>
-        </div>
-      </div>
     </div>
     <h5 class="card-title">@{{curso.nombre}}</h5>
     <div class='row'>
@@ -41,6 +32,11 @@
         <b>Visibilidad :</b>
         <span class="badge bg-success" v-if="curso.visibilidad">Publico</span>
         <span class="badge bg-danger" v-if="!curso.visibilidad">Privado</span>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <b>Inscripcion :</b>
+        <span class="badge bg-success" v-if="curso.inscripcion">Estudiante</span>
+        <span class="badge bg-info" v-if="!curso.inscripcion">Administrador</span>
       </div>
     </div>
 </div>

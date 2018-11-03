@@ -5,41 +5,47 @@
   </div>
 </div>
 
-<div class="col-md-12" v-show="!preload">
-  <div class="alert alert-info alert-dismissible">
-    <h5><i class="icon fa fa-info"></i>Informacion</h5>
-    Los campos marcados en <code>*</code> son obligatorios
-  </div>
-</div>
-
-<div class="col-md-12" v-show="!preload">
-  <div class="card">
-    <div class="card-header no-border" style="height: 60px;">
-      <h2>Editar leccion</h2>
-    </div>
-    <div class="card-body">
-      <div class="form-group">
-        <label>Nombre <code>*</code></label>
-        <input type="text" class="form-control" name='nombre'  v-model='o_leccion.nombre' v-bind:class="[e_leccion.nombre ? 'is-invalid' : '']">
-        <span class="text-danger" v-if="e_leccion.nombre">@{{ e_leccion.nombre[0] }}</span>
-      </div>
-
-      <div class="form-group">
-      <label>Tiempo de lectura(Minutos)</label>
-        <input type="number" class="form-control" name='tiempo' min="0" max="1000"  v-model='o_leccion.tiempolectura'>
-      </div>
-
-      <div class="form-group">
-        <div id="summernote"></div>
-      </div>
-
-      <button type="button" class="btn btn-outline-primary btn-sm float-left" :disabled="loader_actualizar" v-on:click.prevent='actualizar()'>
-        Actualizar
-        <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_actualizar"></i>
+<div class="row" v-if="!preload">
+  <div class="col-md-6 col-sm-6">
+    <h5 class="m-0 text-dark">
+      <strong>Actualizar leccion</strong>
+      <button type="button" class="btn btn-tool" v-on:click.prevent="redirectVolver()">
+        <i class="fa fa-arrow-circle-left"  style="font-size: 24px;"></i>
       </button>
-    </div>
+    </h5>
   </div>
 </div>
+
+<div class="card" v-show="!preload">
+  <div class="card-body">
+    <div class="callout callout-info">
+    	<p>
+    	  <i class="fa fa-fw fa-info"></i>Los campos marcados en <code>*</code> son obligatorios
+    	</p>
+    </div>
+
+    <div class="form-group">
+      <label>Nombre <code>*</code></label>
+      <input type="text" class="form-control" name='nombre'  v-model='o_leccion.nombre' v-bind:class="[e_leccion.nombre ? 'is-invalid' : '']">
+      <span class="text-danger" v-if="e_leccion.nombre">@{{ e_leccion.nombre[0] }}</span>
+    </div>
+
+    <div class="form-group">
+    <label>Tiempo de lectura(Minutos)</label>
+      <input type="number" class="form-control" name='tiempo' min="0" max="1000"  v-model='o_leccion.tiempolectura'>
+    </div>
+
+    <div class="form-group">
+      <div id="summernote"></div>
+    </div>
+
+    <button type="button" class="btn btn-outline-primary btn-sm float-left" :disabled="loader_actualizar" v-on:click.prevent='actualizar()'>
+      Actualizar
+      <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_actualizar"></i>
+    </button>
+  </div>
+</div>
+
 <input type='hidden' name='idcurso' id='idcurso' value="{{$curso->id}}"></input>
 <input type='hidden' name='idmodulo' id='idmodulo' value="{{$idmodulo}}"></input>
 <input type='hidden' name='id' id='id' value="{{$id}}"></input>

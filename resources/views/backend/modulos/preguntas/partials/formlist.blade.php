@@ -1,26 +1,28 @@
 
-
 <div class="row" v-if="preload">
   <div class="d-block mx-auto" >
     <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
   </div>
 </div>
 
-<div class="card">
-  <div class="card-header no-border">
-    <h3 class="card-title">Lista de preguntas</h3>
-
-    <div class="card-tools">
-      <div class="btn-group">
-        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <i class="fa  fa-bars"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
-          <a href="#" class="dropdown-item" v-on:click.prevent="redirectCrear()">Nueva pregunta</a>
-        </div>
-      </div>
-    </div>
+<div class="row" v-if="!preload">
+  <div class="col-sm-6">
+    <h5 class="m-0 text-dark">
+      <strong>Preguntas </strong>
+    </h5>
   </div>
+  <div class='col-md-6'>
+    <button type="button" class="btn btn-tool float-right" v-on:click.prevent="redirectCrear()">
+      <i class="fa fa-plus-circle"  style="font-size: 24px;"></i>
+    </button>
+    <button type="button" class="btn btn-tool float-right" v-on:click.prevent="redirectVolver()">
+      <i class="fa fa-arrow-circle-left" style="font-size: 24px;"></i>
+    </button>
+  </div>
+</div>
+
+
+<div class="card">
   <div class="card-body p-0">
     <table class="table table-striped table-valign-middle">
       <thead>

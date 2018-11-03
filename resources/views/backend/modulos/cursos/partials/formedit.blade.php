@@ -3,21 +3,15 @@
     <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
   </div>
 </div>
-
-<div class="col-md-12" v-if="!preload">
-  <div class="alert alert-info alert-dismissible">
-    <h5><i class="icon fa fa-info"></i>Informacion</h5>
-    Los campos marcados en <code>*</code> son obligatorios
-  </div>
-</div>
-
-
 <div class="col-md-12" v-if="!preload">
   <div class="card card-outline">
-    <div class="card-header no-border" style="height: 60px;">
-      <h2>Editar curso</h2>
-    </div>
     <div class="card-body">
+      <div class="callout callout-info">
+      	<p>
+      	  <i class="fa fa-fw fa-info"></i>Los campos marcados en <code>*</code> son obligatorios
+      	</p>
+      </div>
+
       <div class="form-group">
         <label>Nombre <code>*</code></label>
         <input type="text" class="form-control" name='nombre'  v-model='o_curso.nombre' v-bind:class="[e_curso.nombre ? 'is-invalid' : '']">

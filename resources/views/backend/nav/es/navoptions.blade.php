@@ -8,13 +8,15 @@
       @if(Session::get('navcursos') !=null)
         @foreach(Session::get('navcursos') as $navcurso)
           @php ($callout = '')
+          @php ($color = '')
           @if(isset($curso->id))
             @if($curso->id==$navcurso->id)
               @php ($callout = 'callout-cours')
+              @php ($color = 'color:#007bff')
             @endif
           @endif
           <li class="nav-item {{$callout}}">
-            <a href="{{url('cursos/abrir/'.$navcurso->id)}}" class="nav-link">
+            <a href="{{url('cursos/abrir/'.$navcurso->id)}}" class="nav-link" style="{{$color}}">
               {{$navcurso->nombre}}
             </a>
           </li>
@@ -28,14 +30,4 @@
       @endif
     </ul>
   </div>
-  <div class="card-footer">
-    <ul class="nav nav-pills flex-column">
-      <li class="nav-item">
-        <a href="{{url('ofertados')}}" class="nav-link">
-          <i class="fa fa-plus-square-o"></i> Ofertas  de cursos
-        </a>
-      </li>
-    </ul>
-  </div>
-
 </div>

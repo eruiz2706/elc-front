@@ -45,8 +45,8 @@
 
 
 <div class="card">
-  <div class="card-header no-border"  style='height:40px'>
-    <h2>Ultimas noticias</h2>
+  <div class="card-header card-header-cuorse">
+    <h2 class="card-title-course">Ultimas noticias</h2>
   </div>
   <div class="card-body">
     <div class="row">
@@ -70,27 +70,26 @@
   </div>
 </div>
 
-<div class="col-md-12" v-for="(foro,indexforo) in a_foros">
-  <div class="card card-widget">
-    <div class="card-header">
-      <div class="user-block">
-        <img class="user-img-foro img-circle"  v-bind:class="border(foro.role)"  v-bind:src="base_url+'/'+foro.imagenuser" alt="User Image">
-        <span class="username">@{{foro.nombreuser}}</span>
-        <span class="description">@{{foro.fecha_creacion}}</span>
-      </div>
+<div class="card card-widget" v-for="(foro,indexforo) in a_foros">
+  <div class="card-header">
+    <div class="user-block">
+      <img class="user-img-foro img-circle"  v-bind:class="border(foro.role)"  v-bind:src="base_url+'/'+foro.imagenuser" alt="User Image">
+      <span class="username">@{{foro.nombreuser}}</span>
+      <span class="description">@{{foro.fecha_creacion}}</span>
     </div>
-    <div class="card-body">
-      <p v-html = "foro.descripcion"></p>
-      <span class="float-right text-muted"><a href="#" v-on:click.prevent="openComentarios(foro.id,indexforo)">@{{foro.comentarios}} comentarios</a></span>
-    </div>
-    <div class="card-footer">
-        <div class="img-push">
-          <input type="text" class="form-control form-control-sm" placeholder="Escribe una respuesta"  v-on:click="openComentarios(foro.id,indexforo)">
-        </div>
-    </div>
-
   </div>
+  <div class="card-body">
+    <p v-html = "foro.descripcion"></p>
+    <span class="float-right text-muted"><a href="#" v-on:click.prevent="openComentarios(foro.id,indexforo)">@{{foro.comentarios}} comentarios</a></span>
+  </div>
+  <div class="card-footer">
+      <div class="img-push">
+        <input type="text" class="form-control form-control-sm" placeholder="Escribe una respuesta"  v-on:click="openComentarios(foro.id,indexforo)">
+      </div>
+  </div>
+
 </div>
+
 
 
 @section('scripts')

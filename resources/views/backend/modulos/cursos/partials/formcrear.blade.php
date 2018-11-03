@@ -15,20 +15,18 @@
   </div>
 </div>
 
-
 <div class="col-md-12">
-  <div class="alert alert-info alert-dismissible">
-    <h5><i class="icon fa fa-info"></i>Informacion</h5>
-    Los campos marcados en <code>*</code> son obligatorios
-  </div>
-</div>
-
-<div class="col-md-12">
-  <div class="card card-outline">
-    <div class="card-header no-border" style="height: 60px;">
-      <h2>Nuevo curso</h2>
+  <div class="card ">
+    <div class="card-header card-header-cuorse">
+      <h2 class="card-title-course">Nuevo curso</h2>
     </div>
     <div class="card-body">
+      <div class="callout callout-info">
+        <p>
+          <i class="fa fa-fw fa-info"></i>Los campos marcados en <code>*</code> son obligatorios
+        </p>
+      </div>
+
       <div class="form-group">
         <label>Nombre <code>*</code></label>
         <input type="text" class="form-control" name='nombre'  v-model='o_curso.nombre' v-bind:class="[e_curso.nombre ? 'is-invalid' : '']">
@@ -83,12 +81,12 @@
         <label>Inscripcion</label>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="radio" class="form-check-input"  name="permitradio" value='true' v-model='o_curso.inscripcion'>Permitido al usuario
+            <input type="radio" class="form-check-input"  name="permitradio" value='true' v-model='o_curso.inscripcion'>Estudiante
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="permitradio" value='false' v-model='o_curso.inscripcion'>Disponible para administrador del curso
+            <input type="radio" class="form-check-input" name="permitradio" value='false' v-model='o_curso.inscripcion'>Administrador
           </label>
         </div>
       </div>

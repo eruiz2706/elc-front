@@ -58,6 +58,9 @@ new Vue({
               });
             }
         });
+      },
+      redirectVolver:function(){
+        window.location.href=base_url+'/tareas/'+this.idcurso;
       }
     }
 });

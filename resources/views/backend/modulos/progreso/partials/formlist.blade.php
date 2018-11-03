@@ -8,7 +8,7 @@
             @{{progreso.cantlec_leidas}}/<b>@{{progreso.cantlec}}</b>
           </span>
           <div class="progress">
-            <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progreso.cantlec_leidas,progreso.cantlec)+'%'">@{{porcent(progreso.cantlec_leidas,progreso.cantlec)}}%</div>
+            <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progreso.cantlec_leidas,progreso.cantlec)+'%'">Progreso modulo @{{porcent(progreso.cantlec_leidas,progreso.cantlec)}}%</div>
           </div>
         </div>
     </h3>
@@ -19,10 +19,17 @@
       <div class="card" v-for="leccion in progreso.lecciones">
         <div class="card-header" style="padding:.2rem 1.25rem">
           <h5 class="card-title" style="font-size:1rem">
-            <a data-toggle="collapse" v-bind:href="'#'+progreso.id+'-'+leccion.id" class="collapsed" aria-expanded="false">
+            <a data-toggle="collapse" v-bind:href="'#'+progreso.id+'-'+leccion.id" class="collapsed" aria-expanded="false" v-if="leccion.leido">
               @{{leccion.nombre}} <i class="fa fa-check" v-if="leccion.leido"></i>
             </a>
-            <small class="badge badge-primary float-right">
+            <small class="badge badge-primary float-right" v-if="leccion.leido">
+              <i class="fa fa-clock-o"></i> @{{leccion.tiempolectura}} minutos
+            </small>
+
+            <a data-toggle="collapse" v-bind:href="'#'+progreso.id+'-'+leccion.id" class="collapsed" aria-expanded="false" style='color:grey' v-if="!leccion.leido">
+              @{{leccion.nombre}} <i class="fa fa-check" v-if="leccion.leido"></i>
+            </a>
+            <small class="badge badge-default float-right" v-if="!leccion.leido">
               <i class="fa fa-clock-o"></i> @{{leccion.tiempolectura}} minutos
             </small>
           </h5>

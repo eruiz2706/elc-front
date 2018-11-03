@@ -5,35 +5,28 @@
   </div>
 </div>
 
-<div class="card" v-if="!preload">
-  <div class="card-header no-border">
-    <h3 class="card-title">Lista de modulos</h3>
-
-    <div class="card-tools">
-      <div class="btn-group">
-        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <i class="fa  fa-bars"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
-          <a href="#" class="dropdown-item" v-on:click.prevent="redirectCrear()">Nuevo modulo</a>
-        </div>
-      </div>
-    </div>
+<div class="row" v-if="!preload">
+  <div class="col-md-12 col-sm-12">
+    <h5 class="m-0 text-dark">
+      <strong>Lista de modulos</strong>
+      <button type="button" class="btn btn-tool" v-on:click.prevent="redirectCrear()">
+        <i class="fa fa-plus-circle"  style="font-size: 24px;"></i>
+      </button>
+    </h5>
   </div>
 </div>
 
-<div class="card" v-if="!preload" v-for="modulo in a_modulos">
+<div class="card"  v-for="modulo in a_modulos">
   <div class="card-header no-border">
     <h5 class="card-title">@{{modulo.nombre}}</h5>
     <div class="card-tools">
       <div class="btn-group">
-        <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <i class="fa  fa-bars"></i>
+        <button type="button" class="btn btn-tool" v-on:click.prevent="redirectEdit(modulo.id)">
+          <i class="fa  fa-pencil"></i>
         </button>
-        <div class="dropdown-menu dropdown-menu-right" role="menu" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(45px, 31px, 0px);">
-          <a href="#" class="dropdown-item" v-on:click.prevent="redirectEdit(modulo.id)">Editar</a>
-          <a href="#" class="dropdown-item" v-on:click.prevent="redirectLecciones(modulo.id)">Abrir lecciones</a>
-        </div>
+        <button type="button" class="btn btn-tool" v-on:click.prevent="redirectLecciones(modulo.id)">
+          <i class="fa fa-list-alt"></i>
+        </button>
       </div>
     </div>
 

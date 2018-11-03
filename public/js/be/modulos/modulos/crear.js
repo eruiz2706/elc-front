@@ -43,5 +43,8 @@ new Vue({
             }
         });
       },
+      redirectVolver:function(){
+        window.location.href=base_url+'/modulos/'+this.idcurso;
+      }
     }
 });

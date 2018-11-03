@@ -37,10 +37,25 @@ class CursosController extends Controller
   //vista edicion curso
   public function view_editar($id){
       $rol  =Session::get('rol');
+      $user =Auth::user();
       if($rol !='in'){
         return view('layouts.errors.access_denied');
       }
-      return view('backend.modulos.cursos.view_edit',compact('id'));
+
+      $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
+                            from cursos c
+                            left join users u on(c.user_id=u.id)
+                            where c.id= :id and user_id = :user_id"
+                       ,['id'=>$id,'user_id'=>$user->id]);
+
+      if(empty($curso)){
+        return view('layouts.errors.not_page');
+      }
+
+      $curso    =$curso[0];
+      $tab_edit ='';
+
+      return view('backend.modulos.cursos.view_edit',compact('id','curso','tab_edit'));
   }
 
   //vista para datos de configuracion de curso
@@ -73,7 +88,7 @@ class CursosController extends Controller
   public function lista(Request $request){
     $user     =Auth::user();
     $cursos   =DB::select("select
-                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,fecha_creacion
+                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,fecha_creacion,inscripcion
                             from cursos
                             where user_id = :user_id
                             order by fecha_creacion desc",
@@ -318,7 +333,7 @@ class CursosController extends Controller
     $rol  =Session::get('rol');
 
     if($rol=='in'){
-        return redirect('cursos/v_config/'.$id);
+        return redirect('cursos/v_editar/'.$id);
     }else if(in_array($rol,['pr','es'])){
       return redirect('foroc/'.$id);
     }else{
