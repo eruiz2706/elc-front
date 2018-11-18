@@ -16,8 +16,8 @@ class LeccionesController extends Controller
 {
   ############################## VISTAS ##############################
   //lista de modulos de un curso
-  function view_lista($idcurso,$idmodulo){
-    $tab_mod='';
+  function view_lista($idcurso){
+    $tab_lecc='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
     if($rol !='in'){
@@ -34,13 +34,13 @@ class LeccionesController extends Controller
     }
 
     $curso  =$curso[0];
-    return view('backend.modulos.lecciones.view_list',compact('idmodulo','curso','tab_mod'));
+    return view('backend.modulos.lecciones.view_list',compact('curso','tab_lecc'));
 
   }
 
   //vista para crear una nueva leccion
-  public function view_crear($idcurso,$idmodulo){
-    $tab_mod='';
+  public function view_crear($idcurso){
+    $tab_lecc='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
     if($rol !='in'){
@@ -57,13 +57,13 @@ class LeccionesController extends Controller
      }
 
     $curso  =$curso[0];
-    return view('backend.modulos.lecciones.view_crear',compact('idmodulo','curso','tab_mod','idcurso'));
+    return view('backend.modulos.lecciones.view_crear',compact('curso','tab_lecc','idcurso'));
   }
 
   //vista para editar una leccion
-  public function view_editar($idcurso,$idmodulo,$id){
+  public function view_editar($idcurso,$id){
 
-    $tab_mod='';
+    $tab_lecc='';
     $user   =Auth::user();
     $rol    =Session::get('rol');
     if($rol !='in'){
@@ -79,16 +79,52 @@ class LeccionesController extends Controller
      }
 
     $curso  =$curso[0];
-    return view('backend.modulos.lecciones.view_edit',compact('curso','tab_mod','idmodulo','id'));
+    return view('backend.modulos.lecciones.view_edit',compact('curso','tab_lecc','id'));
   }
 
 
   ############################## METODOS ##############################
   //listado de modulos de un curso
   public function lista(Request $request){
-    $lecciones  =DB::select("select l.id,l.nombre,l.descripcion,l.fecha_creacion,l.tiempolectura
+    $select_mod  =DB::select("select m.id,m.nombre
+                              from modulos m
+                              where curso_id = :idcurso
+                              order by m.numero asc"
+                            ,['idcurso'=>$request->idcurso]);
+
+    /*$lecciones  =DB::select("select l.id,l.nombre,l.descripcion,l.fecha_creacion,l.tiempolectura,
+                            l.modulo_id,m.nombre as nommod
                             from lecciones l
-                            where modulo_id = :idmodulo"
+                            left join modulos m on(l.modulo_id=m.id)
+                            where curso_id = :idcurso"
+                     ,['idcurso'=>$request->idcurso]);*/
+
+    $jsonresponse=[
+        'lecciones'=>[],
+        'select_mod'=>$select_mod
+    ];
+    return response()->json($jsonresponse,200);
+  }
+  public function select_mod(Request $request){
+    $select_mod  =DB::select("select m.id,m.nombre
+                              from modulos m
+                              where curso_id = :idcurso
+                              order by m.numero asc"
+                            ,['idcurso'=>$request->idcurso]);
+
+    $jsonresponse=[
+        'select_mod'=>$select_mod
+    ];
+    return response()->json($jsonresponse,200);
+  }
+  public function listamod(Request $request){
+
+    $lecciones  =DB::select("select l.id,l.nombre,l.descripcion,l.fecha_creacion,l.tiempolectura,
+                            l.modulo_id,m.nombre as nommod,l.numero
+                            from lecciones l
+                            left join modulos m on(l.modulo_id=m.id)
+                            where l.modulo_id = :idmodulo
+                            order by l.numero asc"
                      ,['idmodulo'=>$request->idmodulo]);
 
     $jsonresponse=[
@@ -101,6 +137,8 @@ class LeccionesController extends Controller
   public function guardar(Request $request){
     $user   =Auth::user();
     $validator =Validator::make($request->all(),[
+      'numero' =>'required',
+      'modulo' =>'required|integer',
       'nombre' =>'required|string'
     ]);
 
@@ -113,7 +151,8 @@ class LeccionesController extends Controller
     DB::beginTransaction();
     try{
       DB::table('lecciones')->insert([
-        'modulo_id'=>$request->idmodulo,
+        'modulo_id'=>$request->modulo,
+        'numero'=>$request->numero,
         'nombre'=>$request->nombre,
         'descripcion'=>$request->descripcion,
         'tiempolectura'=>$request->tiempolectura,
@@ -139,14 +178,20 @@ class LeccionesController extends Controller
   }
 
   //datos de edicion de un modulo
-  public function editar($id){
+  public function editar(Request $request){
+    $select_mod  =DB::select("select m.id,m.nombre
+                              from modulos m
+                              where curso_id = :idcurso"
+                            ,['idcurso'=>$request->idcurso]);
+
     $leccion   =DB::select("select
-                            id,nombre,descripcion,tiempolectura
+                            id,nombre,numero,descripcion,tiempolectura,modulo_id as modulo
                             from lecciones
                             where id = :id",
-                          ['id'=>$id])[0];
+                          ['id'=>$request->id])[0];
     $jsonresponse=[
-        'leccion'=>$leccion
+        'leccion'=>$leccion,
+        'select_mod'=>$select_mod
     ];
     return response()->json($jsonresponse,200);
 
@@ -155,6 +200,8 @@ class LeccionesController extends Controller
   public function actualizar(Request $request){
     $user   =Auth::user();
     $validator =Validator::make($request->all(),[
+      'numero' =>'required',
+      'modulo' =>'required|integer',
       'nombre' =>'required|string'
     ]);
 
@@ -168,6 +215,8 @@ class LeccionesController extends Controller
     DB::beginTransaction();
     try{
       DB::table('lecciones')->where('id',$request->id)->update([
+        'modulo_id'=>$request->modulo,
+        'numero'=>$request->numero,
         'nombre'=>$request->nombre,
         'descripcion'=>$request->descripcion,
         'tiempolectura'=>$request->tiempolectura,

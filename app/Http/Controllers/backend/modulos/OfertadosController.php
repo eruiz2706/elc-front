@@ -58,6 +58,7 @@ class OfertadosController extends Controller
     }
 
     public function suscripcion(Request $request){
+      $rol  =Session::get('rol');
       $id     =Auth::user()->id;
 
       if ($request->idcurso=='') {
@@ -72,6 +73,7 @@ class OfertadosController extends Controller
         DB::table('cursos_user')->insert([
           'user_id'=>$id,
           'curso_id'=>$request->idcurso,
+          'slugrol'=>$rol,
           'fecha_creacion'=>date('Y-m-d H:i:s')
         ]);
 

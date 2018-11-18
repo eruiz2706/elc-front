@@ -25,6 +25,11 @@ new Vue({
             this.loader_guardar=false;
             this.e_tarea=[];
             this.o_tarea=this.o_basetarea;
+
+            socket.emit('send_notifi',{
+              'token':'123','mensaje':response.data.message
+            });
+
             swal({
                 title:response.data.message,
                 text:response.data.message2,

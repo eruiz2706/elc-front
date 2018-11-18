@@ -49,6 +49,13 @@ new Vue({
         this.o_pregunta.idcurso=this.idcurso;
         this.o_pregunta.idejerc=this.idejerc;
         this.o_pregunta.descripcion=$('#summernote').summernote('code');
+        this.o_pregunta.resp_abierta=this.o_resp_abierta;
+        this.o_pregunta.resp_unica=this.a_resp_unica;
+        this.o_pregunta.radio_unica=this.radio_unica
+        this.o_pregunta.resp_multiple=this.a_resp_multiple;
+        this.o_pregunta.resp_relacionar=this.a_resp_relacionar;
+        this.o_pregunta.resp_rellenar=this.a_resp_rellenar;
+        this.o_pregunta.texto_rellenar=this.resp_rellenar;
         var url =base_url+'/preguntas/guardar';
         axios.post(url,this.o_pregunta).then(response =>{
             this.loader_guardar=false;
@@ -134,23 +141,19 @@ new Vue({
 
         if(this.o_pregunta.tipo=='relacionar'){
           this.view_resp_relacionar=true;
-          this.id_relacionar=4;
+          this.id_relacionar=2;
           this.a_resp_relacionar=[
             {'id':1,'respuesta':'','relacionar':'','puntaje':0,'delete':true},
             {'id':2,'respuesta':'','relacionar':'','puntaje':0,'delete':true},
-            {'id':3,'respuesta':'','relacionar':'','puntaje':0,'delete':true},
-            {'id':4,'respuesta':'','relacionar':'','puntaje':0,'delete':true}
           ];
         }
 
         if(this.o_pregunta.tipo=='multiple'){
           this.view_resp_multiple=true;
-          this.id_multiple=4;
+          this.id_multiple=2;
           this.a_resp_multiple=[
             {'id':1,'option':false,'respuesta':'','puntaje':0,'delete':true},
-            {'id':2,'option':false,'respuesta':'','puntaje':0,'delete':true},
-            {'id':3,'option':false,'respuesta':'','puntaje':0,'delete':true},
-            {'id':4,'option':false,'respuesta':'','puntaje':0,'delete':true}
+            {'id':2,'option':false,'respuesta':'','puntaje':0,'delete':true}
           ];
         }
 
@@ -204,6 +207,9 @@ new Vue({
 
           //if (cadena[i].toLowerCase() === caracter) indices.push(i);
         }
+      },
+      redirectVolver:function(){
+        window.location.href=base_url+'/preguntas/'+this.idcurso+'/'+this.idejerc;
       }
     }
 });

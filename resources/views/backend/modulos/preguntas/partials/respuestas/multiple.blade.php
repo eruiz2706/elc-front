@@ -1,16 +1,11 @@
+<!--@{{a_resp_multiple}}-->
 <div class="card">
-  <div class="card-header no-border">
-    <h3 class="card-title">
-      Respuesta Multiple
-      <!--@{{a_resp_multiple}}-->
-    </h3>
-  </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-striped table-valign-middle">
       <thead>
       <tr>
         <th>Verdadera</th>
-        <th>Respuesta</th>
+        <th>Posibles respuestas</th>
         <th>Puntaje</th>
         <th>
           <button type="button" class="btn btn-outline-primary btn-sm float-left" v-on:click.prevent='addRespMultiple()'>
@@ -25,7 +20,7 @@
             <input type="checkbox"  v-model='fila.option'>
           </td>
           <td>
-            <textarea class="form-control" rows="2" v-model='fila.respuesta'></textarea>
+            <textarea class="form-control" rows="2" cols="100" v-model='fila.respuesta'></textarea>
           </td>
           <td>
             <input type="number" class="form-control" name='puntaje'  v-model='fila.puntaje'>

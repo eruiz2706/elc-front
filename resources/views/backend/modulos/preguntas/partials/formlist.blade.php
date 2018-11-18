@@ -9,44 +9,39 @@
   <div class="col-sm-6">
     <h5 class="m-0 text-dark">
       <strong>Preguntas </strong>
+      <button type="button" class="btn btn-tool" v-on:click.prevent="redirectVolver()">
+        <i class="fa fa-arrow-circle-left" style="font-size: 24px;"></i>
+      </button>
+      <button type="button" class="btn btn-tool" v-on:click.prevent="redirectCrear()">
+        <i class="fa fa-plus-circle"  style="font-size: 24px;"></i>
+      </button>
     </h5>
   </div>
-  <div class='col-md-6'>
-    <button type="button" class="btn btn-tool float-right" v-on:click.prevent="redirectCrear()">
-      <i class="fa fa-plus-circle"  style="font-size: 24px;"></i>
-    </button>
-    <button type="button" class="btn btn-tool float-right" v-on:click.prevent="redirectVolver()">
-      <i class="fa fa-arrow-circle-left" style="font-size: 24px;"></i>
-    </button>
-  </div>
 </div>
 
+<div class="card" v-if="!preload" v-for="pregunta in a_preguntas">
+  <div class="card-header no-border">
+    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(pregunta.id)">@{{pregunta.nombre}}</h5>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" v-on:click.prevent="redirectEdit(pregunta.id)">
+        <i class="fa  fa-pencil" style="font-size: 20px;"></i>
+      </button>
+    </div>
 
-<div class="card">
-  <div class="card-body p-0">
-    <table class="table table-striped table-valign-middle">
-      <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Tipo</th>
-        <th>Acciones</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="pregunta in a_preguntas">
-        <td>
-          @{{pregunta.nombre}}
-        </td>
-        <td>
-          <a href="#" v-on:click.prevent="redirectEdit(pregunta.id)" class="text-muted">
-            <i class="fa fa-edit"></i> Editar
-          </a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class='row'>
+      <div class="col-md-4 col-sm-6">
+        <b>Tipo :</b> @{{pregunta.tipo}}
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <b>Creado :</b> @{{pregunta.fecha_creacion}}
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <b>Puntaje :</b> @{{pregunta.puntaje}}
+      </div>
+    </div>
 </div>
+</div>
+
 
 <input type='hidden' name='idcurso' id='idcurso' value="{{$curso->id}}"></input>
 <input type='hidden' name='idejerc' id='idejerc' value="{{$idejerc}}"></input>

@@ -20,6 +20,8 @@ class CreateEjerciciosTable extends Migration
           $table->string('nombre',300);
           $table->text('descripcion')->nullable();
           $table->integer('duracion')->default(0);
+          $table->double('calificacion')->unsigned()->default(0);
+          $table->double('preguntas')->unsigned()->default(0);//numero de preguntas del ejericio
           $table->date('fecha_inicio')->nullable();
           $table->integer('user_id')->unsigned()->index();
           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

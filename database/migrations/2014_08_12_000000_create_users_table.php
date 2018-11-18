@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('imagen')->default('img/app/avatar.jpg');
             $table->date('fecha_vencimiento')->nullable();
             $table->dateTime('fecha_ultimo_ingreso')->nullable();
+            $table->dateTime('fecha_ultimo_uso')->nullable();
             $table->string('telefono')->nullable();
             $table->string('ciudad')->nullable();
             $table->string('direccion')->nullable();

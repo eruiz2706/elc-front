@@ -43,7 +43,8 @@ new Vue({
                 text:response.data.message2,
                 type: "success"
             },function(){
-              window.location.href=base_url+'/cursos';
+              var id=document.getElementById('id').value;
+              window.location.href=base_url+'/cursos/v_editar/'+id;
             });
         }).catch(error =>{
             this.loader_actualizar=false;

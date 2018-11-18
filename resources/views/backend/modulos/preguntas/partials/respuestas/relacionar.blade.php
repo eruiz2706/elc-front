@@ -1,15 +1,9 @@
 <div class="card">
-  <div class="card-header no-border">
-    <h3 class="card-title">
-      Respuesta Relacionar
-      <!--@{{a_resp_relacionar}}-->
-    </h3>
-  </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-striped table-valign-middle">
       <thead>
       <tr>
-        <th>Respuesta</th>
+        <th>Posibles respuestas</th>
         <th>Corresponde a</th>
         <th>Puntaje</th>
         <th>
@@ -22,10 +16,10 @@
       <tbody>
         <tr v-for='(fila,index) in a_resp_relacionar'>
           <td>
-            <textarea class="form-control" rows="2" v-model='fila.respuesta'></textarea>
+            <textarea class="form-control" rows="2" cols="50" v-model='fila.respuesta'></textarea>
           </td>
           <td>
-            <textarea class="form-control" rows="2" v-model='fila.relacionar'></textarea>
+            <textarea class="form-control" rows="2" cols="50" v-model='fila.relacionar'></textarea>
           </td>
           <td>
             <input type="number" class="form-control" name='puntaje'  v-model='fila.puntaje'>

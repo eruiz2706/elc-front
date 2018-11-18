@@ -1,14 +1,9 @@
+<!--@{{a_resp_rellenar}}
+@{{resp_rellenar}}-->
 <div class="card">
-  <div class="card-header no-border">
-    <h3 class="card-title">
-      Respuesta Rellenar
-      <!--@{{a_resp_rellenar}}-->
-      <!--@{{resp_rellenar}}-->
-    </h3>
-  </div>
   <div class="card-body table-responsive p-0">
     <div class="form-group">
-      <label>Parar marcar los puntos de separacion utilize [palabra]</label>
+      <strong style='padding:5px'>Parar marcar los puntos de separacion utilize [palabra]</strong>
       <textarea class="form-control" rows="4" placeholder="Escribe el texto" v-model='resp_rellenar' @keyup="obtenerRellenar()" ></textarea>
     </div>
 

@@ -18,19 +18,19 @@
 
 <div class="card"  v-for="modulo in a_modulos">
   <div class="card-header no-border">
-    <h5 class="card-title">@{{modulo.nombre}}</h5>
+    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(modulo.id)">Modulo @{{modulo.numero}}</h5>
     <div class="card-tools">
       <div class="btn-group">
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectEdit(modulo.id)">
-          <i class="fa  fa-pencil"></i>
-        </button>
-        <button type="button" class="btn btn-tool" v-on:click.prevent="redirectLecciones(modulo.id)">
-          <i class="fa fa-list-alt"></i>
+          <i class="fa  fa-pencil" style="font-size: 20px;"></i>
         </button>
       </div>
     </div>
 
     <div class='row'>
+      <div class="col-md-4 col-sm-6">
+        <b>Nombre :</b> @{{modulo.nombre}}
+      </div>
       <div class="col-md-4 col-sm-6">
         <b>Creado :</b> @{{modulo.fecha_creacion}}
       </div>

@@ -81,12 +81,24 @@ class EjerciciosController extends Controller
 
   ############################## METODOS ##############################
   public function lista(Request $request){
-    $ejercicios   =DB::select("select id,nombre,descripcion,duracion,fecha_inicio,fecha_creacion
-                              from ejercicios
-                              where curso_id = :curso_id",
-                          ['curso_id'=>$request->idcurso]);
+
+    $cantUser     =DB::select("select count(id) as cant
+                                from cursos_user
+                                where curso_id= :curso_id and slugrol='es'",
+                        ['curso_id'=>$request->idcurso]);
+    if(!empty($cantUser)){
+      $cantUser    =$cantUser[0]->cant;
+    }else{
+      $cantUser =0;
+    }
+    $ejercicios   =DB::select("select e.id,e.nombre,e.descripcion,e.duracion,e.fecha_inicio,e.fecha_creacion,e.preguntas as cant_preg,e.calificacion as notamaxima
+                                from ejercicios e
+                                where e.curso_id = :curso_id",
+                              ['curso_id'=>$request->idcurso]);
+
     $jsonresponse=[
-        'ejercicios'=>$ejercicios
+        'ejercicios'=>$ejercicios,
+        'cantUser'=>$cantUser
     ];
     return response()->json($jsonresponse,200);
   }

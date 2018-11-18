@@ -34,3 +34,57 @@
 <script src="{{ URL::asset('js/axios.js') }}"></script>
 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.0/socket.io.js"></script>
+ <script>
+   var socket = io('http://localhost:8081',{ 'forceNew': true });
+   socket.on('get_notifi', function(data) {
+     console.log(data['mensaje']);
+
+     var nav_notifi = document.getElementById('nav_notificaciones');
+     if(nav_notifi.innerHTML==''){
+        nav_notifi.innerHTML =1;
+     }else{
+       nav_notifi.innerHTML =parseInt(nav_notifi.innerHTML)+1;
+     }
+   });
+ </script>
+ <script>
+ new Vue({
+     el : '#vue-notifi',
+     ready: function(){
+     },
+     created : function(){
+       this.notificaciones();
+     },
+     data : {
+
+     },
+     computed : {
+
+     },
+     methods : {
+       notificaciones:function(){
+         var url =base_url+'/notificaciones/conteo';
+         axios.post(url,{}).then(response =>{
+           var conteo=response.data.notificaciones;
+           var nav_notifi = document.getElementById('nav_notificaciones');
+           if(nav_notifi.innerHTML==''){
+              nav_notifi.innerHTML =conteo;
+           }else{
+             nav_notifi.innerHTML =parseInt(nav_notifi.innerHTML)+parseInt(conteo);
+           }
+        }).catch(error =>{
+             this.loader_guardar=false;
+             if(error.response.data.errors){
+               this.e_tarea=error.response.data.errors;
+             }
+             if(error.response.data.error){
+               toastr.error(error.response.data.error,'',{
+                   "timeOut": "2500"
+               });
+             }
+         });
+       }
+     }
+ });
+ </script>

@@ -17,6 +17,7 @@ class CreateLeccionesTable extends Migration
             $table->increments('id');
             $table->integer('modulo_id')->unsigned()->index();
             $table->foreign('modulo_id')->references('id')->on('modulos')->onDelete('cascade');
+            $table->double('numero',5,2)->default(0);
             $table->string('nombre',300);
             $table->text('descripcion')->nullable();
             $table->integer('tiempolectura')->default(0);

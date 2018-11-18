@@ -16,6 +16,7 @@ class PrincipalController extends Controller
     function index(){
       Session::put('rol','');
       Session::put('navcursos','');
+      Session::put('user_tiempo','0');
       $user =Auth::user();
 
       //se consulta el rol al que esta asociado el usuario

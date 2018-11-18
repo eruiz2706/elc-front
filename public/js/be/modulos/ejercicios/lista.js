@@ -11,6 +11,7 @@ new Vue({
       idcurso : 0,
       preload:false,
       a_ejercicios:[],
+      cantUser : 0
     },
     computed : {
 
@@ -22,6 +23,7 @@ new Vue({
         axios.post(url,{idcurso:this.idcurso}).then(response =>{
             this.preload=false;
             this.a_ejercicios=response.data.ejercicios;
+            this.cantUser=response.data.cantUser;
         }).catch(error =>{
             this.preload=false;
             if(error.response.data.errors){

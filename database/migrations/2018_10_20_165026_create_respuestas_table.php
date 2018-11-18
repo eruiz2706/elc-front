@@ -15,6 +15,10 @@ class CreateRespuestasTable extends Migration
     {
         Schema::create('respuestas', function (Blueprint $table) {
           $table->increments('id');
+          $table->double('puntaje')->default(0);
+          $table->boolean('seleccion')->default(false);
+          $table->text('respuesta')->nullable();
+          $table->text('relacionar')->nullable();
           $table->integer('pregunta_id')->unsigned()->index();
           $table->foreign('pregunta_id')->references('id')->on('preguntas')->onDelete('cascade');
           $table->integer('user_id')->unsigned()->index();

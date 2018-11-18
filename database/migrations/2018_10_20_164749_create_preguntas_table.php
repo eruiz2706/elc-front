@@ -18,7 +18,11 @@ class CreatePreguntasTable extends Migration
           $table->integer('ejercicio_id')->unsigned()->index();
           $table->foreign('ejercicio_id')->references('id')->on('ejercicios')->onDelete('cascade');
           $table->string('nombre',300);
+          $table->string('tipo',30);
           $table->text('descripcion')->nullable();
+          $table->text('textoaudio')->nullable();
+          $table->text('textorellenar')->nullable();
+          $table->double('calificacion')->unsigned()->default(0);
           $table->integer('user_id')->unsigned()->index();
           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
           $table->dateTime('fecha_creacion');

@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="{{ URL::asset('rsc/plugins/select2/select2.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ URL::asset('rsc/dist/css/adminlte.min.css') }}">
-  <!-- personalizacion Theme style -->
-  <link rel="stylesheet" href="{{ URL::asset('rsc/dist/css/style.css') }}">
   <!-- toast -->
   <link rel="stylesheet" href="{{ URL::asset('plugins/toastr/toastr.min.css') }}">
   <!-- swheetalert -->
@@ -24,8 +22,10 @@
   <!-- preload -->
   <link rel="stylesheet" href="{{ URL::asset('css/loader-1.css') }}">
   <!-- fullCalendar 2.2.5 -->
-    <link rel="stylesheet" href="{{ URL::asset('rsc/plugins/fullcalendar/fullcalendar.min.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('rsc/plugins/fullcalendar/fullcalendar.min.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('rsc/plugins/fullcalendar/fullcalendar.print.css') }}" media="print">
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
+  <!-- personalizacion Theme style -->
+  <link rel="stylesheet" href="{{ URL::asset('rsc/dist/css/style.css') }}">
 </head>

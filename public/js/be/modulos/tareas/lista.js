@@ -10,6 +10,7 @@ new Vue({
       idcurso : 0,
       preload:true,
       a_tareas:[],
+      cantUser : 0
     },
     computed : {
 
@@ -21,6 +22,7 @@ new Vue({
         axios.post(url,{idcurso:this.idcurso}).then(response =>{
             this.preload=false;
             this.a_tareas=response.data.tareas;
+            this.cantUser=response.data.cantUser;
         }).catch(error =>{
             this.preload=false;
             this.modulos=[];

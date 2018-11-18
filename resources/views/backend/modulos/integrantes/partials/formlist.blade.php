@@ -15,6 +15,8 @@
               <a>@{{integrante.nombre}}</a>
             </span>
             <span class="description">@{{integrante.perfil}}</span>
+            <span class="description">Ultimo ingreso: @{{integrante.fecha_ultimo_ingreso}}</span>
+            <span class="description">Tiempo de uso: @{{integrante.tiempouso}} minutos</span>
           </div>
         </div>
       </div>

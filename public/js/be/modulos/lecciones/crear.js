@@ -4,23 +4,42 @@ new Vue({
     },
     created : function(){
       this.idcurso=document.getElementById('idcurso').value;
-      this.idmodulo=document.getElementById('idmodulo').value;
+      this.list_select();
     },
     data : {
-      idmodulo:0,
       idcurso:0,
-      o_baseleccion:{'nombre':'','descripcion':'','tiempolectura':0},
-      o_leccion:{'nombre':'','descripcion':'','tiempolectura':0},
+      preload:true,
+      o_baseleccion:{'modulo':'','nombre':'','descripcion':'','tiempolectura':0},
+      o_leccion:{'modulo':'','nombre':'','descripcion':'','tiempolectura':0},
       e_leccion:[],
       loader_guardar :false,
+      select_mod:[],
     },
     computed : {
 
     },
     methods : {
+      list_select:function(){
+        var url =base_url+'/lecciones/select_mod';
+        this.preload=true;
+        axios.post(url,{idcurso:this.idcurso}).then(response =>{
+            this.preload=false;
+            this.select_mod=response.data.select_mod;
+            this.a_leccion=response.data.lecciones;
+        }).catch(error =>{
+            this.preload=false;
+            this.a_leccion=[];
+            if(error.response.data.errors){
+            }
+            if(error.response.data.error){
+              toastr.error(error.response.data.error,'',{
+                  "timeOut": "3500"
+              });
+            }
+        });
+      },
       guardar:function(){
         this.loader_guardar=true;
-        this.o_leccion.idmodulo=this.idmodulo;
         this.o_leccion.descripcion=$('#summernote').summernote('code');
         var url =base_url+'/lecciones/guardar';
         axios.post(url,this.o_leccion).then(response =>{
@@ -32,8 +51,7 @@ new Vue({
                 type: "success"
             },function(){
                 var idcurso=document.getElementById('idcurso').value;
-                var idmodulo=document.getElementById('idmodulo').value;
-                window.location.href=base_url+'/lecciones/'+idcurso+'/'+idmodulo;
+                window.location.href=base_url+'/lecciones/'+idcurso;
             });
         }).catch(error =>{
             this.loader_guardar=false;
@@ -48,7 +66,7 @@ new Vue({
         });
       },
       redirectVolver:function(){
-        window.location.href=base_url+'/lecciones/'+this.idcurso+'/'+this.idmodulo;
+        window.location.href=base_url+'/lecciones/'+this.idcurso;
       }
     }
 });

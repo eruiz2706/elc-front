@@ -36,6 +36,7 @@
     </div>
 
     <div class="form-group">
+      <label>Descripcion</label>
       <div id="summernote"></div>
     </div>
 
@@ -52,7 +53,7 @@
 <script src="{{ URL::asset('js/be/modulos/ejercicios/crear.js') }}"></script>
 <script>
   $('#summernote').summernote({
-    height: 200
+    height:100
   });
 </script>
 @stop

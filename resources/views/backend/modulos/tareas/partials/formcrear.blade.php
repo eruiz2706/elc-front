@@ -51,7 +51,7 @@
 <script src="{{ URL::asset('js/be/modulos/tareas/crear.js') }}"></script>
 <script>
   $('#summernote').summernote({
-    height: 350
+    height: 250
   });
 </script>
 @stop

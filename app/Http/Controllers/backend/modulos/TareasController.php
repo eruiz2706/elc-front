@@ -80,14 +80,45 @@ class TareasController extends Controller
     return view('backend.modulos.tareas.view_edit',compact('curso','tab_tar','idcurso','id'));
   }
 
+  public function view_entrega($idcurso,$id){
+    $tab_tar='';
+    $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if($rol !='es'){
+      return view('layouts.errors.access_denied');
+    }
+    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
+                          from cursos c
+                          left join users u on(c.user_id=u.id)
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
+     if(empty($curso)){
+       return view('layouts.errors.not_page');
+     }
+
+    $curso  =$curso[0];
+    return view('backend.modulos.tareas.view_entrega',compact('curso','tab_tar','idcurso','id'));
+  }
+
   ############################## METODOS ##############################
   public function lista(Request $request){
-    $tareas   =DB::select("select id,nombre,fecha_vencimiento,calificacion,fecha_creacion,descripcion
-                              from tareas
-                              where curso_id = :curso_id
-                              order by fecha_creacion desc",
-                          ['curso_id'=>$request->idcurso]);
+
+    $cantUser     =DB::select("select count(id) as cant
+                                from cursos_user
+                                where curso_id= :curso_id and slugrol='es'",
+                        ['curso_id'=>$request->idcurso]);
+    if(!empty($cantUser)){
+      $cantUser    =$cantUser[0]->cant;
+    }else{
+      $cantUser =0;
+    }
+
+    $tareas   =DB::select("select t.id,t.nombre,t.fecha_vencimiento,t.calificacion,t.fecha_creacion,t.descripcion,t.entregas as cant_respuest
+                            from tareas t
+                            where t.curso_id = :curso_id",
+                            ['curso_id'=>$request->idcurso]);
     $jsonresponse=[
+        'cantUser'=>$cantUser,
         'tareas'=>$tareas
     ];
     return response()->json($jsonresponse,200);
@@ -133,6 +164,18 @@ class TareasController extends Controller
         'user_id'=>$user->id
       ]);
 
+      $curso  =DB::select("select c.nombre
+                            from cursos c
+                            where c.id= :idcurso"
+                       ,['idcurso'=>$request->idcurso]);
+      $curso  =$curso[0];
+
+      DB::table('notificaciones')->insert([
+        'descripcion'=>'Nueva tarea curso:<strong> '.$curso->nombre.'</strong> fecha de entrega: <strong>'.$request->fecha_vencimiento.'</strong>',
+        'fecha_creacion'=>date('Y-m-d H:i:s'),
+        'user_id'=>$user->id
+      ]);
+
       DB::commit();
       return response()->json([
           'message' => 'Registro creado correctamente!',
@@ -145,7 +188,7 @@ class TareasController extends Controller
         //$e->getMessage();
 
         return response()->json([
-            'error' =>'Hubo una inconsistencias al intentar crear el registro'
+            'error' =>'Hubo una inconsistencias al intentar crear el registro'.$e->getMessage()
         ], 400);
     }
   }
@@ -202,6 +245,60 @@ class TareasController extends Controller
 
         return response()->json([
             'error' =>'Hubo una inconsistencias al intentar actualizar el registro'
+        ], 400);
+    }
+  }
+
+  public function editent($id){
+    $tarea   =DB::select("select
+                            id,nombre,calificacion,fecha_vencimiento,descripcion
+                            from tareas
+                            where id = :id",
+                          ['id'=>$id])[0];
+    $jsonresponse=[
+        'tarea'=>$tarea
+    ];
+    return response()->json($jsonresponse,200);
+  }
+
+  public function entregar(Request $request){
+    $user   =Auth::user();
+
+    ############guardar datos ########
+    DB::beginTransaction();
+    try{
+      DB::table('tareas_user')->insert([
+        'tarea_id'=>$request->id,
+        'respuesta'=>$request->respuesta,
+        'fecha_creacion'=>date('Y-m-d H:i:s'),
+        'user_id'=>$user->id
+      ]);
+
+      /*$curso  =DB::select("select c.nombre
+                            from cursos c
+                            where c.id= :idcurso"
+                       ,['idcurso'=>$request->idcurso]);
+      $curso  =$curso[0];
+
+      DB::table('notificaciones')->insert([
+        'descripcion'=>'Nueva tarea curso:<strong> '.$curso->nombre.'</strong> fecha de entrega: <strong>'.$request->fecha_vencimiento.'</strong>',
+        'fecha_creacion'=>date('Y-m-d H:i:s'),
+        'user_id'=>$user->id
+      ]);*/
+
+      DB::commit();
+      return response()->json([
+          'message' => 'Tarea enviada correctamente!',
+          'message2' => 'Click para continuar!'
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('creacion tarea : '.$e->getMessage());
+        DB::rollback();
+        //$e->getMessage();
+
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar crear el registro'.$e->getMessage()
         ], 400);
     }
   }

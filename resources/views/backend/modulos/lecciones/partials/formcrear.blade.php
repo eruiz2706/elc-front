@@ -1,5 +1,11 @@
 
-<div class="row">
+<div class="row" v-show="preload">
+  <div class="d-block mx-auto" >
+    <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
+  </div>
+</div>
+
+<div class="row" v-show="!preload">
   <div class="col-md-6 col-sm-6">
     <h5 class="m-0 text-dark">
       <strong>Nueva leccion</strong>
@@ -10,12 +16,27 @@
   </div>
 </div>
 
-<div class="card">
+<div class="card" v-show="!preload">
   <div class="card-body">
     <div class="callout callout-info">
     	<p>
     	  <i class="fa fa-fw fa-info"></i>Los campos marcados en <code>*</code> son obligatorios
     	</p>
+    </div>
+
+    <div class="form-group">
+      <label>Modulo <code>*</code></label>
+      <select class="form-control" name="select_mod" v-model='o_leccion.modulo' v-bind:class="[e_leccion.modulo ? 'is-invalid' : '']">
+        <option v-bind:value="''"> - </option>
+        <option v-bind:value='s_mod.id' v-for='s_mod in select_mod'>@{{s_mod.nombre}}</option>
+      </select>
+      <span class="text-danger" v-if="e_leccion.modulo">@{{ e_leccion.modulo[0] }}</span>
+    </div>
+
+    <div class="form-group ">
+      <label>Numero <code>*</code></label>
+      <input type="number" step="0.01" class="form-control" name='numero'  v-model='o_leccion.numero' v-bind:class="[e_leccion.numero ? 'is-invalid' : '']">
+      <span class="text-danger" v-if="e_leccion.numero">@{{ e_leccion.numero[0] }}</span>
     </div>
 
     <div class="form-group">
@@ -41,13 +62,12 @@
 </div>
 
 <input type='hidden' name='idcurso' id='idcurso' value="{{$curso->id}}"></input>
-<input type='hidden' name='idmodulo' id='idmodulo' value="{{$idmodulo}}"></input>
 @section('scripts')
 @parent
 <script src="{{ URL::asset('js/be/modulos/lecciones/crear.js') }}"></script>
 <script>
   $('#summernote').summernote({
-    height: 350
+    height: 250
   });
 </script>
 @stop

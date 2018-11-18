@@ -88,7 +88,8 @@ class CursosController extends Controller
   public function lista(Request $request){
     $user     =Auth::user();
     $cursos   =DB::select("select
-                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,fecha_creacion,inscripcion
+                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,fecha_creacion,inscripcion,
+                            fecha_limite
                             from cursos
                             where user_id = :user_id
                             order by fecha_creacion desc",

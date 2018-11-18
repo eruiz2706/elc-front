@@ -32,7 +32,9 @@ new Vue({
               });
             }
         });
-      }
-
+      },
+      abrir:function(id){
+        window.location.href=base_url+'/tareas/v_entrega/'+this.idcurso+'/'+id;
+      },
     }
 });

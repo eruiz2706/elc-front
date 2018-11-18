@@ -7,7 +7,7 @@ new Vue({
     created : function(){
       this.idcurso=document.getElementById('idcurso').value;
       this.id=document.getElementById('id').value;
-      this.getCurso();
+      this.getTarea();
     },
     data : {
       loader_actualizar:false,
@@ -21,7 +21,7 @@ new Vue({
 
     },
     methods : {
-      getCurso:function(){
+      getTarea:function(){
           this.preload=true;
           var url =base_url+'/tareas/editar/'+this.id;
           axios.get(url,{}).then(response =>{

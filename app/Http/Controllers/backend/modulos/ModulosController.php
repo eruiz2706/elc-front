@@ -84,11 +84,12 @@ class ModulosController extends Controller
   ############################## METODOS ##############################
   //listado de modulos de un curso
   public function lista(Request $request){
-    $modulos   =DB::select("select m.id,m.nombre,m.fecha_creacion,count(l.id) as numlec
+    $modulos   =DB::select("select m.id,m.nombre,m.fecha_creacion,m.numero,count(l.id) as numlec
                               from modulos m
                               left join lecciones l on(m.id=l.modulo_id)
                               where curso_id = :curso_id
-                              group by m.id,m.nombre,m.fecha_creacion",
+                              group by m.id,m.nombre,m.fecha_creacion
+                              order by m.numero asc",
                           ['curso_id'=>$request->idcurso]);
     $jsonresponse=[
         'modulos'=>$modulos
@@ -100,6 +101,7 @@ class ModulosController extends Controller
   public function guardar(Request $request){
     $user   =Auth::user();
     $validator =Validator::make($request->all(),[
+      'numero' =>'required',
       'nombre' =>'required|string'
     ]);
 
@@ -115,6 +117,7 @@ class ModulosController extends Controller
       DB::table('modulos')->insert([
         'curso_id'=>$request->idcurso,
         'nombre'=>$request->nombre,
+        'numero'=>$request->numero,
         'fecha_creacion'=>date('Y-m-d H:i:s'),
         'user_id'=>$user->id
       ]);
@@ -139,7 +142,7 @@ class ModulosController extends Controller
   //datos de edicion de un modulo
   public function editar($id){
     $modulo   =DB::select("select
-                            id,nombre
+                            id,nombre,numero
                             from modulos
                             where id = :id",
                           ['id'=>$id])[0];
@@ -152,6 +155,7 @@ class ModulosController extends Controller
   public function actualizar(Request $request){
     $user   =Auth::user();
     $validator =Validator::make($request->all(),[
+      'numero' =>'required',
       'nombre' =>'required|string'
     ]);
 
@@ -166,6 +170,7 @@ class ModulosController extends Controller
     try{
       DB::table('modulos')->where('id',$request->id)->update([
         'nombre'=>$request->nombre,
+        'numero'=>$request->numero,
         'fecha_modific'=>date('Y-m-d H:i:s'),
         'userm_id'=>$user->id
       ]);

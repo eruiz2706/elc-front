@@ -20,7 +20,8 @@ class CreateTareasTable extends Migration
           $table->string('nombre',300);
           $table->text('descripcion')->nullable();
           $table->date('fecha_vencimiento');
-          $table->integer('calificacion')->unsigned()->default(0);
+          $table->double('calificacion')->unsigned()->default(0);
+          $table->double('entregas')->unsigned()->default(0);//almacena la cantidad de usuarios que han entregado una tarea
           $table->integer('user_id')->unsigned()->index();
           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
           $table->dateTime('fecha_creacion');
