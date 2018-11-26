@@ -32,13 +32,21 @@ class OfertadosController extends Controller
     }
 
     public function listacursos(Request $request){
+
+      $a_where=[];
+      $where='';
+      if($request->select_bsq !=''){
+        $a_where['estado']=$request->select_bsq;
+        $where    ="and c.estado = :estado";
+      }
+
       $id       =Auth::user()->id;
       $cursos   =DB::select("select
                               c.id,c.nombre,c.imagen,e.nombre as nombestado
                               from cursos c
                               left join estados e on(c.estado=e.slug and e.tipo='cursos')
-                              where visibilidad=true
-                              ");
+                              where c.visibilidad=true $where
+                              ",$a_where);
       $jsonresponse=[
           'cursos'=>$cursos
       ];

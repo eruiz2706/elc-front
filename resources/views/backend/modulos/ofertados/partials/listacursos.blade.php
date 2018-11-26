@@ -3,10 +3,11 @@
     <div class="card">
         <!-- /.card-header -->
         <div class="card-body">
-          <select class="form-control">
-            <option>Seleccione el estado</option>
-            <option>Abierto</option>
-            <option>Cerrado</option>
+          <select class="form-control" id='select_bsq' v-on:change="getBusqueda();">
+            <option value=''>Seleccione el estado</option>
+            <option value='abierto'>Abierto</option>
+            <option value='encurso'>En curso</option>
+            <option value='finalizado'>Finalizado</option>
           </select>
         </div>
     </div>

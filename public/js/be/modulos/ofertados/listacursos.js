@@ -18,8 +18,9 @@ new Vue({
     methods : {
       getBusqueda:function(){
           this.preload=true;
+          var select_bsq=document.getElementById('select_bsq')
           var url =base_url+'/ofertados/busq';
-          axios.post(url,{}).then(response =>{
+          axios.post(url,{select_bsq:select_bsq.value}).then(response =>{
               this.cursos=response.data.cursos;
               this.preload=false;
               console.log(this.cursos);
