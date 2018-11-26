@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
 
         /*ejecutar todos los dias a las 12:01 de media noche*/
         $schedule->command('command:update_estado_curso')
-        ->dailyAt('00:01');
+        ->dailyAt('00:01')
         ->timezone('America/Bogota')
         ->withoutOverlapping()
         ->appendOutputTo($cronLog);
