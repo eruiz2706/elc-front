@@ -10,6 +10,7 @@
     <table class="table table-striped table-valign-middle">
       <thead>
       <tr>
+        <th>Opcion</th>
         <th>Respuesta</th>
         <th>Puntaje</th>
       </tr>
@@ -18,6 +19,9 @@
         <tr v-for='(fila,index) in a_resp_rellenar'>
           <td>
             <input type="text" class="form-control" name='respuesta' readonly  v-model='fila.respuesta'>
+          </td>
+          <td>
+            <input type="text" class="form-control" name='relacionar'  v-model='fila.relacionar'>
           </td>
           <td>
             <input type="number" class="form-control" name='puntaje'  v-model='fila.puntaje'>

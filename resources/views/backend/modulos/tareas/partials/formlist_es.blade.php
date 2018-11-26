@@ -19,10 +19,10 @@
       </div>
       <div class="col-md-4 col-sm-6">
         <b>Estado :</b>
-        <small class="badge badge-danger">Pendiente por Entregar</small>
+        <small class="badge badge-danger">@{{tarea.estado}}</small>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Nota :</b>
+        <b>Nota : @{{tarea.notaes}}</b>
       </div>
     </div>
   </div>

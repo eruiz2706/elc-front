@@ -53,19 +53,23 @@ class HomeController extends Controller
                   ->join('users as u', 'c.user_id', '=', 'u.id');
 
 
-      /*if($estado =='AB'){
-        $cursos =$cursos->where('c.fecha_inicio','>=',$fecha);
+      if($estado =='AB'){
+        $cursos =$cursos->where('c.fecha_inicio','<',$fecha);
       }
       if($estado =='EC'){
-        $cursos =$cursos->where('c.fecha_finalizacion','<=',$fecha)
-                ;
+        $cursos =$cursos->where('c.fecha_finalizacion','<=',$fecha);
       }
       if($estado =='FI'){
         $cursos =$cursos->where('c.fecha_finalizacion','>',$fecha);
-      }*/
+      }
 
       $cursos =$cursos->where('visibilidad',true)
-                  ->select('c.id','c.nombre', 'c.imagen', 'u.nombre as usercrea')
+                  ->select("CASE
+                            WHEN c.fecha_inicio>'$fecha' THEN 'Abierto'
+                            WHEN '$fecha'>=c.fecha_inicio and '$fecha'<=c.fecha_finalizacion THEN 'En curso'
+                            WHEN '$fecha'>=c.fecha_inicio and '$fecha'>c.fecha_finalizacion THEN 'Finalizado'
+                            END AS estado",
+                            'c.id','c.nombre', 'c.imagen', 'u.nombre as usercrea')
                   ->paginate(6);
 
       $link_curs='';

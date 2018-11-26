@@ -222,13 +222,14 @@ new Vue({
         var abrir   ='0';
         var palabra ='';
         for(var i = 0; i < cadena.length; i++) {
-          var letra=cadena[i].toLowerCase();
+          //var letra=cadena[i].toLowerCase();
+          var letra=cadena[i];
           if(letra=='['){
             abrir='1';
           }else if(abrir=='1' && letra !=']'){
             palabra +=letra;
           }else if(letra ==']'){
-            this.a_resp_rellenar.push({'id':this.id_rellenar,'respuesta':palabra,'puntaje':0});
+            this.a_resp_rellenar.push({'id':this.id_rellenar,'respuesta':palabra,'relacionar':'','puntaje':0});
             abrir=0;
             palabra='';
           }

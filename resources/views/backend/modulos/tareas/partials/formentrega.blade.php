@@ -18,16 +18,24 @@
 <div class="card" v-show="!preload">
   <div class="card-body">
     <label>Descripcion</label>
-  	<p v-html='o_tarea.descripcion'>
-  	  <i class="fa fa-fw fa-info"></i>Los campos marcados en <code>*</code> son obligatorios
-  	</p><hr>
+  	<p v-html='o_tarea.respuesta'></p>
+    <hr>
 
-    <label>Responder <code>*</code></label>
-    <div class="form-group">
+    <label>Respuesta</label>
+    <div class="form-group" v-show="o_tarea.entrega">
       <div id="summernote"></div>
     </div>
+    <div class="form-group" v-if="!o_tarea.entrega">
+      <div v-html="o_tarea.respuesta"></div>
+    </div>
 
-    <button type="button" class="btn btn-outline-primary btn-sm float-left" :disabled="loader_actualizar" v-on:click.prevent='entregar()'>
+    <hr>
+    <label v-if="!o_tarea.entrega">Comentarios Profesor</label>
+    <div class="form-group" >
+      <div v-html="o_tarea.comentario"   v-if="!o_tarea.entrega"></div>
+    </div>
+
+    <button type="button" class="btn btn-outline-primary btn-sm float-left" :disabled="loader_actualizar" v-on:click.prevent='entregar()' v-if="o_tarea.entrega">
       Entregar tarea
       <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_actualizar"></i>
     </button>
@@ -41,7 +49,7 @@
 <script src="{{ URL::asset('js/be/modulos/tareas/entrega.js') }}"></script>
 <script>
   $('#summernote').summernote({
-    height: 350
+    height: 250
   });
 </script>
 @stop

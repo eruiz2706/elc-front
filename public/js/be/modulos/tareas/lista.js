@@ -40,7 +40,9 @@ new Vue({
       },
       redirectEdit:function(id){
         window.location.href=base_url+'/tareas/v_editar/'+this.idcurso+'/'+id;
+      },
+      redirectEnt:function(id){
+        window.location.href=base_url+'/tareas/v_listaent/'+this.idcurso+'/'+id;
       }
-
     }
 });

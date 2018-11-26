@@ -114,6 +114,169 @@ class EjerciciosController extends Controller
     return response()->json($jsonresponse,200);
   }
 
+  public function iniciar(Request $request){
+    $user   =Auth::user();
+
+   DB::beginTransaction();
+     try{
+
+       $ejercicio=DB::select("select duracion
+                                from ejercicios
+                                where id = :id",
+                             ['id'=>$request->id])[0];
+
+       $idejeruser=DB::table('ejercicios_user')->insertGetId([
+            'ejercicio_id'=>$request->id,
+            'fecha_creacion'=>date('Y-m-d H:i:s'),
+            'user_id'=>$user->id
+          ]);
+
+        $preguntas=DB::select("select p.id,p.nombre,p.tipo,p.descripcion,p.textorellenar,0 as idunica
+                                from preguntas p
+                                where ejercicio_id = :ejercicio_id
+                                order by p.id",
+                              ['ejercicio_id'=>$request->id]);
+
+        foreach($preguntas as $preg){
+          $respuestas=DB::select("select pregunta_id,id,puntaje,seleccion as option,false as seleccion,respuesta,relacionar,'' as relacionar2
+                                  from respuestas
+                                  where pregunta_id= :pregunta_id"
+                             ,['pregunta_id'=>$preg->id]);
+          $preg->respuestas=$respuestas;
+        }
+
+       DB::commit();
+       return response()->json([
+           'idejeruser' =>$idejeruser,
+           'preguntas' => $preguntas,
+           'duracion'=>$ejercicio->duracion
+       ]);
+     }
+     catch(\Exception $e){
+         Log::info('iniciar ejercicio : '.$e->getMessage());
+         DB::rollback();
+         //$e->getMessage();
+
+         return response()->json([
+             'error' =>'Hubo una inconsistencias al intentar iniciar la prueba'
+         ], 400);
+     }
+
+  }
+
+  public function finalizar(Request $request){
+
+    DB::beginTransaction();
+    try{
+
+      $estado='CA';
+      foreach($request->examen as $examen){
+        foreach($examen['respuestas'] as $resp){
+          $puntaje=0;
+          /*si tiene una respuesta de tipo abierta, queda pendiente por calificar
+          por el profesor*/
+          if($examen['tipo']=='abierta'){
+            $estado='PC';
+
+            DB::table('respuestas_user')->insert([
+              'ejerciciouser_id'=>$request->idejeruser,
+              'preguntas_id'=>$resp['pregunta_id'],
+              'respuesta_id'=>$resp['id'],
+              'respuesta'=>$resp['respuesta'],
+            ]);
+          }
+
+          if($examen['tipo']=='unica'){
+            $seleccion=($resp['id']==$examen['idunica']) ? true : false;
+            if($resp['option']==$seleccion)$puntaje=$resp['puntaje'];
+
+
+            DB::table('respuestas_user')->insert([
+              'ejerciciouser_id'=>$request->idejeruser,
+              'preguntas_id'=>$resp['pregunta_id'],
+              'respuesta_id'=>$resp['id'],
+              'respuesta'=>$resp['respuesta'],
+              'seleccion'=>$seleccion,
+              'puntaje'=>$puntaje
+            ]);
+          }
+
+          if($examen['tipo']=='multiple'){
+            if($resp['option']==$resp['seleccion'])$puntaje=$resp['puntaje'];
+
+            DB::table('respuestas_user')->insert([
+              'ejerciciouser_id'=>$request->idejeruser,
+              'preguntas_id'=>$resp['pregunta_id'],
+              'respuesta_id'=>$resp['id'],
+              'respuesta'=>$resp['respuesta'],
+              'seleccion'=>$resp['seleccion'],
+              'puntaje'=>$puntaje
+            ]);
+          }
+
+          if($examen['tipo']=='relacionar'){
+            if($resp['relacionar']==$resp['relacionar2'])$puntaje=$resp['puntaje'];
+
+            DB::table('respuestas_user')->insert([
+              'ejerciciouser_id'=>$request->idejeruser,
+              'preguntas_id'=>$resp['pregunta_id'],
+              'respuesta_id'=>$resp['id'],
+              'respuesta'=>$resp['respuesta'],
+              'relacionar'=>$resp['relacionar2'],
+              'puntaje'=>$puntaje
+            ]);
+          }
+
+          if($examen['tipo']=='rellenar'){
+            if($resp['relacionar']==$resp['relacionar2'])$puntaje=$resp['puntaje'];
+
+            DB::table('respuestas_user')->insert([
+              'ejerciciouser_id'=>$request->idejeruser,
+              'preguntas_id'=>$resp['pregunta_id'],
+              'respuesta_id'=>$resp['id'],
+              'respuesta'=>$resp['respuesta'],
+              'relacionar'=>$resp['relacionar2'],
+              'puntaje'=>$puntaje
+            ]);
+          }
+        }
+      }
+
+      $calificacion=DB::select("select sum(puntaje) as puntaje
+                                  from respuestas_user
+                                  where ejerciciouser_id= :ejerciciouser_id",
+                            ['ejerciciouser_id'=>$request->idejeruser])[0];
+
+      DB::table('ejercicios_user')->where('id',$request->idejeruser)->update([
+        'estado'=>$estado,
+        'calificacion'=>$calificacion->puntaje
+      ]);
+
+      $msj2="";
+      if($estado=='PC'){
+        $msj2 .="Tu nota parcial es: ".$calificacion->puntaje;
+        $msj2 .=",con preguntas pendientes por calificar";
+      }else{
+        $msj2 .="Tu nota es: ".$calificacion->puntaje;
+      }
+
+      DB::commit();
+      return response()->json([
+          'message' => 'Finalizaste la prueba!',
+          'message2' =>$msj2
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('creacion ejercicio : '.$e->getMessage());
+        DB::rollback();
+        //$e->getMessage();
+
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar enviar la prueba'.$e->getMessage()
+        ], 400);
+    }
+
+  }
 
   //guardar un nuevo modulo de un curso
   public function guardar(Request $request){
@@ -121,7 +284,7 @@ class EjerciciosController extends Controller
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'fecha_inicio' =>'required',
-      'duracion' =>'required|integer|min:10'
+      'duracion' =>'required|integer|min:1'
     ]);
 
     if ($validator->fails()) {
@@ -177,7 +340,7 @@ class EjerciciosController extends Controller
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'fecha_inicio' =>'required',
-      'duracion' =>'required|integer|min:10'
+      'duracion' =>'required|integer|min:1'
     ]);
 
     if ($validator->fails()) {

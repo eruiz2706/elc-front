@@ -100,6 +100,27 @@ class TareasController extends Controller
     return view('backend.modulos.tareas.view_entrega',compact('curso','tab_tar','idcurso','id'));
   }
 
+  function view_listaent($idcurso,$id){
+    $tab_tar='';
+    $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if(!in_array($rol,['pr','es'])){
+      return view('layouts.errors.access_denied');
+    }
+    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
+                          from cursos c
+                          left join users u on(c.user_id=u.id)
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
+     if(empty($curso)){
+       return view('layouts.errors.not_page');
+     }
+
+    $curso  =$curso[0];
+    if($rol=='pr')return view('backend.modulos.tareas.view_listent',compact('id','curso','tab_tar'));
+
+  }
+
   ############################## METODOS ##############################
   public function lista(Request $request){
 
@@ -124,11 +145,36 @@ class TareasController extends Controller
     return response()->json($jsonresponse,200);
   }
 
+  public function listaent(Request $request){
+
+    $tarea   =DB::select("select
+                             t.nombre
+                             from tareas t
+                             where t.id= :id",
+                             ['id'=>$request->id])[0];
+
+
+   $tareas   =DB::select("select
+                            tu.id as ident,u.nombre,tu.respuesta,tu.calificacion as notaes,tu.comentario,tu.estado,t.calificacion
+                            from tareas_user tu
+                            left join tareas t on(tu.tarea_id=t.id)
+                            left join users u on(tu.user_id=u.id)
+                            where t.id= :id",
+                            ['id'=>$request->id]);
+    $jsonresponse=[
+        'tarea'=>$tarea,
+        'tareas'=>$tareas
+    ];
+    return response()->json($jsonresponse,200);
+  }
+
   public function lista_es(Request $request){
-    $tareas   =DB::select("select id,nombre,fecha_vencimiento,calificacion,fecha_creacion,descripcion
-                              from tareas
+    $tareas   =DB::select("select t.id,t.nombre,t.fecha_vencimiento,t.calificacion,t.fecha_creacion,t.descripcion,
+                              tu.calificacion as notaes,tu.respuesta,tu.comentario,tu.estado
+                              from tareas t
+                              left join tareas_user tu on(t.id=tu.tarea_id)
                               where curso_id = :curso_id
-                              order by fecha_creacion desc",
+                              order by t.fecha_creacion desc",
                           ['curso_id'=>$request->idcurso]);
     $jsonresponse=[
         'tareas'=>$tareas
@@ -251,15 +297,62 @@ class TareasController extends Controller
 
   public function editent($id){
     $tarea   =DB::select("select
-                            id,nombre,calificacion,fecha_vencimiento,descripcion
-                            from tareas
-                            where id = :id",
+                            t.id,t.nombre,t.calificacion,t.fecha_vencimiento,t.descripcion,
+                            tu.calificacion as notaes,tu.respuesta,tu.comentario,
+                            case when tu.id is null then true else false end entrega
+                            from tareas t
+                            left join tareas_user tu on(t.id=tu.tarea_id)
+                            where t.id = :id",
                           ['id'=>$id])[0];
     $jsonresponse=[
         'tarea'=>$tarea
     ];
     return response()->json($jsonresponse,200);
   }
+
+  public function revision(Request $request){
+    $tarea   =DB::select("select
+                            tu.id,tu.respuesta,tu.comentario,tu.calificacion as notaes,t.calificacion as notasobre
+                            from tareas_user tu
+                            left join tareas t on(tu.tarea_id=t.id)
+                            where tu.id = :id",
+                          ['id'=>$request->id])[0];
+    $jsonresponse=[
+        'tarea'=>$tarea
+    ];
+    return response()->json($jsonresponse,200);
+  }
+
+  public function updrevision(Request $request){
+    $user   =Auth::user();
+
+    ############guardar datos ########
+    DB::beginTransaction();
+    try{
+
+      DB::table('tareas_user')->where('id',$request->id)->update([
+        'comentario'=>$request->comentario,
+        'calificacion' =>$request->notaes,
+        'estado' =>'CA'
+      ]);
+
+      DB::commit();
+      return response()->json([
+          'message' => 'Actualizacion correctamente!',
+          'message2' => 'Click para continuar!'
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('creacion tarea : '.$e->getMessage());
+        DB::rollback();
+        //$e->getMessage();
+
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar crear el registro'.$e->getMessage()
+        ], 400);
+    }
+  }
+
 
   public function entregar(Request $request){
     $user   =Auth::user();

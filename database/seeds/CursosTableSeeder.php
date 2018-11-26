@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Curso;
+use App\Models\Estados;
 
 class CursosTableSeeder extends Seeder
 {
@@ -51,6 +52,23 @@ class CursosTableSeeder extends Seeder
             'urlvideo'=>'https://www.youtube.com/embed/YqvBGgMW-3U',
             'imagen'=>'img/cursos/curso_4.jpg',
             'fecha_creacion'=>date('Y-m-d')
+        ]);
+
+        /*estados de un curso*/
+        Estados::create([
+            'tipo'=>'cursos',
+            'slug' =>'abierto',
+            'nombre'=>'Abierto'
+        ]);
+        Estados::create([
+            'tipo'=>'cursos',
+            'slug' =>'encurso',
+            'nombre'=>'En curso'
+        ]);
+        Estados::create([
+            'tipo'=>'cursos',
+            'slug' =>'finalizado',
+            'nombre'=>'Finalizado'
         ]);
     }
 }

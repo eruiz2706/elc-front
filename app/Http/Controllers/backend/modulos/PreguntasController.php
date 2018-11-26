@@ -114,7 +114,7 @@ class PreguntasController extends Controller
         'nombre'=>$request->nombre,
         'descripcion'=>$request->descripcion,
         'tipo'=>$request->tipo,
-        'textorellenar'=>$request->texto_rellenar,
+        'textorellenar'=>nl2br($request->texto_rellenar),
         'fecha_creacion'=>date('Y-m-d H:i:s'),
         'user_id'=>$user->id
       ]);
@@ -137,7 +137,7 @@ class PreguntasController extends Controller
             'pregunta_id'=>$idpregunta,
             'seleccion'=>$seleccion,
             'puntaje'=>$res['puntaje'],
-            'respuesta'=>$res['respuesta'],
+            'respuesta'=>nl2br($res['respuesta']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
             'user_id'=>$user->id
           ]);
@@ -150,7 +150,7 @@ class PreguntasController extends Controller
             'pregunta_id'=>$idpregunta,
             'seleccion'=>$res['option'],
             'puntaje'=>$res['puntaje'],
-            'respuesta'=>$res['respuesta'],
+            'respuesta'=>nl2br($res['respuesta']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
             'user_id'=>$user->id
           ]);
@@ -162,8 +162,8 @@ class PreguntasController extends Controller
           DB::table('respuestas')->insert([
             'pregunta_id'=>$idpregunta,
             'puntaje'=>$res['puntaje'],
-            'respuesta'=>$res['respuesta'],
-            'relacionar'=>$res['relacionar'],
+            'respuesta'=>nl2br($res['respuesta']),
+            'relacionar'=>nl2br($res['relacionar']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
             'user_id'=>$user->id
           ]);
@@ -175,7 +175,8 @@ class PreguntasController extends Controller
           DB::table('respuestas')->insert([
             'pregunta_id'=>$idpregunta,
             'puntaje'=>$res['puntaje'],
-            'respuesta'=>$res['respuesta'],
+            'respuesta'=>nl2br($res['respuesta']),
+            'relacionar'=>nl2br($res['relacionar']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
             'user_id'=>$user->id
           ]);
@@ -258,7 +259,7 @@ class PreguntasController extends Controller
         'nombre'=>$request->nombre,
         'descripcion'=>$request->descripcion,
         'tipo'=>$request->tipo,
-        'textorellenar'=>$request->texto_rellenar,
+        'textorellenar'=>nl2br($request->texto_rellenar),
       ]);
 
       DB::table('respuestas')->where([
@@ -283,7 +284,7 @@ class PreguntasController extends Controller
             'pregunta_id'=>$request->id,
             'seleccion'=>$seleccion,
             'puntaje'=>$res['puntaje'],
-            'respuesta'=>$res['respuesta'],
+            'respuesta'=>nl2br($res['respuesta']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
             'user_id'=>$user->id
           ]);
@@ -296,7 +297,7 @@ class PreguntasController extends Controller
             'pregunta_id'=>$request->id,
             'seleccion'=>$res['option'],
             'puntaje'=>$res['puntaje'],
-            'respuesta'=>$res['respuesta'],
+            'respuesta'=>nl2br($res['respuesta']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
             'user_id'=>$user->id
           ]);
@@ -308,8 +309,8 @@ class PreguntasController extends Controller
           DB::table('respuestas')->insert([
             'pregunta_id'=>$request->id,
             'puntaje'=>$res['puntaje'],
-            'respuesta'=>$res['respuesta'],
-            'relacionar'=>$res['relacionar'],
+            'respuesta'=>nl2br($res['respuesta']),
+            'relacionar'=>nl2br($res['relacionar']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
             'user_id'=>$user->id
           ]);
@@ -321,7 +322,8 @@ class PreguntasController extends Controller
           DB::table('respuestas')->insert([
             'pregunta_id'=>$request->id,
             'puntaje'=>$res['puntaje'],
-            'respuesta'=>$res['respuesta'],
+            'respuesta'=>nl2br($res['respuesta']),
+            'relacionar'=>nl2br($res['relacionar']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
             'user_id'=>$user->id
           ]);

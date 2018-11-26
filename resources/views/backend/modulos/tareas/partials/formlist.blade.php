@@ -37,7 +37,7 @@
         <b>Califacion Sobre :</b> @{{tarea.calificacion}}
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Entregas :</b> @{{tarea.cant_respuest}}/@{{cantUser}}
+        <i class="fa fa-list-alt" style="cursor:pointer" v-on:click.prevent="redirectEnt(tarea.id)"></i> <b>Entregas :</b> @{{tarea.cant_respuest}}/@{{cantUser}}
       </div>
     </div>
 </div>

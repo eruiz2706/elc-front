@@ -18,7 +18,7 @@
       <tbody>
         <tr v-for='(fila,index) in a_resp_unica'>
           <td>&nbsp;&nbsp;
-              <input type="radio" class="form-check-input float-center" v-bind:id="fila.id" v-bind:value="fila.id" v-model='radio_unica'>
+              <input type="radio" v-bind:id="fila.id" v-bind:value="fila.id" v-model='radio_unica'>
           </td>
           <td>
             <textarea class="form-control" rows="2" cols="100" v-model='fila.respuesta'></textarea>

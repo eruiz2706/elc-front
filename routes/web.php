@@ -112,17 +112,23 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('lecciones/guardar', 'backend\modulos\LeccionesController@guardar');
   Route::post('lecciones/actualizar', 'backend\modulos\LeccionesController@actualizar');
 
+
   Route::get('tareas/{idcurso}','backend\modulos\TareasController@view_lista');
   Route::get('tareas/v_crear/{idcurso}', 'backend\modulos\TareasController@view_crear');
   Route::get('tareas/v_editar/{idcurso}/{id}', 'backend\modulos\TareasController@view_editar');
   Route::get('tareas/v_entrega/{idcurso}/{id}', 'backend\modulos\TareasController@view_entrega');
+  Route::get('tareas/v_listaent/{idcurso}/{id}', 'backend\modulos\TareasController@view_listaent');
   Route::post('tareas/lista', 'backend\modulos\TareasController@lista');
   Route::post('tareas/lista_es', 'backend\modulos\TareasController@lista_es');
+  Route::post('tareas/listaent', 'backend\modulos\TareasController@listaent');
   Route::post('tareas/guardar', 'backend\modulos\TareasController@guardar');
   Route::get('tareas/editar/{id}', 'backend\modulos\TareasController@editar');
   Route::get('tareas/editent/{id}', 'backend\modulos\TareasController@editent');
   Route::post('tareas/actualizar', 'backend\modulos\TareasController@actualizar');
   Route::post('tareas/entregar', 'backend\modulos\TareasController@entregar');
+  Route::post('tareas/revision', 'backend\modulos\TareasController@revision');
+  Route::post('tareas/updrevision', 'backend\modulos\TareasController@updrevision');
+
 
   Route::get('ejercicios/{idcurso}','backend\modulos\EjerciciosController@view_lista');
   Route::get('ejercicios/v_crear/{idcurso}', 'backend\modulos\EjerciciosController@view_crear');
@@ -132,6 +138,8 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('ejercicios/guardar', 'backend\modulos\EjerciciosController@guardar');
   Route::get('ejercicios/editar/{id}', 'backend\modulos\EjerciciosController@editar');
   Route::post('ejercicios/actualizar', 'backend\modulos\EjerciciosController@actualizar');
+  Route::post('ejercicios/iniciar', 'backend\modulos\EjerciciosController@iniciar');
+  Route::post('ejercicios/finalizar', 'backend\modulos\EjerciciosController@finalizar');
 
   Route::get('preguntas/editar/{id}', 'backend\modulos\PreguntasController@editar');
   Route::get('preguntas/{idcurso}/{idejerc}','backend\modulos\PreguntasController@view_lista');

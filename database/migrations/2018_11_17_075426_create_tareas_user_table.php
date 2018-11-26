@@ -20,6 +20,7 @@ class CreateTareasUserTable extends Migration
           $table->text('respuesta')->nullable();
           $table->text('comentario')->nullable();
           $table->double('calificacion')->unsigned()->default(0);
+          $table->string('estado',15)->default('PC');
           $table->dateTime('fecha_creacion');
           $table->integer('user_id')->unsigned()->index();
           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
