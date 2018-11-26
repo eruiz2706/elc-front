@@ -16,29 +16,29 @@
             Ingresar <i class="fa fa-folder-open" style="font-size:20px"></i>
       </button>
     </div>
-    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectAbrir(curso.id)">@{{curso.nombre}}</h5>
+    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectAbrir(curso.id)" v-text='curso.nombre'></h5>
     <div class='row'>
       <div class="col-md-4 col-sm-6">
-        <b>Creado :</b> @{{curso.fecha_creacion}}
+        <b>Creado :</b> <span v-text='curso.fecha_creacion'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Inicia :</b> @{{curso.fecha_inicio}}
+        <b>Inicia :</b> <span v-text='curso.fecha_inicio'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Finaliza :</b> @{{curso.fecha_finalizacion}}
+        <b>Finaliza :</b> <span v-text='curso.fecha_finalizacion'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Limite notas :</b> @{{curso.fecha_limite}}
+        <b>Limite notas :</b> <span v-text='curso.fecha_limite'></span>
       </div>
       <div class="col-md-4 col-sm-6">
         <b>Visibilidad :</b>
         <span class="badge bg-success" v-if="curso.visibilidad">Publico</span>
-        <span class="badge bg-danger" v-if="!curso.visibilidad">Privado</span>
+        <span class="badge bg-danger" v-else>Privado</span>
       </div>
       <div class="col-md-4 col-sm-6">
         <b>Inscripcion :</b>
         <span class="badge bg-success" v-if="curso.inscripcion">Estudiante</span>
-        <span class="badge bg-info" v-if="!curso.inscripcion">Administrador</span>
+        <span class="badge bg-info" v-else>Administrador</span>
       </div>
     </div>
 </div>

@@ -1,9 +1,7 @@
 
 <div class="card">
   <div class="card-header card-header-cuorse">
-    <h2 class="card-title-course">
-      @{{o_curso.nombre}}
-    </h2>
+    <h2 class="card-title-course" v-text='o_curso.nombre'></h2>
   </div>
 
   <div class="card-body" >
@@ -18,30 +16,39 @@
       <!-- /.col -->
       <div class="col-md-4">
         <div class="table-responsive">
-          <table class="table">
+          <table class="table no-border">
             <tbody>
             <tr>
                 <td>
-                    <img src="{{ URL::asset('rsc/dist/img/photo3.jpg') }}" alt="Ample Admin" class="media-object" style="width: 150px;height: auto;border-radius: 4px;box-shadow: 0 1px 3px rgba(0,0,0,.15);">
+                    <img v-bind:src="base_url+'/'+o_curso.imagen"  alt="Ample Admin" class="media-object" style="width: 100%;height: auto;border-radius: 4px;box-shadow: 0 1px 3px rgba(0,0,0,.15);">
                 </td>
             </tr>
             <tr>
-              <th>FECHA INICIO</th>
+              <td>
+                <p style='padding:0px'><strong>FECHA INICIO</strong></p>
+                <span v-text='o_curso.fecha_inicio'></span>
+              </td>
             </tr>
             <tr>
-              <td>@{{o_curso.fecha_inicio}}</td>
+              <td>
+                <p><strong>FECHA FINALIZACION</strong></p>
+                <span v-text='o_curso.fecha_finalizacion'></span>
+              </td>
             </tr>
             <tr>
-              <th>FECHA FINALIZACION</th>
-            </tr>
-            <tr>
-              <td>@{{o_curso.fecha_finalizacion}}</td>
-            </tr>
-            <tr>
-              <th colspan='2'>
-                <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" :disabled="loader_suscrip" v-on:click.prevent="suscribirse()">
-                <i class="fa fa-thumbs-o-up"></i> Unirse
-                <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_suscrip"></i>
+              <th colspan='2' v-if='!subscrip'>
+                <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" :disabled="loader_suscrip" v-on:click.prevent="suscribirse()" v-if="o_curso.estado=='abierto'">
+                  <i class="fa fa-thumbs-o-up"></i> Unirse
+                  <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_suscrip"></i>
+                </button>
+
+                <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" disabled v-else>
+                  <i class="fa fa-close"></i> Cerrado
+                </button>
+              </td>
+              <th colspan='2' v-else>
+                <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" disabled>
+                  <i class="fa fa-thumbs-o-up"></i> Suscrito
                 </button>
               </td>
             </tr>

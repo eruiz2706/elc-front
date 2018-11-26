@@ -16,7 +16,7 @@ class OfertadosController extends Controller
     public function index(Request $request){
       $rol  =Session::get('rol');
       if($rol !='es'){
-        echo "no pertenece a ningun rol redireccionar";
+        return view('layouts.errors.access_denied');
       }
       return view('backend.modulos.ofertados.viewlist_es');
     }
@@ -24,7 +24,7 @@ class OfertadosController extends Controller
     public function verCurso(Request $request,$id){
       $rol  =Session::get('rol');
       if($rol !='es'){
-        echo "no pertenece a ningun rol redireccionar";
+        return view('layouts.errors.access_denied');
       }
       $idcurso=$id;
       return view('backend.modulos.ofertados.viewdet_es',compact('idcurso'));
@@ -34,8 +34,9 @@ class OfertadosController extends Controller
     public function listacursos(Request $request){
       $id       =Auth::user()->id;
       $cursos   =DB::select("select
-                              id,nombre,imagen
-                              from cursos
+                              c.id,c.nombre,c.imagen,e.nombre as nombestado
+                              from cursos c
+                              left join estados e on(c.estado=e.slug and e.tipo='cursos')
                               where visibilidad=true
                               ");
       $jsonresponse=[
@@ -45,14 +46,27 @@ class OfertadosController extends Controller
     }
 
     public function edit_curso($id){
+      $user     =Auth::user();
+      $subscrip =false;
+      $validasub=DB::select("select curso_id
+                            from cursos_user
+                            where user_id = :user_id and curso_id = :curso_id",
+                            ['user_id'=>$user->id,'curso_id'=>$id]);
+
+      if(!empty($validasub)){
+        $validasub=$validasub[0];
+        $subscrip =($validasub->curso_id==$id) ? true : false;
+      }
+
       $curso   =DB::select("select
-                              c.id,c.nombre,c.imagen,c.plan_estudio,c.urlvideo,
+                              c.id,c.nombre,c.imagen,c.plan_estudio,c.urlvideo,c.estado,
                               c.fecha_inicio,c.fecha_finalizacion,u.imagen as img_usercrea
                               from cursos c
                               left join users u on(c.user_id=u.id)
                               where c.visibilidad=true and c.id = :id",['id'=>$id])[0];
       $jsonresponse=[
-          'curso'=>$curso
+          'curso'=>$curso,
+          'subscrip'=>$subscrip
       ];
       return response()->json($jsonresponse,200);
     }
@@ -89,7 +103,7 @@ class OfertadosController extends Controller
         Session::put('navcursos',$cursos);
 
         return response()->json([
-            'message' => 'Se ha registrado correctamente!',
+            'message' => 'Tu subscripcion se realizo correctamente!',
             'message2' => 'Click para continuar!'
         ]);
       }

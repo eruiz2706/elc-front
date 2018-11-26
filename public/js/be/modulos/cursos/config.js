@@ -14,7 +14,7 @@ jQuery(function (){
   };
 })
 
-new Vue({
+var curso_config=new Vue({
     el : '#vue',
     ready: function(){
     },
@@ -63,7 +63,7 @@ new Vue({
                 text:response.data.message2,
                 type: "success"
             },function(){
-              location.reload();
+              curso_config.getConfig();
             });
         }).catch(error =>{
             this.loader_updplan=false;
@@ -89,7 +89,7 @@ new Vue({
                 text:response.data.message2,
                 type: "success"
             },function(){
-              location.reload();
+              curso_config.getConfig();
             });
         }).catch(error =>{
             this.loader_updvideo=false;
@@ -116,7 +116,7 @@ new Vue({
                 text:response.data.message2,
                 type: "success"
             },function(){
-              location.reload();
+              curso_config.getConfig();
             });
         }).catch(error =>{
             this.loader_updlogo=false;

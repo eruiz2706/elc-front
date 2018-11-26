@@ -165,6 +165,16 @@ class CursosController extends Controller
         'user_id'=>$user->id
       ]);
 
+      $fecha  =date('Y-m-d');
+      DB::update("update cursos set estado='abierto'
+                          where fecha_inicio>'$fecha' and id='$idcurso'");
+
+      DB::update("update cursos set estado='encurso'
+                  where '$fecha'>=fecha_inicio and '$fecha'<=fecha_finalizacion  and id='$idcurso'");
+
+      DB::update("update cursos set estado='finalizado'
+                  where '$fecha'>=fecha_inicio and '$fecha'>fecha_finalizacion  and id='$idcurso'");
+
       if($idprof !=''){
         DB::table('cursos_user')->insert([
           'user_id'=>$idprof,
@@ -280,7 +290,8 @@ class CursosController extends Controller
 
     DB::beginTransaction();
     try{
-      DB::table('cursos')->where('id',$request->id)->update([
+      $idcurso=$request->id;
+      DB::table('cursos')->where('id',$idcurso)->update([
         'nombre'=>$request->nombre,
         'fecha_inicio'=>$request->fecha_inicio,
         'fecha_finalizacion'=>$request->fecha_finalizacion,
@@ -290,15 +301,26 @@ class CursosController extends Controller
         'userm_id'=>$user->id
       ]);
 
+      $fecha  =date('Y-m-d');
+      DB::update("update cursos set estado='abierto'
+                          where fecha_inicio>'$fecha' and id='$idcurso'");
+
+      DB::update("update cursos set estado='encurso'
+                  where '$fecha'>=fecha_inicio and '$fecha'<=fecha_finalizacion  and id='$idcurso'");
+
+      DB::update("update cursos set estado='finalizado'
+                  where '$fecha'>=fecha_inicio and '$fecha'>fecha_finalizacion  and id='$idcurso'");
+
+
       DB::table('cursos_user')->where([
-        ['curso_id','=',$request->id],
+        ['curso_id','=',$idcurso],
         ['slugrol','=','pr']
         ])->delete();
 
       if($idprof !=''){
         DB::table('cursos_user')->insert([
           'user_id'=>$idprof,
-          'curso_id'=>$request->id,
+          'curso_id'=>$idcurso,
           'slugrol'=>'pr',
           'fecha_creacion'=>date('Y-m-d H:i:s')
         ]);
@@ -306,7 +328,7 @@ class CursosController extends Controller
       if($idprof2 !=''){
         DB::table('cursos_user')->insert([
           'user_id'=>$idprof2,
-          'curso_id'=>$request->id,
+          'curso_id'=>$idcurso,
           'slugrol'=>'pr',
           'fecha_creacion'=>date('Y-m-d H:i:s')
         ]);

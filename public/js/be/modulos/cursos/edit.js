@@ -1,5 +1,5 @@
 
-new Vue({
+var curso_edit=new Vue({
     el : '#vue',
     ready: function(){
 
@@ -43,8 +43,7 @@ new Vue({
                 text:response.data.message2,
                 type: "success"
             },function(){
-              var id=document.getElementById('id').value;
-              window.location.href=base_url+'/cursos/v_editar/'+id;
+              curso_edit.getCurso();
             });
         }).catch(error =>{
             this.loader_actualizar=false;

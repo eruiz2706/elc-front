@@ -27,8 +27,8 @@
 
             <div class="comment-text">
               <span class="username">
-                @{{comentario.nombre}}
-                <span class="text-muted float-right">@{{comentario.fecha_creacion}}</span>
+                <span v-text='comentario.nombre'></span>
+                <span class="text-muted float-right" v-text='comentario.fecha_creacion'></span>
               </span><!-- /.username -->
               <p v-html = "comentario.descripcion"></p>
             </div>
@@ -53,7 +53,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <textarea class="form-control" rows="3" placeholder="Escribe tu comentario aqui" name='p_descripcion' v-model="o_publicar.comentario"  v-bind:class="[e_publicar.comentario ? 'is-invalid' : '']"></textarea>
-          <span class="text-danger" v-if="e_publicar.comentario">@{{ e_publicar.comentario[0] }}</span>
+          <span class="text-danger" v-if="e_publicar.comentario" v-text='e_publicar.comentario[0]'></span>
         </div>
       </div>
     </div>
@@ -74,13 +74,17 @@
   <div class="card-header">
     <div class="user-block">
       <img class="user-img-foro img-circle"  v-bind:class="border(foro.role)"  v-bind:src="base_url+'/'+foro.imagenuser" alt="User Image">
-      <span class="username">@{{foro.nombreuser}}</span>
-      <span class="description">@{{foro.fecha_creacion}}</span>
+      <span class="username" v-text='foro.nombreuser'></span>
+      <span class="description" v-text='foro.fecha_creacion'></span>
     </div>
   </div>
   <div class="card-body">
     <p v-html = "foro.descripcion"></p>
-    <span class="float-right text-muted"><a href="#" v-on:click.prevent="openComentarios(foro.id,indexforo)">@{{foro.comentarios}} comentarios</a></span>
+    <span class="float-right text-muted">
+      <a href="#" v-on:click.prevent="openComentarios(foro.id,indexforo)">
+        <span v-text='foro.comentarios'></span> comentarios
+      </a>
+    </span>
   </div>
   <div class="card-footer">
       <div class="img-push">

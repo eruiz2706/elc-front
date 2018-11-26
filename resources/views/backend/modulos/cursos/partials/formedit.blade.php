@@ -15,37 +15,37 @@
       <div class="form-group">
         <label>Nombre <code>*</code></label>
         <input type="text" class="form-control" name='nombre'  v-model='o_curso.nombre' v-bind:class="[e_curso.nombre ? 'is-invalid' : '']">
-        <span class="text-danger" v-if="e_curso.nombre">@{{ e_curso.nombre[0] }}</span>
+        <span class="text-danger" v-if="e_curso.nombre" v-text='e_curso.nombre[0]'></span>
       </div>
 
       <div class="form-group">
         <label>Fecha de Inicio <code>*</code></label>
         <input type="date" class="form-control" name='fecha_inicio' v-model='o_curso.fecha_inicio'  v-bind:class="[e_curso.fecha_inicio ? 'is-invalid' : '']">
-        <span class="text-danger" v-if="e_curso.fecha_inicio">@{{ e_curso.fecha_inicio[0] }}</span>
+        <span class="text-danger" v-if="e_curso.fecha_inicio" v-text='e_curso.fecha_inicio[0]'></span>
       </div>
 
       <div class="form-group">
         <label>Fecha de Finalizacion <code>*</code></label>
         <input type="date" class="form-control" name='fecha_finalizacion' v-model='o_curso.fecha_finalizacion'  v-bind:class="[e_curso.fecha_finalizacion ? 'is-invalid' : '']">
-        <span class="text-danger" v-if="e_curso.fecha_finalizacion">@{{ e_curso.fecha_finalizacion[0] }}</span>
+        <span class="text-danger" v-if="e_curso.fecha_finalizacion" v-text='e_curso.fecha_finalizacion[0]'></span>
       </div>
 
       <div class="form-group">
         <label>Fecha limite ver notas <code>*</code></label>
         <input type="date" class="form-control" name='fecha_limite' v-model='o_curso.fecha_limite'  v-bind:class="[e_curso.fecha_limite ? 'is-invalid' : '']">
-        <span class="text-danger" v-if="e_curso.fecha_limite">@{{ e_curso.fecha_limite[0] }}</span>
+        <span class="text-danger" v-if="e_curso.fecha_limite" v-text='e_curso.fecha_limite[0]'></span>
       </div>
 
       <div class="form-group">
         <label>Profesor(email)</label>
         <input type="text" class="form-control" name='profesor' v-model='o_curso.profesor'  v-bind:class="[e_curso.profesor ? 'is-invalid' : '']">
-        <span class="text-danger" v-if="e_curso.profesor">@{{ e_curso.profesor[0] }}</span>
+        <span class="text-danger" v-if="e_curso.profesor" v-text='e_curso.profesor[0]'></span>
       </div>
 
       <div class="form-group">
         <label>Profesor2(email)</label>
         <input type="text" class="form-control" name='profesor2' v-model='o_curso.profesor2'  v-bind:class="[e_curso.profesor2 ? 'is-invalid' : '']">
-        <span class="text-danger" v-if="e_curso.profesor2">@{{ e_curso.profesor2[0] }}</span>
+        <span class="text-danger" v-if="e_curso.profesor2" v-text='e_curso.profesor2[0]'></span>
       </div>
 
       <div class='form-group'>

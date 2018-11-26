@@ -1,5 +1,5 @@
 
-new Vue({
+var ofertado_det=new Vue({
     el : '#vue',
     ready: function(){
 
@@ -14,6 +14,7 @@ new Vue({
       id_curso :0,
       o_curso:{},
       preload :false,
+      subscrip:false
     },
     computed : {
 
@@ -24,16 +25,29 @@ new Vue({
           var url =base_url+'/ofertados/e_curso/'+this.id_curso;
           axios.get(url,{}).then(response =>{
               this.o_curso=response.data.curso;
+              this.subscrip=response.data.subscrip;
               this.preload=false;
-              console.log(this.o_curso);
           }).catch(error =>{
               this.preload=false;
               console.log(error.response.data);
           });
       },
       suscribirse:function(){
+        swal({
+          title: "Seguro deseas suscribirte",
+          text: "",
+          type: "info",
+          showCancelButton: true,
+          confirmButtonClass: "btn-success",
+          confirmButtonText: "Aceptar",
+          closeOnConfirm: true
+        },
+        function(){
+          ofertado_det.enviarSuscripcion();
+        });
+      },
+      enviarSuscripcion:function(){
         this.loader_suscrip=true;
-
         var url =base_url+'/ofertados/suscrip';
         axios.post(url,{idcurso:this.id_curso}).then(response =>{
             this.loader_suscrip=false;
@@ -42,7 +56,7 @@ new Vue({
                 text:response.data.message2,
                 type: "success"
             },function(){
-              window.location.href=base_url+'/ofertados';
+                window.location.href=base_url+'/ofertados';
             });
         }).catch(error =>{
             this.loader_suscrip=false;

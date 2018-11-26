@@ -14,13 +14,13 @@
         <div class="col-md-12">
           <div class="form-group">
               <input type="password" class="form-control" placeholder="Contraseña" v-model='o_cambiocl.password' v-bind:class="[e_cambiocl.password ? 'is-invalid' : '']">
-              <span class="text-danger" v-if="e_cambiocl.password">@{{ e_cambiocl.password[0] }}</span>
+              <span class="text-danger" v-if="e_cambiocl.password" v-text='e_cambiocl.password[0]'></span>
           </div>
         </div>
         <div class="col-md-12">
           <div class="form-group">
               <input type="password" class="form-control" placeholder="Confirmar contraseña"  v-model='o_cambiocl.repassword' v-bind:class="[e_cambiocl.repassword ? 'is-invalid' : '']">
-              <span class="text-danger" v-if="e_cambiocl.repassword">@{{ e_cambiocl.repassword[0] }}</span>
+              <span class="text-danger" v-if="e_cambiocl.repassword" v-text='e_cambiocl.repassword[0]'></span>
           </div>
         </div>
       </div>
@@ -45,7 +45,7 @@
               <tr>
                 <td colspan='2'>
                   <p><strong>Nombre:</strong></p>
-                  <span v-if='!modo_edit'>@{{o_user.nombre}}</span>
+                  <span v-if='!modo_edit' v-text='o_user.nombre'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
                         <input type="text" class="form-control" v-model="o_user.nombre">
@@ -56,7 +56,7 @@
               <tr>
                 <td colspan='2'>
                   <p><strong>Telefono:</strong></p>
-                  <span v-if='!modo_edit'>@{{o_user.telefono}}</span>
+                  <span v-if='!modo_edit' v-text='o_user.telefono'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
                         <input type="text" class="form-control" v-model="o_user.telefono">
@@ -67,7 +67,7 @@
               <tr>
                 <td colspan='2'>
                   <p><strong>Ciudad:</strong></p>
-                  <span v-if='!modo_edit'>@{{o_user.ciudad}}</span>
+                  <span v-if='!modo_edit' v-text='o_user.ciudad'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
                         <input type="text" class="form-control" v-model="o_user.ciudad">
@@ -78,7 +78,7 @@
               <tr>
                 <td colspan='2'>
                   <p><strong>Direccion:</strong></p>
-                  <span v-if='!modo_edit'>@{{o_user.direccion}}</span>
+                  <span v-if='!modo_edit' v-text='o_user.direccion'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
                         <input type="text" class="form-control" v-model="o_user.direccion">
@@ -89,13 +89,13 @@
               <tr>
                 <td colspan='2'>
                   <p><strong>Email:</strong></p>
-                  <span>@{{o_user.email}}</span>
+                  <span v-text='o_user.email'></span>
                 </td>
               </tr>
               <tr>
                 <td colspan='2'>
                   <p><strong>Facebook:</strong></p>
-                  <span v-if='!modo_edit'>@{{o_user.facebook}}</span>
+                  <span v-if='!modo_edit' v-text='o_user.facebook'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
                         <input type="text" class="form-control" v-model="o_user.facebook">
@@ -106,7 +106,7 @@
               <tr>
                 <td colspan='2'>
                   <p><strong>Linkedin:</strong></p>
-                  <span v-if='!modo_edit'>@{{o_user.linkedin}}</span>
+                  <span v-if='!modo_edit'  v-text='o_user.linkedin'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
                         <input type="text" class="form-control" v-model="o_user.linkedin">
@@ -117,7 +117,7 @@
               <tr>
                 <td colspan='2'>
                   <p><strong>Biografia:</strong></p>
-                  <span v-if='!modo_edit'>@{{o_user.biografia}}</span>
+                  <span v-if='!modo_edit' v-text='o_user.biografia'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
                         <textarea class="form-control" rows="3" v-model="o_user.biografia"></textarea>
