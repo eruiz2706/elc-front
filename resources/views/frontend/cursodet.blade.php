@@ -35,9 +35,7 @@
 				<div class="col-lg-8">
 
 					<div class="course_container">
-						<div class="course_title">
-              @{{o_curso.nombre}}
-            </div>
+						<div class="course_title" v-text='o_curso.nombre'></div>
 
 						<!-- Course Image -->
 						<div class="course_image">
@@ -76,7 +74,7 @@
                 <div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
                   <div class="teacher_image"><img v-bind:src="base_url+'/'+o_curso.imgusucrea" alt=""></div>
                   <div class="teacher_title">
-                    <div class="teacher_name"><a href="#">@{{o_curso.usercrea}}</div>
+                    <div class="teacher_name"><a href="#"><span v-text='o_curso.usercrea'></span></div>
                     <!--<div class="teacher_position">Marketing & Management</div>-->
                   </div>
                 </div>
@@ -87,7 +85,7 @@
 						<div class="sidebar_section">
 							<div class="sidebar_section_title">{{ trans('frontend.page_coursedet.feature') }}</div>
 							<div class="sidebar_feature">
-								<div class="course_price">Abierto</div>
+								<div class="course_price" v-text='o_curso.nombestado'></div>
 
 								<!-- Features -->
 								<div class="feature_list">
@@ -95,13 +93,13 @@
 									<!-- Feature -->
                   <div class="feature d-flex flex-row align-items-center justify-content-start">
 										<div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ trans('frontend.page_coursedet.start_date') }}</span></div>
-										<div class="feature_text ml-auto">@{{o_curso.fecha_inicio}}</div>
+										<div class="feature_text ml-auto" v-text='o_curso.fecha_inicio'></div>
 									</div>
 
                   <!-- Feature -->
 									<div class="feature d-flex flex-row align-items-center justify-content-start">
 										<div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ trans('frontend.page_coursedet.end_date') }}</span></div>
-										<div class="feature_text ml-auto">@{{o_curso.fecha_inicio}}</div>
+										<div class="feature_text ml-auto" v-text='o_curso.fecha_inicio'></div>
 									</div>
                 </div>
                 <BR>

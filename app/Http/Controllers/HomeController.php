@@ -31,10 +31,13 @@ class HomeController extends Controller
     public function index()
     {
       $cursos   =DB::select("select
-                              c.id,c.nombre,c.imagen,u.nombre as usercrea
+                              c.id,c.nombre,c.imagen,u.nombre as usercrea,
+                              e.nombre as nomestado
                               from cursos c
                               left join users u on(c.user_id=u.id)
+                              left join estados e on(c.estado=e.slug and e.tipo='cursos')
                               where visibilidad=true
+                              order by fecha_creacion desc
                               limit 3");
 
       Auth::logout();
@@ -49,31 +52,27 @@ class HomeController extends Controller
 
     public function cursos($estado=''){
       $fecha  =date('Y-m-d');
+
+      $select_curso  =DB::select("select e.slug,e.nombre
+                            from estados e
+                            where e.tipo='cursos'");
+
       $cursos=DB::table('cursos as c')
-                  ->join('users as u', 'c.user_id', '=', 'u.id');
+                  ->leftjoin('users as u', 'c.user_id', '=', 'u.id')
+                  ->leftJoin('estados as e','c.estado', '=', 'e.slug')
+                  ->where('e.tipo','cursos');
 
 
-      if($estado =='AB'){
-        $cursos =$cursos->where('c.fecha_inicio','<',$fecha);
-      }
-      if($estado =='EC'){
-        $cursos =$cursos->where('c.fecha_finalizacion','<=',$fecha);
-      }
-      if($estado =='FI'){
-        $cursos =$cursos->where('c.fecha_finalizacion','>',$fecha);
+      if($estado != ''){
+        $cursos =$cursos->where('c.estado','=',$estado);
       }
 
       $cursos =$cursos->where('visibilidad',true)
-                  ->select("CASE
-                            WHEN c.fecha_inicio>'$fecha' THEN 'Abierto'
-                            WHEN '$fecha'>=c.fecha_inicio and '$fecha'<=c.fecha_finalizacion THEN 'En curso'
-                            WHEN '$fecha'>=c.fecha_inicio and '$fecha'>c.fecha_finalizacion THEN 'Finalizado'
-                            END AS estado",
-                            'c.id','c.nombre', 'c.imagen', 'u.nombre as usercrea')
+                  ->select('e.nombre as nomestado','c.id','c.nombre', 'c.imagen', 'u.nombre as usercrea')
                   ->paginate(6);
 
       $link_curs='';
-      return view('frontend.cursos',compact('link_curs','cursos'));
+      return view('frontend.cursos',compact('link_curs','cursos','select_curso'));
     }
 
     public function cursosdet($id){
@@ -141,9 +140,10 @@ class HomeController extends Controller
       $curso   =DB::select("select
                               c.id,c.nombre,c.imagen,u.nombre as usercrea,c.urlvideo,
                               c.plan_estudio,u.imagen as imgusucrea,c.fecha_inicio,
-                              c.fecha_finalizacion
+                              c.fecha_finalizacion,e.nombre as nombestado
                               from cursos c
                               left join users u on(c.user_id=u.id)
+                              left join estados e on(c.estado=e.slug and e.tipo='cursos')
                               where visibilidad=true and c.id = :id",['id'=>$id]);
 
       if(!empty($curso)){

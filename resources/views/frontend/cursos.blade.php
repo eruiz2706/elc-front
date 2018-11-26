@@ -47,11 +47,11 @@
           <form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
             <select id="courses_search_select" class="courses_search_select courses_search_input">
               <option value=''>Seleccione el estado</option>
-              <option value='AB'>Abierto</option>
-              <option value='EC'>En curso</option>
-              <option value='FI'>Finalizado</option>
+              @foreach($select_curso as $select)
+                <option value='{{$select->slug}}'>{{$select->nombre}}</option>
+              @endforeach
             </select>
-            <button action="submit" class="courses_search_button ml-auto">{{ trans('frontend.page_courses.button_search') }}</button>
+            <button type='button' onclick="busqueda();" class="courses_search_button ml-auto">{{ trans('frontend.page_courses.button_search') }}</button>
           </form>
         </div>
 
@@ -71,7 +71,7 @@
                 <div class="course_body">
                   <h3 class="course_title"><a href="{{url('cursodet/'.$curso->id)}}">{{$curso->nombre}}</a></h3>
                   <div class="course_teacher">{{$curso->usercrea}}</div>
-                  <div class="course_price ml-auto">Abierto</div>
+                  <div class="course_price ml-auto">{{$curso->nomestado}}</div>
                 </div>
               </div>
             </div>
@@ -115,5 +115,9 @@
 
 <!-- Newsletter -->
 @include('frontend.partials.newsletter')
-
 @endsection
+
+@section('scripts')
+  @parent
+  <script src="{{ URL::asset('js/fe/curso.js') }}"></script>
+@stop
