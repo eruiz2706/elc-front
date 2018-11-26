@@ -29,8 +29,10 @@ class Kernel extends ConsoleKernel
        if (!File::exists($cronLog)) {
            File::put($cronLog, '');
        }
+
+        /*ejecutar todos los dias a las 12:01 de media noche*/
         $schedule->command('command:update_estado_curso')
-        ->everyMinute()
+        ->dailyAt('00:01');
         ->timezone('America/Bogota')
         ->withoutOverlapping()
         ->appendOutputTo($cronLog);

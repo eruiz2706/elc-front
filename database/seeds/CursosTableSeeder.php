@@ -20,7 +20,7 @@ class CursosTableSeeder extends Seeder
             'fecha_inicio'=>'2018-10-01',
             'fecha_finalizacion'=>'2018-10-15',
             'urlvideo'=>'https://www.youtube.com/embed/6f1sjIhI2Ww',
-            'imagen'=>'img/cursos/curso_1.jpg',
+            'imagen'=>'img/app/curso.jpg',
             'fecha_creacion'=>date('Y-m-d')
         ]);
         Curso::create([
@@ -30,7 +30,7 @@ class CursosTableSeeder extends Seeder
             'fecha_inicio'=>'2018-10-16',
             'fecha_finalizacion'=>'2018-11-01',
             'urlvideo'=>'https://www.youtube.com/embed/r-Kb8SrR5LQ',
-            'imagen'=>'img/cursos/curso_2.jpg',
+            'imagen'=>'img/app/curso.jpg',
             'fecha_creacion'=>date('Y-m-d')
         ]);
         Curso::create([
@@ -40,7 +40,7 @@ class CursosTableSeeder extends Seeder
             'fecha_inicio'=>'2018-11-02',
             'fecha_finalizacion'=>'2018-11-20',
             'urlvideo'=>'https://www.youtube.com/embed/iFHWC3S2vXY',
-            'imagen'=>'img/cursos/curso_3.jpg',
+            'imagen'=>'img/app/curso.jpg',
             'fecha_creacion'=>date('Y-m-d')
         ]);
         Curso::create([
@@ -50,7 +50,7 @@ class CursosTableSeeder extends Seeder
             'fecha_inicio'=>'2018-11-21',
             'fecha_finalizacion'=>'2018-12-10',
             'urlvideo'=>'https://www.youtube.com/embed/YqvBGgMW-3U',
-            'imagen'=>'img/cursos/curso_4.jpg',
+            'imagen'=>'img/app/curso.jpg',
             'fecha_creacion'=>date('Y-m-d')
         ]);
 
