@@ -155,7 +155,8 @@ class EjerciciosController extends Controller
 
    $ejercicios   =DB::select("select
                             eu.id as ident,u.nombre,eu.calificacion as notaes,
-                            ej.calificacion,es.nombre as nombestado,es.status
+                            ej.calificacion,es.nombre as nombestado,es.status,
+                            es.slug as slugstatus
                             from ejercicios_user eu
                             left join ejercicios ej on(eu.ejercicio_id=ej.id)
                             left join users u on(eu.user_id=u.id)
@@ -171,7 +172,8 @@ class EjerciciosController extends Controller
 
   public function revision(Request $request){
     $ejercicio   =DB::select("select
-                                pe.nombre,pe.descripcion,ru.id,ru.respuesta,ru.puntaje
+                                pe.nombre,pe.descripcion,ru.id,ru.respuesta,ru.puntaje,pe.calificacion as notapreg,
+                                0 as calificacion
                               from respuestas_user ru
                               left join preguntas pe on(ru.preguntas_id=pe.id)
                               where ejerciciouser_id= :id and pe.tipo='abierta'",
@@ -180,6 +182,48 @@ class EjerciciosController extends Controller
         'ejercicio'=>$ejercicio
     ];
     return response()->json($jsonresponse,200);
+  }
+
+  public function updrevision(Request $request){
+    $user   =Auth::user();
+
+    ############guardar datos ########
+    DB::beginTransaction();
+    try{
+
+      foreach($request->revision as $revision){
+        DB::table('respuestas_user')->where('id',$revision['id'])->update([
+          'puntaje'=>$revision['calificacion']
+        ]);
+      }
+
+      $calificacion=DB::select("select sum(puntaje) as puntaje
+                                  from respuestas_user
+                                  where ejerciciouser_id= :ejerciciouser_id",
+                            ['ejerciciouser_id'=>$request->idejeruser])[0];
+
+      DB::table('ejercicios_user')->where('id',$request->idejeruser)->update([
+        'estado'=>'calificado',
+        'calificacion'=>$calificacion->puntaje
+      ]);
+
+      DB::commit();
+      return response()->json([
+          'message' => 'Actualizacion correctamente!',
+          'message2' => 'Click para continuar!'
+      ]);
+
+
+    }
+    catch(\Exception $e){
+        Log::info('creacion tarea : '.$e->getMessage());
+        DB::rollback();
+        //$e->getMessage();
+
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar crear el registro'.$e->getMessage()
+        ], 400);
+    }
   }
 
   public function iniciar(Request $request){

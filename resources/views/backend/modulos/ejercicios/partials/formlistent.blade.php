@@ -13,11 +13,18 @@
         </div>
 
         <div v-for='revision in a_revision'>
-          <strong v-text="revision.nombre"></strong>
-          <p v-html="revision.descripcion"></p>
-          <p text="revision.respuesta"></p>
           <div class="form-group">
-            <p v-text='revision.nombre'></p>
+            <label>Pregunta</label>
+            <p v-text="revision.nombre"></p>
+            <p v-html="revision.descripcion"></p>
+          </div>
+          <div class="form-group">
+            <label>Respuesta</label>
+            <p v-html="revision.respuesta"></p>
+          </div>
+          <div class="form-group">
+            <label>Calificaion sobre <span v-text="revision.notapreg"></span></label>
+            <input type="number" name="calificacion" min="0" max="1000" class="form-control" v-model='revision.calificacion'>
           </div>
           <hr>
         </div>
@@ -56,7 +63,7 @@
   <div class="card-header no-border">
     <h5 class="card-title" style='cursor:pointer'  v-text='ejercicio.nombre'></h5>
     <div class="card-tools">
-      <button type="button" class="btn btn-tool" v-on:click.prevent="openRevisar(ejercicio.ident)">
+      <button type="button" class="btn btn-tool" v-on:click.prevent="openRevisar(ejercicio.ident)" v-if="ejercicio.slugstatus !='calificado'">
         <i class="fa  fa-eye" style="font-size: 20px;"></i>
       </button>
     </div>

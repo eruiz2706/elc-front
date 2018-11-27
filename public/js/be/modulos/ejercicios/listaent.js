@@ -68,10 +68,11 @@ new Vue({
         });
       },
       updrevision:function(){
-        /*this.loader_revision=true;
-        var url =base_url+'/tareas/updrevision';
-        axios.post(url,this.o_revision).then(response =>{
+        this.loader_revision=true;
+        var url =base_url+'/ejercicios/updrevision';
+        axios.post(url,{revision:this.a_revision,idejeruser:this.o_revision.id}).then(response =>{
             this.loader_revision=false;
+            this.a_revision=[];
             this.o_revision={};
             $('#modal_revision').modal('hide');
             this.listado();
@@ -90,7 +91,7 @@ new Vue({
                   "timeOut": "2500"
               });
             }
-        });*/
+        });
       }
     }
 });

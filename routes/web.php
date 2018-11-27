@@ -143,6 +143,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('ejercicios/iniciar', 'backend\modulos\EjerciciosController@iniciar');
   Route::post('ejercicios/finalizar', 'backend\modulos\EjerciciosController@finalizar');
   Route::post('ejercicios/revision', 'backend\modulos\EjerciciosController@revision');
+  Route::post('ejercicios/updrevision', 'backend\modulos\EjerciciosController@updrevision');
 
   Route::get('preguntas/editar/{id}', 'backend\modulos\PreguntasController@editar');
   Route::get('preguntas/{idcurso}/{idejerc}','backend\modulos\PreguntasController@view_lista');
