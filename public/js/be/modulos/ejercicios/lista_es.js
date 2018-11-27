@@ -5,7 +5,6 @@ var v_ejercicio=new Vue({
     created : function(){
       this.idcurso=document.getElementById('idcurso').value;
       this.listado();
-      console.log('fafd');
     },
     data : {
       idcurso : 0,
@@ -39,7 +38,17 @@ var v_ejercicio=new Vue({
             }
         });
       },
-      comenzar:function(id){
+      comenzar:function(id,status_user){
+
+        if(status_user==true){
+          swal({
+            title: "Ya realizaste la prueba",
+            text: "click para continuar",
+            type: "info"
+          });
+          return;
+        }
+
         swal({
           title: "Seguro deseas comenzar",
           text: "",
@@ -86,11 +95,12 @@ var v_ejercicio=new Vue({
         axios.post(url,{idejeruser:this.idejeruser,examen:this.a_examen}).then(response =>{
             this.loader_finalizar=false;
             $('#modal_ejercicio').modal('hide');
-            v_ejercicio.listado();
             swal({
                 title:response.data.message,
                 text:response.data.message2,
                 type: "success"
+            },function(){
+              location.reload();
             });
         }).catch(error =>{
             this.loader_finalizar=false;

@@ -21,7 +21,7 @@
 
 <div class="card" v-if="!preload" v-for="pregunta in a_preguntas">
   <div class="card-header no-border">
-    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(pregunta.id)">@{{pregunta.nombre}}</h5>
+    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(pregunta.id)" v-text='pregunta.nombre'></h5>
     <div class="card-tools">
       <button type="button" class="btn btn-tool" v-on:click.prevent="redirectEdit(pregunta.id)">
         <i class="fa  fa-pencil" style="font-size: 20px;"></i>
@@ -30,13 +30,13 @@
 
     <div class='row'>
       <div class="col-md-4 col-sm-6">
-        <b>Tipo :</b> @{{pregunta.tipo}}
+        <b>Tipo :</b> <span v-text='pregunta.tipo'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Creado :</b> @{{pregunta.fecha_creacion}}
+        <b>Creado :</b> <span v-text='pregunta.fecha_creacion'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Puntaje :</b> @{{pregunta.puntaje}}
+        <b>Puntaje :</b> <span v-text='pregunta.puntaje'></span>
       </div>
     </div>
 </div>

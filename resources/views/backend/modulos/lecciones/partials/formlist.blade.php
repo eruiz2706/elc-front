@@ -22,14 +22,14 @@
     <div class="form-group">
     <select class="form-control" name="select_mod" v-model='idmodulo' @change="busqueda_modulo">
       <option v-bind:value='0'>Seleccione un modulo</option>
-      <option v-bind:value='s_mod.id' v-for='s_mod in select_mod'>@{{s_mod.nombre}}</option>
+      <option v-bind:value='s_mod.id' v-for='s_mod in select_mod' v-text='s_mod.nombre'></option>
     </select>
     </div>
   </div>
 </div>
 <div class="card" v-if="!preload" v-for="leccion in a_leccion">
   <div class="card-header no-border">
-    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(leccion.id)">Leccion @{{leccion.numero}}</h5>
+    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(leccion.id)">Leccion <span v-text='leccion.numero'></span></h5>
     <div class="card-tools">
       <button type="button" class="btn btn-tool" v-on:click.prevent="redirectEdit(leccion.id)">
         <i class="fa  fa-pencil" style='font-size:20px'></i>
@@ -38,16 +38,16 @@
 
     <div class='row'>
       <div class="col-md-4 col-sm-6">
-        <b>Nombre :</b> @{{leccion.nombre}}
+        <b>Nombre :</b> <span v-text='leccion.nombre'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Creado :</b> @{{leccion.fecha_creacion}}
+        <b>Creado :</b> <span v-text='leccion.fecha_creacion'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Tiempo de lectura :</b> @{{leccion.tiempolectura}} minutos
+        <b>Tiempo de lectura :</b> <span v-text='leccion.tiempolectura'></span> minutos
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Modulo :</b> @{{leccion.nommod}}
+        <b>Modulo :</b> <span v-text='leccion.nommod'></span>
       </div>
     </div>
   </div>

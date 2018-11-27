@@ -58,7 +58,7 @@ class CursosTableSeeder extends Seeder
         Estados::create([
             'tipo'=>'cursos',
             'slug' =>'abierto',
-            'nombre'=>'Abierto'
+            'nombre'=>'Abierto',
         ]);
         Estados::create([
             'tipo'=>'cursos',
@@ -69,6 +69,43 @@ class CursosTableSeeder extends Seeder
             'tipo'=>'cursos',
             'slug' =>'finalizado',
             'nombre'=>'Finalizado'
+        ]);
+        Estados::create([
+            'tipo'=>'tareas',
+            'slug' =>'pendiente',
+            'nombre'=>'Pendiente',
+            'status'=>'danger'
+        ]);
+        Estados::create([
+            'tipo'=>'tareas',
+            'slug' =>'entregado',
+            'nombre'=>'Pendiente por calificar',
+            'status'=>'info'
+        ]);
+        Estados::create([
+            'tipo'=>'tareas',
+            'slug' =>'calificado',
+            'nombre'=>'Calificado',
+            'status'=>'success'
+        ]);
+
+        Estados::create([
+            'tipo'=>'ejercicios',
+            'slug' =>'pendiente',
+            'nombre'=>'Pendiente',
+            'status'=>'danger'
+        ]);
+        Estados::create([
+            'tipo'=>'ejercicios',
+            'slug' =>'entregado',
+            'nombre'=>'Pendiente por calificar',
+            'status'=>'info'
+        ]);
+        Estados::create([
+            'tipo'=>'ejercicios',
+            'slug' =>'calificado',
+            'nombre'=>'Calificado',
+            'status'=>'success'
         ]);
     }
 }

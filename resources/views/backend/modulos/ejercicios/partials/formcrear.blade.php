@@ -20,19 +20,19 @@
     <div class="form-group">
       <label>Nombre <code>*</code></label>
       <input type="text" class="form-control" name='nombre'  v-model='o_ejercicio.nombre' v-bind:class="[e_ejercicio.nombre ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_ejercicio.nombre">@{{ e_ejercicio.nombre[0] }}</span>
+      <span class="text-danger" v-if="e_ejercicio.nombre" v-text='e_ejercicio.nombre[0]'></span>
     </div>
 
     <div class="form-group">
       <label>Fecha de Inicio <code>*</code></label>
       <input type="date" class="form-control" name='fecha_inicio' v-model='o_ejercicio.fecha_inicio'  v-bind:class="[e_ejercicio.fecha_inicio ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_ejercicio.fecha_inicio">@{{ e_ejercicio.fecha_inicio[0] }}</span>
+      <span class="text-danger" v-if="e_ejercicio.fecha_inicio" v-text='e_ejercicio.fecha_inicio[0]'></span>
     </div>
 
     <div class="form-group">
     <label>Duracion(Minutos) <code>*</code></label>
       <input type="number" class="form-control" name='duracion' min="0" max="1000"  v-model='o_ejercicio.duracion'  v-bind:class="[e_ejercicio.duracion ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_ejercicio.duracion">@{{ e_ejercicio.duracion[0] }}</span>
+      <span class="text-danger" v-if="e_ejercicio.duracion" v-text='e_ejercicio.duracion[0]'></span>
     </div>
 
     <div class="form-group">

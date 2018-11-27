@@ -69,6 +69,24 @@ class CreateTrigger extends Migration
             ON respuestas FOR EACH ROW
             EXECUTE PROCEDURE respuestas();
       ');
+
+      /*
+      */
+      DB::unprepared('
+      CREATE OR REPLACE FUNCTION ejercicios_user() RETURNS TRIGGER AS $ejercicios_user$
+        DECLARE
+        BEGIN
+        update ejercicios set entregas=(select count(id) from ejercicios_user where ejercicio_id=NEW.ejercicio_id)
+        where id=NEW.ejercicio_id;
+
+         RETURN NULL;
+        END;
+      $ejercicios_user$ LANGUAGE plpgsql;
+
+      CREATE TRIGGER ejercicios_user AFTER INSERT OR UPDATE
+          ON ejercicios_user FOR EACH ROW
+          EXECUTE PROCEDURE ejercicios_user();
+      ');
     }
 
     /**
@@ -81,5 +99,6 @@ class CreateTrigger extends Migration
         DB::unprepared('DROP TRIGGER `tareas_user`');
         DB::unprepared('DROP TRIGGER `preguntas`');
         DB::unprepared('DROP TRIGGER `respuestas`');
+        DB::unprepared('DROP TRIGGER `ejercicios_user`');
     }
 }

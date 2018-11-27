@@ -8,21 +8,21 @@
 
 <div class="card" v-if="!preload" v-for="tarea in a_tareas">
   <div class="card-header no-border">
-    <h5 class="card-title">@{{tarea.nombre}}</h5>
+    <h5 class="card-title" v-text='tarea.nombre'></h5>
 
     <div class='row'>
       <div class="col-md-4 col-sm-6">
-        <b><i class="fa  fa-clock-o"></i> Vence :</b> @{{tarea.fecha_vencimiento}}
+        <b><i class="fa  fa-clock-o"></i> Vence :</b> <span v-text='tarea.fecha_vencimiento'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Calificacion Sobre :</b> @{{tarea.calificacion}}
+        <b>Calificacion Sobre :</b> <span v-text='tarea.calificacion'></span>
       </div>
       <div class="col-md-4 col-sm-6">
         <b>Estado :</b>
-        <small class="badge badge-danger">@{{tarea.estado}}</small>
+        <small v-bind:class="'badge badge-'+tarea.status"><span v-text='tarea.nombestado'></span></small>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Nota : @{{tarea.notaes}}</b>
+        <b>Nota : <span v-text='tarea.notaes'></span></b>
       </div>
     </div>
   </div>

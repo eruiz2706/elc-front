@@ -19,7 +19,7 @@
 
 <div class="card" v-if="!preload" v-for="ejercicio in a_ejercicios">
   <div class="card-header no-border">
-    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(ejercicio.id)">@{{ejercicio.nombre}}</h5>
+    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(ejercicio.id)" v-text='ejercicio.nombre'></h5>
     <div class="card-tools">
       <div class="btn-group">
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectEdit(ejercicio.id)">
@@ -33,22 +33,22 @@
 
     <div class='row'>
       <div class="col-md-4 col-sm-6">
-        <b>Creado :</b> @{{ejercicio.fecha_creacion}}
+        <b>Creado :</b> <span v-text='ejercicio.fecha_creacion'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Inicia :</b> @{{ejercicio.fecha_inicio}}
+        <b>Inicia :</b> <span v-text='ejercicio.fecha_inicio'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Duracion :</b> @{{ejercicio.duracion}} minutos
+        <b>Duracion :</b> <span v-text='ejercicio.duracion'></span> minutos
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Preguntas :</b> @{{ejercicio.cant_preg}}
+        <b>Preguntas :</b> <span v-text='ejercicio.cant_preg'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Nota sobre :</b> @{{ejercicio.notamaxima}}
+        <b>Nota sobre :</b> <span v-text='ejercicio.notamaxima'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Realizado :</b> 0/@{{cantUser}}
+        <i class="fa fa-list-alt" style="cursor:pointer" v-on:click.prevent="redirectEnt(ejercicio.id)"></i> <b>Realizado :</b> <span v-text='ejercicio.entregas'></span>/<span v-text='cantUser'></span>
       </div>
     </div>
 </div>

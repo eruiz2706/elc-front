@@ -18,7 +18,7 @@ class CreateEjerciciosUserTable extends Migration
             $table->integer('ejercicio_id')->unsigned()->index();
             $table->foreign('ejercicio_id')->references('id')->on('ejercicios')->onDelete('cascade');
             $table->double('calificacion')->unsigned()->default(0);
-            $table->string('estado',15)->default('CA');
+            $table->string('estado',15)->default('');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->dateTime('fecha_creacion');

@@ -5,7 +5,6 @@ new Vue({
     created : function(){
       this.idcurso=document.getElementById('idcurso').value;
       this.listado();
-      console.log('fafd');
     },
     data : {
       idcurso : 0,
@@ -43,6 +42,9 @@ new Vue({
       },
       redirectPreguntas:function(id){
         window.location.href=base_url+'/preguntas/'+this.idcurso+'/'+id;
+      },
+      redirectEnt:function(id){
+        window.location.href=base_url+'/ejercicios/v_listaent/'+this.idcurso+'/'+id;
       }
 
     }

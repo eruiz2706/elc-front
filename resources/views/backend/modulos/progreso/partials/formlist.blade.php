@@ -3,12 +3,12 @@
   <div class="card-header no-border">
     <h3 class="card-title" >
       <div class="progress-group">
-          Modulo @{{progreso.numero}} : @{{progreso.nombre}}
+          Modulo <span v-text='progreso.numero'></span> : <span v-text='progreso.nombre'></span>
           <span class="float-right">
-            @{{progreso.cantlec_leidas}}/<b>@{{progreso.cantlec}}</b>
+            <span v-text='progreso.cantlec_leidas'></span>/<b><span v-text='progreso.cantlec'></span></b>
           </span>
           <div class="progress">
-            <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progreso.cantlec_leidas,progreso.cantlec)+'%'">Progreso modulo @{{porcent(progreso.cantlec_leidas,progreso.cantlec)}}%</div>
+            <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progreso.cantlec_leidas,progreso.cantlec)+'%'">Progreso modulo <span v-text='porcent(progreso.cantlec_leidas,progreso.cantlec)'></span>%</div>
           </div>
         </div>
     </h3>
@@ -20,17 +20,17 @@
         <div class="card-header" style="padding:.2rem 1.25rem">
           <h5 class="card-title" style="font-size:1rem">
             <a data-toggle="collapse" v-bind:href="'#'+progreso.id+'-'+leccion.id" class="collapsed" aria-expanded="false" v-if="leccion.leido">
-            Leccion @{{leccion.numero}} : @{{leccion.nombre}} <i class="fa fa-check" v-if="leccion.leido"></i>
+            Leccion <span v-text='leccion.numero'></span> : <span v-text='leccion.nombre'></span> <i class="fa fa-check" v-if="leccion.leido"></i>
             </a>
             <small class="badge badge-primary float-right" v-if="leccion.leido">
-              <i class="fa fa-clock-o"></i> @{{leccion.tiempolectura}} minutos
+              <i class="fa fa-clock-o"></i> <span v-text='leccion.tiempolectura'></span> minutos
             </small>
 
             <a data-toggle="collapse" v-bind:href="'#'+progreso.id+'-'+leccion.id" class="collapsed" aria-expanded="false" style='color:grey' v-if="!leccion.leido">
-              Leccion @{{leccion.numero}} : @{{leccion.nombre}} <i class="fa fa-check" v-if="leccion.leido"></i>
+              Leccion <span v-text='leccion.numero'></span> : <span v-text='leccion.nombre'></span> <i class="fa fa-check" v-if="leccion.leido"></i>
             </a>
             <small class="badge badge-default float-right" v-if="!leccion.leido">
-              <i class="fa fa-clock-o"></i> @{{leccion.tiempolectura}} minutos
+              <i class="fa fa-clock-o"></i> <span v-text='leccion.tiempolectura'></span> minutos
             </small>
           </h5>
         </div>

@@ -19,19 +19,19 @@
     <div class="form-group">
       <label>Nombre <code>*</code></label>
       <input type="text" class="form-control" name='nombre'  v-model='o_tarea.nombre' v-bind:class="[e_tarea.nombre ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_tarea.nombre">@{{ e_tarea.nombre[0] }}</span>
+      <span class="text-danger" v-if="e_tarea.nombre" v-text='e_tarea.nombre[0]'></span>
     </div>
 
     <div class="form-group">
     <label>Calificacion sobre <code>*</code></label>
       <input type="number" class="form-control" name='calificacion' min="0" max="1000"  v-model='o_tarea.calificacion' v-bind:class="[e_tarea.calificacion ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_tarea.calificacion">@{{ e_tarea.calificacion[0] }}</span>
+      <span class="text-danger" v-if="e_tarea.calificacion" v-text='e_tarea.calificacion[0]'></span>
     </div>
 
     <div class="form-group">
       <label>Fecha vencimiento <code>*</code></label>
       <input type="date" class="form-control" name='fecha_vencimiento' v-model='o_tarea.fecha_vencimiento'  v-bind:class="[e_tarea.fecha_vencimiento ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_tarea.fecha_vencimiento">@{{ e_tarea.fecha_vencimiento[0] }}</span>
+      <span class="text-danger" v-if="e_tarea.fecha_vencimiento" v-text='e_tarea.fecha_vencimiento[0]'></span>
     </div>
 
     <div class="form-group">

@@ -19,7 +19,7 @@
 
 <div class="card" v-if="!preload" v-for="tarea in a_tareas">
   <div class="card-header no-border">
-    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(tarea.id)">@{{tarea.nombre}}</h5>
+    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(tarea.id)" v-text='tarea.nombre'></h5>
     <div class="card-tools">
       <button type="button" class="btn btn-tool" v-on:click.prevent="redirectEdit(tarea.id)">
         <i class="fa  fa-pencil" style="font-size: 20px;"></i>
@@ -28,16 +28,16 @@
 
     <div class='row'>
       <div class="col-md-4 col-sm-6">
-        <b>Creado :</b> @{{tarea.fecha_creacion}}
+        <b>Creado :</b> <span v-text='tarea.fecha_creacion'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Vence :</b> @{{tarea.fecha_vencimiento}}
+        <b>Vence :</b> <span v-text='tarea.fecha_vencimiento'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Califacion Sobre :</b> @{{tarea.calificacion}}
+        <b>Califacion Sobre :</b> <span v-text='tarea.calificacion'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <i class="fa fa-list-alt" style="cursor:pointer" v-on:click.prevent="redirectEnt(tarea.id)"></i> <b>Entregas :</b> @{{tarea.cant_respuest}}/@{{cantUser}}
+        <i class="fa fa-list-alt" style="cursor:pointer" v-on:click.prevent="redirectEnt(tarea.id)"></i> <b>Entregas :</b> <span v-text='tarea.cant_respuest'></span>/<span v-text='cantUser'></span>
       </div>
     </div>
 </div>

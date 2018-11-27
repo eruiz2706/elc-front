@@ -27,13 +27,13 @@
       <div class="form-group col-md-2 col-sm-4">
         <label>Numero <code>*</code></label>
         <input type="number" step="0.01" class="form-control" name='numero'  v-model='o_modulo.numero' v-bind:class="[e_modulo.numero ? 'is-invalid' : '']">
-        <span class="text-danger" v-if="e_modulo.numero">@{{ e_modulo.numero[0] }}</span>
+        <span class="text-danger" v-if="e_modulo.numero" v-text='e_modulo.numero[0]'></span>
       </div>
 
       <div class="form-group col-md-10 col-sm-12">
         <label>Nombre <code>*</code></label>
         <input type="text" class="form-control" name='nombre'  v-model='o_modulo.nombre' v-bind:class="[e_modulo.nombre ? 'is-invalid' : '']">
-        <span class="text-danger" v-if="e_modulo.nombre">@{{ e_modulo.nombre[0] }}</span>
+        <span class="text-danger" v-if="e_modulo.nombre" v-text='e_modulo.nombre[0]'></span>
       </div>
     </div>
 

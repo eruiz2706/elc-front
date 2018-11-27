@@ -78,6 +78,27 @@ class EjerciciosController extends Controller
     return view('backend.modulos.ejercicios.view_edit',compact('curso','tab_ejer','idcurso','id'));
   }
 
+  function view_listaent($idcurso,$id){
+    $tab_tar='';
+    $user   =Auth::user();
+    $rol    =Session::get('rol');
+    if(!in_array($rol,['pr'])){
+      return view('layouts.errors.access_denied');
+    }
+    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
+                          from cursos c
+                          left join users u on(c.user_id=u.id)
+                          where c.id= :idcurso"
+                     ,['idcurso'=>$idcurso]);
+     if(empty($curso)){
+       return view('layouts.errors.not_page');
+     }
+
+    $curso  =$curso[0];
+    if($rol=='pr')return view('backend.modulos.ejercicios.view_listent',compact('id','curso','tab_ejer'));
+
+  }
+
 
   ############################## METODOS ##############################
   public function lista(Request $request){
@@ -91,7 +112,8 @@ class EjerciciosController extends Controller
     }else{
       $cantUser =0;
     }
-    $ejercicios   =DB::select("select e.id,e.nombre,e.descripcion,e.duracion,e.fecha_inicio,e.fecha_creacion,e.preguntas as cant_preg,e.calificacion as notamaxima
+    $ejercicios   =DB::select("select e.id,e.nombre,e.descripcion,e.duracion,e.fecha_inicio,e.fecha_creacion,e.preguntas as cant_preg,
+                                e.calificacion as notamaxima,e.entregas
                                 from ejercicios e
                                 where e.curso_id = :curso_id",
                               ['curso_id'=>$request->idcurso]);
@@ -104,12 +126,58 @@ class EjerciciosController extends Controller
   }
 
   public function lista_es(Request $request){
-    $ejercicios   =DB::select("select id,nombre,descripcion,duracion,fecha_inicio,fecha_creacion
-                              from ejercicios
-                              where curso_id = :curso_id",
+    $fecha=date('Y-m-d');
+    $ejercicios   =DB::select("select ej.id,ej.nombre,ej.descripcion,ej.duracion,ej.fecha_inicio,ej.fecha_creacion,
+                              case when ej.fecha_inicio='$fecha' then true else false end as statusini,eu.calificacion,
+                              case when es.nombre is null then 'Pendiente' else es.nombre end as nombestado,
+                              case when es.status is null then 'danger' else es.status end as status,
+                              case when eu.id is null then false else true end as status_user
+                              from ejercicios ej
+                              left join ejercicios_user eu on(ej.id=eu.ejercicio_id)
+                              left join estados es on(es.slug=eu.estado and es.tipo='ejercicios')
+                              where ej.curso_id = :curso_id",
                           ['curso_id'=>$request->idcurso]);
+
     $jsonresponse=[
         'ejercicios'=>$ejercicios
+    ];
+    return response()->json($jsonresponse,200);
+  }
+
+  public function listaent(Request $request){
+
+    $ejercicio   =DB::select("select
+                             e.nombre
+                             from ejercicios e
+                             where e.id= :id",
+                             ['id'=>$request->id])[0];
+
+
+   $ejercicios   =DB::select("select
+                            eu.id as ident,u.nombre,eu.calificacion as notaes,
+                            ej.calificacion,es.nombre as nombestado,es.status
+                            from ejercicios_user eu
+                            left join ejercicios ej on(eu.ejercicio_id=ej.id)
+                            left join users u on(eu.user_id=u.id)
+                            left join estados es on(es.slug=eu.estado and es.tipo='ejercicios')
+                            where ej.id= :id",
+                            ['id'=>$request->id]);
+    $jsonresponse=[
+        'ejercicio'=>$ejercicio,
+        'ejercicios'=>$ejercicios
+    ];
+    return response()->json($jsonresponse,200);
+  }
+
+  public function revision(Request $request){
+    $ejercicio   =DB::select("select
+                                pe.nombre,pe.descripcion,ru.id,ru.respuesta,ru.puntaje
+                              from respuestas_user ru
+                              left join preguntas pe on(ru.preguntas_id=pe.id)
+                              where ejerciciouser_id= :id and pe.tipo='abierta'",
+                          ['id'=>$request->id]);
+    $jsonresponse=[
+        'ejercicio'=>$ejercicio
     ];
     return response()->json($jsonresponse,200);
   }
@@ -128,6 +196,7 @@ class EjerciciosController extends Controller
        $idejeruser=DB::table('ejercicios_user')->insertGetId([
             'ejercicio_id'=>$request->id,
             'fecha_creacion'=>date('Y-m-d H:i:s'),
+            'estado'=>'calificado',
             'user_id'=>$user->id
           ]);
 
@@ -169,14 +238,14 @@ class EjerciciosController extends Controller
     DB::beginTransaction();
     try{
 
-      $estado='CA';
+      $estado='calificado';
       foreach($request->examen as $examen){
         foreach($examen['respuestas'] as $resp){
           $puntaje=0;
           /*si tiene una respuesta de tipo abierta, queda pendiente por calificar
           por el profesor*/
           if($examen['tipo']=='abierta'){
-            $estado='PC';
+            $estado='entregado';
 
             DB::table('respuestas_user')->insert([
               'ejerciciouser_id'=>$request->idejeruser,
@@ -253,7 +322,7 @@ class EjerciciosController extends Controller
       ]);
 
       $msj2="";
-      if($estado=='PC'){
+      if($estado=='entregado'){
         $msj2 .="Tu nota parcial es: ".$calificacion->puntaje;
         $msj2 .=",con preguntas pendientes por calificar";
       }else{

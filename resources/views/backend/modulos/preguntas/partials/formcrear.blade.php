@@ -21,7 +21,7 @@
     <div class="form-group">
       <label>Nombre <code>*</code></label>
       <input type="text" class="form-control" name='nombre'  v-model='o_pregunta.nombre' v-bind:class="[e_pregunta.nombre ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_pregunta.nombre">@{{ e_pregunta.nombre[0] }}</span>
+      <span class="text-danger" v-if="e_pregunta.nombre" v-text='e_pregunta.nombre[0]'></span>
     </div>
 
     <div class="form-group">
@@ -39,7 +39,7 @@
         <option value='relacionar'>Relacionar</option>
         <option value='rellenar'>Rellenar</option>
       </select>
-      <span class="text-danger" v-if="e_pregunta.tipo">@{{ e_pregunta.tipo[0] }}</span>
+      <span class="text-danger" v-if="e_pregunta.tipo" v-text='e_pregunta.tipo[0]'></span>
     </div>
 
     @include('backend.modulos.preguntas.partials.formresp')

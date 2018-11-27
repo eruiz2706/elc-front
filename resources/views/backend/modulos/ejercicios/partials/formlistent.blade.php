@@ -12,24 +12,17 @@
           </div>
         </div>
 
-        <label>Descripcion</label>
-      	<p v-html='o_revision.descripcion'></p>
-        <hr>
-
-        <label>Entrega</label>
-      	<p v-html='o_revision.respuesta'></p>
-        <hr>
-
-        <div class="form-group">
-          <label>Calificacion sobre <span v-text='o_revision.notasobre'></span></label>
-          <input type="number" name="calificacion" min="0" max="1000" class="form-control" v-model='o_revision.notaes'>
+        <div v-for='revision in a_revision'>
+          <strong v-text="revision.nombre"></strong>
+          <p v-html="revision.descripcion"></p>
+          <p text="revision.respuesta"></p>
+          <div class="form-group">
+            <p v-text='revision.nombre'></p>
+          </div>
+          <hr>
         </div>
 
-        <label>Comentario</label>
-      	<div class="form-group">
-          <textarea rows="3" placeholder="Escribe tu comentario aqui" name="p_descripcion" class="form-control" v-model='o_revision.comentario'>
-          </textarea>
-        </div>
+
       </div>
 
       <div class='modal-footer'>
@@ -51,7 +44,7 @@
 <div class="row" v-if="!preload">
   <div class="col-sm-6">
     <h5 class="m-0 text-dark">
-      <strong>Entrega: </strong><span v-text="o_tarea.nombre"></span>
+      <strong>Entrega: </strong><span v-text="o_ejercicio.nombre"></span>
       <button type="button" class="btn btn-tool" v-on:click.prevent="redirectVolver()">
         <i class="fa fa-arrow-circle-left"  style="font-size: 24px;"></i>
       </button>
@@ -59,11 +52,11 @@
   </div>
 </div>
 
-<div class="card" v-if="!preload" v-for="tarea in a_tareas">
+<div class="card" v-if="!preload" v-for="ejercicio in a_ejercicios">
   <div class="card-header no-border">
-    <h5 class="card-title" style='cursor:pointer' v-text='tarea.nombre'></h5>
+    <h5 class="card-title" style='cursor:pointer'  v-text='ejercicio.nombre'></h5>
     <div class="card-tools">
-      <button type="button" class="btn btn-tool" v-on:click.prevent="openRevisar(tarea.ident)">
+      <button type="button" class="btn btn-tool" v-on:click.prevent="openRevisar(ejercicio.ident)">
         <i class="fa  fa-eye" style="font-size: 20px;"></i>
       </button>
     </div>
@@ -71,10 +64,10 @@
     <div class='row'>
       <div class="col-md-4 col-sm-6">
         <b>Estado :</b>
-        <small v-bind:class="'badge badge-'+tarea.status"><span v-text='tarea.nombestado'></span></small>
+        <small v-bind:class="'badge badge-'+ejercicio.status"><span v-text='ejercicio.nombestado'></span></small>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Calificacion :</b> <span v-text='tarea.notaes'></span>/<span v-text='tarea.calificacion'></span>
+        <b>Calificacion :</b> <span v-text='ejercicio.notaes'></span>/<span v-text='ejercicio.calificacion'></span>
       </div>
     </div>
 </div>
@@ -84,5 +77,5 @@
 <input type='hidden' name='id' id='id' value="{{$id}}"></input>
 @section('scripts')
 @parent
-<script src="{{ URL::asset('js/be/modulos/tareas/listaent.js') }}"></script>
+<script src="{{ URL::asset('js/be/modulos/ejercicios/listaent.js') }}"></script>
 @stop

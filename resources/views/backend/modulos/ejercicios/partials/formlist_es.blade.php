@@ -112,24 +112,31 @@
 
 <div class="card" v-if="!preload" v-for="ejercicio in a_ejercicios">
   <div class="card-header no-border">
-    <h5 class="card-title">@{{ejercicio.nombre}}</h5>
+    <h5 class="card-title" v-text='ejercicio.nombre'></h5>
 
     <div class='row'>
       <div class="col-md-4 col-sm-6">
-        <b>Inicia :</b> @{{ejercicio.fecha_inicio}}
+        <b>Inicia :</b> <span v-text='ejercicio.fecha_inicio'></span>
       </div>
       <div class="col-md-4 col-sm-6">
-        <b>Duracion :</b> @{{ejercicio.duracion}} minutos
+        <b>Duracion :</b> <span v-text='ejercicio.duracion'></span> minutos
       </div>
       <div class="col-md-4 col-sm-6">
         <b>Estado :</b>
-        <small class="badge badge-danger">Pendiente</small>
+        <small v-bind:class="'badge badge-'+ejercicio.status" v-text='ejercicio.nombestado'></small>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <b>Calificacion :</b>
+        <span v-text='ejercicio.calificacion'></span>
       </div>
     </div>
   </div>
 
   <div class="card-body">
-    <button type="button" class="btn btn-outline-primary btn-sm float-left" v-on:click.prevent="comenzar(ejercicio.id)">
+    <button type="button" class="btn btn-outline-primary btn-sm float-left" v-on:click.prevent="comenzar(ejercicio.id,ejercicio.status_user)" v-if='ejercicio.statusini'>
+      Comenzar
+    </button>
+    <button type="button" class="btn btn-outline-primary btn-sm float-left"  disabled v-else>
       Comenzar
     </button>
   </div>

@@ -18,6 +18,7 @@ class CreateEstadosTable extends Migration
             $table->string('tipo',100)->nullable();
             $table->string('slug',100)->nullable();
             $table->string('nombre',100)->nullable();
+            $table->string('status',100)->nullable();
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@
 <div class="card" v-show="!preload">
   <div class="card-body">
     <label>Descripcion</label>
-  	<p v-html='o_tarea.respuesta'></p>
+  	<p v-html='o_tarea.descripcion'></p>
     <hr>
 
     <label>Respuesta</label>

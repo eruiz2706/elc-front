@@ -24,15 +24,15 @@
             <tr v-for="progmod in a_progmod">
                 <td>
                   <img v-bind:src="base_url+'/'+progmod.imagen"  class="img-circle img-size-32 mr-2">
-                  @{{progmod.nombre}}
+                  <span v-text='progmod.nombre'></span>
                 </td>
                 <td>
-                    <small class="badge badge-success" v-if="estadoporcent(progmod.cantleccuser,progmod.cantlecc)"> Completo @{{progmod.cantleccuser}}/@{{progmod.cantlecc}} </small>
-                    <small class="badge badge-danger" v-if="!estadoporcent(progmod.cantleccuser,progmod.cantlecc)"> Incompleto @{{progmod.cantleccuser}}/@{{progmod.cantlecc}} </small>
+                    <small class="badge badge-success" v-if="estadoporcent(progmod.cantleccuser,progmod.cantlecc)"> Completo <span v-text='progmod.cantleccuser'></span>/<span v-text='progmod.cantlecc'></span></small>
+                    <small class="badge badge-danger" v-if="!estadoporcent(progmod.cantleccuser,progmod.cantlecc)"> Incompleto <span v-text='progmod.cantleccuser'></span>/<span v-text='progmod.cantlecc'></span></small>
                 </td>
                 <td>
                   <div class="progress">
-                    <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progmod.cantleccuser,progmod.cantlecc)+'%'">Progreso @{{porcent(progmod.cantleccuser,progmod.cantlecc)}}%</div>
+                    <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progmod.cantleccuser,progmod.cantlecc)+'%'">Progreso <span v-text='porcent(progmod.cantleccuser,progmod.cantlecc)'></span>%</div>
                   </div>
                 </td>
             </tr>
@@ -49,16 +49,16 @@
   <div class="card-header no-border">
     <h3 class="card-title" >
       <div class="progress-group">
-          Modulo @{{progreso.numero}} : @{{progreso.nombre}}
+          Modulo <span v-text='progreso.numero'></span> : <span v-text='progreso.nombre'></span>
           <span class="float-right">
-            @{{progreso.cant_leccuser}}/<b>@{{progreso.cant_user}}</b>
+            <span v-text='progreso.cant_leccuser'></span>/<b><span v-text='progreso.cant_user'></span></b>
             <button type="button" class="btn btn-tool" data-toggle="modal" v-on:click.prevent="progresomodulo(progreso.id)">
               <i class="fa fa-eye" style='font-size:20px'></i>
             </button>
           </span>
 
           <div class="progress">
-            <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progreso.cant_leccuser,progreso.cant_user)+'%'">Progreso modulo @{{porcent(progreso.cant_leccuser,progreso.cant_user)}}%</div>
+            <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progreso.cant_leccuser,progreso.cant_user)+'%'">Progreso modulo <span v-text='porcent(progreso.cant_leccuser,progreso.cant_user)'></span>%</div>
           </div>
         </div>
     </h3>
@@ -70,10 +70,10 @@
         <div class="card-header" style="padding:.2rem 1.25rem">
           <h5 class="card-title" style="font-size:1rem">
             <a data-toggle="collapse" v-bind:href="'#'+progreso.id+'-'+leccion.id" class="collapsed" aria-expanded="false">
-            Leccion @{{leccion.numero}} : @{{leccion.nombre}}
+            Leccion <span v-text='leccion.numero'></span> : <span v-text='leccion.nombre'></span>
             </a>
             <small class="badge badge-primary float-right">
-              <i class="fa fa-clock-o"></i> @{{leccion.tiempolectura}} minutos
+              <i class="fa fa-clock-o"></i> <span v-text='leccion.tiempolectura'></span> minutos
             </small>
           </h5>
         </div>

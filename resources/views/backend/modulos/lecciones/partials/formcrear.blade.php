@@ -28,21 +28,21 @@
       <label>Modulo <code>*</code></label>
       <select class="form-control" name="select_mod" v-model='o_leccion.modulo' v-bind:class="[e_leccion.modulo ? 'is-invalid' : '']">
         <option v-bind:value="''"> - </option>
-        <option v-bind:value='s_mod.id' v-for='s_mod in select_mod'>@{{s_mod.nombre}}</option>
+        <option v-bind:value='s_mod.id' v-for='s_mod in select_mod' v-text='s_mod.nombre'></option>
       </select>
-      <span class="text-danger" v-if="e_leccion.modulo">@{{ e_leccion.modulo[0] }}</span>
+      <span class="text-danger" v-if="e_leccion.modulo" v-text='e_leccion.modulo[0]'></span>
     </div>
 
     <div class="form-group ">
       <label>Numero <code>*</code></label>
       <input type="number" step="0.01" class="form-control" name='numero'  v-model='o_leccion.numero' v-bind:class="[e_leccion.numero ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_leccion.numero">@{{ e_leccion.numero[0] }}</span>
+      <span class="text-danger" v-if="e_leccion.numero" v-text='e_leccion.numero[0]'></span>
     </div>
 
     <div class="form-group">
       <label>Nombre <code>*</code></label>
       <input type="text" class="form-control" name='nombre'  v-model='o_leccion.nombre' v-bind:class="[e_leccion.nombre ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_leccion.nombre">@{{ e_leccion.nombre[0] }}</span>
+      <span class="text-danger" v-if="e_leccion.nombre" v-text='e_leccion.nombre[0]'></span>
     </div>
 
     <div class="form-group">
