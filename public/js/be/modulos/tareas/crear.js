@@ -26,10 +26,10 @@ new Vue({
             this.e_tarea=[];
             this.o_tarea=this.o_basetarea;
 
-            socket.emit('send_notifi',{
-              'token':'123','mensaje':response.data.message
+            socket.emit('notifi_cli',{
+              'notifi_tk':response.data.notifi_tk
             });
-
+            console.log(response.data.notifi_tk);
             swal({
                 title:response.data.message,
                 text:response.data.message2,

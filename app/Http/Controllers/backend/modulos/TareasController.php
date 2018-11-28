@@ -221,16 +221,26 @@ class TareasController extends Controller
                        ,['idcurso'=>$request->idcurso]);
       $curso  =$curso[0];
 
-      DB::table('notificaciones')->insert([
-        'descripcion'=>'Nueva tarea curso:<strong> '.$curso->nombre.'</strong> fecha de entrega: <strong>'.$request->fecha_vencimiento.'</strong>',
-        'fecha_creacion'=>date('Y-m-d H:i:s'),
-        'user_id'=>$user->id
-      ]);
+      $users_curso   =DB::select("select user_id
+                                  from cursos_user
+                                  where slugrol='es' and curso_id = :curso_id",
+                            ['curso_id'=>$request->idcurso]);
+
+      $notifi_tk=[];
+      foreach ($users_curso as $u_curso) {
+        DB::table('notificaciones')->insert([
+          'descripcion'=>'Nueva tarea curso:<strong> '.$curso->nombre.'</strong> fecha de entrega: <strong>'.$request->fecha_vencimiento.'</strong>',
+          'fecha_creacion'=>date('Y-m-d H:i:s'),
+          'user_id'=>$u_curso->user_id
+        ]);
+        $notifi_tk[]=$u_curso->user_id;
+      }
 
       DB::commit();
       return response()->json([
           'message' => 'Registro creado correctamente!',
-          'message2' => 'Click para continuar!'
+          'message2' => 'Click para continuar!',
+          'notifi_tk'=>$notifi_tk
       ]);
     }
     catch(\Exception $e){

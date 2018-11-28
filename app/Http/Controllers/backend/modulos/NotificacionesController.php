@@ -20,7 +20,7 @@ class NotificacionesController extends Controller
                             where user_id= :user_id and estado=0",
                           ['user_id'=>$user->id])[0];
     $jsonresponse=[
-        'notificaciones'=>$notificaciones->conteo
+        'conteo'=>$notificaciones->conteo
     ];
     return response()->json($jsonresponse,200);
   }

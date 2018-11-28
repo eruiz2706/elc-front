@@ -1,5 +1,3 @@
-
-<script>var base_url = '<?php echo url('/'); ?>';</script>
 <!-- jQuery -->
 <script src="{{ URL::asset('rsc/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -32,59 +30,65 @@
 <!-- vue -->
 <script src="{{ URL::asset('js/vue.js') }}"></script>
 <script src="{{ URL::asset('js/axios.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.0/socket.io.js"></script>
+<script>
+  var base_url = '<?php echo url('/'); ?>';
+  var ident_tk='<?php echo Auth::user()->id; ?>';
+  var url_servinotifi='<?php echo env('URL_SERVINOTIFI'); ?>';
+</script>
+<script>
+var v_notifi=new Vue({
+   el : '#vue-notifi',
+   ready: function(){
+   },
+   created : function(){
+     this.notificaciones();
+   },
+   data : {
 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.0/socket.io.js"></script>
- <script>
-   var socket = io('http://localhost:8081',{ 'forceNew': true });
-   socket.on('get_notifi', function(data) {
-     console.log(data['mensaje']);
+   },
+   computed : {
 
-     var nav_notifi = document.getElementById('nav_notificaciones');
-     if(nav_notifi.innerHTML==''){
-        nav_notifi.innerHTML =1;
-     }else{
-       nav_notifi.innerHTML =parseInt(nav_notifi.innerHTML)+1;
-     }
-   });
- </script>
- <script>
- new Vue({
-     el : '#vue-notifi',
-     ready: function(){
-     },
-     created : function(){
-       this.notificaciones();
-     },
-     data : {
-
-     },
-     computed : {
-
-     },
-     methods : {
-       notificaciones:function(){
-         var url =base_url+'/notificaciones/conteo';
-         axios.post(url,{}).then(response =>{
-           var conteo=response.data.notificaciones;
-           var nav_notifi = document.getElementById('nav_notificaciones');
-           if(nav_notifi.innerHTML==''){
-              nav_notifi.innerHTML =conteo;
-           }else{
-             nav_notifi.innerHTML =parseInt(nav_notifi.innerHTML)+parseInt(conteo);
+   },
+   methods : {
+     notificaciones:function(){
+       var url =base_url+'/notificaciones/conteo';
+       axios.post(url,{}).then(response =>{
+         var conteo=response.data.conteo;
+         var nav_notifi = document.getElementById('nav_notifi');
+         if(conteo>0){
+            nav_notifi.innerHTML =conteo;
+         }
+      }).catch(error =>{
+           this.loader_guardar=false;
+           if(error.response.data.errors){
+             this.e_tarea=error.response.data.errors;
            }
-        }).catch(error =>{
-             this.loader_guardar=false;
-             if(error.response.data.errors){
-               this.e_tarea=error.response.data.errors;
-             }
-             if(error.response.data.error){
-               toastr.error(error.response.data.error,'',{
-                   "timeOut": "2500"
-               });
-             }
+           if(error.response.data.error){
+             toastr.error(error.response.data.error,'',{
+                 "timeOut": "2500"
+             });
+           }
+       });
+     }
+   }
+});
+</script>
+<script>
+ var socket = io(url_servinotifi,{ 'forceNew': true });
+ socket.on('notifi_serve', function(data) {
+  if (typeof data['notifi_tk'] != 'undefined') {
+     var notifi_tk=data['notifi_tk'];
+     for(var i = 0; i < notifi_tk.length;i++){
+       if(notifi_tk[i]==ident_tk){
+         toastr.info('Tienes notificaciones nuevas','',{
+             "timeOut": "3500"
          });
+         v_notifi.notificaciones();
        }
      }
+  }
+
  });
- </script>
+</script>
