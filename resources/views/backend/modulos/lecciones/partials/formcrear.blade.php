@@ -24,6 +24,20 @@
     	</p>
     </div>
 
+    <div class='row'>
+      <div class="form-group col-md-2 col-sm-4">
+        <label>Numero <code>*</code></label>
+        <input type="number" step="0.01" class="form-control" name='numero'  v-model='o_leccion.numero' v-bind:class="[e_leccion.numero ? 'is-invalid' : '']">
+        <span class="text-danger" v-if="e_leccion.numero" v-text='e_leccion.numero[0]'></span>
+      </div>
+
+      <div class="form-group col-md-10 col-sm-12">
+        <label>Nombre <code>*</code></label>
+        <input type="text" class="form-control" name='nombre'  v-model='o_leccion.nombre' v-bind:class="[e_leccion.nombre ? 'is-invalid' : '']">
+        <span class="text-danger" v-if="e_leccion.nombre" v-text='e_leccion.nombre[0]'></span>
+      </div>
+    </div>
+
     <div class="form-group">
       <label>Modulo <code>*</code></label>
       <select class="form-control" name="select_mod" v-model='o_leccion.modulo' v-bind:class="[e_leccion.modulo ? 'is-invalid' : '']">
@@ -31,18 +45,6 @@
         <option v-bind:value='s_mod.id' v-for='s_mod in select_mod' v-text='s_mod.nombre'></option>
       </select>
       <span class="text-danger" v-if="e_leccion.modulo" v-text='e_leccion.modulo[0]'></span>
-    </div>
-
-    <div class="form-group ">
-      <label>Numero <code>*</code></label>
-      <input type="number" step="0.01" class="form-control" name='numero'  v-model='o_leccion.numero' v-bind:class="[e_leccion.numero ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_leccion.numero" v-text='e_leccion.numero[0]'></span>
-    </div>
-
-    <div class="form-group">
-      <label>Nombre <code>*</code></label>
-      <input type="text" class="form-control" name='nombre'  v-model='o_leccion.nombre' v-bind:class="[e_leccion.nombre ? 'is-invalid' : '']">
-      <span class="text-danger" v-if="e_leccion.nombre" v-text='e_leccion.nombre[0]'></span>
     </div>
 
     <div class="form-group">
@@ -66,8 +68,17 @@
 @parent
 <script src="{{ URL::asset('js/be/modulos/lecciones/crear.js') }}"></script>
 <script>
-  $('#summernote').summernote({
-    height: 250
-  });
+$('#summernote').summernote({
+  toolbar: [
+    ['font', ['fontname']],
+    ['para', ['ul', 'ol','paragraph','strikethrough']],
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['height', ['height']],
+    ['groupName', ['picture','link','video','table','hr','fullscreen']],
+  ],
+  height: 350
+});
 </script>
 @stop

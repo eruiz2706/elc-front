@@ -57,8 +57,18 @@
 @parent
 <script src="{{ URL::asset('js/be/modulos/tareas/edit.js') }}"></script>
 <script>
-  $('#summernote').summernote({
-    height: 350
-  });
+$('#summernote').summernote({
+  toolbar: [
+    ['font', ['fontname']],
+    ['para', ['ul', 'ol','paragraph','strikethrough']],
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['height', ['height']],
+    ['groupName', ['picture','link','video','table','hr','fullscreen']],
+  ],
+  height: 250
+});
+
 </script>
 @stop

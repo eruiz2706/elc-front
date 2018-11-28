@@ -88,8 +88,18 @@
 <script>const artyom = new Artyom();</script>
 <script src="{{ URL::asset('js/be/modulos/preguntas/crear.js') }}"></script>
 <script>
-  $('#summernote').summernote({
-    height: 55
-  });
+$('#summernote').summernote({
+  toolbar: [
+    ['font', ['fontname']],
+    ['para', ['ul', 'ol','paragraph','strikethrough']],
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['height', ['height']],
+    ['groupName', ['picture','link','video','table','hr','fullscreen']],
+  ],
+  height: 55
+});
+
 </script>
 @stop

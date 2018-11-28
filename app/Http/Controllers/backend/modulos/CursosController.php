@@ -94,6 +94,16 @@ class CursosController extends Controller
                             where user_id = :user_id
                             order by fecha_creacion desc",
                           ['user_id'=>$user->id]);
+
+    foreach($cursos as $curso){
+      $profesores=DB::select("select us.email
+                                from cursos_user cu
+                                left join users us on(cu.user_id=us.id)
+                                where slugrol='pr' and curso_id= :curso_id",
+                              ['curso_id'=>$curso->id]);
+      $curso->profesores=$profesores;
+    }
+
     $jsonresponse=[
         'cursos'=>$cursos
     ];

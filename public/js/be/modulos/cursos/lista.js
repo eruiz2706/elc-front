@@ -19,6 +19,7 @@ new Vue({
         axios.post(url,{}).then(response =>{
             this.preload=false;
             this.a_cursos=response.data.cursos;
+            console.log(this.a_cursos);
         }).catch(error =>{
             this.preload=false;
             this.a_cursos=[];

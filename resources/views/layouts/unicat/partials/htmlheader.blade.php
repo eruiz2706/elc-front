@@ -13,3 +13,10 @@
 <link rel="stylesheet" href="{{ URL::asset('plugins/toastr/toastr.min.css') }}">
 <!-- swheetalert -->
 <link rel="stylesheet" href="{{ URL::asset('plugins/sweetalert/sweetalert.css') }}">
+<style>
+@media only screen and (min-width: 1024px) {
+  .course_image img{
+    height: 200px;
+  }
+}
+</style>
