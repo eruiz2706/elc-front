@@ -185,3 +185,8 @@
     font-size: .875rem;
     color: black;
 }
+
+/*imagen ofertados*/
+.card-img-top{
+  height: 200px;
+}
