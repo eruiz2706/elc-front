@@ -19,7 +19,7 @@
     </div>
 
     <div class="form-group">
-      <label>Nombre <code>*</code></label>
+      <label>Titulo <code>*</code></label>
       <input type="text" class="form-control" name='nombre'  v-model='o_pregunta.nombre' v-bind:class="[e_pregunta.nombre ? 'is-invalid' : '']">
       <span class="text-danger" v-if="e_pregunta.nombre" v-text='e_pregunta.nombre[0]'></span>
     </div>

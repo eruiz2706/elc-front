@@ -31,7 +31,7 @@
       </div>
 
       <div class="form-group col-md-10 col-sm-12">
-        <label>Nombre <code>*</code></label>
+        <label>Titulo <code>*</code></label>
         <input type="text" class="form-control" name='nombre'  v-model='o_modulo.nombre' v-bind:class="[e_modulo.nombre ? 'is-invalid' : '']">
         <span class="text-danger" v-if="e_modulo.nombre" v-text='e_modulo.nombre[0]'></span>
       </div>

@@ -38,7 +38,7 @@
 
     <div class='row'>
       <div class="col-md-4 col-sm-6">
-        <b>Nombre :</b> <span v-text='leccion.nombre'></span>
+        <b>Titulo :</b> <span v-text='leccion.nombre'></span>
       </div>
       <div class="col-md-4 col-sm-6">
         <b>Creado :</b> <span v-text='leccion.fecha_creacion'></span>

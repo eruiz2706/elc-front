@@ -19,12 +19,11 @@
 
 <div class="card" v-if="!preload" v-for="ejercicio in a_ejercicios">
   <div class="card-header no-border">
-    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(ejercicio.id)" v-text='ejercicio.nombre'></h5>
+    <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectEdit(ejercicio.id)">
+      <span v-text='ejercicio.nombre'></span> <i class="fa  fa-pencil btn-tool" style="font-size: 20px;" v-on:click.prevent="redirectEdit(ejercicio.id)"></i>
+    </h5>
     <div class="card-tools">
       <div class="btn-group">
-        <button type="button" class="btn btn-tool" v-on:click.prevent="redirectEdit(ejercicio.id)">
-          <i class="fa  fa-pencil" style="font-size: 20px;"></i>
-        </button>
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectPreguntas(ejercicio.id)">
           <i class="fa  fa-list-alt" style="font-size: 20px;"></i>
         </button>

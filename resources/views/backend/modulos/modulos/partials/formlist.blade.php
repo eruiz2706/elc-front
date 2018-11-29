@@ -29,7 +29,7 @@
 
     <div class='row'>
       <div class="col-md-4 col-sm-6">
-        <b>Nombre :</b> <span v-text='modulo.nombre'></span>
+        <b>Titulo :</b> <span v-text='modulo.nombre'></span>
       </div>
       <div class="col-md-4 col-sm-6">
         <b>Creado :</b> <span v-text='modulo.fecha_creacion'></span>
