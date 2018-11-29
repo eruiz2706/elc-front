@@ -53,6 +53,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
   //Route::get('storage/{archivo}','backend\StorageController@index');
 
   Route::post('notificaciones/conteo', 'backend\modulos\NotificacionesController@conteo');
+  Route::post('notificaciones/lista', 'backend\modulos\NotificacionesController@lista');
 
   Route::get('foro','backend\modulos\ForoController@index');
   Route::post('foro/data','backend\modulos\ForoController@getData');

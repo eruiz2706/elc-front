@@ -13,62 +13,34 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown" id="vue-notifi">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fa fa-bell-o" style='padding-top:7px;font-size:24px'></i>
+          <i class="fa fa-bell-o" style='padding-top:7px;font-size:24px' v-on:click.prevent='listanotificaciones()'></i>
           <span class="badge badge-warning navbar-badge" id='nav_notifi'></span>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="height:450px;overflow-y: auto;">
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-
-              <div class="media-body">
-                <p class="text-sm">
-                  Nueva tarea curso:<strong> Analisis y diseño de algoritmos.</strong> fecha de entrega: <strong>2018-10-25</strong>
-                </p>
-                <p class="text-sm text-muted">
-                  <i class="fa fa-clock-o mr-1"></i>
-                  2018-10-25
-                </p>
-              </div>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="height:250px;overflow-y: auto;">
+          <div class="row" v-if="preload_notifi">
+            <div class="d-block mx-auto" >
+              <i class="fa fa-circle-o-notch fa-spin" style="font-size:40px"></i>
             </div>
-            <!-- Message End -->
-          </a>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
+          </div>
+          <div v-for='notifi in a_notifi' v-if="!preload_notifi">
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item" >
+              <!-- Message Start -->
+              <div class="media">
 
-              <div class="media-body">
-                <p class="text-sm">
-                  Nueva tarea
-                  <strong>curso:</strong> Analisis y diseño de algoritmos. <strong>fecha de entrega:</strong> 2018-10-25
-                </p>
-                <p class="text-sm text-muted">
-                  <i class="fa fa-clock-o mr-1"></i>
-                  2018-10-25
-                </p>
+                <div class="media-body">
+                  <p class="text-sm" v-html='notifi.descripcion'>
+                  </p>
+                  <p class="text-sm text-muted">
+                    <i class="fa fa-clock-o mr-1"></i>
+                    <span v-text='notifi.fecha_creacion'></span>
+                  </p>
+                </div>
               </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
+            </a>
+          </div>
 
-              <div class="media-body">
-                <p class="text-sm">
-                  Nueva tarea
-                  <strong>curso:</strong> Analisis y diseño de algoritmos. <strong>fecha de entrega:</strong> 2018-10-25
-                </p>
-                <p class="text-sm text-muted">
-                  <i class="fa fa-clock-o mr-1"></i>
-                  2018-10-25
-                </p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
+          <!--<div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <div class="media">
               <div class="media-body">
@@ -77,7 +49,7 @@
                 </p>
               </div>
             </div>
-          </a>
+          </a>-->
         </div>
       </li>
 

@@ -24,4 +24,21 @@ class NotificacionesController extends Controller
     ];
     return response()->json($jsonresponse,200);
   }
+  public function lista(Request $request){
+    $user             =Auth::user();
+    $notificaciones   =DB::select("select descripcion,fecha_creacion
+                            from notificaciones
+                            where user_id= :user_id order by fecha_creacion desc
+                            limit 20",
+                          ['user_id'=>$user->id]);
+
+    DB::table('notificaciones')->where(['user_id'=>$user->id,'estado'=>'0'])->update([
+      'estado'=>'1',
+    ]);
+
+    $jsonresponse=[
+        'notificaciones'=>$notificaciones
+    ];
+    return response()->json($jsonresponse,200);
+  }
 }

@@ -46,7 +46,8 @@ var v_notifi=new Vue({
      this.notificaciones();
    },
    data : {
-
+     a_notifi:[],
+     preload_notifi:false
    },
    computed : {
 
@@ -59,9 +60,30 @@ var v_notifi=new Vue({
          var nav_notifi = document.getElementById('nav_notifi');
          if(conteo>0){
             nav_notifi.innerHTML =conteo;
+         }else{
+           nav_notifi.innerHTML ='';
          }
       }).catch(error =>{
            this.loader_guardar=false;
+           if(error.response.data.errors){
+             this.e_tarea=error.response.data.errors;
+           }
+           if(error.response.data.error){
+             toastr.error(error.response.data.error,'',{
+                 "timeOut": "2500"
+             });
+           }
+       });
+     },
+     listanotificaciones:function(){
+       var url =base_url+'/notificaciones/lista';
+       this.preload_notifi=true;
+       axios.post(url,{}).then(response =>{
+         this.a_notifi=response.data.notificaciones;
+         this.preload_notifi=false;
+         document.getElementById('nav_notifi').innerHTML='';
+       }).catch(error =>{
+           this.preload_notifi=false;
            if(error.response.data.errors){
              this.e_tarea=error.response.data.errors;
            }
