@@ -190,3 +190,8 @@
 .card-img-top{
   height: 200px;
 }
+
+/*imagen profile*/
+.profile-user-img{
+  width: 100px;
+}
