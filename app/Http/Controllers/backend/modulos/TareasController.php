@@ -22,11 +22,16 @@ class TareasController extends Controller
     if(!in_array($rol,['pr','es'])){
       return view('layouts.errors.access_denied');
     }
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
+    $curso  =DB::select("select c.id,c.nombre
+                              from cursos c
+                              where c.id= :id"
+                         ,['id'=>$idcurso]);
+    /*$curso->profesores=DB::select("select u.imagen as imagenprof
+                         from cursos_user cu
+                         left join users u on(cu.user_id=u.id)
+                         where cu.curso_id= :idcurso and slugrol='pr'"
+                         ,['idcurso'=>$idcurso]);*/
+
      if(empty($curso)){
        return view('layouts.errors.not_page');
      }

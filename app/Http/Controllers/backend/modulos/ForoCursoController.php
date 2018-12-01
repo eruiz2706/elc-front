@@ -21,11 +21,11 @@ class ForoCursoController extends Controller
       return view('layouts.errors.access_denied');
     }
 
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
+    $curso  =DB::select("select c.id,c.nombre
                               from cursos c
-                              left join users u on(c.user_id=u.id)
                               where c.id= :id"
                          ,['id'=>$idcurso])[0];
+
     return view('backend.modulos.forocurso.view_list',compact('curso','tab_foro','idcurso'));
   }
 

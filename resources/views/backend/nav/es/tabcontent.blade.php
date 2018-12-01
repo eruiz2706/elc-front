@@ -61,11 +61,11 @@
     </h2>
 
     <div class="card-tools">
-      <div style="width:80px;">
-        @if(isset($curso))
-          @if($curso->imagenprof !='')
-            <img class="img-circle img-bordered-sm img-fluid" src="{{ URL::asset($curso->imagenprof) }}" style='cursor:pointer' alt="user image" onclick="$('#modalchatprofe').modal('show');">
-          @endif
+      <div style="width:80px;display:inline">
+        @if(isset($curso->profesores))
+          @foreach($curso->profesores as $prof)
+            <img class="profile-user-img img-circle img-bordered-sm img-fluid" src="{{ URL::asset($prof->imagenprof) }}" style='cursor:pointer' alt="user image" onclick="$('#modalchatprofe').modal('show');">
+          @endforeach
         @endif
       </div>
     </div>

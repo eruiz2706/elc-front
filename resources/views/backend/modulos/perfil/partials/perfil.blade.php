@@ -43,8 +43,8 @@
             <table class="table">
               <tbody>
               <tr>
-                <td colspan='2'>
-                  <p><strong>Nombre:</strong></p>
+                <td colspan='2' style="padding-top:1px">
+                  <p style='margin:0px'><strong>Nombre:</strong></p>
                   <span v-if='!modo_edit' v-text='o_user.nombre'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -54,8 +54,22 @@
                 </td>
               </tr>
               <tr>
-                <td colspan='2'>
-                  <p><strong>Telefono:</strong></p>
+                <td colspan='2' style="padding-top:1px">
+                  <p style='margin:0px'>
+                    <strong>Contraseña:</strong>
+                  </p>
+                  <span>************</span>  <i class="fa  fa-pencil" style='cursor:pointer' v-on:click.prevent="modalcambiocl()"></i>
+                </td>
+              </tr>
+              <tr>
+                <td colspan='2' style="padding-top:1px">
+                  <p style='margin:0px'><strong>Email:</strong></p>
+                  <span v-text='o_user.email'></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan='2' style="padding-top:1px">
+                  <p style='margin:0px'><strong>Telefono:</strong></p>
                   <span v-if='!modo_edit' v-text='o_user.telefono'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -65,8 +79,8 @@
                 </td>
               </tr>
               <tr>
-                <td colspan='2'>
-                  <p><strong>Ciudad:</strong></p>
+                <td colspan='2' style="padding-top:1px">
+                  <p style='margin:0px'> <strong>Ciudad:</strong></p>
                   <span v-if='!modo_edit' v-text='o_user.ciudad'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -76,8 +90,8 @@
                 </td>
               </tr>
               <tr>
-                <td colspan='2'>
-                  <p><strong>Direccion:</strong></p>
+                <td colspan='2' style="padding-top:1px">
+                  <p style='margin:0px'><strong>Direccion:</strong></p>
                   <span v-if='!modo_edit' v-text='o_user.direccion'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -87,14 +101,8 @@
                 </td>
               </tr>
               <tr>
-                <td colspan='2'>
-                  <p><strong>Email:</strong></p>
-                  <span v-text='o_user.email'></span>
-                </td>
-              </tr>
-              <tr>
-                <td colspan='2'>
-                  <p><strong>Facebook:</strong></p>
+                <td colspan='2' style="padding-top:1px">
+                  <p style='margin:0px'><strong>Facebook:</strong></p>
                   <span v-if='!modo_edit' v-text='o_user.facebook'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -104,8 +112,8 @@
                 </td>
               </tr>
               <tr>
-                <td colspan='2'>
-                  <p><strong>Linkedin:</strong></p>
+                <td colspan='2' style="padding-top:1px">
+                  <p style='margin:0px'><strong>Linkedin:</strong></p>
                   <span v-if='!modo_edit'  v-text='o_user.linkedin'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -115,8 +123,8 @@
                 </td>
               </tr>
               <tr>
-                <td colspan='2'>
-                  <p><strong>Biografia:</strong></p>
+                <td colspan='2' style="padding-top:1px">
+                  <p style='margin:0px'><strong>Biografia:</strong></p>
                   <span v-if='!modo_edit' v-text='o_user.biografia'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -134,14 +142,19 @@
                   </button>
                   <button type="button" class="btn btn-outline-primary btn-sm" v-if='modo_edit' v-on:click.prevent='cancelar()'>Cancelar</button>
                 </th>
-                <td><button type="button" class="btn btn-outline-primary btn-sm float-right" v-on:click.prevent="modalcambiocl()">Cambiar Contraseña</button></td>
               </tr>
             </tbody></table>
           </div>
     </div>
 
     <div class="col-md-4">
-      <img style='width:250px;height:200px;' class="img-fluid" src="{{ URL::asset(Auth::user()->imagen) }}" alt="Avatar user" id="logo-user">
+      <div class="media">
+          <div class="media-left">
+              <a href="#" class="ad-click-event">
+                  <img id="logo-user" src="{{ URL::asset(Auth::user()->imagen) }}" class="media-object" style="width: 150px;height: 150px;border-radius: 4px;box-shadow: 0 1px 3px rgba(0,0,0,.15);">
+              </a>
+          </div>
+      </div>
       <form method="post" enctype="multipart/form-data" id="uploadForm" v-on:submit.prevent="actualizarImg()">
         @csrf
         <input type="file" class="form-control-file border" id="file_avatar" >
