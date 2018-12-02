@@ -59,6 +59,37 @@
 <script src="{{ URL::asset('js/be/modulos/ejercicios/edit.js') }}"></script>
 <script>
 $('#summernote').summernote({
+  callbacks: {
+   onImageUpload: function(image) {
+         var sizeKB = image[0]['size'] / 1000;
+         var tmp_pr = 0;
+         if(sizeKB > 1100){
+            tmp_pr = 1;
+            swal({
+                title:"Seleccione una imagen menor o igual a 1mb",
+                text:'',
+                type: "info"
+            });
+        }
+         if(image[0]['type'] != 'image/jpeg' && image[0]['type'] != 'image/png'){
+            tmp_pr = 1;
+            swal({
+                title:"La imagen debe ser formato png o jpg",
+                text:'',
+                type: "info"
+            });
+        }
+         if(tmp_pr == 0){
+             var file = image[0];
+             var reader = new FileReader();
+            reader.onloadend = function() {
+                var image = $('<img>').attr('src',  reader.result);
+                $('#summernote').summernote("insertNode", image[0]);
+            }
+           reader.readAsDataURL(file);
+         }
+      }
+  },
   toolbar: [
     ['font', ['fontname']],
     ['para', ['ul', 'ol','paragraph','strikethrough']],

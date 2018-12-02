@@ -45,12 +45,14 @@ new Vue({
       },
       publicacion:function(){
           this.loader_publicar=true;
+          this.o_publicar.comentario=$('#summernote').summernote('code');
           this.o_publicar.idcurso=this.idcurso;
           var url =base_url+'/foroc/publicar';
           axios.post(url,this.o_publicar).then(response =>{
               //this.a_foros.unshift({'nombreuser':'cargfasdf'});
               this.getData();
               this.o_publicar={'comentario':''};
+              $('#summernote').summernote('code', '');
               this.loader_publicar=false;
               this.e_publicar=[];
               console.log(response.data.foros);

@@ -68,7 +68,8 @@ class ForoCursoController extends Controller
         'curso_id'=>$request->idcurso,
         'user_id'=>$id,
         'fecha_creacion'=>date('Y-m-d H:i:s'),
-        'descripcion'=>nl2br($request->comentario)
+        'descripcion'=>$request->comentario
+        //'descripcion'=>nl2br($request->comentario)
       ]);
 
       DB::commit();

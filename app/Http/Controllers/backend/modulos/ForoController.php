@@ -61,7 +61,8 @@ class ForoController extends Controller
         DB::table('foros')->insert([
           'user_id'=>$id,
           'fecha_creacion'=>date('Y-m-d H:i:s'),
-          'descripcion'=>nl2br($request->comentario)
+          'descripcion'=>$request->comentario
+          //'descripcion'=>nl2br($request->comentario)
         ]);
 
         DB::commit();
