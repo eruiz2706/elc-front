@@ -10,8 +10,11 @@ new Vue({
     data : {
       o_userbase :{'nombre':'','email':'','password':'','repassword':'','rol':''},
       o_user:{'nombre':'','email':'','password':'','repassword':'','rol':''},
+      o_recover:{'email':''},
       errores :[],
+      errores_recover :[],
       loader_crear :false,
+      loader_recover :false,
     },
     computed : {
 
@@ -47,14 +50,48 @@ new Vue({
               });
           });
       },
+      recover: function(){
+          this.loader_recover=true;
+          var url =base_url+'/registro/recover';
+          axios.post(url,{
+            email : this.o_recover.email,
+          }).then(response =>{
+              this.errores_recover=[];
+              $('#modal_recover').modal('hide');
+              swal({
+                  title:response.data.message,
+                  text:response.data.message2,
+                  type: "success"
+              }, function() {
+                  window.location = "login";
+              });
+          }).catch(error =>{
+              this.loader_recover=false;
+              this.errores_recover=error.response.data.errors;
+              toastr.error(error.response.data.message,'',{
+                  "timeOut": "2500"
+              });
+          });
+      },
+      openregister:function(){
+        this.o_user.nombre='';
+        this.o_user.email='';
+        this.o_user.password='';
+        this.o_user.repassword='';
+        this.o_user.rol='';
+        $('#modal_register').modal('show');
+      },
+      openrecover:function(){
+        $('#modal_recover').modal('show');
+      },
       crearRedes:function(provider){
         var modo =document.getElementById('counter_select').value;
 
         if(modo==''){
           swal({
               title:'',
-              text:'Debe seleccionar el tipo',
-              type: "error"
+              text:'Seleccione el tipo de usuario',
+              type: "info"
           });
           return;
         }

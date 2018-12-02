@@ -13,7 +13,7 @@
       <div class="modal-body">
         <div class="col-md-12">
           <div class="form-group">
-              <input type="password" class="form-control" placeholder="Contraseña" v-model='o_cambiocl.password' v-bind:class="[e_cambiocl.password ? 'is-invalid' : '']">
+              <input type="password" class="form-control" placeholder="Nueva contraseña" v-model='o_cambiocl.password' v-bind:class="[e_cambiocl.password ? 'is-invalid' : '']">
               <span class="text-danger" v-if="e_cambiocl.password" v-text='e_cambiocl.password[0]'></span>
           </div>
         </div>

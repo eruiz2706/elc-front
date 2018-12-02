@@ -1,12 +1,11 @@
   <nav class="main-header navbar navbar-expand border-bottom bg-primary main-header-fixed">
     <ul class="navbar-nav">
       <li class="nav-item">
-
-
+          <a href="{{ url('/principal') }}">
             <img id="logo-mainmenu" src="{{ URL::asset('img/app/logo2.png') }}" alt="AdminLTE Logo" class="brand-image ">
             <!--<span class="brand-text font-weight-light">{{ config('app.name') }}</span>-->
-
-        </li>
+          </a>
+      </li>
     </ul>
 
     <ul class="navbar-nav ml-auto">

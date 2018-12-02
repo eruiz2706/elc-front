@@ -35,7 +35,8 @@ Route::middleware(['lang'])->group(function(){
   Route::get('/getcursodet/{id}', 'HomeController@getCursodet');
   Route::get('/acercade', 'HomeController@acercade');
   Route::get('/contacto', 'HomeController@contacto');
-  Route::get('/registro', 'HomeController@registro');
+  Route::post('/registro/guardar', 'HomeController@guardarRegistro');
+  Route::post('/registro/recover', 'HomeController@recuperarPass');
   Route::get('/login', 'HomeController@login');
   Route::get('/noaccess', 'HomeController@noaccess');
   Auth::routes();

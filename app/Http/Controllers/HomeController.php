@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Repository\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Helpers\Mailgun;
+use App\Helpers\Templatehtml;
 use Validator;
 use DB;
 
@@ -19,8 +21,13 @@ class HomeController extends Controller
      * @return void
      */
      private $user_repo;
-     public function __construct(UserRepository $user_repo){
-         $this->user_repo     =$user_repo;
+     private $mailgun;
+     private $templatehtml;
+
+     public function __construct(UserRepository $user_repo,Mailgun $mailgun,Templatehtml $templatehtml){
+         $this->user_repo   =$user_repo;
+         $this->mailgun     =$mailgun;
+         $this->templatehtml=$templatehtml;
      }
 
     /**
@@ -90,15 +97,85 @@ class HomeController extends Controller
       return view('frontend.contacto',compact('link_contac'));
     }
 
-    public function registro(){
-      return view('frontend.registro');
+    public function recuperarPass(Request $request){
+      $validator =Validator::make($request->all(),[
+        'email' =>'required|string|email',
+      ]);
+
+      if ($validator->fails()) {
+          return response()->json([
+              'status' =>'error',
+              'errors' => $validator->messages(),
+              'message' =>'Debe validar los campos obligatorios'
+          ], 400);
+      }
+
+      $iduser='';
+      $data_users  =DB::select("select id
+                            from users
+                            where email= :email"
+                       ,['email'=>$request->input('email')]);
+
+      if(!empty($data_users)){
+        $iduser=$data_users[0]->id;
+      }
+
+      if($iduser==''){
+        return response()->json([
+            'status' =>'error',
+            'errors' => 'El email no se encuentra registrado',
+            'message' =>'Debe validar los campos obligatorios'
+        ], 400);
+      }
+
+
+
+      $password   = substr( md5(microtime()),1,8);
+      DB::beginTransaction();
+      try{
+
+        DB::table('users')->where('id',$iduser)->update([
+          'password'=>Hash::make($password),
+        ]);
+
+        $titulo='Contraseña de recuperacion';
+        $content="<p>Se te ha generado una contraseña automatica, recuerda que puedes cambiarla en cualquier momento desde el perfil de tu usuario.</p>
+                  <br><p><strong>Contraseña</strong><br>$password</p>";
+
+        $html=$this->templatehtml->generic([
+          'titulo'=>$titulo,
+          'content'=>$content
+        ]);
+
+        $response =$this->mailgun->send([
+          'to'=>$request->input('email'),
+          'subject'=>'Registro de usuario',
+          'html'=>$html
+        ]);
+
+        DB::commit();
+        return response()->json([
+            'status' =>'success',
+            'message' => '',
+            'message2' => 'Se te ha enviado una contraeña de acceso al email ingresado'.$iduser
+        ]);
+      }
+      catch(\Exception $e){
+          Log::info('creacion tarea : '.$e->getMessage());
+          DB::rollback();
+          //$e->getMessage();
+
+          return response()->json([
+              'error' =>'Hubo una inconsistencias al intentar recuperar la contraseña'
+          ], 400);
+      }
     }
 
     public function guardarRegistro(Request $request){
       $validator =Validator::make($request->all(),[
         'nombre' =>'required|string',
         'email' =>'required|string|email|max:255|unique:users',
-        'password' =>'required|string|min:6',
+        //'password' =>'required|string|min:6',
         'rol' =>'required'
       ]);
 
@@ -109,11 +186,14 @@ class HomeController extends Controller
               'message' =>'Debe validar los campos obligatorios'
           ], 400);
       }
+
+
+      $password   = substr( md5(microtime()),1,8);
       $attributes =[
           'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
           'nombre'  =>$request->input('nombre'),
           'email'=>$request->input('email'),
-          'password'=>Hash::make($request->input('password')),
+          'password'=>Hash::make($password),
           'uniqid'=>uniqid('',true)
       ];
       $params=[
@@ -122,11 +202,26 @@ class HomeController extends Controller
       $return   =$this->user_repo->create($attributes,$params);
 
       if($return->response){
-          return response()->json([
-              'status' =>'success',
-              'message' => 'Tu registro ha sido exitoso!',
-              'message2' => 'Click para continuar!'
-          ]);
+        $titulo='Tu registro se realizo satisfactoriamente';
+        $content="<p>Se te ha generado una contraseña automatica, recuerda que puedes cambiarla en cualquier momento desde el perfil de tu usuario.</p>
+                  <br><p><strong>Contraseña</strong><br>$password</p>";
+
+        $html=$this->templatehtml->generic([
+          'titulo'=>$titulo,
+          'content'=>$content
+        ]);
+
+        $response =$this->mailgun->send([
+          'to'=>$request->input('email'),
+          'subject'=>'Registro de usuario',
+          'html'=>$html
+        ]);
+
+        return response()->json([
+            'status' =>'success',
+            'message' => 'Tu registro ha sido exitoso!',
+            'message2' => 'Se te ha enviado tu contraseña de acceso al email ingresado!'
+        ]);
       }else{
           return response()->json([
               'status' =>'error',

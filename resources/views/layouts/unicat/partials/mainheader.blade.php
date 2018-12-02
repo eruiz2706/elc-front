@@ -42,6 +42,9 @@
                 <div class="login_button">
                   <a href="{{url('/login')}}">{{ trans('frontend.nav.login') }}</a>
                 </div>
+                <div class="login_button">
+                  <a href="{{url('/login')}}">fasfsd{{ trans('frontend.nav.login') }}</a>
+                </div>
               </div>
             </div>
           </div>

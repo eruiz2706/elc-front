@@ -9,6 +9,96 @@
 @stop
 
 @section('content')
+<div class="modal fade" id="modal_recover" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="counter_form_title" style='margin:0px;margin-top:3px'>{{ trans('frontend.recover_pass') }}</div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row fill_height">
+            <div class="col fill_height">
+              <form class="counter_form_content d-flex flex-column align-items-center justify-content-center" method="post" v-on:submit.prevent="recover()">
+                <input type="text" class="counter_input" name='recov_email' placeholder="{{ trans('frontend.page_register.form_email') }}" autocomplete="off" v-model="o_recover.email">
+                <label v-if="errores_recover.email" class="text-danger">@{{ errores_recover.email[0] }}</label>
+
+                <button type="submit" class="counter_form_button"  :disabled="loader_recover">
+                  {{ trans('frontend.send') }}
+                  <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader" v-if="loader_recover"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal_register" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="counter_form_title" style='margin:0px;margin-top:3px'>{{ trans('frontend.sign_up') }}</div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row fill_height">
+            <div class="col fill_height">
+              <form class="counter_form_content d-flex flex-column align-items-center justify-content-center" method="post" v-on:submit.prevent="crear()">
+                <select name="counter_select" id="counter_select" class="counter_input counter_options" required="required" v-model="o_user.rol">
+                  <option value=''>Seleccione el tipo de usuario</option>
+                  <option value='es'>Soy un estudiante</option>
+                  <option value='pr'>Soy un profesor</option>
+                  <option value='pa'>Soy un familiar</option>
+                </select>
+
+                <input type="text" class="counter_input" name='nombre' placeholder="{{ trans('frontend.page_register.form_name') }}" autocomplete="off" required="required" v-model="o_user.nombre">
+                <label v-if="errores.nombre" class="text-danger">@{{ errores.nombre[0] }}</label>
+
+                <input type="text" class="counter_input" name='email' placeholder="{{ trans('frontend.page_register.form_email') }}" autocomplete="off" required="required" v-model="o_user.email">
+                <label v-if="errores.email" class="text-danger">@{{ errores.email[0] }}</label>
+
+                <!--<input type="password" class="counter_input" name='password' autocomplete="off" placeholder="{{ trans('frontend.page_register.form_pass') }}" required="required" v-model="o_user.password">
+                <label v-if="errores.password" class="text-danger">@{{ errores.password[0] }}</label>-->
+
+                <button type="submit" class="counter_form_button"  :disabled="loader_crear">
+                  {{ trans('frontend.sign_up') }}
+                  <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader" v-if="loader_crear"></i>
+                </button>
+
+                <p>- OR -</p>
+                <div class="social-auth-links text-center mb-3">
+                  <div class='row'>
+                  <div class='col-md-6'>
+                    <div class="form-group">
+                      <a href="#" class="btn  btn-primary" v-on:click.prevent="crearRedes('facebook')">
+                        <i class="fa fa-facebook mr-2"></i> Facebook
+                      </a>
+                    </div>
+                  </div>
+                  <div class='col-md-6'>
+                    <div class="form-group">
+                      <a href="#" class="btn  btn-danger" v-on:click.prevent="crearRedes('google')">
+                        <i class="fa fa-google mr-2"></i> Google
+                      </a>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Home -->
 <div class="home">
   <div class="breadcrumbs_container">
@@ -71,23 +161,27 @@
               {{ trans('frontend.enter') }}
             </button>
 
-            <p>- OR -</p>
+            <hr>
             <div class="social-auth-links text-center mb-3">
               <div class='row'>
               <div class='col-md-6'>
+                <div class='form-group'>
                 <a href="{{ url('/redirect/facebook') }}" class="btn  btn-primary">
                   <i class="fa fa-facebook mr-2"></i> Facebook
                 </a>
+                </div>
               </div>
               <div class='col-md-6'>
+                <div class='form-group'>
                 <a href="{{ url('/redirect/google') }}" class="btn  btn-danger">
                   <i class="fa fa-google mr-2"></i> Google
                 </a>
+                </div>
               </div>
               </div>
             </div>
-            <a href="{{ url('/registro') }}" class="text-left float-left">{{ trans('frontend.sign_up') }}</a>
-            <!--<a href="{{ url('/registro') }}" class="text-left float-left">Olvidaste tu contraseña?</a>-->
+            <a href="#" class="text-left float-left" v-on:click.prevent='openregister();'>{{ trans('frontend.sign_up') }}</a>
+            <a href="#" class="text-left float-left" v-on:click.prevent='openrecover()'>{{ trans('frontend.forget_pass') }}</a>
           </form>
         </div>
       </div>
@@ -113,6 +207,9 @@
     </div>
   </div>
 </div>
-
-
 @endsection
+
+@section('scripts')
+  @parent
+  <script src="{{ URL::asset('js/fe/registro.js') }}"></script>
+@stop
