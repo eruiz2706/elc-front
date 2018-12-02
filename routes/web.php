@@ -39,6 +39,7 @@ Route::middleware(['lang'])->group(function(){
   Route::post('/registro/recover', 'HomeController@recuperarPass');
   Route::get('/login', 'HomeController@login');
   Route::get('/noaccess', 'HomeController@noaccess');
+  Route::get('/noregister', 'HomeController@noregister');
   Auth::routes();
 
   Route::get('/redirect/{provider}/{type?}/{modo?}', 'SocialController@redirect');

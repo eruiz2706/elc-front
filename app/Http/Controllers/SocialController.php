@@ -52,13 +52,13 @@ class SocialController extends Controller
                 return $this->authAndRedirect($user);
               }
 
-              return redirect()->to('registro#');          
+              return redirect()->to('registro#');
           }
       }else{
         if ($user = User::where('email', $social_user->email)->first()) {
           return $this->authAndRedirect($user); // Login y redirección
         }
-        return redirect()->to('registro#');
+        return redirect()->to('noregister#');
       }
 
     }

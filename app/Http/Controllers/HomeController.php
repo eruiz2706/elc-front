@@ -57,6 +57,10 @@ class HomeController extends Controller
       return view('frontend.noaccess');
     }
 
+    public function noregister(){
+      return view('frontend.noregister');
+    }
+
     public function cursos($estado=''){
       $fecha  =date('Y-m-d');
 
