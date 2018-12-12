@@ -13,74 +13,6 @@ use Session;
 
 class ModulosController extends Controller
 {
-  ############################## VISTAS ##############################
-  //lista de modulos de un curso
-  function view_lista($idcurso){
-
-    $tab_mod='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if($rol !='in'){
-      return view('layouts.errors.access_denied');
-    }
-
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
-    if(empty($curso)){
-      return view('layouts.errors.not_page');
-    }
-
-    $curso  =$curso[0];
-    return view('backend.modulos.modulos.view_list',compact('curso','tab_mod'));
-  }
-
-  //vista para crear un nuevo modulo
-  public function view_crear($idcurso){
-    $tab_mod='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if($rol !='in'){
-      return view('layouts.errors.access_denied');
-    }
-
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
-    if(empty($curso)){
-      return view('layouts.errors.not_page');
-    }
-
-    $curso  =$curso[0];
-    return view('backend.modulos.modulos.viewcrear',compact('curso','tab_mod','idcurso'));
-  }
-
-  //vista para editar un modulo
-  public function view_editar($idcurso,$id){
-    $tab_mod='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if($rol !='in'){
-      return view('layouts.errors.access_denied');
-    }
-
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso and user_id = :user_id"
-                     ,['idcurso'=>$idcurso,'user_id'=>$user->id]);
-    if(empty($curso)){
-      return view('layouts.errors.not_page');
-    }
-
-    $curso  =$curso[0];
-    return view('backend.modulos.modulos.viewedit',compact('curso','tab_mod','idcurso','id'));
-  }
-
   ############################## METODOS ##############################
   //listado de modulos de un curso
   public function lista(Request $request){
@@ -140,12 +72,12 @@ class ModulosController extends Controller
   }
 
   //datos de edicion de un modulo
-  public function editar($id){
+  public function editar(Request $request){
     $modulo   =DB::select("select
                             id,nombre,numero
                             from modulos
                             where id = :id",
-                          ['id'=>$id])[0];
+                          ['id'=>$request->id])[0];
     $jsonresponse=[
         'modulo'=>$modulo
     ];

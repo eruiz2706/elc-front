@@ -13,97 +13,6 @@ use Session;
 
 class TareasController extends Controller
 {
-  ############################## VISTAS ##############################
-  //lista de modulos de un curso
-  function view_lista($idcurso){
-    $tab_tar='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if(!in_array($rol,['pr','es'])){
-      return view('layouts.errors.access_denied');
-    }
-    $curso  =DB::select("select c.id,c.nombre
-                              from cursos c
-                              where c.id= :id"
-                         ,['id'=>$idcurso]);
-    /*$curso->profesores=DB::select("select u.imagen as imagenprof
-                         from cursos_user cu
-                         left join users u on(cu.user_id=u.id)
-                         where cu.curso_id= :idcurso and slugrol='pr'"
-                         ,['idcurso'=>$idcurso]);*/
-
-     if(empty($curso)){
-       return view('layouts.errors.not_page');
-     }
-
-    $curso  =$curso[0];
-    if($rol=='pr')return view('backend.modulos.tareas.view_list',compact('curso','tab_tar'));
-    if($rol=='es')return view('backend.modulos.tareas.view_list_es',compact('curso','tab_tar'));
-
-  }
-
-  //vista para crear un nuevo modulo
-  public function view_crear($idcurso){
-    $tab_tar='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if($rol !='pr'){
-      return view('layouts.errors.access_denied');
-    }
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-     if(empty($curso)){
-       return view('layouts.errors.not_page');
-     }
-
-    $curso  =$curso[0];
-    return view('backend.modulos.tareas.view_crear',compact('curso','tab_tar','idcurso'));
-  }
-
-  //vista para editar un modulo
-  public function view_editar($idcurso,$id){
-    $tab_tar='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if($rol !='pr'){
-      return view('layouts.errors.access_denied');
-    }
-
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-     if(empty($curso)){
-       return view('layouts.errors.not_page');
-     }
-
-    $curso  =$curso[0];
-    return view('backend.modulos.tareas.view_edit',compact('curso','tab_tar','idcurso','id'));
-  }
-
-  public function view_entrega($idcurso,$id){
-    $tab_tar='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if($rol !='es'){
-      return view('layouts.errors.access_denied');
-    }
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-     if(empty($curso)){
-       return view('layouts.errors.not_page');
-     }
-
-    $curso  =$curso[0];
-    return view('backend.modulos.tareas.view_entrega',compact('curso','tab_tar','idcurso','id'));
-  }
 
   function view_listaent($idcurso,$id){
     $tab_tar='';
@@ -150,6 +59,23 @@ class TareasController extends Controller
     return response()->json($jsonresponse,200);
   }
 
+  public function lista_es(Request $request){
+    $tareas   =DB::select("select t.id,t.nombre,t.fecha_vencimiento,t.calificacion,t.fecha_creacion,t.descripcion,
+                              tu.calificacion as notaes,tu.respuesta,tu.comentario,
+                              case when tu.estado is null then 'Pendiente' else e.nombre end as nombestado,
+                              case when e.status is null then 'danger' else e.status end as status
+                              from tareas t
+                              left join tareas_user tu on(t.id=tu.tarea_id)
+                              left join estados e on (e.slug=tu.estado and e.tipo='tareas')
+                              where curso_id = :curso_id
+                              order by t.fecha_creacion desc",
+                          ['curso_id'=>$request->idcurso]);
+    $jsonresponse=[
+        'tareas'=>$tareas
+    ];
+    return response()->json($jsonresponse,200);
+  }
+
   public function listaent(Request $request){
 
     $tarea   =DB::select("select
@@ -170,23 +96,6 @@ class TareasController extends Controller
                             ['id'=>$request->id]);
     $jsonresponse=[
         'tarea'=>$tarea,
-        'tareas'=>$tareas
-    ];
-    return response()->json($jsonresponse,200);
-  }
-
-  public function lista_es(Request $request){
-    $tareas   =DB::select("select t.id,t.nombre,t.fecha_vencimiento,t.calificacion,t.fecha_creacion,t.descripcion,
-                              tu.calificacion as notaes,tu.respuesta,tu.comentario,
-                              case when tu.estado is null then 'Pendiente' else e.nombre end as nombestado,
-                              case when e.status is null then 'danger' else e.status end as status
-                              from tareas t
-                              left join tareas_user tu on(t.id=tu.tarea_id)
-                              left join estados e on (e.slug=tu.estado and e.tipo='tareas')
-                              where curso_id = :curso_id
-                              order by t.fecha_creacion desc",
-                          ['curso_id'=>$request->idcurso]);
-    $jsonresponse=[
         'tareas'=>$tareas
     ];
     return response()->json($jsonresponse,200);
@@ -254,18 +163,18 @@ class TareasController extends Controller
         //$e->getMessage();
 
         return response()->json([
-            'error' =>'Hubo una inconsistencias al intentar crear el registro'.$e->getMessage()
+            'error' =>'Hubo una inconsistencias al intentar crear el registro'
         ], 400);
     }
   }
 
   //datos de edicion de un modulo
-  public function editar($id){
+  public function editar(Request $request){
     $tarea   =DB::select("select
                             id,nombre,calificacion,fecha_vencimiento,descripcion
                             from tareas
                             where id = :id",
-                          ['id'=>$id])[0];
+                          ['id'=>$request->id])[0];
     $jsonresponse=[
         'tarea'=>$tarea
     ];
@@ -315,7 +224,7 @@ class TareasController extends Controller
     }
   }
 
-  public function editent($id){
+  public function editent(Request $request){
     $tarea   =DB::select("select
                             t.id,t.nombre,t.calificacion,t.fecha_vencimiento,t.descripcion,
                             tu.calificacion as notaes,tu.respuesta,tu.comentario,
@@ -323,7 +232,7 @@ class TareasController extends Controller
                             from tareas t
                             left join tareas_user tu on(t.id=tu.tarea_id)
                             where t.id = :id",
-                          ['id'=>$id])[0];
+                          ['id'=>$request->id])[0];
     $jsonresponse=[
         'tarea'=>$tarea
     ];

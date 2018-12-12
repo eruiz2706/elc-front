@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Validator;
-use Session; 
+use Session;
 use DB;
 use Log;
 
@@ -17,16 +17,10 @@ class PerfilController extends Controller
 {
     public function index(){
       $rol  =Session::get('rol');
-      if($rol=='ad'){
-        return view('backend.modulos.perfil.view_ad');
-      }else if($rol=='in'){
-          return view('backend.modulos.perfil.view_in');
-      }else if($rol=='pr'){
-        return view('backend.modulos.perfil.view_pr');
-      }else if($rol=='es'){
-        return view('backend.modulos.perfil.view_es');
+      if($rol != ''){
+        return view('backend.modulos.perfil.view_index');
       }else{
-        echo "no pertenece a ningun rol redireccionar";
+        return view('layouts.errors.access_denied');
       }
     }
 
@@ -107,7 +101,7 @@ class PerfilController extends Controller
 
     public function getData(Request $request){
       $id  =Auth::user()->id;
-      $user   =DB::select("select nombre,email,telefono,ciudad,direccion,facebook,linkedin,biografia,
+      $user   =DB::select("select nombre,email,telefono,ciudad,direccion,facebook,linkedin,biografia,imagen,
                             fecha_vencimiento
                             from users
                             where id =:id",['id'=>$id])[0];

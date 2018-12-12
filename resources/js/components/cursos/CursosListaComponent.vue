@@ -1,0 +1,102 @@
+<template>
+<div>
+  <div class="row" v-if="preload">
+    <div class="d-block mx-auto" >
+      <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
+    </div>
+  </div>
+
+  <div class="card" v-if="!preload">
+    <div class="card-header card-header-cuorse">
+      <h2 class="card-title-course">
+        Lista de cursos
+        <button type="button" class="btn btn-tool" v-on:click.prevent="redirectCrear('cursos-crear')">
+          <i class="fa fa-plus-circle"  style="font-size: 24px;"></i>
+        </button>
+      </h2>
+    </div>
+  </div>
+  <div class="card" v-if="!preload" v-for="curso in a_cursos">
+    <div class="card-header no-border">
+      <div class="card-tools float-left">
+        <button type="button" class="btn btn-tool" v-on:click.prevent="redirectAbrir(curso.id)">
+              Ingresar <i class="fa fa-folder-open" style="font-size:20px"></i>
+        </button>
+      </div>
+      <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectAbrir(curso.id)" v-text='curso.nombre'></h5>
+      <div class='row'>
+        <div class="col-md-4 col-sm-6">
+          <b>Creado :</b> <span v-text='curso.fecha_creacion'></span>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <b>Inicia :</b> <span v-text='curso.fecha_inicio'></span>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <b>Finaliza :</b> <span v-text='curso.fecha_finalizacion'></span>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <b>Limite notas :</b> <span v-text='curso.fecha_limite'></span>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <b>Visibilidad :</b>
+          <span class="badge bg-success" v-if="curso.visibilidad">Publico</span>
+          <span class="badge bg-danger" v-else>Privado</span>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <b>Inscripcion :</b>
+          <span class="badge bg-success" v-if="curso.inscripcion">Estudiante</span>
+          <span class="badge bg-info" v-else>Administrador</span>
+        </div>
+        <div class="col-md-4 col-sm-6" v-for="profesor in curso.profesores">
+          <b>Profesor :</b>
+          <span v-text='profesor.email'></span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+    export default {
+        mounted() {
+
+        },created : function(){
+          this.base_url=base_url;
+          this.listado();
+        },
+        data: function () {
+          return {
+            preload:false,
+            a_cursos:[],
+          }
+        },
+        methods : {
+          listado:function(){
+            var url =this.base_url+'/cursos/lista';
+            this.preload=true;
+            axios.post(url,{}).then(response =>{
+                this.preload=false;
+                this.a_cursos=response.data.cursos;
+            }).catch(error =>{
+                this.preload=false;
+                this.a_cursos=[];
+                if(error.response.data.errors){
+                }
+                if(error.response.data.error){
+                  toastr.error(error.response.data.error,'',{
+                      "timeOut": "2500"
+                  });
+                }
+            });
+          },
+          redirectCrear:function(){
+            this.$root.$emit('setMenu','cursos-crear');
+          },
+          redirectAbrir:function(id){
+            window.location.href=this.base_url+'/cursos/config/'+id;
+          }
+        }
+    }
+</script>

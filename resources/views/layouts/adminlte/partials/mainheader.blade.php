@@ -9,7 +9,6 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
-      <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown" id="vue-notifi">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fa fa-bell-o" style='padding-top:7px;font-size:24px' v-on:click.prevent='listanotificaciones()'></i>
@@ -24,7 +23,6 @@
           <div v-for='notifi in a_notifi' v-if="!preload_notifi">
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item" >
-              <!-- Message Start -->
               <div class="media">
 
                 <div class="media-body">
@@ -38,34 +36,23 @@
               </div>
             </a>
           </div>
-
-          <!--<div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <div class="media">
-              <div class="media-body">
-                <p class="text-sm float-center">
-                    <strong>Ver todas</strong>
-                </p>
-              </div>
-            </div>
-          </a>-->
         </div>
       </li>
 
       <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
-            <div class="user-block">
+            <div class="user-block" v-on:click.prevent='conexion();'>
               <img class="img-circle img-bordered-sm" src="{{ URL::asset(Auth::user()->imagen) }}" alt="User avatar">
-              <i class="fa fa-chevron-down" style="padding-top:10px;padding-left:10px;"></i>
+              <i class="fa fa-chevron-down" style="padding-top:10px;padding-left:10px;" v-on:click.prevent='conexion();'></i>
             </div>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
               <div class="card ">
                   <div class="card-body">
-                    <h5 class="widget-user-desc">{{ Auth::user()->nombre}}</h5>
-                    <h7 class="widget-user-desc">Ultimo ingreso: {{ Auth::user()->fecha_ultimo_ingreso}}</h7>
-                    <h6 class="widget-user-desc">Tiempo de uso: {{Session::get('user_tiempo')}} minutos</h6>
+                    <h5 class="widget-user-desc" v-text='conexion_user.nombre'></h5>
+                    <h7 class="widget-user-desc" v-text='conexion_user.ultimo_ingreso'></h7>
+                    <h6 class="widget-user-desc" v-text='conexion_user.tiempo_uso'></h6>
                     <div class="row">
                       <div class="col-sm-6 border-right">
                           <button class="btn btn-block btn-outline-primary btn-sm" onclick="window.location.href='{{url('/perfil')}}'">

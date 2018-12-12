@@ -13,32 +13,6 @@ use Session;
 
 class ProgresoController extends Controller
 {
-  ############################## VISTAS ##############################
-  //lista de modulos de un curso
-  function view_lista($idcurso){
-    $tab_prog='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-
-    if(!in_array($rol,['es','pr'])){
-      return view('layouts.errors.access_denied');
-    }
-
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-    if(empty($curso)){
-      return view('layouts.errors.not_page');
-    }
-
-    $curso  =$curso[0];
-    if($rol=='es')return view('backend.modulos.progreso.view_list',compact('curso','tab_prog'));
-    if($rol=='pr')return view('backend.modulos.progreso.view_list_pr',compact('curso','tab_prog'));
-  }
-
-  ############################## METODOS ##############################
   //listado de modulos de un curso
   public function lista(Request $request){
     $user     =Auth::user();

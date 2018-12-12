@@ -25,40 +25,7 @@ class CursosController extends Controller
     return view('backend.modulos.cursos.view_list');
   }
 
-  //vista para crear un nuevo curso
-  public function view_crear(){
-    $rol  =Session::get('rol');
-    if($rol !='in'){
-      return view('layouts.errors.access_denied');
-    }
-    return view('backend.modulos.cursos.view_crear');
-  }
-
-  //vista edicion curso
-  public function view_editar($id){
-      $rol  =Session::get('rol');
-      $user =Auth::user();
-      if($rol !='in'){
-        return view('layouts.errors.access_denied');
-      }
-
-      $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                            from cursos c
-                            left join users u on(c.user_id=u.id)
-                            where c.id= :id and user_id = :user_id"
-                       ,['id'=>$id,'user_id'=>$user->id]);
-
-      if(empty($curso)){
-        return view('layouts.errors.not_page');
-      }
-
-      $curso    =$curso[0];
-      $tab_edit ='';
-
-      return view('backend.modulos.cursos.view_edit',compact('id','curso','tab_edit'));
-  }
-
-  //vista para datos de configuracion de curso
+  //vista para datos de configuracion de curso, solo se ve los cursos creados por mi usuario
   public function view_config($id){
     $user =Auth::user();
     $rol  =Session::get('rol');
@@ -78,8 +45,37 @@ class CursosController extends Controller
     }
 
     $curso    =$curso[0];
-    $tab_conf ='';
-    return view('backend.modulos.cursos.view_config',compact('curso','tab_conf'));
+    return view('backend.modulos.cursos.view_config',compact('curso'));
+  }
+  public function view_gestion($id){
+    $user =Auth::user();
+    $rol  =Session::get('rol');
+
+    if($rol !='pr' && $rol !='es'){
+      return view('layouts.errors.access_denied');
+    }
+
+    $curso  =DB::select("select c.id,c.nombre
+                          from cursos c
+                          left join users u on(c.user_id=u.id)
+                          where c.id= :id"
+                     ,['id'=>$id]);
+
+    if(empty($curso)){
+      return view('layouts.errors.not_page');
+    }
+    $curso    =$curso[0];
+    if($rol =='pr')return view('backend.modulos.cursos.view_config_pr',compact('curso'));
+    if($rol =='es'){
+      $profesor =DB::select("select u.imagen,u.nombre
+                             from cursos_user cu
+                             left join users u on(u.id=cu.user_id)
+                             where cu.slugrol='pr' and cu.curso_id= :curso_id
+                             limit 1",
+                             ['curso_id'=>$id]);
+
+      return view('backend.modulos.cursos.view_config_es',compact('curso','profesor'));
+    }
   }
 
 
@@ -219,19 +215,19 @@ class CursosController extends Controller
   }
 
   //datos de edicion de un curso
-  public function editar($id){
+  public function editar(Request $request){
     $curso   =DB::select("select
                             id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,inscripcion,fecha_limite
                             from cursos
                             where id = :id",
-                          ['id'=>$id])[0];
+                          ['id'=>$request->id])[0];
 
     $curso_prof=DB::select("select cu.user_id,u.email
                             from cursos_user cu
                             left join users u on(cu.user_id=u.id)
                             where cu.curso_id= :curso_id
                             order by cu.id",
-                          ['curso_id'=>$id]);
+                          ['curso_id'=>$request->id]);
     $profesor='';
     $profesor2='';
     $con=0;
@@ -374,12 +370,12 @@ class CursosController extends Controller
     }
   }
 
-  public function edit_config($id){
+  public function edit_config(Request $request){
     $user     =Auth::user();
     $curso  =DB::select("select c.id,urlvideo,plan_estudio,imagen
                           from cursos c
                           where c.id= :id and user_id = :user_id"
-                     ,['id'=>$id,'user_id'=>$user->id])[0];
+                     ,['id'=>$request->id,'user_id'=>$user->id])[0];
 
     $jsonresponse=[
         'curso'=>$curso

@@ -13,94 +13,6 @@ use Session;
 
 class EjerciciosController extends Controller
 {
-  ############################## VISTAS ##############################
-  //lista de modulos de un curso
-  function view_lista($idcurso){
-    $tab_ejer='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if(!in_array($rol,['pr','es'])){
-      return view('layouts.errors.access_denied');
-    }
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-    if(empty($curso)){
-       return view('layouts.errors.not_page');
-    }
-
-    $curso  =$curso[0];
-    if($rol=='pr')return view('backend.modulos.ejercicios.view_list',compact('curso','tab_ejer'));
-    if($rol=='es')return view('backend.modulos.ejercicios.view_list_es',compact('curso','tab_ejer'));
-
-  }
-
-  //vista para crear un nuevo modulo
-  public function view_crear($idcurso){
-    $tab_ejer='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if($rol !='pr'){
-      return view('layouts.errors.access_denied');
-    }
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-     if(empty($curso)){
-       return view('layouts.errors.not_page');
-     }
-
-    $curso  =$curso[0];
-    return view('backend.modulos.ejercicios.view_crear',compact('curso','tab_ejer','idcurso'));
-  }
-
-  //vista para editar un modulo
-  public function view_editar($idcurso,$id){
-    $tab_ejer='';
-    $user   =Auth::user();
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-    if(!empty($curso)){
-      $curso  =$curso[0];
-    }
-
-    $rol  =Session::get('rol');
-    if($rol !='pr'){
-      echo "no pertenece a ningun rol redireccionar";
-    }
-    return view('backend.modulos.ejercicios.view_edit',compact('curso','tab_ejer','idcurso','id'));
-  }
-
-  function view_listaent($idcurso,$id){
-    $tab_tar='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if(!in_array($rol,['pr'])){
-      return view('layouts.errors.access_denied');
-    }
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-     if(empty($curso)){
-       return view('layouts.errors.not_page');
-     }
-
-    $curso  =$curso[0];
-    if($rol=='pr')return view('backend.modulos.ejercicios.view_listent',compact('id','curso','tab_ejer'));
-
-  }
-
-
-  ############################## METODOS ##############################
   public function lista(Request $request){
 
     $cantUser     =DB::select("select count(id) as cant
@@ -436,12 +348,12 @@ class EjerciciosController extends Controller
   }
 
   //datos de edicion de un modulo
-  public function editar($id){
+  public function editar(Request $request){
     $ejercicio   =DB::select("select
                             id,nombre,descripcion,duracion,fecha_inicio,fecha_creacion
                             from ejercicios
                             where id = :id",
-                          ['id'=>$id])[0];
+                          ['id'=>$request->id])[0];
     $jsonresponse=[
         'ejercicio'=>$ejercicio
     ];

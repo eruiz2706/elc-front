@@ -5,12 +5,12 @@
     @show
 
 <body class="hold-transition sidebar-collapse">
-
+<div >
     <div  id="loader-body" class="loader-wrapper loader1">
         <div class="loader"></div>
     </div>
 
-    <div class="wrapper" id="main">
+    <div class="wrapper" id="v-app">
     @include('layouts.adminlte.partials.mainheader')
 
     <div class="img-bannerhome" style="background-image: url('{{ URL::asset('rfend/images/counter_background.jpg') }}');"></div>
@@ -47,10 +47,11 @@
 
     @include('layouts.adminlte.partials.footer')
 
-</div>
+  </div>
   <!-- ./wrapper -->
   @section('scripts')
       @include('layouts.adminlte.partials.scripts')
   @show
+</div>
 </body>
 </html>

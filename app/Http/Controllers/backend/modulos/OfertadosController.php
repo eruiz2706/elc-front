@@ -18,17 +18,7 @@ class OfertadosController extends Controller
       if($rol !='es'){
         return view('layouts.errors.access_denied');
       }
-      return view('backend.modulos.ofertados.viewlist_es');
-    }
-
-    public function verCurso(Request $request,$id){
-      $rol  =Session::get('rol');
-      if($rol !='es'){
-        return view('layouts.errors.access_denied');
-      }
-      $idcurso=$id;
-      return view('backend.modulos.ofertados.viewdet_es',compact('idcurso'));
-
+      return view('backend.modulos.ofertados.view_index');
     }
 
     public function listacursos(Request $request){
@@ -53,17 +43,17 @@ class OfertadosController extends Controller
       return response()->json($jsonresponse,200);
     }
 
-    public function edit_curso($id){
+    public function vercurso(Request $request){
       $user     =Auth::user();
       $subscrip =false;
       $validasub=DB::select("select curso_id
                             from cursos_user
                             where user_id = :user_id and curso_id = :curso_id",
-                            ['user_id'=>$user->id,'curso_id'=>$id]);
+                            ['user_id'=>$user->id,'curso_id'=>$request->id]);
 
       if(!empty($validasub)){
         $validasub=$validasub[0];
-        $subscrip =($validasub->curso_id==$id) ? true : false;
+        $subscrip =($validasub->curso_id==$request->id) ? true : false;
       }
 
       $curso   =DB::select("select
@@ -71,7 +61,7 @@ class OfertadosController extends Controller
                               c.fecha_inicio,c.fecha_finalizacion,u.imagen as img_usercrea
                               from cursos c
                               left join users u on(c.user_id=u.id)
-                              where c.visibilidad=true and c.id = :id",['id'=>$id])[0];
+                              where c.visibilidad=true and c.id = :id",['id'=>$request->id])[0];
       $jsonresponse=[
           'curso'=>$curso,
           'subscrip'=>$subscrip

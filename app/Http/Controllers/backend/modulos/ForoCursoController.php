@@ -13,22 +13,6 @@ use Session;
 
 class ForoCursoController extends Controller
 {
-  public function index($idcurso){
-    $tab_foro='';
-    $rol  =Session::get('rol');
-
-    if(!in_array($rol,['pr','es'])){
-      return view('layouts.errors.access_denied');
-    }
-
-    $curso  =DB::select("select c.id,c.nombre
-                              from cursos c
-                              where c.id= :id"
-                         ,['id'=>$idcurso])[0];
-
-    return view('backend.modulos.forocurso.view_list',compact('curso','tab_foro','idcurso'));
-  }
-
   /*trae el listado de las ultimas 30 publicacion*/
   public function getData(Request $request){
     $foros   =DB::select("select

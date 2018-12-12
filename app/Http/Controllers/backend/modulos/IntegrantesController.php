@@ -13,29 +13,6 @@ use Session;
 
 class IntegrantesController extends Controller
 {
-  ############################## VISTAS ##############################
-  //lista de modulos de un curso
-  function view_lista($idcurso){
-    $tab_integ='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if($rol==''){
-      return view('layouts.errors.access_denied');
-    }
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-     if(empty($curso)){
-       return view('layouts.errors.not_page');
-     }
-
-     $curso  =$curso[0];
-     return view('backend.modulos.integrantes.view_list',compact('curso','tab_integ'));
-   }
-
-
    ############################## METODOS ##############################
    //listado de integrantes de un curso
    public function lista(Request $request){

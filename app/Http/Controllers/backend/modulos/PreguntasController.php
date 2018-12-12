@@ -13,69 +13,6 @@ use Session;
 
 class PreguntasController extends Controller
 {
-  ############################## VISTAS ##############################
-  //lista de modulos de un curso
-  function view_lista($idcurso,$idejerc){
-    $tab_ejer='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if($rol !='pr'){
-      return view('layouts.errors.access_denied');
-    }
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-   if(empty($curso)){
-     return view('layouts.errors.not_page');
-   }
-
-   $curso  =$curso[0];
-   return view('backend.modulos.preguntas.view_list',compact('curso','tab_ejer','idejerc'));
-
-  }
-
-  //vista para crear un nuevo modulo
-  public function view_crear($idcurso,$idejerc){
-    $tab_ejer='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
-    if($rol !='pr'){
-      return view('layouts.errors.access_denied');
-    }
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-     if(empty($curso)){
-       return view('layouts.errors.not_page');
-     }
-
-    $curso  =$curso[0];
-    return view('backend.modulos.preguntas.view_crear',compact('curso','tab_ejer','idcurso','idejerc'));
-  }
-
-  //vista para editar un modulo
-  public function view_editar($idcurso,$idejerc,$id){
-
-    $tab_ejer='';
-    $user   =Auth::user();
-    $curso  =DB::select("select c.id,c.nombre,u.imagen as imagenprof
-                          from cursos c
-                          left join users u on(c.user_id=u.id)
-                          where c.id= :idcurso"
-                     ,['idcurso'=>$idcurso]);
-    if(empty($curso)){
-     return view('layouts.errors.not_page');
-    }
-    $curso  =$curso[0];
-
-    return view('backend.modulos.preguntas.view_edit',compact('curso','tab_ejer','idcurso','idejerc','id'));
-  }
-
-
   ############################## METODOS ##############################
   //listado de modulos de un curso
   public function lista(Request $request){
@@ -201,18 +138,18 @@ class PreguntasController extends Controller
   }
 
   //datos de edicion de un modulo
-  public function editar($id){
+  public function editar(Request $request){
     $pregunta   =DB::select("select
                             id,nombre,descripcion,tipo,textorellenar
                             from preguntas
                             where id = :id",
-                          ['id'=>$id])[0];
+                          ['id'=>$request->id])[0];
 
     $respuestas   =DB::select("select
                                 id,puntaje,seleccion as option,respuesta,relacionar
                                 from respuestas
                             where pregunta_id = :id",
-                          ['id'=>$id]);
+                          ['id'=>$request->id]);
 
     $puntaje=0;
     $radio_unica=0;
@@ -223,7 +160,7 @@ class PreguntasController extends Controller
         $seleccion   =DB::select("select id
                                   from respuestas
                               where pregunta_id = :id and seleccion=true",
-                            ['id'=>$id])[0];
+                            ['id'=>$request->id])[0];
         $radio_unica=$seleccion->id;
     }
 

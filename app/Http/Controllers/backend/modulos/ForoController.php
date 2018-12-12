@@ -21,7 +21,7 @@ class ForoController extends Controller
         return view('layouts.errors.access_denied');
       }
 
-      return view('backend.modulos.foro.view_list');
+      return view('backend.modulos.foro.view_index');
     }
 
     /*trae el listado de los ultimos 20 foros publicados*/
