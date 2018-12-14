@@ -709,7 +709,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     text: response.data.message2,
                     type: "success"
                 }, function () {
-                    location.reload();
+                    location.reload(true);
                 });
             }).catch(function (error) {
                 _this.loader_img = false;
@@ -758,14 +758,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post(url, {}).then(function (response) {
                 _this3.preload = false;
                 _this3.o_user = response.data.user;
-                _this3.o_userbase.nombre = _this3.o_user.nombre;
-                _this3.o_userbase.telefono = _this3.o_user.telefono;
-                _this3.o_userbase.ciudad = _this3.o_user.ciudad;
-                _this3.o_userbase.direccion = _this3.o_user.direccion;
-                _this3.o_userbase.email = _this3.o_user.email;
-                _this3.o_userbase.facebook = _this3.o_user.facebook;
-                _this3.o_userbase.linkedin = _this3.o_user.linkedin;
-                _this3.o_userbase.biografia = _this3.o_user.biografia;
+                _this3.o_userbase = response.data.user;
             }).catch(function (error) {
                 _this3.preload = false;
                 console.log(error.response.data);
@@ -775,6 +768,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.modo_edit = true;
         },
         cancelar: function cancelar() {
+            this.o_user = {};
             this.o_user = this.o_userbase;
             this.modo_edit = false;
         },

@@ -222,7 +222,7 @@
                   text:response.data.message2,
                   type: "success"
               }, function() {
-                  location.reload();
+                  location.reload(true);
               });
           }).catch(error =>{
               this.loader_img=false;
@@ -267,14 +267,7 @@
             axios.post(url,{}).then(response =>{
                 this.preload=false;
                 this.o_user=response.data.user;
-                this.o_userbase.nombre=this.o_user.nombre;
-                this.o_userbase.telefono=this.o_user.telefono;
-                this.o_userbase.ciudad=this.o_user.ciudad;
-                this.o_userbase.direccion=this.o_user.direccion;
-                this.o_userbase.email=this.o_user.email;
-                this.o_userbase.facebook=this.o_user.facebook;
-                this.o_userbase.linkedin=this.o_user.linkedin;
-                this.o_userbase.biografia=this.o_user.biografia;
+                this.o_userbase=response.data.user;
             }).catch(error =>{
                 this.preload=false;
                 console.log(error.response.data);
