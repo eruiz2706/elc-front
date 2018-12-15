@@ -13,8 +13,6 @@ use Session;
 
 class PreguntasController extends Controller
 {
-  ############################## METODOS ##############################
-  //listado de modulos de un curso
   public function lista(Request $request){
     $preguntas   =DB::select("select p.id,p.nombre,p.tipo,p.fecha_creacion,sum(r.puntaje) as puntaje
                               from preguntas p
@@ -33,7 +31,7 @@ class PreguntasController extends Controller
     $user   =Auth::user();
 
     $validator =Validator::make($request->all(),[
-      'nombre' =>'required|string',
+      'descripcion' =>'required|string',
       'tipo' =>'required|string'
     ]);
 
@@ -48,7 +46,7 @@ class PreguntasController extends Controller
     try{
        $idpregunta=DB::table('preguntas')->insertGetId([
         'ejercicio_id'=>$request->idejerc,
-        'nombre'=>$request->nombre,
+        'nombre'=>'',
         'descripcion'=>$request->descripcion,
         'tipo'=>$request->tipo,
         'textorellenar'=>nl2br($request->texto_rellenar),
@@ -179,7 +177,7 @@ class PreguntasController extends Controller
   public function actualizar(Request $request){
     $user   =Auth::user();
     $validator =Validator::make($request->all(),[
-      'nombre' =>'required|string',
+      'descripcion' =>'required|string',
       'tipo' =>'required|string'
     ]);
 
@@ -193,7 +191,7 @@ class PreguntasController extends Controller
     DB::beginTransaction();
     try{
       DB::table('preguntas')->where('id',$request->id)->update([
-        'nombre'=>$request->nombre,
+        'nombre'=>'',
         'descripcion'=>$request->descripcion,
         'tipo'=>$request->tipo,
         'textorellenar'=>nl2br($request->texto_rellenar),

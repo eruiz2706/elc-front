@@ -19,15 +19,16 @@
       	</p>
       </div>
 
-      <div class="form-group">
+      <!--<div class="form-group">
         <label>Titulo <code>*</code></label>
         <input type="text" class="form-control" name='nombre'  v-model='o_pregunta.nombre' v-bind:class="[e_pregunta.nombre ? 'is-invalid' : '']">
         <span class="text-danger" v-if="e_pregunta.nombre" v-text='e_pregunta.nombre[0]'></span>
-      </div>
+      </div>-->
 
       <div class="form-group">
-        <label>Descripcion</label>
+        <label>Contenido de pregunta</label>
         <div id="summernote" ></div>
+        <span class="text-danger" v-if="e_pregunta.descripcion" v-text='e_pregunta.descripcion[0]'></span>
       </div>
 
       <div class="form-group">
@@ -289,7 +290,7 @@
               ['height', ['height']],
               ['groupName', ['picture','link','video','table','hr','fullscreen']],
             ],
-            height: 55
+            height: 70
           });
         },created : function(){
           this.base_url=base_url;

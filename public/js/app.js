@@ -768,7 +768,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.modo_edit = true;
         },
         cancelar: function cancelar() {
-            this.o_user = {};
             this.o_user = this.o_userbase;
             this.modo_edit = false;
         },
@@ -13309,7 +13308,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", [_vm._v("Titulo "), _c("code", [_vm._v("*")])])
+    return _c("label", [
+      _vm._v("Titulo de evaluación "),
+      _c("code", [_vm._v("*")])
+    ])
   },
   function() {
     var _vm = this
@@ -13331,7 +13333,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Descripcion")]),
+      _c("label", [_vm._v("Contenido de preguntas")]),
       _vm._v(" "),
       _c("div", { attrs: { id: "summernote" } })
     ])
@@ -14563,6 +14565,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -14581,10 +14591,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       idejeruser: 0,
       toSecond: 0,
       toMinute: 0,
-      loader_finalizar: false
+      loader_finalizar: false,
+      tab_active: 0
     };
   },
   methods: {
+    tabtoogle_mas: function tabtoogle_mas() {
+      if (!(this.tab_active == this.a_examen.length - 1)) {
+        this.tab_active = this.tab_active + 1;
+      }
+    },
+    tabtoogle_menos: function tabtoogle_menos() {
+      if (!(this.tab_active == 0)) {
+        this.tab_active = this.tab_active - 1;
+      }
+    },
+    tabtoogle: function tabtoogle(index) {
+      this.tab_active = index;
+    },
     listado: function listado() {
       var _this = this;
 
@@ -14757,12 +14781,15 @@ var render = function() {
                         return _c("li", { staticClass: "nav-item" }, [
                           _c("a", {
                             staticClass: "nav-link  show",
-                            class: index == 0 ? "active" : "",
-                            attrs: {
-                              href: "#tab_" + index,
-                              "data-toggle": "tab"
-                            },
-                            domProps: { textContent: _vm._s(index + 1) }
+                            class: index == _vm.tab_active ? "active" : "",
+                            attrs: { href: "#tab_" + index },
+                            domProps: { textContent: _vm._s(index + 1) },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.tabtoogle(index)
+                              }
+                            }
                           })
                         ])
                       })
@@ -14789,14 +14816,14 @@ var render = function() {
                           "div",
                           {
                             staticClass: "tab-pane show",
-                            class: index == 0 ? "active" : "",
+                            class: index == _vm.tab_active ? "active" : "",
                             attrs: { id: "tab_" + index }
                           },
                           [
                             _c("strong", {
                               domProps: {
                                 textContent: _vm._s(
-                                  index + 1 + ")" + examen.nombre
+                                  index + 1 + ")" + examen.tipo
                                 )
                               }
                             }),
@@ -15176,24 +15203,73 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-outline-primary btn-sm float-left",
-                      attrs: { type: "button", disabled: _vm.loader_finalizar },
+                      attrs: { type: "button" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          _vm.finalizar()
+                          _vm.tabtoogle_menos()
                         }
                       }
                     },
                     [
-                      _vm._v("\n            Finalizar y enviar\n            "),
-                      _vm.loader_finalizar
-                        ? _c("i", {
-                            staticClass: "fa fa-spinner fa-spin fa-loader",
+                      _c("i", {
+                        staticClass: "fa fa-angle-double-left",
+                        staticStyle: { "font-size": "20px" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  !(_vm.tab_active == _vm.a_examen.length - 1)
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-outline-primary btn-sm float-left",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.tabtoogle_mas()
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-angle-double-right",
                             staticStyle: { "font-size": "20px" }
                           })
-                        : _vm._e()
-                    ]
-                  )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.tab_active == _vm.a_examen.length - 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-outline-primary btn-sm float-left",
+                          attrs: {
+                            type: "button",
+                            disabled: _vm.loader_finalizar
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.finalizar()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("\n            Finalizar\n            "),
+                          _vm.loader_finalizar
+                            ? _c("i", {
+                                staticClass: "fa fa-spinner fa-spin fa-loader",
+                                staticStyle: { "font-size": "20px" }
+                              })
+                            : _vm._e()
+                        ]
+                      )
+                    : _vm._e()
                 ])
               ])
             ]
@@ -15244,6 +15320,10 @@ var render = function() {
                     _vm._v(" "),
                     _c("span", {
                       domProps: { textContent: _vm._s(ejercicio.calificacion) }
+                    }),
+                    _vm._v("/"),
+                    _c("span", {
+                      domProps: { textContent: _vm._s(ejercicio.notamaxima) }
                     })
                   ])
                 ])
@@ -15432,9 +15512,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -15554,7 +15631,7 @@ var render = function() {
                 _c("h5", {
                   staticClass: "card-title",
                   staticStyle: { cursor: "pointer" },
-                  domProps: { textContent: _vm._s(pregunta.nombre) },
+                  domProps: { textContent: _vm._s(pregunta.tipo) },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -15586,14 +15663,6 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-                    _c("b", [_vm._v("Tipo :")]),
-                    _vm._v(" "),
-                    _c("span", {
-                      domProps: { textContent: _vm._s(pregunta.tipo) }
-                    })
-                  ]),
-                  _vm._v(" "),
                   _c("div", { staticClass: "col-md-4 col-sm-6" }, [
                     _c("b", [_vm._v("Creado :")]),
                     _vm._v(" "),
@@ -15938,6 +16007,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 var artyom = new Artyom();
 
@@ -15976,7 +16046,7 @@ var artyom = new Artyom();
         }
       },
       toolbar: [['font', ['fontname']], ['para', ['ul', 'ol', 'paragraph', 'strikethrough']], ['style', ['bold', 'italic', 'underline', 'clear']], ['fontsize', ['fontsize']], ['color', ['color']], ['height', ['height']], ['groupName', ['picture', 'link', 'video', 'table', 'hr', 'fullscreen']]],
-      height: 55
+      height: 70
     });
   },
   created: function created() {
@@ -16224,43 +16294,20 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _vm._m(1),
+          _c("label", [_vm._v("Contenido de pregunta")]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.o_pregunta.nombre,
-                expression: "o_pregunta.nombre"
-              }
-            ],
-            staticClass: "form-control",
-            class: [_vm.e_pregunta.nombre ? "is-invalid" : ""],
-            attrs: { type: "text", name: "nombre" },
-            domProps: { value: _vm.o_pregunta.nombre },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.o_pregunta, "nombre", $event.target.value)
-              }
-            }
-          }),
+          _c("div", { attrs: { id: "summernote" } }),
           _vm._v(" "),
-          _vm.e_pregunta.nombre
+          _vm.e_pregunta.descripcion
             ? _c("span", {
                 staticClass: "text-danger",
-                domProps: { textContent: _vm._s(_vm.e_pregunta.nombre[0]) }
+                domProps: { textContent: _vm._s(_vm.e_pregunta.descripcion[0]) }
               })
             : _vm._e()
         ]),
         _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _vm._m(3),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "select",
@@ -16887,7 +16934,7 @@ var render = function() {
                     "table",
                     { staticClass: "table table-striped table-valign-middle" },
                     [
-                      _vm._m(4),
+                      _vm._m(2),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -16992,7 +17039,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { attrs: { id: "accordion" } }, [
           _c("div", { staticClass: "card " }, [
-            _vm._m(5),
+            _vm._m(3),
             _vm._v(" "),
             _c(
               "div",
@@ -17112,22 +17159,6 @@ var staticRenderFns = [
         _c("code", [_vm._v("*")]),
         _vm._v(" son obligatorios\n      \t")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_vm._v("Titulo "), _c("code", [_vm._v("*")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Descripcion")]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "summernote" } })
     ])
   },
   function() {
@@ -17492,6 +17523,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 var artyom = new Artyom();
 
@@ -17530,7 +17562,7 @@ var artyom = new Artyom();
         }
       },
       toolbar: [['font', ['fontname']], ['para', ['ul', 'ol', 'paragraph', 'strikethrough']], ['style', ['bold', 'italic', 'underline', 'clear']], ['fontsize', ['fontsize']], ['color', ['color']], ['height', ['height']], ['groupName', ['picture', 'link', 'video', 'table', 'hr', 'fullscreen']]],
-      height: 55
+      height: 70
     });
   },
   created: function created() {
@@ -17808,43 +17840,20 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _vm._m(1),
+          _c("label", [_vm._v("Contenido de pregunta")]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.o_pregunta.nombre,
-                expression: "o_pregunta.nombre"
-              }
-            ],
-            staticClass: "form-control",
-            class: [_vm.e_pregunta.nombre ? "is-invalid" : ""],
-            attrs: { type: "text", name: "nombre" },
-            domProps: { value: _vm.o_pregunta.nombre },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.o_pregunta, "nombre", $event.target.value)
-              }
-            }
-          }),
+          _c("div", { attrs: { id: "summernote" } }),
           _vm._v(" "),
-          _vm.e_pregunta.nombre
+          _vm.e_pregunta.descripcion
             ? _c("span", {
                 staticClass: "text-danger",
-                domProps: { textContent: _vm._s(_vm.e_pregunta.nombre[0]) }
+                domProps: { textContent: _vm._s(_vm.e_pregunta.descripcion[0]) }
               })
             : _vm._e()
         ]),
         _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _vm._m(3),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "select",
@@ -18471,7 +18480,7 @@ var render = function() {
                     "table",
                     { staticClass: "table table-striped table-valign-middle" },
                     [
-                      _vm._m(4),
+                      _vm._m(2),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -18576,7 +18585,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { attrs: { id: "accordion" } }, [
           _c("div", { staticClass: "card " }, [
-            _vm._m(5),
+            _vm._m(3),
             _vm._v(" "),
             _c(
               "div",
@@ -18696,22 +18705,6 @@ var staticRenderFns = [
         _c("code", [_vm._v("*")]),
         _vm._v(" son obligatorios\n      \t")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_vm._v("Titulo "), _c("code", [_vm._v("*")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Descripcion")]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "summernote" } })
     ])
   },
   function() {

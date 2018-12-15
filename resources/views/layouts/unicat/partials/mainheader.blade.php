@@ -37,13 +37,15 @@
                   <i class="fa fa-envelope-o" aria-hidden="true"></i>
                   <div>aulavirtual@gmail.com</div>
                 </li>
+
+
               </ul>
               <div class="top_bar_login ml-auto">
                 <div class="login_button">
-                  <a href="{{url('/login')}}">{{ trans('frontend.nav.login') }}</a>
+                  <a href="#" data-toggle="modal" data-target="#exampleModal">{{ trans('frontend.nav.lang') }}</a>
                 </div>
                 <div class="login_button">
-                  <a href="{{url('/login')}}">fasfsd{{ trans('frontend.nav.login') }}</a>
+                  <a href="{{url('/login')}}">{{ trans('frontend.nav.login') }}</a>
                 </div>
               </div>
             </div>
@@ -71,7 +73,6 @@
                 <li class="@if(isset($link_curs)) active @endif"><a href="{{url('/cursosd')}}">{{ trans('frontend.nav.courses') }}</a></li>
                 <li class="@if(isset($link_acerca)) active @endif"><a href="{{url('/acercade')}}">{{ trans('frontend.nav.about') }}</a></li>
                 <li class="@if(isset($link_contac)) active @endif"><a href="{{url('/contacto')}}">{{ trans('frontend.nav.contact') }}</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#exampleModal">{{ trans('frontend.nav.lang') }}</a></li>
               </ul>
               <div class="hamburger menu_mm">
                 <i class="fa fa-bars menu_mm" aria-hidden="true"></i>

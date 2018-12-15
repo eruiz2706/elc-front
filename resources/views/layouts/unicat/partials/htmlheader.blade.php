@@ -19,4 +19,12 @@
     height: 200px;
   }
 }
+
+/*permitir agregar botton adicional superior*/
+.top_bar_login{
+  display: -webkit-box;
+}
+.login_button{
+  margin-left: 10px;
+}
 </style>

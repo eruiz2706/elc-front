@@ -12,7 +12,8 @@
           </h5>
           <ul class="nav nav-pills ml-auto" >
             <li class="nav-item" v-for="(examen,index) in a_examen">
-              <a class="nav-link  show" v-bind:href="'#tab_'+index" data-toggle="tab" v-bind:class="(index==0) ? 'active':''" v-text="index+1"></a>
+              <!--<a class="nav-link  show" v-bind:href="'#tab_'+index" data-toggle="tab" v-bind:class="(index==0) ? 'active':''" v-text="index+1"></a>-->
+              <a class="nav-link  show" v-bind:href="'#tab_'+index"  v-bind:class="(index==tab_active) ? 'active':''" v-text="index+1" v-on:click.prevent="tabtoogle(index)"></a>
             </li>
           </ul>
         </div>
@@ -24,8 +25,8 @@
           </div>
           <div class="tab-content">
             <!--<p>@{{a_examen}}</p>-->
-            <div class="tab-pane show" v-bind:class="(index==0) ? 'active':''" v-bind:id="'tab_'+index" v-for="(examen,index) in a_examen">
-              <strong v-text="(index+1)+')'+examen.nombre"></strong>
+            <div class="tab-pane show" v-bind:class="(index==tab_active) ? 'active':''" v-bind:id="'tab_'+index" v-for="(examen,index) in a_examen">
+              <strong v-text="(index+1)+')'+examen.tipo"></strong>
               <p v-html="examen.descripcion"></p>
               <p v-html="examen.textorellenar"></p>
 
@@ -97,8 +98,15 @@
           </div>
         </div>
         <div class='modal-footer'>
-          <button type="button" class="btn btn-outline-primary btn-sm float-left" :disabled="loader_finalizar" v-on:click.prevent="finalizar()">
-            Finalizar y enviar
+          <button type="button" class="btn btn-outline-primary btn-sm float-left"  v-on:click.prevent="tabtoogle_menos()">
+            <i style='font-size:20px' class="fa fa-angle-double-left"></i>
+          </button>
+          <button type="button" class="btn btn-outline-primary btn-sm float-left" v-if="!(tab_active==a_examen.length-1)" v-on:click.prevent="tabtoogle_mas()">
+              <i style='font-size:20px' class="fa fa-angle-double-right"></i>
+          </button>
+
+          <button type="button" class="btn btn-outline-primary btn-sm float-left" v-if="(tab_active==a_examen.length-1)" :disabled="loader_finalizar" v-on:click.prevent="finalizar()">
+            Finalizar
             <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_finalizar"></i>
           </button>
         </div>
@@ -129,7 +137,7 @@
         </div>
         <div class="col-md-4 col-sm-6">
           <b>Calificacion :</b>
-          <span v-text='ejercicio.calificacion'></span>
+          <span v-text='ejercicio.calificacion'></span>/<span v-text='ejercicio.notamaxima'></span>
         </div>
       </div>
     </div>
@@ -165,10 +173,24 @@
             idejeruser:0,
             toSecond:0,
             toMinute:0,
-            loader_finalizar:false
+            loader_finalizar:false,
+            tab_active:0
           }
         },
         methods : {
+          tabtoogle_mas:function(){
+            if(!(this.tab_active==this.a_examen.length-1)){
+              this.tab_active=this.tab_active+1;
+            }
+          },
+          tabtoogle_menos:function(){
+            if(!(this.tab_active==0)){
+                this.tab_active=this.tab_active-1;
+            }
+          },
+          tabtoogle:function(index){
+            this.tab_active=index;
+          },
           listado:function(){
             var url =this.base_url+'/ejercicios/lista_es';
             this.preload=true;

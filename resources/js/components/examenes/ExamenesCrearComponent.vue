@@ -19,7 +19,7 @@
         </p>
       </div>
       <div class="form-group">
-        <label>Titulo <code>*</code></label>
+        <label>Titulo de evaluación <code>*</code></label>
         <input type="text" class="form-control" name='nombre'  v-model='o_ejercicio.nombre' v-bind:class="[e_ejercicio.nombre ? 'is-invalid' : '']">
         <span class="text-danger" v-if="e_ejercicio.nombre" v-text='e_ejercicio.nombre[0]'></span>
       </div>
@@ -37,7 +37,7 @@
       </div>
 
       <div class="form-group">
-        <label>Descripcion</label>
+        <label>Contenido de preguntas</label>
         <div id="summernote"></div>
       </div>
 

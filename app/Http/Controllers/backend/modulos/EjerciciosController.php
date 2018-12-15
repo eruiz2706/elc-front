@@ -39,15 +39,16 @@ class EjerciciosController extends Controller
 
   public function lista_es(Request $request){
     $fecha=date('Y-m-d');
-    $ejercicios   =DB::select("select ej.id,ej.nombre,ej.descripcion,ej.duracion,ej.fecha_inicio,ej.fecha_creacion,
-                              case when ej.fecha_inicio='$fecha' then true else false end as statusini,eu.calificacion,
+    $ejercicios   =DB::select("select ej.id,ej.nombre,ej.descripcion,ej.duracion,ej.fecha_inicio,ej.fecha_creacion,ej.calificacion as notamaxima,
+                              case when ej.fecha_inicio='$fecha' then true else false end as statusini,case when eu.calificacion is null then 0 else eu.calificacion end as calificacion,
                               case when es.nombre is null then 'Pendiente' else es.nombre end as nombestado,
                               case when es.status is null then 'danger' else es.status end as status,
                               case when eu.id is null then false else true end as status_user
                               from ejercicios ej
                               left join ejercicios_user eu on(ej.id=eu.ejercicio_id)
                               left join estados es on(es.slug=eu.estado and es.tipo='ejercicios')
-                              where ej.curso_id = :curso_id",
+                              where ej.curso_id = :curso_id
+                              order by ej.fecha_inicio desc",
                           ['curso_id'=>$request->idcurso]);
 
     $jsonresponse=[
