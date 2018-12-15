@@ -48,9 +48,14 @@ class PrincipalController extends Controller
       $nav_user=[];
       $nav_cursos=[];
       $tit_cursos='';
+      $nav_options=[];
+      $tit_options='';
       if($rol=='in'){
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
         $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'manualuso'];
+
+        $tit_options='Administracion';
+        $nav_options[]=['nombre'=>'Lista de cursos','url'=>'cursos'];
       }
       if($rol=='pr'){
         $tit_cursos='Cursos Profesor';
@@ -89,7 +94,11 @@ class PrincipalController extends Controller
           'nav_cursos'=>[
               'titulo'=>$tit_cursos,
               'content'=>$nav_cursos
-            ]
+            ],
+          'nav_options'=>[
+            'titulo'=>$tit_options,
+            'content'=>$nav_options
+          ]
       ];
       return response()->json($jsonresponse,200);
     }

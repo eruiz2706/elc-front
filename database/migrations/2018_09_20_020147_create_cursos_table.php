@@ -8,7 +8,7 @@ class CreateCursosTable extends Migration
 {
     /**
      * Run the migrations.
-     * 
+     *
      * @return void
      */
     public function up()
@@ -24,7 +24,8 @@ class CreateCursosTable extends Migration
             $table->boolean('inscripcion')->default(false); // si va a permitir inscripcion por los estudiantes
             $table->text('plan_estudio')->nullable(); // plan de estudio del curso
             $table->string('imagen')->default('img/app/curso.jpg'); // url de la imagen del curso
-            $table->string('estado',15)->default('');
+            $table->string('estado',15)->default('');//estado del curso
+            $table->double('valor')->default(0);//valor del curso
             $table->dateTime('fecha_creacion'); // fecha en que se crea el curso
             $table->integer('user_id')->unsigned()->index(); //usuario que crea el curso
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -39,7 +39,7 @@ class HomeController extends Controller
     {
       $cursos   =DB::select("select
                               c.id,c.nombre,c.imagen,u.nombre as usercrea,
-                              e.nombre as nomestado
+                              e.nombre as nomestado,c.valor
                               from cursos c
                               left join users u on(c.user_id=u.id)
                               left join estados e on(c.estado=e.slug and e.tipo='cursos')
@@ -79,7 +79,7 @@ class HomeController extends Controller
       }
 
       $cursos =$cursos->where('visibilidad',true)
-                  ->select('e.nombre as nomestado','c.id','c.nombre', 'c.imagen', 'u.nombre as usercrea')
+                  ->select('e.nombre as nomestado','c.id','c.nombre', 'c.imagen', 'u.nombre as usercrea','c.valor')
                   ->paginate(6);
 
       $link_curs='';
@@ -239,7 +239,8 @@ class HomeController extends Controller
       $curso   =DB::select("select
                               c.id,c.nombre,c.imagen,u.nombre as usercrea,c.urlvideo,
                               c.plan_estudio,u.imagen as imgusucrea,c.fecha_inicio,
-                              c.fecha_finalizacion,e.nombre as nombestado
+                              case when c.fecha_finalizacion='9999-12-31' then 'Indefinido'else c.fecha_finalizacion::varchar  end as fecha_finalizacion,
+                              e.nombre as nombestado
                               from cursos c
                               left join users u on(c.user_id=u.id)
                               left join estados e on(c.estado=e.slug and e.tipo='cursos')

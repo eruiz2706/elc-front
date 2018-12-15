@@ -135,7 +135,16 @@
           <div class="course_body">
             <h3 class="course_title"><a href="{{url('cursodet/'.$curso->id)}}">{{$curso->nombre}}</a></h3>
             <div class="course_teacher">{{$curso->usercrea}}</div>
-            <div class="course_price ml-auto">{{$curso->nomestado}}</div>
+            <!--<div class="course_price ml-auto">{{$curso->nomestado}}</div>-->
+          </div>
+          <div class="course_footer">
+            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+              <div class="course_info">
+                <i class="fa fa-bank" aria-hidden="true"></i>
+                <span>{{$curso->nomestado}}</span>
+              </div>
+              <div class="course_price ml-auto">${{$curso->valor}}</div>
+            </div>
           </div>
         </div>
       </div>

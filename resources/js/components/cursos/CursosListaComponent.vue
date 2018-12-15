@@ -51,7 +51,10 @@
           <b>Profesor :</b>
           <span v-text='profesor.email'></span>
         </div>
-
+        <div class="col-md-4 col-sm-6" v-for="profesor in curso.profesores">
+          <b>Valor :</b>
+          <span v-text='curso.valor'></span>
+        </div>
       </div>
     </div>
   </div>

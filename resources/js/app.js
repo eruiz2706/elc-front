@@ -80,6 +80,7 @@ const app = new Vue({
       user:{},
       nav_user:[],
       nav_cursos:[],
+      nav_options:[],
       a_notifi:[],
       preload_notifi:false,
       conexion_user:[]
@@ -117,6 +118,7 @@ const app = new Vue({
           this.user=response.data.user;
           this.nav_user=response.data.nav_user;
           this.nav_cursos=response.data.nav_cursos;
+          this.nav_options=response.data.nav_options;
         }).catch(error =>{
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{

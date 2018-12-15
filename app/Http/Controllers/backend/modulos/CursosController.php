@@ -84,8 +84,9 @@ class CursosController extends Controller
   public function lista(Request $request){
     $user     =Auth::user();
     $cursos   =DB::select("select
-                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,fecha_creacion,inscripcion,
-                            fecha_limite
+                            id,nombre,fecha_inicio,visibilidad,fecha_creacion,inscripcion,valor,
+                            case when fecha_finalizacion='9999-12-31' then 'Indefinido' else fecha_finalizacion::varchar end as fecha_finalizacion,
+                            case when fecha_limite='9999-12-31' then 'Indefinido' else fecha_limite::varchar end as fecha_limite
                             from cursos
                             where user_id = :user_id
                             order by fecha_creacion desc",
@@ -115,8 +116,8 @@ class CursosController extends Controller
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'fecha_inicio' =>'required',
-      'fecha_finalizacion' =>'required',
-      'fecha_limite' =>'required',
+      //'fecha_finalizacion' =>'required',
+      //'fecha_limite' =>'required',
     ]);
 
     if ($validator->fails()) {
@@ -160,13 +161,19 @@ class CursosController extends Controller
     //guardar datos
     DB::beginTransaction();
     try{
+
+      $fecha_finalizacion =($request->fecha_finalizacion=='') ? '9999-12-31' : $request->fecha_finalizacion;
+      $fecha_limite       =($request->fecha_limite=='') ? '9999-12-31' : $request->fecha_limite;
+      $valor              =($request->valor=='') ? 0 : $request->valor;
+
       $idcurso=DB::table('cursos')->insertGetId([
         'nombre'=>$request->nombre,
         'fecha_inicio'=>$request->fecha_inicio,
-        'fecha_finalizacion'=>$request->fecha_finalizacion,
-        'fecha_limite'=>$request->fecha_limite,
+        'fecha_finalizacion'=>$fecha_finalizacion,
+        'fecha_limite'=>$fecha_limite,
         'visibilidad'=>$request->visibilidad,
         'inscripcion'=>$request->inscripcion,
+        'valor'=>$valor,
         'fecha_creacion'=>date('Y-m-d H:i:s'),
         'user_id'=>$user->id
       ]);
@@ -209,7 +216,7 @@ class CursosController extends Controller
         DB::rollback();
         //$e->getMessage();
         return response()->json([
-            'error' =>'Hubo una inconsistencias al intentar crear el registro'
+            'error' =>'Hubo una inconsistencias al intentar crear el registro'.$e->getMessage()
         ], 400);
     }
   }
@@ -217,7 +224,9 @@ class CursosController extends Controller
   //datos de edicion de un curso
   public function editar(Request $request){
     $curso   =DB::select("select
-                            id,nombre,fecha_inicio,fecha_finalizacion,visibilidad,inscripcion,fecha_limite
+                            id,nombre,fecha_inicio,visibilidad,inscripcion,valor,
+                            case when fecha_finalizacion='9999-12-31' then NULL else fecha_finalizacion end as fecha_finalizacion,
+                            case when fecha_limite='9999-12-31' then NULL else fecha_limite end as fecha_limite
                             from cursos
                             where id = :id",
                           ['id'=>$request->id])[0];
@@ -253,7 +262,7 @@ class CursosController extends Controller
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'fecha_inicio' =>'required',
-      'fecha_finalizacion' =>'required'
+      //'fecha_finalizacion' =>'required'
     ]);
 
     if ($validator->fails()) {
@@ -296,11 +305,17 @@ class CursosController extends Controller
 
     DB::beginTransaction();
     try{
-      $idcurso=$request->id;
+      $idcurso            =$request->id;
+      $fecha_finalizacion =($request->fecha_finalizacion=='') ? '9999-12-31' : $request->fecha_finalizacion;
+      $fecha_limite       =($request->fecha_limite=='') ? '9999-12-31' : $request->fecha_limite;
+      $valor              =($request->valor=='') ? 0 : $request->valor;
+
       DB::table('cursos')->where('id',$idcurso)->update([
         'nombre'=>$request->nombre,
         'fecha_inicio'=>$request->fecha_inicio,
-        'fecha_finalizacion'=>$request->fecha_finalizacion,
+        'fecha_finalizacion'=>$fecha_finalizacion,
+        'fecha_limite'=>$fecha_limite,
+        'valor'=>$valor,
         'visibilidad'=>$request->visibilidad,
         'inscripcion'=>$request->inscripcion,
         'fecha_modific'=>date('Y-m-d H:i:s'),

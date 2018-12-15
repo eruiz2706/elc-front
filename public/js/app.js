@@ -310,6 +310,7 @@ var app = new Vue({
     user: {},
     nav_user: [],
     nav_cursos: [],
+    nav_options: [],
     a_notifi: [],
     preload_notifi: false,
     conexion_user: []
@@ -345,6 +346,7 @@ var app = new Vue({
         _this.user = response.data.user;
         _this.nav_user = response.data.nav_user;
         _this.nav_cursos = response.data.nav_cursos;
+        _this.nav_options = response.data.nav_options;
       }).catch(function (error) {
         if (error.response.data.error) {
           toastr.error(error.response.data.error, '', {
@@ -5930,6 +5932,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -6123,6 +6128,16 @@ var render = function() {
                           domProps: { textContent: _vm._s(profesor.email) }
                         })
                       ])
+                    }),
+                    _vm._v(" "),
+                    _vm._l(curso.profesores, function(profesor) {
+                      return _c("div", { staticClass: "col-md-4 col-sm-6" }, [
+                        _c("b", [_vm._v("Valor :")]),
+                        _vm._v(" "),
+                        _c("span", {
+                          domProps: { textContent: _vm._s(curso.valor) }
+                        })
+                      ])
                     })
                   ],
                   2
@@ -6303,6 +6318,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -6311,8 +6332,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      o_basecurso: { 'nombre': '', 'fecha_inicio': '', 'fecha_finalizacion': '', 'fecha_limite': '', 'duracion': '', 'urlvideo': '', 'visibilidad': false, 'inscripcion': true, 'profesor': '', 'profesor2': '' },
-      o_curso: { 'nombre': '', 'fecha_inicio': '', 'fecha_finalizacion': '', 'fecha_limite': '', 'duracion': '', 'urlvideo': '', 'visibilidad': false, 'inscripcion': true, 'profesor': '', 'profesor2': '' },
+      o_basecurso: { 'nombre': '', 'fecha_inicio': '', 'fecha_finalizacion': '', 'fecha_limite': '', 'valor': 0, 'duracion': '', 'urlvideo': '', 'visibilidad': false, 'inscripcion': true, 'profesor': '', 'profesor2': '' },
+      o_curso: { 'nombre': '', 'fecha_inicio': '', 'fecha_finalizacion': '', 'fecha_limite': '', 'valor': 0, 'duracion': '', 'urlvideo': '', 'visibilidad': false, 'inscripcion': true, 'profesor': '', 'profesor2': '' },
       e_curso: [],
       loader_guardar: false
     };
@@ -6461,7 +6482,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _vm._m(3),
+            _c("label", [_vm._v("Fecha de Finalizacion")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -6501,7 +6522,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _vm._m(4),
+            _c("label", [_vm._v("Fecha limite ver notas ")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -6530,6 +6551,40 @@ var render = function() {
               ? _c("span", {
                   staticClass: "text-danger",
                   domProps: { textContent: _vm._s(_vm.e_curso.fecha_limite[0]) }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Valor")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.o_curso.valor,
+                  expression: "o_curso.valor"
+                }
+              ],
+              staticClass: "form-control",
+              class: [_vm.e_curso.fecha_limite ? "is-invalid" : ""],
+              attrs: { type: "number", name: "fecha_limite" },
+              domProps: { value: _vm.o_curso.valor },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.o_curso, "valor", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.e_curso.valor
+              ? _c("span", {
+                  staticClass: "text-danger",
+                  domProps: { textContent: _vm._s(_vm.e_curso.valor[0]) }
                 })
               : _vm._e()
           ]),
@@ -6771,24 +6826,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [_vm._v("Fecha de Inicio "), _c("code", [_vm._v("*")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [
-      _vm._v("Fecha de Finalizacion "),
-      _c("code", [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [
-      _vm._v("Fecha limite ver notas "),
-      _c("code", [_vm._v("*")])
-    ])
   }
 ]
 render._withStripped = true
@@ -6853,6 +6890,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7095,7 +7138,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
-                _vm._m(4),
+                _c("label", [_vm._v("Fecha de Finalizacion")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -7135,7 +7178,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
-                _vm._m(5),
+                _c("label", [_vm._v("Fecha limite ver notas")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -7166,6 +7209,40 @@ var render = function() {
                       domProps: {
                         textContent: _vm._s(_vm.e_curso.fecha_limite[0])
                       }
+                    })
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Valor")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.o_curso.valor,
+                      expression: "o_curso.valor"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: [_vm.e_curso.fecha_limite ? "is-invalid" : ""],
+                  attrs: { type: "number", name: "fecha_limite" },
+                  domProps: { value: _vm.o_curso.valor },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.o_curso, "valor", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.e_curso.valor
+                  ? _c("span", {
+                      staticClass: "text-danger",
+                      domProps: { textContent: _vm._s(_vm.e_curso.valor[0]) }
                     })
                   : _vm._e()
               ]),
@@ -7436,24 +7513,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [_vm._v("Fecha de Inicio "), _c("code", [_vm._v("*")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [
-      _vm._v("Fecha de Finalizacion "),
-      _c("code", [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [
-      _vm._v("Fecha limite ver notas "),
-      _c("code", [_vm._v("*")])
-    ])
   }
 ]
 render._withStripped = true

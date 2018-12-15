@@ -27,15 +27,21 @@
         </div>
 
         <div class="form-group">
-          <label>Fecha de Finalizacion <code>*</code></label>
+          <label>Fecha de Finalizacion</label>
           <input type="date" class="form-control" name='fecha_finalizacion' v-model='o_curso.fecha_finalizacion'  v-bind:class="[e_curso.fecha_finalizacion ? 'is-invalid' : '']">
           <span class="text-danger" v-if="e_curso.fecha_finalizacion" v-text='e_curso.fecha_finalizacion[0]'></span>
         </div>
 
         <div class="form-group">
-          <label>Fecha limite ver notas <code>*</code></label>
+          <label>Fecha limite ver notas</label>
           <input type="date" class="form-control" name='fecha_limite' v-model='o_curso.fecha_limite'  v-bind:class="[e_curso.fecha_limite ? 'is-invalid' : '']">
           <span class="text-danger" v-if="e_curso.fecha_limite" v-text='e_curso.fecha_limite[0]'></span>
+        </div>
+
+        <div class="form-group">
+          <label>Valor</label>
+          <input type="number" class="form-control" name='fecha_limite' v-model='o_curso.valor'  v-bind:class="[e_curso.fecha_limite ? 'is-invalid' : '']">
+          <span class="text-danger" v-if="e_curso.valor" v-text='e_curso.valor[0]'></span>
         </div>
 
         <div class="form-group">

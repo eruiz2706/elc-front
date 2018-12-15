@@ -99,7 +99,7 @@
                   <!-- Feature -->
 									<div class="feature d-flex flex-row align-items-center justify-content-start">
 										<div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ trans('frontend.page_coursedet.end_date') }}</span></div>
-										<div class="feature_text ml-auto" v-text='o_curso.fecha_inicio'></div>
+										<div class="feature_text ml-auto" v-text='o_curso.fecha_finalizacion'></div>
 									</div>
                 </div>
                 <BR>
