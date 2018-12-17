@@ -148,6 +148,15 @@
             });
           },
           updrevision:function(){
+            if(this.o_revision.notaes>this.o_revision.notasobre){
+              swal({
+                  title:"La calificacion no puede ser mayor a "+this.o_revision.notasobre,
+                  text:"Click para continuar",
+                  type: "info"
+              });
+              return;
+            }
+
             this.loader_revision=true;
             var url =this.base_url+'/tareas/updrevision';
             axios.post(url,this.o_revision).then(response =>{

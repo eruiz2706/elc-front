@@ -123,10 +123,12 @@
   <div class="card" v-if="!preload" v-for="ejercicio in a_ejercicios">
     <div class="card-header no-border">
       <h5 class="card-title" v-text='ejercicio.nombre'></h5>
-
       <div class='row'>
         <div class="col-md-4 col-sm-6">
           <b>Inicia :</b> <span v-text='ejercicio.fecha_inicio'></span>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <b>Finalizacion :</b> <span v-text='ejercicio.fecha_finalizacion'></span>
         </div>
         <div class="col-md-4 col-sm-6">
           <b>Duracion :</b> <span v-text='ejercicio.duracion'></span> minutos

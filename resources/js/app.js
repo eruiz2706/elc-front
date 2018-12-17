@@ -49,7 +49,8 @@ Vue.component('examenes-lista-es', require('./components/examenes/ExamenesListaE
 Vue.component('preguntas-lista', require('./components/preguntas/PreguntasListaComponent'));
 Vue.component('preguntas-crear', require('./components/preguntas/PreguntasCrearComponent'));
 Vue.component('preguntas-edit', require('./components/preguntas/PreguntasEditComponent'));
-
+Vue.component('resultados', require('./components/resultados/ResultadosComponent'));
+Vue.component('resultados-es', require('./components/resultados/ResultadosEstudianteComponent'));
 
 var socket = io(url_servinotifi,{ 'forceNew': true });
 

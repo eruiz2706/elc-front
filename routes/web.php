@@ -50,7 +50,7 @@ Route::middleware(['lang'])->group(function(){
 
 Route::middleware(['auth','navcursos'])->group(function(){
 
-  Route::get('/principalpa', 'backend\PrincipalController@indexpa'); 
+  Route::get('/principalpa', 'backend\PrincipalController@indexpa');
 
   Route::get('/principal', 'backend\PrincipalController@index');
   Route::post('/principal/config', 'backend\PrincipalController@config');
@@ -144,4 +144,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('preguntas/actualizar', 'backend\modulos\PreguntasController@actualizar');
   Route::post('preguntas/editar', 'backend\modulos\PreguntasController@editar');
 
+  Route::post('resultados/estudiante', 'backend\modulos\ResultadosController@getEstudiante');
+  Route::post('resultados/lista', 'backend\modulos\ResultadosController@lista');
+  Route::post('resultados/lista_es', 'backend\modulos\ResultadosController@lista_es');
 });

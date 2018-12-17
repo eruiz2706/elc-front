@@ -38,11 +38,14 @@
           <b>Inicia :</b> <span v-text='ejercicio.fecha_inicio'></span>
         </div>
         <div class="col-md-4 col-sm-6">
+          <b>Finalizacion :</b> <span v-text='ejercicio.fecha_finalizacion'></span>
+        </div>
+        <div class="col-md-4 col-sm-6">
           <b>Duracion :</b> <span v-text='ejercicio.duracion'></span> minutos
         </div>
         <div class="col-md-4 col-sm-6">
           <b>Preguntas :</b> <span v-text='ejercicio.cant_preg'></span>
-        </div>
+        </div> 
         <div class="col-md-4 col-sm-6">
           <b>Nota sobre :</b> <span v-text='ejercicio.notamaxima'></span>
         </div>

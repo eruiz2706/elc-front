@@ -48,9 +48,12 @@ class TareasController extends Controller
       $cantUser =0;
     }
 
-    $tareas   =DB::select("select t.id,t.nombre,t.fecha_vencimiento,t.calificacion,t.fecha_creacion,t.descripcion,t.entregas as cant_respuest
+    $tareas   =DB::select("select t.id,t.nombre,
+                            case when t.fecha_vencimiento='9999-12-31' then 'Indefinido' else t.fecha_vencimiento::varchar end as fecha_vencimiento,
+                            t.calificacion,t.fecha_creacion,t.descripcion,t.entregas as cant_respuest
                             from tareas t
-                            where t.curso_id = :curso_id",
+                            where t.curso_id = :curso_id
+                            order by t.fecha_vencimiento desc",
                             ['curso_id'=>$request->idcurso]);
     $jsonresponse=[
         'cantUser'=>$cantUser,
@@ -60,16 +63,19 @@ class TareasController extends Controller
   }
 
   public function lista_es(Request $request){
-    $tareas   =DB::select("select t.id,t.nombre,t.fecha_vencimiento,t.calificacion,t.fecha_creacion,t.descripcion,
+    $user   =Auth::user();
+    $tareas   =DB::select("select t.id,t.nombre,
+                              case when t.fecha_vencimiento='9999-12-31' then 'Indefinido' else t.fecha_vencimiento::varchar end as fecha_vencimiento,
+                              t.calificacion,t.fecha_creacion,t.descripcion,
                               tu.calificacion as notaes,tu.respuesta,tu.comentario,
                               case when tu.estado is null then 'Pendiente' else e.nombre end as nombestado,
                               case when e.status is null then 'danger' else e.status end as status
                               from tareas t
-                              left join tareas_user tu on(t.id=tu.tarea_id)
+                              left join tareas_user tu on(t.id=tu.tarea_id and tu.user_id = :user_id)
                               left join estados e on (e.slug=tu.estado and e.tipo='tareas')
                               where curso_id = :curso_id
-                              order by t.fecha_creacion desc",
-                          ['curso_id'=>$request->idcurso]);
+                              order by t.fecha_vencimiento desc",
+                          ['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
     $jsonresponse=[
         'tareas'=>$tareas
     ];
@@ -92,7 +98,8 @@ class TareasController extends Controller
                             left join tareas t on(tu.tarea_id=t.id)
                             left join users u on(tu.user_id=u.id)
                             left join estados e on(e.slug=tu.estado and e.tipo='tareas')
-                            where t.id= :id",
+                            where t.id= :id
+                            order by t.fecha_vencimiento desc",
                             ['id'=>$request->id]);
     $jsonresponse=[
         'tarea'=>$tarea,
@@ -107,7 +114,7 @@ class TareasController extends Controller
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'calificacion' =>'required|integer|min:1',
-      'fecha_vencimiento' =>'required',
+      //'fecha_vencimiento' =>'required',
     ]);
 
     if ($validator->fails()) {
@@ -119,12 +126,15 @@ class TareasController extends Controller
     ############guardar datos ########
     DB::beginTransaction();
     try{
+
+      $fecha_vencimiento =($request->fecha_vencimiento=='') ? '9999-12-31' : $request->fecha_vencimiento;
+
       DB::table('tareas')->insert([
         'curso_id'=>$request->idcurso,
         'nombre'=>$request->nombre,
         'descripcion'=>$request->descripcion,
         'calificacion' =>$request->calificacion,
-        'fecha_vencimiento' =>$request->fecha_vencimiento,
+        'fecha_vencimiento' =>$fecha_vencimiento,
         'fecha_creacion'=>date('Y-m-d H:i:s'),
         'user_id'=>$user->id
       ]);
@@ -171,7 +181,9 @@ class TareasController extends Controller
   //datos de edicion de un modulo
   public function editar(Request $request){
     $tarea   =DB::select("select
-                            id,nombre,calificacion,fecha_vencimiento,descripcion
+                            id,nombre,calificacion,
+                            case when fecha_vencimiento='9999-12-31' then NULL else fecha_vencimiento end as fecha_vencimiento,
+                            descripcion
                             from tareas
                             where id = :id",
                           ['id'=>$request->id])[0];
@@ -186,7 +198,7 @@ class TareasController extends Controller
     $validator =Validator::make($request->all(),[
       'nombre' =>'required|string',
       'calificacion' =>'required|integer|min:1',
-      'fecha_vencimiento' =>'required',
+      //'fecha_vencimiento' =>'required',
     ]);
 
     if ($validator->fails()) {
@@ -198,11 +210,14 @@ class TareasController extends Controller
     //guardar datos
     DB::beginTransaction();
     try{
+
+      $fecha_vencimiento =($request->fecha_vencimiento=='') ? '9999-12-31' : $request->fecha_vencimiento;
+
       DB::table('tareas')->where('id',$request->id)->update([
         'nombre'=>$request->nombre,
         'descripcion'=>$request->descripcion,
         'calificacion' =>$request->calificacion,
-        'fecha_vencimiento' =>$request->fecha_vencimiento,
+        'fecha_vencimiento' =>$fecha_vencimiento,
         'fecha_modific'=>date('Y-m-d H:i:s'),
         'userm_id'=>$user->id
       ]);

@@ -281,6 +281,8 @@ Vue.component('examenes-lista-es', __webpack_require__(90));
 Vue.component('preguntas-lista', __webpack_require__(93));
 Vue.component('preguntas-crear', __webpack_require__(96));
 Vue.component('preguntas-edit', __webpack_require__(99));
+Vue.component('resultados', __webpack_require__(102));
+Vue.component('resultados-es', __webpack_require__(105));
 
 var socket = io(url_servinotifi, { 'forceNew': true });
 
@@ -10827,7 +10829,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _vm._m(3),
+          _c("label", [_vm._v("Fecha vencimiento")]),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -10862,7 +10864,7 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _vm._m(4),
+        _vm._m(3),
         _vm._v(" "),
         _c(
           "button",
@@ -10916,15 +10918,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v("Calificacion sobre "),
-      _c("code", [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [
-      _vm._v("Fecha vencimiento "),
       _c("code", [_vm._v("*")])
     ])
   },
@@ -11294,7 +11287,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _vm._m(4),
+            _c("label", [_vm._v("Fecha vencimiento")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -11333,7 +11326,7 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
-          _vm._m(5),
+          _vm._m(4),
           _vm._v(" "),
           _c(
             "button",
@@ -11399,15 +11392,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v("Calificacion sobre "),
-      _c("code", [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [
-      _vm._v("Fecha vencimiento "),
       _c("code", [_vm._v("*")])
     ])
   },
@@ -11633,6 +11617,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     updrevision: function updrevision() {
       var _this3 = this;
+
+      if (this.o_revision.notaes > this.o_revision.notasobre) {
+        swal({
+          title: "La calificacion no puede ser mayor a " + this.o_revision.notasobre,
+          text: "Click para continuar",
+          type: "info"
+        });
+        return;
+      }
 
       this.loader_revision = true;
       var url = this.base_url + '/tareas/updrevision';
@@ -12728,6 +12721,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -12903,6 +12899,16 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4 col-sm-6" }, [
+                    _c("b", [_vm._v("Finalizacion :")]),
+                    _vm._v(" "),
+                    _c("span", {
+                      domProps: {
+                        textContent: _vm._s(ejercicio.fecha_finalizacion)
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4 col-sm-6" }, [
                     _c("b", [_vm._v("Duracion :")]),
                     _vm._v(" "),
                     _c("span", {
@@ -13033,6 +13039,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -13288,6 +13300,46 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Fecha de Finalizacion")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.o_ejercicio.fecha_finalizacion,
+                expression: "o_ejercicio.fecha_finalizacion"
+              }
+            ],
+            staticClass: "form-control",
+            class: [_vm.e_ejercicio.fecha_finalizacion ? "is-invalid" : ""],
+            attrs: { type: "date", name: "fecha_inicio" },
+            domProps: { value: _vm.o_ejercicio.fecha_finalizacion },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(
+                  _vm.o_ejercicio,
+                  "fecha_finalizacion",
+                  $event.target.value
+                )
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.e_ejercicio.fecha_finalizacion
+            ? _c("span", {
+                staticClass: "text-danger",
+                domProps: {
+                  textContent: _vm._s(_vm.e_ejercicio.fecha_finalizacion[0])
+                }
+              })
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
           _vm._m(3),
           _vm._v(" "),
           _c("input", {
@@ -13460,6 +13512,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -13748,6 +13806,46 @@ var render = function() {
                   staticClass: "text-danger",
                   domProps: {
                     textContent: _vm._s(_vm.e_ejercicio.fecha_inicio[0])
+                  }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Fecha de Finalizacion")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.o_ejercicio.fecha_finalizacion,
+                  expression: "o_ejercicio.fecha_finalizacion"
+                }
+              ],
+              staticClass: "form-control",
+              class: [_vm.e_ejercicio.fecha_finalizacion ? "is-invalid" : ""],
+              attrs: { type: "date", name: "fecha_inicio" },
+              domProps: { value: _vm.o_ejercicio.fecha_finalizacion },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.o_ejercicio,
+                    "fecha_finalizacion",
+                    $event.target.value
+                  )
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.e_ejercicio.fecha_finalizacion
+              ? _c("span", {
+                  staticClass: "text-danger",
+                  domProps: {
+                    textContent: _vm._s(_vm.e_ejercicio.fecha_finalizacion[0])
                   }
                 })
               : _vm._e()
@@ -14632,6 +14730,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -15353,6 +15453,16 @@ var render = function() {
                     _vm._v(" "),
                     _c("span", {
                       domProps: { textContent: _vm._s(ejercicio.fecha_inicio) }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4 col-sm-6" }, [
+                    _c("b", [_vm._v("Finalizacion :")]),
+                    _vm._v(" "),
+                    _c("span", {
+                      domProps: {
+                        textContent: _vm._s(ejercicio.fecha_finalizacion)
+                      }
                     })
                   ]),
                   _vm._v(" "),
@@ -18827,6 +18937,788 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-0f1b703b", module.exports)
+  }
+}
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(103)
+/* template */
+var __vue_template__ = __webpack_require__(104)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/resultados/ResultadosComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-44e7e8b9", Component.options)
+  } else {
+    hotAPI.reload("data-v-44e7e8b9", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 103 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Component integrantes mounted.');
+  },
+  created: function created() {
+    this.base_url = base_url;
+    this.idcurso = document.getElementById('idcurso').value;
+    this.listado();
+  },
+  data: function data() {
+    return {
+      idcurso: 0,
+      preload: true,
+      a_integrantes: [],
+      preloadmodal: false,
+      a_tareas: [],
+      a_examenes: []
+    };
+  },
+  methods: {
+    listado: function listado() {
+      var _this = this;
+
+      var url = base_url + '/resultados/lista';
+      this.preload = true;
+      axios.post(url, { idcurso: this.idcurso }).then(function (response) {
+        _this.preload = false;
+        _this.a_integrantes = response.data.integrantes;
+      }).catch(function (error) {
+        _this.preload = false;
+        if (error.response.data.errors) {}
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "3500"
+          });
+        }
+      });
+    },
+    openuser: function openuser(id) {
+      var _this2 = this;
+
+      console.log(id);
+      $('#modal_resultados').modal('show');
+      var url = this.base_url + '/resultados/estudiante';
+      this.preloadmodal = true;
+      axios.post(url, { idcurso: this.idcurso, id: id }).then(function (response) {
+        _this2.preloadmodal = false;
+        _this2.a_tareas = response.data.tareas;
+        _this2.a_examenes = response.data.examenes;
+      }).catch(function (error) {
+        _this2.preloadmodal = false;
+        _this2.a_tareas = [];
+        _this2.a_examenes = [];
+        if (error.response.data.errors) {}
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "3500"
+          });
+        }
+      });
+    },
+    porcent: function porcent(numerador, denominador) {
+
+      if (denominador == 0) {
+        return 0;
+      } else {
+        return numerador / denominador * 100;
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modal_resultados",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "modal-body",
+                  staticStyle: { height: "400px", "overflow-y": "auto" }
+                },
+                [
+                  _vm.preloadmodal
+                    ? _c("div", { staticClass: "row" }, [_vm._m(1)])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.preload
+                    ? _c("div", { staticClass: "card" }, [
+                        _c(
+                          "div",
+                          { staticClass: "card-body" },
+                          [
+                            _vm._m(2),
+                            _vm._v(" "),
+                            _vm._l(_vm.a_tareas, function(tarea) {
+                              return _c(
+                                "div",
+                                { staticClass: "progress-group" },
+                                [
+                                  _c("span", {
+                                    domProps: {
+                                      textContent: _vm._s(tarea.nombre)
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "float-right" }, [
+                                    _c("b", [
+                                      _c("span", {
+                                        domProps: {
+                                          textContent: _vm._s(tarea.notaes)
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v("/"),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(tarea.calificacion)
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "progress progress-sm" },
+                                    [
+                                      _c("div", {
+                                        staticClass: "progress-bar bg-primary",
+                                        style:
+                                          "width:" +
+                                          _vm.porcent(
+                                            tarea.notaes,
+                                            tarea.calificacion
+                                          ) +
+                                          "%"
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.preload
+                    ? _c("div", { staticClass: "card" }, [
+                        _c(
+                          "div",
+                          { staticClass: "card-body" },
+                          [
+                            _vm._m(3),
+                            _vm._v(" "),
+                            _vm._l(_vm.a_examenes, function(examen) {
+                              return _c(
+                                "div",
+                                { staticClass: "progress-group" },
+                                [
+                                  _c("span", {
+                                    domProps: {
+                                      textContent: _vm._s(examen.nombre)
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "float-right" }, [
+                                    _c("b", [
+                                      _c("span", {
+                                        domProps: {
+                                          textContent: _vm._s(examen.notaes)
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v("/"),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(examen.notamaxima)
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "progress progress-sm" },
+                                    [
+                                      _c("div", {
+                                        staticClass: "progress-bar bg-primary",
+                                        style:
+                                          "width:" +
+                                          _vm.porcent(
+                                            examen.notaes,
+                                            examen.notamaxima
+                                          ) +
+                                          "%"
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(4)]) : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.a_integrantes, function(integrante) {
+        return _c("div", { staticClass: "col-md-6 col-sm-12" }, [
+          !_vm.preload
+            ? _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("div", { staticClass: "card-tools" }, [
+                    _c("div", { staticClass: "btn-group" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-tool",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.openuser(integrante.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa  fa-list-alt",
+                            staticStyle: { "font-size": "20px" }
+                          })
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "post" }, [
+                    _c("div", { staticClass: "user-block" }, [
+                      _c("img", {
+                        staticClass: "img-circle img-bordered",
+                        attrs: { src: _vm.base_url + "/" + integrante.imagen }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "username" }, [
+                        _c("a", [
+                          _c("span", {
+                            domProps: { textContent: _vm._s(integrante.nombre) }
+                          })
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            : _vm._e()
+        ])
+      })
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _vm._v("\n            Resultados"),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("×")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-block mx-auto" }, [
+      _c("i", {
+        staticClass: "fa fa-circle-o-notch fa-spin",
+        staticStyle: { "font-size": "80px" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("TAREAS")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("EXAMENES")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-block mx-auto" }, [
+      _c("i", {
+        staticClass: "fa fa-circle-o-notch fa-spin",
+        staticStyle: { "font-size": "80px" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-44e7e8b9", module.exports)
+  }
+}
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(106)
+/* template */
+var __vue_template__ = __webpack_require__(107)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/resultados/ResultadosEstudianteComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1cf719f2", Component.options)
+  } else {
+    hotAPI.reload("data-v-1cf719f2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 106 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {},
+  created: function created() {
+    this.base_url = base_url;
+    this.idcurso = document.getElementById('idcurso').value;
+    this.listado();
+  },
+  data: function data() {
+    return {
+      idcurso: 0,
+      preload: true,
+      a_tareas: [],
+      a_examenes: []
+    };
+  },
+  methods: {
+    listado: function listado() {
+      var _this = this;
+
+      var url = this.base_url + '/resultados/lista_es';
+      this.preload = true;
+      axios.post(url, { idcurso: this.idcurso }).then(function (response) {
+        _this.preload = false;
+        _this.a_tareas = response.data.tareas;
+        _this.a_examenes = response.data.examenes;
+      }).catch(function (error) {
+        _this.preload = false;
+        _this.a_tareas = [];
+        _this.a_examenes = [];
+        if (error.response.data.errors) {}
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "3500"
+          });
+        }
+      });
+    },
+    porcent: function porcent(numerador, denominador) {
+
+      if (denominador == 0) {
+        return 0;
+      } else {
+        return numerador / denominador * 100;
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(0)]) : _vm._e(),
+    _vm._v(" "),
+    !_vm.preload
+      ? _c("div", { staticClass: "card" }, [
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._l(_vm.a_tareas, function(tarea) {
+                return _c("div", { staticClass: "progress-group" }, [
+                  _c("span", {
+                    domProps: { textContent: _vm._s(tarea.nombre) }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "float-right" }, [
+                    _c("b", [
+                      _c("span", {
+                        domProps: { textContent: _vm._s(tarea.notaes) }
+                      })
+                    ]),
+                    _vm._v("/"),
+                    _c("span", {
+                      domProps: { textContent: _vm._s(tarea.calificacion) }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "progress progress-sm" }, [
+                    _c("div", {
+                      staticClass: "progress-bar bg-primary",
+                      style:
+                        "width:" +
+                        _vm.porcent(tarea.notaes, tarea.calificacion) +
+                        "%"
+                    })
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    !_vm.preload
+      ? _c("div", { staticClass: "card" }, [
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            [
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._l(_vm.a_examenes, function(examen) {
+                return _c("div", { staticClass: "progress-group" }, [
+                  _c("span", {
+                    domProps: { textContent: _vm._s(examen.nombre) }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "float-right" }, [
+                    _c("b", [
+                      _c("span", {
+                        domProps: { textContent: _vm._s(examen.notaes) }
+                      })
+                    ]),
+                    _vm._v("/"),
+                    _c("span", {
+                      domProps: { textContent: _vm._s(examen.notamaxima) }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "progress progress-sm" }, [
+                    _c("div", {
+                      staticClass: "progress-bar bg-primary",
+                      style:
+                        "width:" +
+                        _vm.porcent(examen.notaes, examen.notamaxima) +
+                        "%"
+                    })
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-block mx-auto" }, [
+      _c("i", {
+        staticClass: "fa fa-circle-o-notch fa-spin",
+        staticStyle: { "font-size": "80px" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("TAREAS")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("EXAMENES")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1cf719f2", module.exports)
   }
 }
 

@@ -24,10 +24,13 @@ class EjerciciosController extends Controller
     }else{
       $cantUser =0;
     }
-    $ejercicios   =DB::select("select e.id,e.nombre,e.descripcion,e.duracion,e.fecha_inicio,e.fecha_creacion,e.preguntas as cant_preg,
+    $ejercicios   =DB::select("select e.id,e.nombre,e.descripcion,e.duracion,e.fecha_inicio,
+                                case when e.fecha_finalizacion='9999-12-31' then 'Indefinido' else e.fecha_finalizacion::varchar end as fecha_finalizacion,
+                                e.fecha_creacion,e.preguntas as cant_preg,
                                 e.calificacion as notamaxima,e.entregas
                                 from ejercicios e
-                                where e.curso_id = :curso_id",
+                                where e.curso_id = :curso_id
+                                order by e.fecha_inicio desc",
                               ['curso_id'=>$request->idcurso]);
 
     $jsonresponse=[
@@ -38,18 +41,21 @@ class EjerciciosController extends Controller
   }
 
   public function lista_es(Request $request){
-    $fecha=date('Y-m-d');
-    $ejercicios   =DB::select("select ej.id,ej.nombre,ej.descripcion,ej.duracion,ej.fecha_inicio,ej.fecha_creacion,ej.calificacion as notamaxima,
-                              case when ej.fecha_inicio='$fecha' then true else false end as statusini,case when eu.calificacion is null then 0 else eu.calificacion end as calificacion,
+    $user   =Auth::user();
+    $fecha  =date('Y-m-d');
+    $ejercicios   =DB::select("select ej.id,ej.nombre,ej.descripcion,ej.duracion,ej.fecha_inicio,
+                              case when ej.fecha_finalizacion='9999-12-31' then 'Indefinido' else ej.fecha_finalizacion::varchar end as fecha_finalizacion,
+                              ej.fecha_creacion,ej.calificacion as notamaxima,
+                              case when '$fecha'>=ej.fecha_inicio and '$fecha'<=ej.fecha_finalizacion then true else false end as statusini,case when eu.calificacion is null then 0 else eu.calificacion end as calificacion,
                               case when es.nombre is null then 'Pendiente' else es.nombre end as nombestado,
                               case when es.status is null then 'danger' else es.status end as status,
                               case when eu.id is null then false else true end as status_user
                               from ejercicios ej
-                              left join ejercicios_user eu on(ej.id=eu.ejercicio_id)
+                              left join ejercicios_user eu on(ej.id=eu.ejercicio_id and eu.user_id = :user_id)
                               left join estados es on(es.slug=eu.estado and es.tipo='ejercicios')
                               where ej.curso_id = :curso_id
                               order by ej.fecha_inicio desc",
-                          ['curso_id'=>$request->idcurso]);
+                          ['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
 
     $jsonresponse=[
         'ejercicios'=>$ejercicios
@@ -321,12 +327,15 @@ class EjerciciosController extends Controller
 
     DB::beginTransaction();
     try{
+      $fecha_finalizacion =($request->fecha_finalizacion=='') ? '9999-12-31' : $request->fecha_finalizacion;
+
       DB::table('ejercicios')->insert([
         'curso_id'=>$request->idcurso,
         'nombre'=>$request->nombre,
         'descripcion'=>$request->descripcion,
         'duracion'=>$request->duracion,
         'fecha_inicio'=>$request->fecha_inicio,
+        'fecha_finalizacion'=>$fecha_finalizacion,
         'fecha_creacion'=>date('Y-m-d H:i:s'),
         'user_id'=>$user->id
       ]);
@@ -351,7 +360,9 @@ class EjerciciosController extends Controller
   //datos de edicion de un modulo
   public function editar(Request $request){
     $ejercicio   =DB::select("select
-                            id,nombre,descripcion,duracion,fecha_inicio,fecha_creacion
+                            id,nombre,descripcion,duracion,fecha_inicio,
+                            case when fecha_finalizacion='9999-12-31' then NULL else fecha_finalizacion end as fecha_finalizacion,
+                            fecha_creacion
                             from ejercicios
                             where id = :id",
                           ['id'=>$request->id])[0];
@@ -378,11 +389,15 @@ class EjerciciosController extends Controller
     //guardar datos
     DB::beginTransaction();
     try{
+
+      $fecha_finalizacion =($request->fecha_finalizacion=='') ? '9999-12-31' : $request->fecha_finalizacion;
+
       DB::table('ejercicios')->where('id',$request->id)->update([
         'nombre'=>$request->nombre,
         'descripcion'=>$request->descripcion,
         'duracion'=>$request->duracion,
         'fecha_inicio'=>$request->fecha_inicio,
+        'fecha_finalizacion'=>$fecha_finalizacion,
         'fecha_modific'=>date('Y-m-d H:i:s'),
         'userm_id'=>$user->id
       ]);

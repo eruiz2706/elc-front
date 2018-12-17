@@ -37,6 +37,12 @@
       </div>
 
       <div class="form-group">
+        <label>Fecha de Finalizacion</label>
+        <input type="date" class="form-control" name='fecha_inicio' v-model='o_ejercicio.fecha_finalizacion'  v-bind:class="[e_ejercicio.fecha_finalizacion ? 'is-invalid' : '']">
+        <span class="text-danger" v-if="e_ejercicio.fecha_finalizacion" v-text='e_ejercicio.fecha_finalizacion[0]'></span>
+      </div>
+
+      <div class="form-group">
       <label>Duracion(Minutos) <code>*</code></label>
         <input type="number" class="form-control" name='duracion' min="0" max="1000"  v-model='o_ejercicio.duracion'  v-bind:class="[e_ejercicio.duracion ? 'is-invalid' : '']">
         <span class="text-danger" v-if="e_ejercicio.duracion" v-text='e_ejercicio.duracion[0]'></span>

@@ -31,7 +31,7 @@
       </div>
 
       <div class="form-group">
-        <label>Fecha vencimiento <code>*</code></label>
+        <label>Fecha vencimiento</label>
         <input type="date" class="form-control" name='fecha_vencimiento' v-model='o_tarea.fecha_vencimiento'  v-bind:class="[e_tarea.fecha_vencimiento ? 'is-invalid' : '']">
         <span class="text-danger" v-if="e_tarea.fecha_vencimiento" v-text='e_tarea.fecha_vencimiento[0]'></span>
       </div>

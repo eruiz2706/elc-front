@@ -14,9 +14,9 @@
         <span v-text='user.nombre'></span>
       </a>
     </h3>
-    <p class="text-muted text-center" style="margin-top:-10px">
+    <!--<p class="text-muted text-center" style="margin-top:-10px">
       <a href="#" style='color:#6c757d!important' v-on:click.prevent="setRedirect('perfil')">AJ132550</a>
-    </p>
+    </p>-->
 
     <ul class="nav nav-pills flex-column">
         <li class="nav-item active" v-for='nav in nav_user'>
