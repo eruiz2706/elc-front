@@ -234,7 +234,7 @@ class CursosController extends Controller
     $curso_prof=DB::select("select cu.user_id,u.email
                             from cursos_user cu
                             left join users u on(cu.user_id=u.id)
-                            where cu.curso_id= :curso_id
+                            where cu.curso_id= :curso_id and cu.slugrol='pr'
                             order by cu.id",
                           ['curso_id'=>$request->id]);
     $profesor='';
