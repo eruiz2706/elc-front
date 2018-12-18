@@ -113,6 +113,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('progreso/lista_pr', 'backend\modulos\ProgresoController@lista_pr');
   Route::post('progreso/guardar', 'backend\modulos\ProgresoController@guardar');
   Route::post('progreso/progmod', 'backend\modulos\ProgresoController@lista_progreso_modulo');
+  Route::post('progreso/toque', 'backend\modulos\ProgresoController@toque');
 
   Route::post('tareas/guardar', 'backend\modulos\TareasController@guardar');
   Route::post('tareas/lista', 'backend\modulos\TareasController@lista');

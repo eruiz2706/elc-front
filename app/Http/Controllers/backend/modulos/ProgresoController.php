@@ -107,7 +107,7 @@ class ProgresoController extends Controller
       if(!empty($lecciones))$cantlecc    =$lecciones[0]->cant;
 
       $progmod   =DB::select("select
-                                cu.user_id,u.nombre,u.imagen
+                                cu.user_id,u.nombre,u.imagen,u.id
                                 from cursos_user cu
                                 left join users u on(cu.user_id=u.id)
                                 where cu.curso_id=:curso_id and slugrol='es'",
@@ -122,6 +122,7 @@ class ProgresoController extends Controller
                                  ['modulo_id'=>$request->idmodulo,'user_id'=>$prog->user_id]);
         if(!empty($lecc_user))$cantleccuser=$lecc_user[0]->cant;
 
+        $prog->idmodulo=$request->idmodulo;
         $prog->cantlecc=$cantlecc;
         $prog->cantleccuser=$cantleccuser;
       }
@@ -156,6 +157,47 @@ class ProgresoController extends Controller
         //$e->getMessage();
         return response()->json([
             'error' =>'Hubo una inconsistencias al intentar marcar la leccion como finalizada, intente nuevamente'
+        ], 400);
+    }
+  }
+
+  public function toque(Request $request){
+
+    DB::beginTransaction();
+    try{
+      $curso  =DB::select("select c.nombre
+                            from cursos c
+                            where c.id= :idcurso"
+                       ,['idcurso'=>$request->idcurso]);
+      $curso  =$curso[0];
+
+      $modulo  =DB::select("select nombre
+                            from modulos
+                            where id= :idmodulo"
+                       ,['idmodulo'=>$request->idmodulo]);
+      $modulo  =$modulo[0];
+
+      $notifi_tk=[];
+      DB::table('notificaciones')->insert([
+        'descripcion'=>'En el curso:<strong> '.$curso->nombre.'</strong> el profesor te recomienda terminar las lecciones pendientes del modulo:<strong>'.$modulo->nombre.'</strong>',
+        'fecha_creacion'=>date('Y-m-d H:i:s'),
+        'user_id'=>$request->id
+      ]);
+      $notifi_tk[]=$request->id;
+      DB::commit();
+      return response()->json([
+          'message' => 'Se envio el toque correctamente!',
+          'message2' => 'Click para continuar!',
+          'notifi_tk'=>$notifi_tk
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('creacion tarea : '.$e->getMessage());
+        DB::rollback();
+        //$e->getMessage();
+
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar crear el registro'.$e->getMessage()
         ], 400);
     }
   }

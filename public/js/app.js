@@ -3505,6 +3505,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3525,17 +3531,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   methods: {
-    listado: function listado() {
+    dartoque: function dartoque(id, idmodulo) {
       var _this = this;
+
+      var url = this.base_url + '/progreso/toque';
+      axios.post(url, { idcurso: this.idcurso, id: id, idmodulo: idmodulo }).then(function (response) {
+        var inst = _this;
+        _this.$root.$emit('notifi_cli', response.data.notifi_tk);
+        swal({
+          title: response.data.message,
+          text: response.data.message2,
+          type: "success"
+        });
+      }).catch(function (error) {
+        if (error.response.data.errors) {
+          _this.e_tarea = error.response.data.errors;
+        }
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "2500"
+          });
+        }
+      });
+    },
+    listado: function listado() {
+      var _this2 = this;
 
       var url = this.base_url + '/progreso/lista_pr';
       this.preload = true;
       axios.post(url, { idcurso: this.idcurso }).then(function (response) {
-        _this.preload = false;
-        _this.a_progreso = response.data.progreso;
+        _this2.preload = false;
+        _this2.a_progreso = response.data.progreso;
       }).catch(function (error) {
-        _this.preload = false;
-        _this.a_progreso = [];
+        _this2.preload = false;
+        _this2.a_progreso = [];
         if (error.response.data.errors) {}
         if (error.response.data.error) {
           toastr.error(error.response.data.error, '', {
@@ -3563,18 +3592,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     progresomodulo: function progresomodulo(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       $('#modal_progmod').modal('show');
       var url = this.base_url + '/progreso/progmod';
       this.preloadmodal = true;
       axios.post(url, { idcurso: this.idcurso, idmodulo: id }).then(function (response) {
-        _this2.preloadmodal = false;
-        _this2.a_progmod = response.data.progmod;
+        _this3.preloadmodal = false;
+        _this3.a_progmod = response.data.progmod;
         console.log(response.data);
       }).catch(function (error) {
-        _this2.preloadmodal = false;
-        _this2.a_progmod = [];
+        _this3.preloadmodal = false;
+        _this3.a_progmod = [];
         if (error.response.data.errors) {}
         if (error.response.data.error) {
           toastr.error(error.response.data.error, '', {
@@ -3641,6 +3670,30 @@ var render = function() {
                               "tbody",
                               _vm._l(_vm.a_progmod, function(progmod) {
                                 return _c("tr", [
+                                  _c("td", [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            _vm.dartoque(
+                                              progmod.id,
+                                              progmod.idmodulo
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass:
+                                            "fa fa-fw fa-hand-pointer-o"
+                                        })
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
                                   _c("td", [
                                     _c("img", {
                                       staticClass:
@@ -3974,6 +4027,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th"),
+        _vm._v(" "),
         _c("th", [_vm._v("Estudiante")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")]),

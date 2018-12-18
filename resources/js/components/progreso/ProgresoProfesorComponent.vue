@@ -17,6 +17,7 @@
           <table class="table  table-valign-middle" v-if="!preloadmodal">
             <thead>
               <tr>
+                <th></th>
                 <th>Estudiante</th>
                 <th>Estado</th>
                 <th>Lecciones</th>
@@ -24,6 +25,11 @@
             </thead>
             <tbody>
               <tr v-for="progmod in a_progmod">
+                  <td>
+                    <a href="#" v-on:click.prevent="dartoque(progmod.id,progmod.idmodulo)">
+                    <i class="fa fa-fw fa-hand-pointer-o"></i>
+                    </a>
+                  </td>
                   <td>
                     <img v-bind:src="base_url+'/'+progmod.imagen"  class="img-circle img-size-32 mr-2">
                     <span v-text='progmod.nombre'></span>
@@ -115,6 +121,27 @@
           }
         },
         methods : {
+          dartoque:function(id,idmodulo){
+            var url =this.base_url+'/progreso/toque';
+            axios.post(url,{idcurso:this.idcurso,id:id,idmodulo:idmodulo}).then(response =>{
+                let inst=this;
+                this.$root.$emit('notifi_cli',response.data.notifi_tk);
+                swal({
+                    title:response.data.message,
+                    text:response.data.message2,
+                    type: "success"
+                });
+            }).catch(error =>{
+                if(error.response.data.errors){
+                  this.e_tarea=error.response.data.errors;
+                }
+                if(error.response.data.error){
+                  toastr.error(error.response.data.error,'',{
+                      "timeOut": "2500"
+                  });
+                }
+            });
+          },
           listado:function(){
             var url =this.base_url+'/progreso/lista_pr';
             this.preload=true;
