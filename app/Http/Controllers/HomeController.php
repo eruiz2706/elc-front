@@ -194,7 +194,6 @@ class HomeController extends Controller
 
       $password   = substr( md5(microtime()),1,8);
       $attributes =[
-          'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
           'nombre'  =>$request->input('nombre'),
           'email'=>$request->input('email'),
           'password'=>Hash::make($password),

@@ -47,13 +47,13 @@
           <span class="badge bg-success" v-if="curso.inscripcion">Estudiante</span>
           <span class="badge bg-info" v-else>Administrador</span>
         </div>
+        <div class="col-md-4 col-sm-6">
+          <b>Valor :</b>
+          <span v-text='curso.valor'></span>
+        </div>
         <div class="col-md-4 col-sm-6" v-for="profesor in curso.profesores">
           <b>Profesor :</b>
           <span v-text='profesor.email'></span>
-        </div>
-        <div class="col-md-4 col-sm-6" v-for="profesor in curso.profesores">
-          <b>Valor :</b>
-          <span v-text='curso.valor'></span>
         </div>
       </div>
     </div>

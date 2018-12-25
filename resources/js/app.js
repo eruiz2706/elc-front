@@ -51,6 +51,7 @@ Vue.component('preguntas-crear', require('./components/preguntas/PreguntasCrearC
 Vue.component('preguntas-edit', require('./components/preguntas/PreguntasEditComponent'));
 Vue.component('resultados', require('./components/resultados/ResultadosComponent'));
 Vue.component('resultados-es', require('./components/resultados/ResultadosEstudianteComponent'));
+Vue.component('usuarios-lista', require('./components/usuarios/UsuariosListaComponent'));
 
 var socket = io(url_servinotifi,{ 'forceNew': true });
 

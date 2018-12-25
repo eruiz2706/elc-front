@@ -5,7 +5,6 @@ use Caffeinated\Shinobi\Models\Role;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\RoleUser;
-use App\Models\Precio;
 
 class RolesTableSeeder extends Seeder
 {
@@ -46,7 +45,6 @@ class RolesTableSeeder extends Seeder
           /*USUARIO */
           $user1=User::create([
             'nombre' =>'Estudiante',
-            'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
             'email'=>'estudiante@gmail.com',
             'password'=>Hash::make('123456'),
             'uniqid'=>uniqid('',true)
@@ -58,7 +56,6 @@ class RolesTableSeeder extends Seeder
 
           $user2=User::create([
             'nombre' =>'Profesor',
-            'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
             'email'=>'profesor@gmail.com',
             'password'=>Hash::make('123456'),
             'uniqid'=>uniqid('',true)
@@ -70,7 +67,6 @@ class RolesTableSeeder extends Seeder
 
           $user3=User::create([
             'nombre' =>'Institucion',
-            'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
             'email'=>'institucion@gmail.com',
             'password'=>Hash::make('123456'),
             'uniqid'=>uniqid('',true)
@@ -82,7 +78,6 @@ class RolesTableSeeder extends Seeder
 
           $user4=User::create([
             'nombre' =>'Padres',
-            'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
             'email'=>'padres@gmail.com',
             'password'=>Hash::make('123456'),
             'uniqid'=>uniqid('',true)
@@ -93,7 +88,6 @@ class RolesTableSeeder extends Seeder
           ]);
           $user5=User::create([
             'nombre' =>'Administrador',
-            'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
             'email'=>'administrador@gmail.com',
             'password'=>Hash::make('123456'),
             'uniqid'=>uniqid('',true)
@@ -105,7 +99,6 @@ class RolesTableSeeder extends Seeder
 
           $user6=User::create([
             'nombre' =>'Profesor2',
-            'fecha_vencimiento'=>date('Y-m-d',strtotime('-1 days', strtotime(date('Y-m-d')))),
             'email'=>'profesor2@gmail.com',
             'password'=>Hash::make('123456'),
             'uniqid'=>uniqid('',true)
@@ -113,12 +106,6 @@ class RolesTableSeeder extends Seeder
           RoleUser::create([
             'user_id' =>$user6->id,
             'role_id' =>$rol2->id
-          ]);
-
-          Precio::create([
-            'valor'=>50000,
-            'fecha_creacion'=>date('Y-m-d'),
-            'user_id'=>$user1->id
           ]);
     }
 }

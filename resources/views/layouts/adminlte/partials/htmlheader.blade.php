@@ -18,4 +18,5 @@
   <link rel="stylesheet" href="{{ URL::asset('rsc/css/adminlte.min.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('rsc/css/loader-1.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('rsc/css/style.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('rsc/css/courses.css') }}">
 </head>

@@ -28,26 +28,45 @@
               </tr>
               <tr>
                 <td>
-                  <p style='padding:0px'><strong>FECHA INICIO</strong></p>
-                  <span v-text='o_curso.fecha_inicio'></span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p><strong>FECHA FINALIZACION</strong></p>
-                  <span v-text='o_curso.fecha_finalizacion'></span>
+                  <p>
+                    <strong>FECHA INICIO</strong>
+                    <br><span v-text='o_curso.fecha_inicio'></span>
+                  </p>
+                  <p>
+                    <strong>FECHA FINALIZACION</strong>
+                    <br><span v-text='o_curso.fecha_finalizacion'></span>
+                  </p>
+                  <p>
+                    <strong>VALOR</strong>
+                    <br><span v-text='o_curso.valor'></span>
+                  </p>
                 </td>
               </tr>
               <tr>
                 <th colspan='2' v-if='!subscrip'>
-                  <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" :disabled="loader_suscrip" v-on:click.prevent="suscribirse()" v-if="o_curso.estado=='abierto'">
-                    <i class="fa fa-thumbs-o-up"></i> Unirse
+                  <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" :disabled="loader_suscrip" v-on:click.prevent="suscribirse()" v-if="o_curso.estado !='finalizado' && o_curso.valor==0">
+                    <i class="fa fa-thumbs-o-up"></i> Gratis
                     <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_suscrip"></i>
                   </button>
 
-                  <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" disabled v-else>
-                    <i class="fa fa-close"></i> Cerrado
-                  </button>
+                  <form method="post" v-bind:action="webcheckout.action" v-if="o_curso.estado !='finalizado' && o_curso.valor>0">
+                     <input name="merchantId"    type="hidden"  v-bind:value="webcheckout.merchantId"   >
+                     <input name="accountId"     type="hidden"  v-bind:value="webcheckout.accountId" >
+                     <input name="description"   type="hidden"  v-bind:value="webcheckout.description"  >
+                     <input name="referenceCode" type="hidden"  v-bind:value="webcheckout.referenceCode" >
+                     <input name="amount"        type="hidden"  v-bind:value="webcheckout.amount"   >
+                     <input name="tax"           type="hidden"  v-bind:value="webcheckout.tax"  >
+                     <input name="taxReturnBase" type="hidden"  v-bind:value="webcheckout.taxReturnBase" >
+                     <input name="currency"      type="hidden"  v-bind:value="webcheckout.currency" >
+                     <input name="signature"     type="hidden"  v-bind:value="webcheckout.signature"  >
+                     <input name="test"          type="hidden"  v-bind:value="webcheckout.test"  >
+                     <input name="buyerEmail"    type="hidden"  v-bind:value="webcheckout.buyerEmail" >
+                     <input name="responseUrl"    type="hidden" v-bind:value="webcheckout.responseUrl" >
+                     <input name="confirmationUrl"    type="hidden" v-bind:value="webcheckout.responseUrl" >
+                     <button name="Submit"        type="submit"  class="btn btn-block btn-outline-primary btn-sm">
+                        <i class="fa fa-credit-card"></i> Comprar
+                     </button>
+                  </form>
                 </th>
                 <th colspan='2' v-else>
                   <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" disabled>
@@ -90,7 +109,8 @@
             id_curso :0,
             o_curso:{},
             preload :false,
-            subscrip:false
+            subscrip:false,
+            webcheckout:{},
           }
         },
         methods : {
@@ -100,6 +120,7 @@
               axios.post(url,{id:this.id_curso}).then(response =>{
                   this.o_curso=response.data.curso;
                   this.subscrip=response.data.subscrip;
+                  this.webcheckout=response.data.webcheckout;
                   this.preload=false;
               }).catch(error =>{
                   this.preload=false;

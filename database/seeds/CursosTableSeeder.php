@@ -15,10 +15,11 @@ class CursosTableSeeder extends Seeder
     {
         Curso::create([
             'user_id'=>3,
+            'valor'=>0,
             'nombre' =>'Pre-icfes 2018',
             'visibilidad'=>true,
             'fecha_inicio'=>'2018-12-01',
-            'fecha_finalizacion'=>'2018-12-15',
+            'fecha_finalizacion'=>'2019-01-01',
             'fecha_limite'=>'2018-12-30',
             'urlvideo'=>'https://www.youtube.com/embed/6f1sjIhI2Ww',
             'imagen'=>'img/app/curso.jpg',
@@ -27,10 +28,11 @@ class CursosTableSeeder extends Seeder
         ]);
         Curso::create([
             'user_id'=>3,
+            'valor'=>0,
             'nombre' =>'Ingles nivel 1',
             'visibilidad'=>true,
             'fecha_inicio'=>'2018-11-01',
-            'fecha_finalizacion'=>'2018-12-15',
+            'fecha_finalizacion'=>'2019-01-01',
             'fecha_limite'=>'2018-12-30',
             'urlvideo'=>'https://www.youtube.com/embed/r-Kb8SrR5LQ',
             'imagen'=>'img/app/ingles_1.jpg',
@@ -42,7 +44,7 @@ class CursosTableSeeder extends Seeder
             'nombre' =>'Ingles nivel 2',
             'visibilidad'=>true,
             'fecha_inicio'=>'2018-12-01',
-            'fecha_finalizacion'=>'2018-12-15',
+            'fecha_finalizacion'=>'2019-01-01',
             'fecha_limite'=>'2018-12-30',
             'urlvideo'=>'https://www.youtube.com/embed/iFHWC3S2vXY',
             'imagen'=>'img/app/ingles_2.png',
@@ -51,10 +53,11 @@ class CursosTableSeeder extends Seeder
         ]);
         Curso::create([
             'user_id'=>3,
+            'valor'=>15000,
             'nombre' =>'Ingles nivel 3',
             'visibilidad'=>true,
             'fecha_inicio'=>'2018-12-01',
-            'fecha_finalizacion'=>'2018-12-15',
+            'fecha_finalizacion'=>'2019-01-01',
             'fecha_limite'=>'2018-12-30',
             'urlvideo'=>'https://www.youtube.com/embed/YqvBGgMW-3U',
             'imagen'=>'img/app/ingles_3.jpg',

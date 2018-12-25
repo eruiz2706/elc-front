@@ -33,7 +33,6 @@ class PrincipalController extends Controller
         Session::put('rol',$rol->slug);
 
         if($rol->slug !=''){
-          Session::put('rol',$rol->slug);
           return redirect('foro');
         }
       }
@@ -50,6 +49,13 @@ class PrincipalController extends Controller
       $tit_cursos='';
       $nav_options=[];
       $tit_options='';
+      if($rol=='ad'){
+        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'manualuso'];
+
+        $tit_options='Administracion';
+        $nav_options[]=['nombre'=>'Lista de usuarios','url'=>'usuarios'];
+      }
       if($rol=='in'){
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
         $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'manualuso'];

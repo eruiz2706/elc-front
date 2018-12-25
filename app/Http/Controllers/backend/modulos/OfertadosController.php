@@ -32,7 +32,7 @@ class OfertadosController extends Controller
 
       $id       =Auth::user()->id;
       $cursos   =DB::select("select
-                              c.id,c.nombre,c.imagen,e.nombre as nombestado
+                              c.id,c.nombre,c.imagen,e.nombre as nombestado,c.valor
                               from cursos c
                               left join estados e on(c.estado=e.slug and e.tipo='cursos')
                               where c.visibilidad=true $where
@@ -57,14 +57,51 @@ class OfertadosController extends Controller
       }
 
       $curso   =DB::select("select
-                              c.id,c.nombre,c.imagen,c.plan_estudio,c.urlvideo,c.estado,
-                              c.fecha_inicio,c.fecha_finalizacion,u.imagen as img_usercrea
+                              c.id,c.nombre,c.imagen,c.plan_estudio,c.urlvideo,c.estado,c.valor,
+                              c.fecha_inicio,
+                              case when c.fecha_finalizacion='9999-12-31' then 'Indefinido' else c.fecha_finalizacion::varchar end as fecha_finalizacion,
+                              u.imagen as img_usercrea
                               from cursos c
                               left join users u on(c.user_id=u.id)
                               where c.visibilidad=true and c.id = :id",['id'=>$request->id])[0];
+
+
+
+      $action='https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/';
+      $responseUrl=env('APP_URL').'ofertados/respuestapago';
+      $confirmationUrl=env('APP_URL')."ofertados/cofirmacionpago";
+      $apiKey="4Vj8eK4rloUd272L48hsrarnUA";
+      $merchantId="508029";
+      $referenceCode=$curso->id.'-'.$user->id.'-'.date('hidmY');
+      $amount=$curso->valor;
+      $tax=0;
+      $taxReturnBase=0;
+      $currency="COP";
+      $accountId="512321";
+      $test="1";
+      $buyerEmail=$user->email;
+      $description=$curso->nombre;
+      $signature=md5($apiKey."~".$merchantId."~".$referenceCode."~".$amount."~".$currency);
+
       $jsonresponse=[
           'curso'=>$curso,
-          'subscrip'=>$subscrip
+          'subscrip'=>$subscrip,
+          'webcheckout'=>[
+            'action'=>$action,
+            'responseUrl'=>$responseUrl,
+            'confirmationUrl'=>$confirmationUrl,
+            'merchantId'=>$merchantId,
+            'accountId'=>$accountId,
+            'amount'=>$amount,
+            'tax'=>$tax,
+            'taxReturnBase'=>$taxReturnBase,
+            'currency'=>$currency,
+            'referenceCode'=>$referenceCode,
+            'buyerEmail'=>$buyerEmail,
+            'description'=>$description,
+            'signature'=>$signature,
+            'test'=>$test
+          ]
       ];
       return response()->json($jsonresponse,200);
     }
@@ -89,8 +126,6 @@ class OfertadosController extends Controller
           'fecha_creacion'=>date('Y-m-d H:i:s')
         ]);
 
-        DB::commit();
-
         $cursos  =DB::select("select
                               c.id,c.nombre
                               from cursos_user cu
@@ -99,6 +134,8 @@ class OfertadosController extends Controller
                               order by cu.fecha_creacion desc"
                          ,['user_id'=>$id]);
         Session::put('navcursos',$cursos);
+
+        DB::commit();
 
         return response()->json([
             'message' => 'Tu subscripcion se realizo correctamente!',
@@ -114,5 +151,65 @@ class OfertadosController extends Controller
               'error' =>'Hubo una inconsistencias al intentar realizar el proceso'
           ], 400);
       }
+    }
+
+    public function respuestapago(){
+        $rol  =Session::get('rol');
+        $id     =Auth::user()->id;
+
+        $referenceCode    =$_REQUEST['referenceCode'];
+        $TX_VALUE         =$_REQUEST['TX_VALUE'];
+        $New_value        =number_format($TX_VALUE, 1, '.', '');
+        $description      =$_REQUEST['description'];
+        $transactionId    =$_REQUEST['transactionId'];
+        $buyerEmail       =$_REQUEST['buyerEmail'];
+
+        if ($_REQUEST['transactionState'] == 4 ) {//Transacción aprobada
+          $r_code=explode('-',$referenceCode);
+          DB::beginTransaction();
+          try{
+            DB::table('pagos')->insert([
+              'reference_code'=>$referenceCode,
+              'transaction_id'=>$transactionId,
+              'nombre_curso'=>$description,
+              'valor'=>$New_value,
+              'email'=>$buyerEmail,
+              'user_id'=>$id,
+              'fecha_creacion'=>date('Y-m-d H:i:s')
+            ]);
+
+            DB::table('cursos_user')->insert([
+              'user_id'=>$id,
+              'curso_id'=>$r_code[0],
+              'slugrol'=>$rol,
+              'fecha_creacion'=>date('Y-m-d H:i:s')
+            ]);
+
+            $cursos  =DB::select("select
+                              c.id,c.nombre
+                              from cursos_user cu
+                              left join cursos c on(cu.curso_id=c.id)
+                              where cu.user_id = :user_id
+                              order by cu.fecha_creacion desc"
+                         ,['user_id'=>$id]);
+            Session::put('navcursos',$cursos);
+
+            DB::commit();
+
+            return view('backend.modulos.ofertados.view_confirmacion');
+          }
+          catch(\Exception $e){
+              Log::info('suscripcion curso : '.$e->getMessage());
+              DB::rollback();
+              //$e->getMessage();
+              return view('backend.modulos.ofertados.view_errorconfirmacion');
+          }
+        }else{
+          return view('backend.modulos.ofertados.view_errorconfirmacion');
+        }
+    }
+
+    public function confirmacionpago(){
+
     }
 }

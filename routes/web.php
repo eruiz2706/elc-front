@@ -62,6 +62,8 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('ofertados/busq','backend\modulos\OfertadosController@listacursos');
   Route::post('ofertados/suscrip','backend\modulos\OfertadosController@suscripcion');
   Route::post('ofertados/vercurso','backend\modulos\OfertadosController@vercurso');
+  Route::get('ofertados/respuestapago','backend\modulos\OfertadosController@respuestapago');
+  Route::get('ofertados/confirmacionpago','backend\modulos\OfertadosController@confirmacionpago');
 
   Route::get('foro','backend\modulos\ForoController@index');
   Route::post('foro/data','backend\modulos\ForoController@getData');
@@ -148,4 +150,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('resultados/estudiante', 'backend\modulos\ResultadosController@getEstudiante');
   Route::post('resultados/lista', 'backend\modulos\ResultadosController@lista');
   Route::post('resultados/lista_es', 'backend\modulos\ResultadosController@lista_es');
+
+  Route::get('usuarios','backend\modulos\UsuariosController@index');
+  Route::post('usuarios/lista','backend\modulos\UsuariosController@lista');
 });

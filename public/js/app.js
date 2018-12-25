@@ -283,6 +283,7 @@ Vue.component('preguntas-crear', __webpack_require__(96));
 Vue.component('preguntas-edit', __webpack_require__(99));
 Vue.component('resultados', __webpack_require__(102));
 Vue.component('resultados-es', __webpack_require__(105));
+Vue.component('usuarios-lista', __webpack_require__(108));
 
 var socket = io(url_servinotifi, { 'forceNew': true });
 
@@ -5291,6 +5292,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -5400,37 +5425,61 @@ var render = function() {
         ]),
         _vm._v(" "),
         _vm._l(_vm.cursos, function(curso) {
-          return _c("div", { staticClass: "col-sm-6 col-md-4" }, [
-            _c("div", { staticClass: "card" }, [
-              _c(
-                "a",
-                {
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.detcurso(curso.id)
+          return _c("div", { staticClass: "col-lg-4 " }, [
+            _c("div", { staticClass: "course" }, [
+              _c("div", { staticClass: "course_image" }, [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.detcurso(curso.id)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: { src: _vm.base_url + "/" + curso.imagen }
-                  })
-                ]
-              ),
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "card-img-top",
+                      attrs: { src: _vm.base_url + "/" + curso.imagen }
+                    })
+                  ]
+                )
+              ]),
               _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("h5", {
-                  staticClass: "card-title",
+              _c("div", { staticClass: "course_body" }, [
+                _c("h6", {
+                  staticClass: "course_title",
                   domProps: { textContent: _vm._s(curso.nombre) }
-                }),
-                _vm._v(" "),
-                _c("p", {
-                  staticClass: "card-text",
-                  domProps: { textContent: _vm._s(curso.nombestado) }
                 })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "course_footer" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "course_footer_content d-flex flex-row align-items-center justify-content-start"
+                  },
+                  [
+                    _c("div", { staticClass: "course_info" }, [
+                      _c("i", {
+                        staticClass: "fa fa-bank",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        domProps: { textContent: _vm._s(curso.nombestado) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", {
+                      staticClass: "course_price ml-auto",
+                      domProps: { textContent: _vm._s(curso.valor) }
+                    })
+                  ]
+                )
               ])
             ])
           ])
@@ -5580,6 +5629,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -5596,7 +5664,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       id_curso: 0,
       o_curso: {},
       preload: false,
-      subscrip: false
+      subscrip: false,
+      webcheckout: {}
     };
   },
   methods: {
@@ -5608,6 +5677,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.post(url, { id: this.id_curso }).then(function (response) {
         _this.o_curso = response.data.curso;
         _this.subscrip = response.data.subscrip;
+        _this.webcheckout = response.data.webcheckout;
         _this.preload = false;
       }).catch(function (error) {
         _this.preload = false;
@@ -5735,32 +5805,44 @@ var render = function() {
                   _vm._v(" "),
                   _c("tr", [
                     _c("td", [
-                      _vm._m(0),
+                      _c("p", [
+                        _c("strong", [_vm._v("FECHA INICIO")]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _c("span", {
+                          domProps: {
+                            textContent: _vm._s(_vm.o_curso.fecha_inicio)
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
-                      _c("span", {
-                        domProps: {
-                          textContent: _vm._s(_vm.o_curso.fecha_inicio)
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [
-                      _vm._m(1),
+                      _c("p", [
+                        _c("strong", [_vm._v("FECHA FINALIZACION")]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _c("span", {
+                          domProps: {
+                            textContent: _vm._s(_vm.o_curso.fecha_finalizacion)
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
-                      _c("span", {
-                        domProps: {
-                          textContent: _vm._s(_vm.o_curso.fecha_finalizacion)
-                        }
-                      })
+                      _c("p", [
+                        _c("strong", [_vm._v("VALOR")]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _c("span", {
+                          domProps: { textContent: _vm._s(_vm.o_curso.valor) }
+                        })
+                      ])
                     ])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
                     !_vm.subscrip
                       ? _c("th", { attrs: { colspan: "2" } }, [
-                          _vm.o_curso.estado == "abierto"
+                          _vm.o_curso.estado != "finalizado" &&
+                          _vm.o_curso.valor == 0
                             ? _c(
                                 "button",
                                 {
@@ -5780,7 +5862,7 @@ var render = function() {
                                 },
                                 [
                                   _c("i", { staticClass: "fa fa-thumbs-o-up" }),
-                                  _vm._v(" Unirse\n                    "),
+                                  _vm._v(" Gratis\n                    "),
                                   _vm.loader_suscrip
                                     ? _c("i", {
                                         staticClass:
@@ -5790,21 +5872,137 @@ var render = function() {
                                     : _vm._e()
                                 ]
                               )
-                            : _c(
-                                "button",
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.o_curso.estado != "finalizado" &&
+                          _vm.o_curso.valor > 0
+                            ? _c(
+                                "form",
                                 {
-                                  staticClass:
-                                    "btn btn-block btn-outline-primary btn-sm",
-                                  staticStyle: { "margin-right": "5px" },
-                                  attrs: { type: "button", disabled: "" }
+                                  attrs: {
+                                    method: "post",
+                                    action: _vm.webcheckout.action
+                                  }
                                 },
                                 [
-                                  _c("i", { staticClass: "fa fa-close" }),
-                                  _vm._v(" Cerrado\n                  ")
+                                  _c("input", {
+                                    attrs: {
+                                      name: "merchantId",
+                                      type: "hidden"
+                                    },
+                                    domProps: {
+                                      value: _vm.webcheckout.merchantId
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: {
+                                      name: "accountId",
+                                      type: "hidden"
+                                    },
+                                    domProps: {
+                                      value: _vm.webcheckout.accountId
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: {
+                                      name: "description",
+                                      type: "hidden"
+                                    },
+                                    domProps: {
+                                      value: _vm.webcheckout.description
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: {
+                                      name: "referenceCode",
+                                      type: "hidden"
+                                    },
+                                    domProps: {
+                                      value: _vm.webcheckout.referenceCode
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: { name: "amount", type: "hidden" },
+                                    domProps: { value: _vm.webcheckout.amount }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: { name: "tax", type: "hidden" },
+                                    domProps: { value: _vm.webcheckout.tax }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: {
+                                      name: "taxReturnBase",
+                                      type: "hidden"
+                                    },
+                                    domProps: {
+                                      value: _vm.webcheckout.taxReturnBase
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: { name: "currency", type: "hidden" },
+                                    domProps: {
+                                      value: _vm.webcheckout.currency
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: {
+                                      name: "signature",
+                                      type: "hidden"
+                                    },
+                                    domProps: {
+                                      value: _vm.webcheckout.signature
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: { name: "test", type: "hidden" },
+                                    domProps: { value: _vm.webcheckout.test }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: {
+                                      name: "buyerEmail",
+                                      type: "hidden"
+                                    },
+                                    domProps: {
+                                      value: _vm.webcheckout.buyerEmail
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: {
+                                      name: "responseUrl",
+                                      type: "hidden"
+                                    },
+                                    domProps: {
+                                      value: _vm.webcheckout.responseUrl
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: {
+                                      name: "confirmationUrl",
+                                      type: "hidden"
+                                    },
+                                    domProps: {
+                                      value: _vm.webcheckout.responseUrl
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _vm._m(0)
                                 ]
                               )
+                            : _vm._e()
                         ])
-                      : _c("th", { attrs: { colspan: "2" } }, [_vm._m(2)])
+                      : _c("th", { attrs: { colspan: "2" } }, [_vm._m(1)])
                   ])
                 ])
               ])
@@ -5815,7 +6013,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card" }, [
-      _vm._m(3),
+      _vm._m(2),
       _vm._v(" "),
       _c("div", {
         staticClass: "card-body",
@@ -5829,15 +6027,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: { padding: "0px" } }, [
-      _c("strong", [_vm._v("FECHA INICIO")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [_c("strong", [_vm._v("FECHA FINALIZACION")])])
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-block btn-outline-primary btn-sm",
+        attrs: { name: "Submit", type: "submit" }
+      },
+      [
+        _c("i", { staticClass: "fa fa-credit-card" }),
+        _vm._v(" Comprar\n                     ")
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -6177,22 +6377,20 @@ var render = function() {
                           ])
                     ]),
                     _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4 col-sm-6" }, [
+                      _c("b", [_vm._v("Valor :")]),
+                      _vm._v(" "),
+                      _c("span", {
+                        domProps: { textContent: _vm._s(curso.valor) }
+                      })
+                    ]),
+                    _vm._v(" "),
                     _vm._l(curso.profesores, function(profesor) {
                       return _c("div", { staticClass: "col-md-4 col-sm-6" }, [
                         _c("b", [_vm._v("Profesor :")]),
                         _vm._v(" "),
                         _c("span", {
                           domProps: { textContent: _vm._s(profesor.email) }
-                        })
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _vm._l(curso.profesores, function(profesor) {
-                      return _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-                        _c("b", [_vm._v("Valor :")]),
-                        _vm._v(" "),
-                        _c("span", {
-                          domProps: { textContent: _vm._s(curso.valor) }
                         })
                       ])
                     })
@@ -19774,6 +19972,515 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-1cf719f2", module.exports)
+  }
+}
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(109)
+/* template */
+var __vue_template__ = __webpack_require__(110)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/usuarios/UsuariosListaComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2387d38e", Component.options)
+  } else {
+    hotAPI.reload("data-v-2387d38e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 109 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {},
+    created: function created() {
+        this.base_url = base_url;
+        this.listado();
+    },
+    data: function data() {
+        return {
+            preload: false,
+            pagination: {
+                page: 0,
+                per_page: 8,
+                next_page: 0,
+                total: 0,
+                total_pages: 0,
+                offset: 2,
+                data: [],
+                datafilter: [],
+                search: '',
+                keys: ["email", "nombre", "telefono", "ciudad", "direccion", "facebook", "linkedin"]
+            }
+        };
+    },
+    computed: {
+        isActived: function isActived() {
+            return this.pagination.page;
+        },
+        pagesNumbers: function pagesNumbers() {
+            if (this.pagination.total_pages <= 1) {
+                return [];
+            }
+
+            var from = this.pagination.page - this.pagination.offset;
+            if (from < 1) {
+                from = 1;
+            }
+
+            var to = from + this.pagination.offset * 2;
+            if (to >= this.pagination.total_pages) {
+                to = this.pagination.total_pages;
+            }
+
+            var pagesArray = [];
+            while (from <= to) {
+                pagesArray.push(from);
+                from++;
+            }
+
+            return pagesArray;
+        },
+        msjTables: function msjTables() {
+            var cantIni = 1;
+            var cantFin = 1;
+            if (this.pagination.page > 1) {
+                cantIni = this.pagination.pre_page * this.pagination.per_page;
+            }
+
+            if (this.pagination.page == this.pagination.total_pages) {
+                cantFin = this.pagination.total;
+            } else {
+                if (this.pagination.page > 1) {
+                    cantFin = cantIni + this.pagination.per_page;
+                } else {
+                    cantFin = this.pagination.per_page;
+                }
+            }
+            var mensaje = "Mostrando " + cantIni + " a " + cantFin + " de " + this.pagination.total;
+            return mensaje;
+        }
+    },
+    methods: {
+        listado: function listado() {
+            var _this = this;
+
+            var url = this.base_url + '/usuarios/lista';
+            this.preload = true;
+            console.log('entros');
+            axios.post(url, {}).then(function (response) {
+                _this.preload = false;
+                console.log("**" + response.data.users);
+                _this.pagination.data = response.data.users;
+                _this.changePage(1);
+
+                console.log(_this.pagination);
+            }).catch(function (error) {
+                _this.preload = false;
+            });
+        },
+
+        /*metodos de paginacion de tablas*/
+        changePage: function changePage(page) {
+            var data = this.filterData(this.pagination.search, this.pagination.keys, this.pagination.data);
+            this.paginator(data, page, this.pagination.per_page);
+        },
+        changeSearch: function changeSearch() {
+            this.changePage(1);
+        },
+        paginator: function paginator(items, page, per_page) {
+
+            var page = page || 1;
+            var per_page = per_page || 10;
+            var offset = (page - 1) * per_page;
+
+            var paginatedItems = items.slice(offset).slice(0, per_page);
+            var total_pages = Math.ceil(items.length / per_page);
+
+            this.pagination.page = page;
+            this.pagination.per_page = per_page;
+            this.pagination.pre_page = page - 1 ? page - 1 : null;
+            this.pagination.next_page = total_pages > page ? page + 1 : null;
+            this.pagination.total = items.length;
+            this.pagination.total_pages = total_pages;
+            this.pagination.datafilter = paginatedItems;
+        },
+        filterData: function filterData(search, keys, wines) {
+            var lowSearch = search.toLowerCase();
+            return wines.filter(function (wine) {
+                return keys.some(function (key) {
+                    return String(wine[key]).toLowerCase().includes(lowSearch);
+                });
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(0)]) : _vm._e(),
+    _vm._v(" "),
+    !_vm.preload
+      ? _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v("Lista de Usuarios")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "input-group input-group-sm",
+                  staticStyle: { width: "150px" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.pagination.search,
+                        expression: "pagination.search"
+                      }
+                    ],
+                    staticClass: "form-control float-right",
+                    attrs: {
+                      type: "text",
+                      name: "table_search",
+                      placeholder: "Buscar.."
+                    },
+                    domProps: { value: _vm.pagination.search },
+                    on: {
+                      keyup: function($event) {
+                        _vm.changeSearch()
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.pagination, "search", $event.target.value)
+                      }
+                    }
+                  })
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover" }, [
+              _c(
+                "tbody",
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._l(_vm.pagination.datafilter, function(usuario) {
+                    return _c("tr", [
+                      _c("td", {
+                        domProps: { textContent: _vm._s(usuario.id) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(usuario.email) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(usuario.nombre) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(usuario.telefono) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(usuario.ciudad) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(usuario.direccion) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(usuario.facebook) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(usuario.linkedin) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(usuario.created_at) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: {
+                          textContent: _vm._s(usuario.fecha_ultimo_ingreso)
+                        }
+                      })
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer" }, [
+            _c(
+              "ul",
+              { staticClass: "pagination pagination-sm m-0 float-right" },
+              [
+                _c(
+                  "li",
+                  {
+                    staticClass: "page-item",
+                    class: [_vm.pagination.page > 1 ? "" : "disabled"]
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.changePage(_vm.pagination.page - 1)
+                          }
+                        }
+                      },
+                      [_vm._v("«")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.pagesNumbers, function(page) {
+                  return _c(
+                    "li",
+                    {
+                      staticClass: "page-item",
+                      class: [page == _vm.isActived ? "active" : ""]
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.changePage(page)
+                            }
+                          }
+                        },
+                        [
+                          _c("span", {
+                            domProps: { textContent: _vm._s(page) }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    staticClass: "page-item",
+                    class: [
+                      _vm.pagination.page < _vm.pagination.total_pages
+                        ? ""
+                        : "disabled"
+                    ]
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.changePage(_vm.pagination.page + 1)
+                          }
+                        }
+                      },
+                      [_vm._v("»")]
+                    )
+                  ]
+                )
+              ],
+              2
+            )
+          ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-block mx-auto" }, [
+      _c("i", {
+        staticClass: "fa fa-circle-o-notch fa-spin",
+        staticStyle: { "font-size": "80px" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("#")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nombre")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Telefono")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Ciudad")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Direccion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Facebook")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Linkedin")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Fecha creacion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Ultimo Ingreso")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2387d38e", module.exports)
   }
 }
 
