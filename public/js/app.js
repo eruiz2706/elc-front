@@ -659,174 +659,150 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component perfil usuario mounted.');
-        /*function para previsualizar la imagen */
-        jQuery(function () {
-            jQuery("input[type=file]").change(function () {
-                readURL(this);
-            });
-            var readURL = function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        jQuery('#logo-user').attr('src', e.target.result);
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                }
-            };
-        });
-    },
-    created: function created() {
-        this.base_url = base_url;
-        this.getData();
-    },
-    data: function data() {
-        return {
-            preload: false,
-            o_userbase: { 'nombre': '', 'telefono': '', 'ciudad': '', 'direccion': '', 'email': '', 'facebook': '', 'linkedin': '', 'biografia': '' },
-            o_user: { 'nombre': '', 'telefono': '', 'ciudad': '', 'direccion': '', 'email': '', 'facebook': '', 'linkedin': '', 'biografia': '' },
-
-            loader_img: false,
-
-            loader_cambiocl: false,
-            o_cambiocl: { 'password': '', 'repassword': '' },
-            e_cambiocl: [],
-
-            modo_edit: false,
-            loader_act: false
-        };
-    },
-    methods: {
-        actualizarImg: function actualizarImg() {
-            var _this = this;
-
-            var inst = this;
-            this.loader_img = true;
-            var imagen = $('#file_avatar')[0].files[0];
-            var formData = new FormData();
-            formData.append('avatar', imagen);
-            var url = 'perfil/actimg';
-            axios.post(url, formData, { avatar: imagen }).then(function (response) {
-                _this.loader_img = false;
-                swal({
-                    title: response.data.message,
-                    text: response.data.message2,
-                    type: "success"
-                }, function () {
-                    location.reload(true);
-                });
-            }).catch(function (error) {
-                _this.loader_img = false;
-                if (error.response.data.error) {
-                    toastr.error(error.response.data.error, '', {
-                        "timeOut": "2500"
-                    });
-                }
-            });
-        },
-        modalcambiocl: function modalcambiocl() {
-            this.o_cambiocl = { 'password': '', 'repassword': '' };
-            $('#modalcambiocl').modal('show');
-        },
-        cambiocl: function cambiocl() {
-            var _this2 = this;
-
-            this.loader_cambiocl = true;
-            var url = 'perfil/cambiocl';
-            axios.post(url, this.o_cambiocl).then(function (response) {
-                _this2.loader_cambiocl = false;
-                _this2.e_cambiocl = [];
-                $('#modalcambiocl').modal('hide');
-                swal({
-                    title: response.data.message,
-                    text: response.data.message2,
-                    type: "success"
-                });
-            }).catch(function (error) {
-                _this2.loader_cambiocl = false;
-                if (error.response.data.errors) {
-                    _this2.e_cambiocl = error.response.data.errors;
-                }
-                if (error.response.data.error) {
-                    toastr.error(error.response.data.error, '', {
-                        "timeOut": "2500"
-                    });
-                }
-            });
-        },
-        getData: function getData() {
-            var _this3 = this;
-
-            this.preload = true;
-            var url = 'perfil/data';
-            axios.post(url, {}).then(function (response) {
-                _this3.preload = false;
-                _this3.o_user = response.data.user;
-                _this3.o_userbase = response.data.user;
-            }).catch(function (error) {
-                _this3.preload = false;
-                console.log(error.response.data);
-            });
-        },
-        editar: function editar() {
-            this.modo_edit = true;
-        },
-        cancelar: function cancelar() {
-            this.o_user = this.o_userbase;
-            this.modo_edit = false;
-        },
-        actualizar: function actualizar() {
-            var _this4 = this;
-
-            this.loader_act = true;
-            var url = 'perfil/act';
-            axios.post(url, this.o_user).then(function (response) {
-                _this4.loader_act = false;
-                _this4.modo_edit = false;
-                swal({
-                    title: response.data.message,
-                    text: response.data.message2,
-                    type: "success"
-                });
-            }).catch(function (error) {
-                _this4.loader_act = false;
-                if (error.response.data.errors) {
-                    //
-                }
-                if (error.response.data.error) {
-                    toastr.error(error.response.data.error, '', {
-                        "timeOut": "2500"
-                    });
-                }
-                console.log(error.response.data);
-            });
-        },
-
-        pagar: function pagar() {
-            /*console.log('realizar proceso de pago');
-            this.loader_pagar=true;
-            var url ='perfil/pagar';
-            axios.post(url,{}).then(response =>{
-                this.loader_pagar=false;
-                this.user.fecha_vencimiento=response.data.fecha_vencimiento;
-                this.pagos=response.data.pagos;
-                swal({
-                    title:response.data.message,
-                    text:response.data.message2,
-                    type: "success"
-                });
-            }).catch(error =>{
-                this.loader_pagar=false;
-                console.log(error.response.data.error);
-                swal({
-                    title:error.response.message,
-                    text:error.response.message2,
-                    type: "warning"
-                });
-             });*/
+  mounted: function mounted() {
+    console.log('Component perfil usuario mounted.');
+    /*function para previsualizar la imagen */
+    jQuery(function () {
+      jQuery("input[type=file]").change(function () {
+        readURL(this);
+      });
+      var readURL = function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            jQuery('#logo-user').attr('src', e.target.result);
+          };
+          reader.readAsDataURL(input.files[0]);
         }
+      };
+    });
+  },
+  created: function created() {
+    this.base_url = base_url;
+    this.getData();
+  },
+  data: function data() {
+    return {
+      preload: false,
+      o_userbase: { 'nombre': '', 'telefono': '', 'ciudad': '', 'direccion': '', 'email': '', 'facebook': '', 'linkedin': '', 'biografia': '' },
+      o_user: { 'nombre': '', 'telefono': '', 'ciudad': '', 'direccion': '', 'email': '', 'facebook': '', 'linkedin': '', 'biografia': '' },
+
+      loader_img: false,
+
+      loader_cambiocl: false,
+      o_cambiocl: { 'password': '', 'repassword': '' },
+      e_cambiocl: [],
+
+      modo_edit: false,
+      loader_act: false
+    };
+  },
+  methods: {
+    actualizarImg: function actualizarImg() {
+      var _this = this;
+
+      var inst = this;
+      this.loader_img = true;
+      var imagen = $('#file_avatar')[0].files[0];
+      var formData = new FormData();
+      formData.append('avatar', imagen);
+      var url = this.base_url + '/perfil/actimg';
+      axios.post(url, formData, { avatar: imagen }).then(function (response) {
+        _this.loader_img = false;
+        swal({
+          title: response.data.message,
+          text: response.data.message2,
+          type: "success"
+        }, function () {
+          location.reload(true);
+        });
+      }).catch(function (error) {
+        _this.loader_img = false;
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "2500"
+          });
+        }
+      });
+    },
+    modalcambiocl: function modalcambiocl() {
+      this.o_cambiocl = { 'password': '', 'repassword': '' };
+      $('#modalcambiocl').modal('show');
+    },
+    cambiocl: function cambiocl() {
+      var _this2 = this;
+
+      this.loader_cambiocl = true;
+      var url = this.base_url + '/perfil/cambiocl';
+      axios.post(url, this.o_cambiocl).then(function (response) {
+        _this2.loader_cambiocl = false;
+        _this2.e_cambiocl = [];
+        $('#modalcambiocl').modal('hide');
+        swal({
+          title: response.data.message,
+          text: response.data.message2,
+          type: "success"
+        });
+      }).catch(function (error) {
+        _this2.loader_cambiocl = false;
+        if (error.response.data.errors) {
+          _this2.e_cambiocl = error.response.data.errors;
+        }
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "2500"
+          });
+        }
+      });
+    },
+    getData: function getData() {
+      var _this3 = this;
+
+      this.preload = true;
+      var url = this.base_url + '/perfil/data';
+      axios.post(url, {}).then(function (response) {
+        _this3.preload = false;
+        _this3.o_user = response.data.user;
+        _this3.o_userbase = response.data.user;
+      }).catch(function (error) {
+        _this3.preload = false;
+        console.log(error.response.data);
+      });
+    },
+    editar: function editar() {
+      this.modo_edit = true;
+    },
+    cancelar: function cancelar() {
+      this.o_user = this.o_userbase;
+      this.modo_edit = false;
+    },
+    actualizar: function actualizar() {
+      var _this4 = this;
+
+      this.loader_act = true;
+      var url = this.base_url + '/perfil/act';
+      axios.post(url, this.o_user).then(function (response) {
+        _this4.loader_act = false;
+        _this4.modo_edit = false;
+        swal({
+          title: response.data.message,
+          text: response.data.message2,
+          type: "success"
+        });
+      }).catch(function (error) {
+        _this4.loader_act = false;
+        if (error.response.data.errors) {
+          //
+        }
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "2500"
+          });
+        }
+        console.log(error.response.data);
+      });
     }
+  }
 });
 
 /***/ }),

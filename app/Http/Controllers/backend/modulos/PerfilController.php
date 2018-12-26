@@ -101,22 +101,18 @@ class PerfilController extends Controller
 
     public function getData(Request $request){
       $id  =Auth::user()->id;
-      $user   =DB::select("select nombre,email,telefono,ciudad,direccion,facebook,linkedin,biografia,imagen,
-                            fecha_vencimiento
+      $user   =DB::select("select nombre,email,telefono,ciudad,direccion,facebook,linkedin,biografia,imagen
                             from users
                             where id =:id",['id'=>$id])[0];
 
-      $suscripcion=DB::select("select valor from precios")[0];
-
-      $pagos   =DB::select("select valor,fecha_creacion,fecha_vencimiento
+      /*$pagos   =DB::select("select valor,fecha_creacion
                               from pagos
                               where user_id =:user_id
-                              order by fecha_creacion desc",['user_id'=>$id]);
+                              order by fecha_creacion desc",['user_id'=>$id]);*/
 
       $jsonresponse=[
           'user'=>$user,
-          'vrlsuscrip'=>$suscripcion->valor,
-          'pagos'=>$pagos
+          //'pagos'=>$pagos
       ];
       return response()->json($jsonresponse,200);
     }

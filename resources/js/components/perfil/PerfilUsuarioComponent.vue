@@ -214,7 +214,7 @@
           var imagen  =$('#file_avatar')[0].files[0];
           var formData = new FormData();
           formData.append('avatar',imagen);
-          var url ='perfil/actimg';
+          var url =this.base_url+'/perfil/actimg';
           axios.post(url,formData,{avatar:imagen}).then(response =>{
               this.loader_img=false;
               swal({
@@ -239,7 +239,7 @@
         },
         cambiocl:function(){
           this.loader_cambiocl=true;
-          var url ='perfil/cambiocl';
+          var url =this.base_url+'/perfil/cambiocl';
           axios.post(url,this.o_cambiocl).then(response =>{
               this.loader_cambiocl=false;
               this.e_cambiocl=[];
@@ -263,7 +263,7 @@
         },
         getData:function(){
             this.preload=true;
-            var url ='perfil/data';
+            var url =this.base_url+'/perfil/data';
             axios.post(url,{}).then(response =>{
                 this.preload=false;
                 this.o_user=response.data.user;
@@ -282,7 +282,7 @@
         },
         actualizar:function(){
           this.loader_act=true;
-          var url ='perfil/act';
+          var url =this.base_url+'/perfil/act';
           axios.post(url,this.o_user).then(response =>{
               this.loader_act=false;
               this.modo_edit=false;
@@ -303,31 +303,6 @@
               }
               console.log(error.response.data);
           });
-        },
-
-        pagar:function(){
-          /*console.log('realizar proceso de pago');
-          this.loader_pagar=true;
-          var url ='perfil/pagar';
-          axios.post(url,{}).then(response =>{
-              this.loader_pagar=false;
-              this.user.fecha_vencimiento=response.data.fecha_vencimiento;
-              this.pagos=response.data.pagos;
-              swal({
-                  title:response.data.message,
-                  text:response.data.message2,
-                  type: "success"
-              });
-          }).catch(error =>{
-              this.loader_pagar=false;
-              console.log(error.response.data.error);
-              swal({
-                  title:error.response.message,
-                  text:error.response.message2,
-                  type: "warning"
-              });
-
-          });*/
         }
       }
     }
