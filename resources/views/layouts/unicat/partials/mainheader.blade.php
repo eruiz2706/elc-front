@@ -31,11 +31,11 @@
                 <li><div class="question">{{ trans('frontend.question') }}</div></li>
                 <li>
                   <i class="fa fa-phone" aria-hidden="true"></i>
-                  <div>001-1234-88888</div>
+                  <div>6714563 – (+57) 320 320 4536</div>
                 </li>
                 <li>
                   <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                  <div>aulavirtual@gmail.com</div>
+                  <div>elcquibdo@gmail.com</div>
                 </li>
 
 

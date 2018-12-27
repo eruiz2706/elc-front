@@ -5,6 +5,8 @@
 <link href="{{ URL::asset('rfend/plugins/colorbox/colorbox.css') }}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/contact.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/contact_responsive.css') }}">
+<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
 @stop
 
 @section('content')
@@ -29,20 +31,6 @@
 <!-- Contact -->
 
 <div class="contact">
-
-  <!-- Contact Map -->
-  <!--<div class="contact_map">
-    <div class="map">
-      <div id="google_map" class="google_map">
-        <div class="map_container">
-          <div id="map"></div>
-        </div>
-      </div>
-    </div>
-  </div>-->
-
-  <!-- Contact Info -->
-
   <div class="contact_info_container">
     <div class="container">
       <div class="row">
@@ -79,12 +67,20 @@
               <p>{{ trans('frontend.page_contact.contact_info_text') }}</p>
             </div>
             <div class="contact_info_location">
-              <div class="contact_info_location_title">Cali colombia</div>
+              <!--<div class="contact_info_location_title">Cali colombia</div>-->
               <ul class="location_list">
-                <li>Avenida 3 ·5-27</li>
-                <li>01 8000 913 14 98</li>
-                <li>elc@gmail.com</li>
+                <li><strong>{{ trans('frontend.telephone') }}:</strong> 6714563 – (+57) 320 320 4536</li>
+                <li><strong>{{ trans('frontend.email') }}:</strong> elcquibdo@gmail.com </li>
               </ul>
+            </div>
+            <div class="contact_map">
+              <div class="map">
+                <div id="google_map" class="google_map">
+                  <div class="map_container">
+                    <div id="map" style="box-shadow: 5px 5px 5px #888;z-index:2;width:100%; height: 400px;"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -97,3 +93,20 @@
 @include('frontend.partials.newsletter')
 
 @endsection
+
+@section('scripts')
+@parent
+<script>
+var map = L.map('map').
+setView([5.690039698717132,-76.66133874254979],
+15);
+
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+    maxZoom: 50
+}).addTo(map);
+
+L.control.scale().addTo(map);
+L.marker([5.690466155074229,-76.66156768798828], {draggable: true}).addTo(map);
+</script>
+@stop

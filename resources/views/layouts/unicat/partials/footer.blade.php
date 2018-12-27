@@ -20,10 +20,10 @@
                 </div>
                 <div class="footer_social">
                   <ul>
-                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="{{url('https://www.facebook.com/elc.quibdo')}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="{{url('https://www.instagram.com/elcquibdo/')}}" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <!--<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>-->
+                    <!--<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
                   </ul>
                 </div>
               </div>
@@ -37,9 +37,9 @@
                 <div class="footer_title">{{ trans('frontend.contact') }}</div>
                 <div class="footer_contact_info">
                   <ul>
-                    <li>Email: aulacirtual@gmail.com</li>
-                    <li>{{ trans('frontend.telephone') }} :  +(88) 111 555 666</li>
-                    <li>Calle 8 #5-25 Cali, Valle del cauca</li>
+                    <li>Email: elcquibdo@gmail.com </li>
+                    <li>{{ trans('frontend.telephone') }} :  6714563 – (+57) 320 320 4536</li>
+                    <li>Calle 31 # 5-21 Sede Anexa al IEFEM. Quibdó – Chocó – Colombia</li>
                   </ul>
                 </div>
               </div>
