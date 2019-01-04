@@ -16,6 +16,7 @@
  */
 
 Vue.component('perfil-usu', require('./components/perfil/PerfilUsuarioComponent'));
+Vue.component('perfil-pagos', require('./components/perfil/PerfilPagosComponent'));
 Vue.component('foro-general', require('./components/foro/ForoGeneralComponent'));
 Vue.component('foro-curso', require('./components/foro/ForoCursoComponent'));
 Vue.component('progreso-es', require('./components/progreso/ProgresoEstudianteComponent'));
@@ -69,6 +70,7 @@ const app = new Vue({
           'notifi_tk':data
         });
       })
+      this.manualuso();
     },
     ready: function(){
     },
@@ -85,7 +87,9 @@ const app = new Vue({
       nav_options:[],
       a_notifi:[],
       preload_notifi:false,
-      conexion_user:[]
+      conexion_user:[],
+      chk_manual:false,
+      loader_manual:false
     },
     computed : {
 
@@ -180,6 +184,34 @@ const app = new Vue({
                   "timeOut": "2500"
               });
             }
+        });
+      },
+      manualuso:function(){
+        var url =base_url+'/principal/abrirmanual';
+        axios.post(url,{chk_manual:this.chk_manual}).then(response =>{
+          if(response.data.usermanual==false){
+              $('#modal_manual').modal('show');
+          }
+        }).catch(error =>{
+
+        });
+
+      },
+      updateManual:function(){
+        $('#modal_manual').modal('hide');
+        var url =base_url+'/principal/cerrarmanual';
+        this.loader_manual=true;
+        axios.post(url,{chk_manual:this.chk_manual}).then(response =>{
+          this.loader_manual=false;
+        }).catch(error =>{
+          if(error.response.data.errors){
+            this.e_tarea=error.response.data.errors;
+          }
+          if(error.response.data.error){
+            toastr.error(error.response.data.error,'',{
+                "timeOut": "2500"
+            });
+          }
         });
       }
     }

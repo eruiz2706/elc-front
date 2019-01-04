@@ -55,7 +55,10 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::get('/principal', 'backend\PrincipalController@index');
   Route::post('/principal/config', 'backend\PrincipalController@config');
   Route::post('/principal/conexion', 'backend\PrincipalController@conexion');
-  Route::get('/manualuso', 'backend\PrincipalController@manual');
+  Route::post('/principal/abrirmanual', 'backend\PrincipalController@abrirmanual');
+  Route::post('/principal/cerrarmanual', 'backend\PrincipalController@cerrarmanual');
+  Route::get('/principal/manualuso', 'backend\PrincipalController@manualuso');
+
   //Route::get('storage/{archivo}','backend\StorageController@index');
 
   Route::get('ofertados','backend\modulos\OfertadosController@index');
@@ -76,6 +79,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('perfil/cambiocl','backend\modulos\PerfilController@cambioClave');
   Route::post('perfil/data','backend\modulos\PerfilController@getData');
   Route::post('perfil/act','backend\modulos\PerfilController@actualizar');
+  Route::post('perfil/pagos','backend\modulos\PerfilController@pagos');
 
   Route::get('cursos','backend\modulos\CursosController@view_list');
   Route::get('cursos/config/{id}', 'backend\modulos\CursosController@view_config');

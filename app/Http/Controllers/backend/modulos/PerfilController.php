@@ -18,6 +18,7 @@ class PerfilController extends Controller
     public function index(){
       $rol  =Session::get('rol');
       if($rol != ''){
+        if($rol=='es')return view('backend.modulos.perfil.view_index_es');
         return view('backend.modulos.perfil.view_index');
       }else{
         return view('layouts.errors.access_denied');
@@ -147,5 +148,18 @@ class PerfilController extends Controller
               'error' =>'Hubo una inconsistencias al intentar actualizar la informacion'
           ], 400);
       }
+    }
+
+    public function pagos(Request $request){
+      $id      =Auth::user()->id;
+      $pagos   =DB::select("select reference_code,nombre_curso,valor,fecha_creacion
+                            from pagos
+                            where user_id =:user_id
+                            order by fecha_creacion desc",
+                          ['user_id'=>$id]);
+      $jsonresponse=[
+          'pagos'=>$pagos,
+      ];
+      return response()->json($jsonresponse,200);
     }
 }

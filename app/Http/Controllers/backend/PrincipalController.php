@@ -51,14 +51,15 @@ class PrincipalController extends Controller
       $tit_options='';
       if($rol=='ad'){
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
-        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'manualuso'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
 
         $tit_options='Administracion';
         $nav_options[]=['nombre'=>'Lista de usuarios','url'=>'usuarios'];
+        $nav_options[]=['nombre'=>'Informacion de contacto','url'=>'contactos'];
       }
       if($rol=='in'){
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
-        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'manualuso'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
 
         $tit_options='Administracion';
         $nav_options[]=['nombre'=>'Lista de cursos','url'=>'cursos'];
@@ -73,7 +74,7 @@ class PrincipalController extends Controller
                                     ,['user_id'=>$user->id]);
 
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
-        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'manualuso'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
       }
       if($rol=='es'){
         $tit_cursos='Cursos Estudiante';
@@ -90,7 +91,7 @@ class PrincipalController extends Controller
 
       if($rol=='pa'){
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
-        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'manualuso'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
       }
 
 
@@ -121,7 +122,52 @@ class PrincipalController extends Controller
       return response()->json($jsonresponse,200);
     }
 
-    function manual(){
-      return view('backend/modulos/manual/view_index');
+    function manualuso(){
+      $user     =Auth::user();
+
+      DB::table('users')->where('id',$user->id)->update([
+        'manual'=>false
+      ]);
+      return redirect('foro');
+    }
+
+    function abrirmanual(){
+      $user      =Auth::user();
+      $usermanual=true;
+      $manual  =DB::select("select manual as estado
+                            from users
+                            where id = :iduser"
+                       ,['iduser'=>$user->id]);
+      $usermanual=$manual[0]->estado;
+
+      $jsonresponse=[
+          'usermanual'=>$usermanual
+      ];
+      return response()->json($jsonresponse,200);
+    }
+
+    function cerrarmanual(Request $request){
+      $user     =Auth::user();
+      DB::beginTransaction();
+      try{
+        DB::table('users')->where('id',$user->id)->update([
+          'manual'=>$request->chk_manual
+        ]);
+
+        DB::commit();
+        return response()->json([
+            'message' => 'Cierre corecto!',
+            'message2' => ''
+        ]);
+      }
+      catch(\Exception $e){
+          Log::info('actualizacion manual : '.$e->getMessage());
+          DB::rollback();
+          //$e->getMessage();
+
+          return response()->json([
+              'error' =>'Hubo una inconsistencias al intentar realizar la accion'
+          ], 400);
+      }
     }
 }
