@@ -15322,6 +15322,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       setTimeout(function () {
         inst.countDown();
       }, 1000);
+    },
+    verresultado: function verresultado(id) {
+      /*var url =this.base_url+'/ejercicios/resultadoes';
+      this.preloadmodal=true;
+      $('#modal_ejercicio').modal('show');
+      axios.post(url,{id:id}).then(response =>{
+          this.preloadmodal=false;
+          this.idejeruser=response.data.idejeruser;
+          this.a_examen=response.data.preguntas;
+          this.toMinute=response.data.duracion;
+      }).catch(error =>{
+          this.preloadmodal=false;
+          if(error.response.data.errors){
+          }
+          if(error.response.data.error){
+            toastr.error(error.response.data.error,'',{
+                "timeOut": "3500"
+            });
+            //debe colocarse funcionalidad cerrar modal
+          }
+      });*/
     }
   }
 });
@@ -15960,7 +15981,7 @@ var render = function() {
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            _vm.comenzar(ejercicio.id, ejercicio.status_user)
+                            _vm.verresultado(ejercicio.id)
                           }
                         }
                       },

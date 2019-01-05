@@ -319,7 +319,7 @@
             }, 1000);
           },
           verresultado:function(id){
-            var url =this.base_url+'/ejercicios/resultadoes';
+            /*var url =this.base_url+'/ejercicios/resultadoes';
             this.preloadmodal=true;
             $('#modal_ejercicio').modal('show');
             axios.post(url,{id:id}).then(response =>{
@@ -337,7 +337,7 @@
                   });
                   //debe colocarse funcionalidad cerrar modal
                 }
-            });
+            });*/
           }
         }
     }
