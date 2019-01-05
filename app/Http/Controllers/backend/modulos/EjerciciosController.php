@@ -418,4 +418,55 @@ class EjerciciosController extends Controller
         ], 400);
     }
   }
+
+  public function resultadoes(Request $request){
+    $user   =Auth::user();
+
+   DB::beginTransaction();
+     try{
+
+       $ejercicio=DB::select("select duracion
+                                from ejercicios
+                                where id = :id",
+                             ['id'=>$request->id])[0];
+
+       $idejeruser=DB::table('ejercicios_user')->insertGetId([
+            'ejercicio_id'=>$request->id,
+            'fecha_creacion'=>date('Y-m-d H:i:s'),
+            'estado'=>'calificado',
+            'user_id'=>$user->id
+          ]);
+
+        $preguntas=DB::select("select p.id,p.nombre,p.tipo,p.descripcion,p.textorellenar,0 as idunica
+                                from preguntas p
+                                where ejercicio_id = :ejercicio_id
+                                order by p.id",
+                              ['ejercicio_id'=>$request->id]);
+
+        foreach($preguntas as $preg){
+          $respuestas=DB::select("select pregunta_id,id,puntaje,seleccion as option,false as seleccion,respuesta,relacionar,'' as relacionar2
+                                  from respuestas
+                                  where pregunta_id= :pregunta_id"
+                             ,['pregunta_id'=>$preg->id]);
+          $preg->respuestas=$respuestas;
+        }
+
+       DB::commit();
+       return response()->json([
+           'idejeruser' =>$idejeruser,
+           'preguntas' => $preguntas,
+           'duracion'=>$ejercicio->duracion
+       ]);
+     }
+     catch(\Exception $e){
+         Log::info('iniciar ejercicio : '.$e->getMessage());
+         DB::rollback();
+         //$e->getMessage();
+
+         return response()->json([
+             'error' =>'Hubo una inconsistencias al intentar iniciar la prueba'
+         ], 400);
+     }
+
+  }
 }

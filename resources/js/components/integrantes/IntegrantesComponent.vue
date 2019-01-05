@@ -134,13 +134,13 @@
       <div class="card" v-if="!preload" >
         <div class="card-body">
           <div class="card-tools">
-            <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
+            <!--<a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
               <span class="badge navbar-badge">
                 <i class="fa fa-comments-o" style='font-size:24px' v-on:click.prevent='chatuser()'>
                   <span class="badge badge-danger navbar-badge" style='top:-4px'>3</span>
                 </i>
               </span>
-            </a>
+            </a>-->
           </div>
           <div class="post">
             <div class="user-block">

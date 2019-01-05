@@ -4600,47 +4600,7 @@ var render = function() {
           !_vm.preload
             ? _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticClass: "card-tools" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link",
-                        attrs: {
-                          "data-toggle": "dropdown",
-                          href: "#",
-                          "aria-expanded": "true"
-                        }
-                      },
-                      [
-                        _c("span", { staticClass: "badge navbar-badge" }, [
-                          _c(
-                            "i",
-                            {
-                              staticClass: "fa fa-comments-o",
-                              staticStyle: { "font-size": "24px" },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.chatuser()
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "span",
-                                {
-                                  staticClass:
-                                    "badge badge-danger navbar-badge",
-                                  staticStyle: { top: "-4px" }
-                                },
-                                [_vm._v("3")]
-                              )
-                            ]
-                          )
-                        ])
-                      ]
-                    )
-                  ]),
+                  _c("div", { staticClass: "card-tools" }),
                   _vm._v(" "),
                   _c("div", { staticClass: "post" }, [
                     _c("div", { staticClass: "user-block" }, [
@@ -15202,6 +15162,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -15969,7 +15932,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                ejercicio.statusini
+                ejercicio.statusini == true && ejercicio.status_user == false
                   ? _c(
                       "button",
                       {
@@ -15985,15 +15948,37 @@ var render = function() {
                       },
                       [_vm._v("\n        Comenzar\n      ")]
                     )
-                  : _c(
+                  : _vm._e(),
+                _vm._v(" "),
+                ejercicio.status_user == true
+                  ? _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn btn-outline-primary btn-sm float-left",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.comenzar(ejercicio.id, ejercicio.status_user)
+                          }
+                        }
+                      },
+                      [_vm._v("\n        Ver resultado\n      ")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                ejercicio.statusini == false && ejercicio.status_user == false
+                  ? _c(
                       "button",
                       {
                         staticClass:
                           "btn btn-outline-primary btn-sm float-left",
                         attrs: { type: "button", disabled: "" }
                       },
-                      [_vm._v("\n        Comenzar\n      ")]
+                      [_vm._v("\n        Cerrado\n      ")]
                     )
+                  : _vm._e()
               ])
             ])
           : _vm._e()

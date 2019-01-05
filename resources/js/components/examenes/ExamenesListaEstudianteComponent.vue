@@ -145,11 +145,14 @@
     </div>
 
     <div class="card-body">
-      <button type="button" class="btn btn-outline-primary btn-sm float-left" v-on:click.prevent="comenzar(ejercicio.id,ejercicio.status_user)" v-if='ejercicio.statusini'>
+      <button type="button" class="btn btn-outline-primary btn-sm float-left" v-on:click.prevent="comenzar(ejercicio.id,ejercicio.status_user)" v-if='ejercicio.statusini==true && ejercicio.status_user==false'>
         Comenzar
       </button>
-      <button type="button" class="btn btn-outline-primary btn-sm float-left"  disabled v-else>
-        Comenzar
+      <button type="button" class="btn btn-outline-primary btn-sm float-left" v-on:click.prevent="verresultado(ejercicio.id)" v-if='ejercicio.status_user==true'>
+        Ver resultado
+      </button>
+      <button type="button" class="btn btn-outline-primary btn-sm float-left"  disabled v-if='ejercicio.statusini==false && ejercicio.status_user==false'>
+        Cerrado
       </button>
     </div>
   </div>
@@ -314,6 +317,27 @@
             setTimeout(function(){
                 inst.countDown();
             }, 1000);
+          },
+          verresultado:function(id){
+            var url =this.base_url+'/ejercicios/resultadoes';
+            this.preloadmodal=true;
+            $('#modal_ejercicio').modal('show');
+            axios.post(url,{id:id}).then(response =>{
+                this.preloadmodal=false;
+                this.idejeruser=response.data.idejeruser;
+                this.a_examen=response.data.preguntas;
+                this.toMinute=response.data.duracion;
+            }).catch(error =>{
+                this.preloadmodal=false;
+                if(error.response.data.errors){
+                }
+                if(error.response.data.error){
+                  toastr.error(error.response.data.error,'',{
+                      "timeOut": "3500"
+                  });
+                  //debe colocarse funcionalidad cerrar modal
+                }
+            });
           }
         }
     }

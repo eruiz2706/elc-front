@@ -55,9 +55,10 @@ class PreguntasController extends Controller
       ]);
 
       if($request->tipo=='abierta'){
+        $puntaje=($request->resp_abierta['puntaje']=='') ? 0 : $request->resp_abierta['puntaje'];
         DB::table('respuestas')->insert([
           'pregunta_id'=>$idpregunta,
-          'puntaje'=>$request->resp_abierta['puntaje'],
+          'puntaje'=>$puntaje,
           'fecha_creacion'=>date('Y-m-d H:i:s'),
           'user_id'=>$user->id
         ]);
@@ -67,11 +68,11 @@ class PreguntasController extends Controller
         foreach($request->resp_unica as $res){
           $seleccion=false;
           if($res['id']==$request->radio_unica)$seleccion=true;
-
+          $puntaje=($res['puntaje']=='') ? 0 : $res['puntaje'];
           DB::table('respuestas')->insert([
             'pregunta_id'=>$idpregunta,
             'seleccion'=>$seleccion,
-            'puntaje'=>$res['puntaje'],
+            'puntaje'=>$puntaje,
             'respuesta'=>nl2br($res['respuesta']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
             'user_id'=>$user->id
@@ -81,10 +82,11 @@ class PreguntasController extends Controller
 
       if($request->tipo=='multiple'){
         foreach($request->resp_multiple as $res){
+          $puntaje=($res['puntaje']=='') ? 0 : $res['puntaje'];
           DB::table('respuestas')->insert([
             'pregunta_id'=>$idpregunta,
             'seleccion'=>$res['option'],
-            'puntaje'=>$res['puntaje'],
+            'puntaje'=>$puntaje,
             'respuesta'=>nl2br($res['respuesta']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
             'user_id'=>$user->id
@@ -94,9 +96,10 @@ class PreguntasController extends Controller
 
       if($request->tipo=='relacionar'){
         foreach($request->resp_relacionar as $res){
+          $puntaje=($res['puntaje']=='') ? 0 : $res['puntaje'];
           DB::table('respuestas')->insert([
             'pregunta_id'=>$idpregunta,
-            'puntaje'=>$res['puntaje'],
+            'puntaje'=>$puntaje,
             'respuesta'=>nl2br($res['respuesta']),
             'relacionar'=>nl2br($res['relacionar']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),
@@ -107,9 +110,10 @@ class PreguntasController extends Controller
 
       if($request->tipo=='rellenar'){
         foreach($request->resp_rellenar as $res){
+          $puntaje=($res['puntaje']=='') ? 0 : $res['puntaje'];
           DB::table('respuestas')->insert([
             'pregunta_id'=>$idpregunta,
-            'puntaje'=>$res['puntaje'],
+            'puntaje'=>$puntaje,
             'respuesta'=>nl2br($res['respuesta']),
             'relacionar'=>nl2br($res['relacionar']),
             'fecha_creacion'=>date('Y-m-d H:i:s'),

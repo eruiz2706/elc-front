@@ -55,7 +55,7 @@ class PrincipalController extends Controller
 
         $tit_options='Administracion';
         $nav_options[]=['nombre'=>'Lista de usuarios','url'=>'usuarios'];
-        $nav_options[]=['nombre'=>'Informacion de contacto','url'=>'contactos'];
+        //$nav_options[]=['nombre'=>'Informacion de contacto','url'=>'contactos'];
       }
       if($rol=='in'){
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
@@ -85,7 +85,7 @@ class PrincipalController extends Controller
                                     order by cu.fecha_creacion desc"
                                     ,['user_id'=>$user->id]);
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
-        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'manualuso'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
         $nav_user[]=['icono'=>'fa fa-plus-square-o','nombre'=>'Ofertas  de cursos','url'=>'ofertados'];
       }
 
@@ -132,13 +132,16 @@ class PrincipalController extends Controller
     }
 
     function abrirmanual(){
+      $rol      =Session::get('rol');
       $user      =Auth::user();
       $usermanual=true;
-      $manual  =DB::select("select manual as estado
-                            from users
-                            where id = :iduser"
-                       ,['iduser'=>$user->id]);
-      $usermanual=$manual[0]->estado;
+      if($rol !='ad'){
+        $manual  =DB::select("select manual as estado
+                              from users
+                              where id = :iduser"
+                         ,['iduser'=>$user->id]);
+        $usermanual=$manual[0]->estado;
+      }
 
       $jsonresponse=[
           'usermanual'=>$usermanual
