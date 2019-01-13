@@ -23,6 +23,7 @@
             <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='cursos-config') ? 'active' : ''" v-on:click.prevent="setMenuContent('cursos-config')">Datos Avanzados</a></li>
             <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='modulos-lista' || menu_content=='modulos-crear' || menu_content=='modulos-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('modulos-lista')">Modulos</a></li>
             <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='lecciones-lista' || menu_content=='lecciones-crear' || menu_content=='lecciones-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('lecciones-lista')">Lecciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='foro-curso') ? 'active' : ''" v-on:click.prevent="setMenuContent('foro-curso')">Foro</a></li>
             <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='integrantes') ? 'active' : ''" v-on:click.prevent="setMenuContent('integrantes')">Integrantes</a></li>
           </ul>
         </div>
@@ -51,6 +52,9 @@
       </div>
       <div v-if="menu_content=='lecciones-edit'">
         <lecciones-edit></lecciones-edit>
+      </div>
+      <div v-if="menu_content=='foro-curso'">
+        <foro-curso></foro-curso>
       </div>
       <div v-if="menu_content=='integrantes'">
         <integrantes></integrantes>

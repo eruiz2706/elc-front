@@ -69,6 +69,9 @@ const app = new Vue({
         socket.emit('notifi_cli',{
           'notifi_tk':data
         });
+      });
+      this.$root.$on('private_message_cli',function(data){
+        socket.emit('private_message_cli',data);
       })
       this.manualuso();
     },
@@ -213,6 +216,9 @@ const app = new Vue({
             });
           }
         });
+      },
+      private_message_serve:function(data){
+        this.$root.$emit('private_message_serve',data);
       }
     }
 });
@@ -229,4 +235,8 @@ socket.on('notifi_serve', function(data) {
       }
     }
  }
+});
+
+socket.on('private_message_serve', function(data) {
+  app.private_message_serve(data);
 });

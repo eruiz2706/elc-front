@@ -13,8 +13,13 @@ class CreateChatDetalleTable extends Migration
      */
     public function up()
     {
-        Schema::create('chat_detalle', function (Blueprint $table) {
+        Schema::create('chatprivado_det', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('chat_id')->unsigned()->index();
+            $table->foreign('chat_id')->references('id')->on('chatprivado')->onDelete('cascade');
+            $table->integer('remitente')->unsigned()->index();
+            $table->text('mensaje');
+            $table->dateTime('fecha_creacion');
             $table->timestamps();
         });
     }

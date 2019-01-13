@@ -19,6 +19,7 @@ class CreateLeccionesUserTable extends Migration
             $table->integer('receptor')->unsigned()->index();
             $table->dateTime('fecha_creacion');
             $table->timestamps();*/
+            $table->increments('id');
             $table->integer('leccion_id')->unsigned()->index();
             $table->foreign('leccion_id')->references('id')->on('lecciones')->onDelete('cascade');
             $table->dateTime('fecha_creacion');

@@ -302,6 +302,9 @@ var app = new Vue({
         'notifi_tk': data
       });
     });
+    this.$root.$on('private_message_cli', function (data) {
+      socket.emit('private_message_cli', data);
+    });
     this.manualuso();
   },
   ready: function ready() {},
@@ -447,6 +450,9 @@ var app = new Vue({
           });
         }
       });
+    },
+    private_message_serve: function private_message_serve(data) {
+      this.$root.$emit('private_message_serve', data);
     }
   }
 });
@@ -463,6 +469,10 @@ socket.on('notifi_serve', function (data) {
       }
     }
   }
+});
+
+socket.on('private_message_serve', function (data) {
+  app.private_message_serve(data);
 });
 
 /***/ }),
@@ -4411,133 +4421,92 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component integrantes mounted.');
-  },
-  created: function created() {
-    this.base_url = base_url;
-    this.idcurso = document.getElementById('idcurso').value;
-    this.listado();
-  },
-  data: function data() {
-    return {
-      idcurso: 0,
-      preload: true,
-      a_integrantes: [],
-      preloadmodal: false
-    };
-  },
-  methods: {
-    listado: function listado() {
-      var _this = this;
-
-      var url = base_url + '/integrantes/lista';
-      this.preload = true;
-      axios.post(url, { idcurso: this.idcurso }).then(function (response) {
-        _this.preload = false;
-        _this.a_integrantes = response.data.integrantes;
-      }).catch(function (error) {
-        _this.preload = false;
-        if (error.response.data.errors) {}
-        if (error.response.data.error) {
-          toastr.error(error.response.data.error, '', {
-            "timeOut": "3500"
-          });
-        }
-      });
+    mounted: function mounted() {
+        console.log('Component integrantes mounted.');
+        var vm = this;
+        this.$root.$on('private_message_serve', function (data) {
+            if (data.chat_id == this.idchat) {
+                vm.chat_mensajes.push(data);
+            }
+        });
     },
-    chatuser: function chatuser(id) {
-      $('#modal_chat').modal('show');
-      /*var url =this.base_url+'/progreso/progmod';
-      this.preloadmodal=true;
-      axios.post(url,{idcurso:this.idcurso,idmodulo:id}).then(response =>{
-          this.preloadmodal=false;
-          this.a_progmod=response.data.progmod;
-          console.log(response.data);
-      }).catch(error =>{
-          this.preloadmodal=false;
-          this.a_progmod=[];
-          if(error.response.data.errors){
-          }
-          if(error.response.data.error){
-            toastr.error(error.response.data.error,'',{
-                "timeOut": "3500"
+    created: function created() {
+        this.base_url = base_url;
+        this.idcurso = document.getElementById('idcurso').value;
+        this.listado();
+    },
+    data: function data() {
+        return {
+            idcurso: 0,
+            preload: true,
+            a_integrantes: [],
+            preloadmodal: false,
+            chat_mensajes: [],
+            idchat: 0,
+            id_userchat: 0,
+            loader_responder: false,
+            mensaje_chat: ''
+        };
+    },
+    methods: {
+        listado: function listado() {
+            var _this = this;
+
+            var url = base_url + '/integrantes/lista';
+            this.preload = true;
+            axios.post(url, { idcurso: this.idcurso }).then(function (response) {
+                _this.preload = false;
+                _this.a_integrantes = response.data.integrantes;
+            }).catch(function (error) {
+                _this.preload = false;
+                if (error.response.data.errors) {}
+                if (error.response.data.error) {
+                    toastr.error(error.response.data.error, '', {
+                        "timeOut": "3500"
+                    });
+                }
             });
-          }
-       });*/
+        },
+        chatuser: function chatuser(iduser) {
+            var _this2 = this;
+
+            $('#modal_chat').modal('show');
+            var url = this.base_url + '/chatprivado/open';
+            this.preloadmodal = true;
+            this.chat_mensajes = [];
+            this.id_userchat = iduser;
+            axios.post(url, { iduser: iduser }).then(function (response) {
+                _this2.preloadmodal = false;
+                _this2.chat_mensajes = response.data.chat_mensajes;
+                _this2.idchat = response.data.idchat;
+                console.log(_this2.chat_mensajes);
+            }).catch(function (error) {
+                _this2.preloadmodal = false;
+                if (error.response.data.errors) {}
+                if (error.response.data.error) {
+                    toastr.error(error.response.data.error, '', {
+                        "timeOut": "3500"
+                    });
+                }
+            });
+        },
+        responderchat: function responderchat() {
+            var _this3 = this;
+
+            var url = this.base_url + '/chatprivado/responder';
+            this.loader_responder = true;
+            axios.post(url, { idchat: this.idchat, mensaje_chat: this.mensaje_chat }).then(function (response) {
+                _this3.chat_mensajes.push(response.data.chat_enviado);
+                _this3.loader_responder = false;
+                _this3.mensaje_chat = '';
+                _this3.$root.$emit('private_message_cli', response.data.chat_enviado);
+            }).catch(function (error) {
+                _this3.loader_responder = false;
+            });
+        }
     }
-  }
 });
 
 /***/ }),
@@ -4549,48 +4518,156 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "modal_chat",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "modal-body",
-                  staticStyle: { height: "400px", "overflow-y": "auto" }
-                },
-                [
-                  _vm.preloadmodal
-                    ? _c("div", { staticClass: "row" }, [_vm._m(1)])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ]
-              ),
-              _vm._v(" "),
-              _vm._m(3)
+    _c("div", { staticClass: "modal fade", attrs: { id: "modal_chat" } }, [
+      _c(
+        "div",
+        { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "modal-body",
+                staticStyle: { height: "400px", "overflow-y": "auto" }
+              },
+              [
+                _vm.preloadmodal
+                  ? _c("div", { staticClass: "row" }, [_vm._m(1)])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "direct-chat-messages direct-chat-info",
+                    staticStyle: { overflow: "initial" }
+                  },
+                  _vm._l(_vm.chat_mensajes, function(chat) {
+                    return _c(
+                      "div",
+                      {
+                        staticClass: "direct-chat-msg",
+                        class: _vm.id_userchat == chat.remitente ? "" : "right"
+                      },
+                      [
+                        _vm.id_userchat == chat.remitente
+                          ? _c(
+                              "div",
+                              { staticClass: "direct-chat-info clearfix" },
+                              [
+                                _c("span", {
+                                  staticClass: "direct-chat-name float-left",
+                                  domProps: {
+                                    textContent: _vm._s(chat.nomremitente)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("span", {
+                                  staticClass:
+                                    "direct-chat-timestamp float-right",
+                                  domProps: {
+                                    textContent: _vm._s(chat.fecha_creacion)
+                                  }
+                                })
+                              ]
+                            )
+                          : _c(
+                              "div",
+                              { staticClass: "direct-chat-info clearfix" },
+                              [
+                                _c("span", {
+                                  staticClass: "direct-chat-name float-right",
+                                  domProps: {
+                                    textContent: _vm._s(chat.nomremitente)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("span", {
+                                  staticClass:
+                                    "direct-chat-timestamp float-left",
+                                  domProps: {
+                                    textContent: _vm._s(chat.fecha_creacion)
+                                  }
+                                })
+                              ]
+                            ),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass: "direct-chat-img",
+                          attrs: {
+                            src: _vm.base_url + "/" + chat.imgremitente,
+                            alt: ""
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "direct-chat-text",
+                          domProps: { innerHTML: _vm._s(chat.mensaje) }
+                        })
+                      ]
+                    )
+                  })
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c("div", { staticClass: "input-group col-md-12" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.mensaje_chat,
+                      expression: "mensaje_chat"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.mensaje_chat },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.mensaje_chat = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button", disabled: _vm.loader_responder },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.responderchat()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v("\n                Responder\n                "),
+                      _vm.loader_responder
+                        ? _c("i", {
+                            staticClass: "fa fa-spinner fa-spin fa-loader",
+                            staticStyle: { "font-size": "20px" }
+                          })
+                        : _vm._e()
+                    ]
+                  )
+                ])
+              ])
             ])
-          ]
-        )
-      ]
-    ),
+          ])
+        ]
+      )
+    ]),
     _vm._v(" "),
-    _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(4)]) : _vm._e(),
+    _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(2)]) : _vm._e(),
     _vm._v(" "),
     _c(
       "div",
@@ -4600,7 +4677,38 @@ var render = function() {
           !_vm.preload
             ? _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticClass: "card-tools" }),
+                  _c("div", { staticClass: "card-tools" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { href: "#", "aria-expanded": "true" }
+                      },
+                      [
+                        _c("span", { staticClass: "badge navbar-badge" }, [
+                          _c(
+                            "i",
+                            {
+                              staticClass: "fa fa-comments-o",
+                              staticStyle: { "font-size": "24px" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.chatuser(integrante.iduser)
+                                }
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass: "badge badge-danger navbar-badge",
+                                staticStyle: { top: "-4px" }
+                              })
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "post" }, [
                     _c("div", { staticClass: "user-block" }, [
@@ -4679,206 +4787,6 @@ var staticRenderFns = [
         staticClass: "fa fa-circle-o-notch fa-spin",
         staticStyle: { "font-size": "80px" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "direct-chat-messages direct-chat-info",
-        staticStyle: { overflow: "initial" }
-      },
-      [
-        _c("div", { staticClass: "direct-chat-msg" }, [
-          _c("div", { staticClass: "direct-chat-info clearfix" }, [
-            _c("span", { staticClass: "direct-chat-name float-left" }, [
-              _vm._v("Alexander Pierce")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "direct-chat-timestamp float-right" }, [
-              _vm._v("23 Jan 2:00 pm")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "direct-chat-img",
-            attrs: {
-              src:
-                "http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png",
-              alt: "message user image"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "direct-chat-text" }, [
-            _vm._v(
-              "\n                      Is this template really for free? That's unbelievable!\n                      asdfads\n                      asdfadsasdfa\n                      asdfadsasdfasd\n                    "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "direct-chat-msg right" }, [
-          _c("div", { staticClass: "direct-chat-info clearfix" }, [
-            _c("span", { staticClass: "direct-chat-name float-right" }, [
-              _vm._v("Sarah Bullock")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "direct-chat-timestamp float-left" }, [
-              _vm._v("23 Jan 2:05 pm")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "direct-chat-img",
-            attrs: {
-              src:
-                "http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png",
-              alt: "message user image"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "direct-chat-text" }, [
-            _vm._v(
-              "\n                      You better believe it!\n                    "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "direct-chat-msg right" }, [
-          _c("div", { staticClass: "direct-chat-info clearfix" }, [
-            _c("span", { staticClass: "direct-chat-name float-right" }, [
-              _vm._v("Sarah Bullock")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "direct-chat-timestamp float-left" }, [
-              _vm._v("23 Jan 2:05 pm")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "direct-chat-img",
-            attrs: {
-              src:
-                "http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png",
-              alt: "message user image"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "direct-chat-text" }, [
-            _vm._v(
-              "\n                      You better believe it!\n                    "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "direct-chat-msg right" }, [
-          _c("div", { staticClass: "direct-chat-info clearfix" }, [
-            _c("span", { staticClass: "direct-chat-name float-right" }, [
-              _vm._v("Sarah Bullock")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "direct-chat-timestamp float-left" }, [
-              _vm._v("23 Jan 2:05 pm")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "direct-chat-img",
-            attrs: {
-              src:
-                "http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png",
-              alt: "message user image"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "direct-chat-text" }, [
-            _vm._v(
-              "\n                      You better believe it!\n                    "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "direct-chat-msg right" }, [
-          _c("div", { staticClass: "direct-chat-info clearfix" }, [
-            _c("span", { staticClass: "direct-chat-name float-right" }, [
-              _vm._v("Sarah Bullock")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "direct-chat-timestamp float-left" }, [
-              _vm._v("23 Jan 2:05 pm")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "direct-chat-img",
-            attrs: {
-              src:
-                "http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png",
-              alt: "message user image"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "direct-chat-text" }, [
-            _vm._v(
-              "\n                      You better believe it!\n                    "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "direct-chat-msg right" }, [
-          _c("div", { staticClass: "direct-chat-info clearfix" }, [
-            _c("span", { staticClass: "direct-chat-name float-right" }, [
-              _vm._v("Sarah Bullock")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "direct-chat-timestamp float-left" }, [
-              _vm._v("23 Jan 2:05 pm")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "direct-chat-img",
-            attrs: {
-              src:
-                "http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png",
-              alt: "message user image"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "direct-chat-text" }, [
-            _vm._v(
-              "\n                      You better believe it!\n                    "
-            )
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c("div", { staticClass: "input-group col-md-12" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            name: "message",
-            placeholder: "Type Message ..."
-          }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "input-group-append" }, [
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "button" } },
-            [_vm._v("Send")]
-          )
-        ])
-      ])
     ])
   },
   function() {

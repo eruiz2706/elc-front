@@ -1,7 +1,7 @@
 <template>
 <div>
   <!-- Modal -->
-  <div class="modal fade" id="modal_chat" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="modal_chat" >
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class='modal-header'>
@@ -15,106 +15,37 @@
           </div>
           <div class="direct-chat-messages direct-chat-info" style='overflow:initial'>
                   <!-- Message. Default to the left -->
-                  <div class="direct-chat-msg">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name float-left">Alexander Pierce</span>
-                      <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                  <div class="direct-chat-msg" v-bind:class="(id_userchat==chat.remitente) ? '':'right'" v-for="chat in chat_mensajes" >
+                    <div class="direct-chat-info clearfix" v-if="id_userchat==chat.remitente">
+                      <span class="direct-chat-name float-left" v-text='chat.nomremitente'></span>
+                      <span class="direct-chat-timestamp float-right" v-text='chat.fecha_creacion'></span>
                     </div>
-                    <!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      Is this template really for free? That's unbelievable!
-                      asdfads
-                      asdfadsasdfa
-                      asdfadsasdfasd
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
 
-                  <!-- Message to the right -->
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name float-right">Sarah Bullock</span>
-                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                    <div class="direct-chat-info clearfix" v-else>
+                      <span class="direct-chat-name float-right" v-text='chat.nomremitente'></span>
+                      <span class="direct-chat-timestamp float-left" v-text='chat.fecha_creacion'></span>
                     </div>
-                    <!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      You better believe it!
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name float-right">Sarah Bullock</span>
-                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                    </div>
-                    <!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      You better believe it!
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
 
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name float-right">Sarah Bullock</span>
-                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                    </div>
                     <!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png" alt="message user image">
+                    <img class="direct-chat-img" v-bind:src="base_url+'/'+chat.imgremitente" alt="">
                     <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      You better believe it!
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
+                    <div class="direct-chat-text" v-html = "chat.mensaje">
 
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name float-right">Sarah Bullock</span>
-                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                    </div>
-                    <!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      You better believe it!
                     </div>
                     <!-- /.direct-chat-text -->
                   </div>
                   <!-- /.direct-chat-msg -->
-
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name float-right">Sarah Bullock</span>
-                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                    </div>
-                    <!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="http://localhost/aulavirtual/public/img/avatar/5bfe03f8561bd2.49151940.png" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      You better believe it!
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
-              </div>
+            </div>
         </div>
         <div class="modal-footer">
 
           <div class="input-group col-md-12">
-            <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+            <input type="text" class="form-control" v-model="mensaje_chat">
             <span class="input-group-append">
-              <button type="button" class="btn btn-primary">Send</button>
+              <button type="button" class="btn btn-primary" :disabled="loader_responder"  v-on:click.prevent='responderchat()'>
+                Responder
+                <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_responder"></i>
+              </button>
             </span>
           </div>
 
@@ -134,13 +65,13 @@
       <div class="card" v-if="!preload" >
         <div class="card-body">
           <div class="card-tools">
-            <!--<a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
+            <a class="nav-link"  href="#" aria-expanded="true">
               <span class="badge navbar-badge">
-                <i class="fa fa-comments-o" style='font-size:24px' v-on:click.prevent='chatuser()'>
-                  <span class="badge badge-danger navbar-badge" style='top:-4px'>3</span>
+                <i class="fa fa-comments-o" style='font-size:24px' v-on:click.prevent='chatuser(integrante.iduser)'>
+                  <span class="badge badge-danger navbar-badge" style='top:-4px'> </span>
                 </i>
               </span>
-            </a>-->
+            </a>
           </div>
           <div class="post">
             <div class="user-block">
@@ -164,6 +95,12 @@
     export default {
         mounted() {
             console.log('Component integrantes mounted.');
+            let vm = this;
+            this.$root.$on('private_message_serve',function(data){
+              if(data.chat_id==this.idchat){
+                  vm.chat_mensajes.push(data);
+              }
+            });
         },created : function(){
           this.base_url=base_url;
           this.idcurso=document.getElementById('idcurso').value;
@@ -175,6 +112,11 @@
             preload:true,
             a_integrantes:[],
             preloadmodal:false,
+            chat_mensajes:[],
+            idchat:0,
+            id_userchat:0,
+            loader_responder:false,
+            mensaje_chat:''
           }
         },
         methods : {
@@ -195,17 +137,19 @@
                 }
             });
           },
-          chatuser:function(id){
+          chatuser:function(iduser){
             $('#modal_chat').modal('show');
-            /*var url =this.base_url+'/progreso/progmod';
+            var url =this.base_url+'/chatprivado/open';
             this.preloadmodal=true;
-            axios.post(url,{idcurso:this.idcurso,idmodulo:id}).then(response =>{
+            this.chat_mensajes=[];
+            this.id_userchat=iduser;
+            axios.post(url,{iduser:iduser}).then(response =>{
                 this.preloadmodal=false;
-                this.a_progmod=response.data.progmod;
-                console.log(response.data);
+                this.chat_mensajes=response.data.chat_mensajes;
+                this.idchat=response.data.idchat
+                console.log(this.chat_mensajes);
             }).catch(error =>{
                 this.preloadmodal=false;
-                this.a_progmod=[];
                 if(error.response.data.errors){
                 }
                 if(error.response.data.error){
@@ -214,7 +158,19 @@
                   });
                 }
 
-            });*/
+            });
+          },
+          responderchat:function(){
+            var url =this.base_url+'/chatprivado/responder';
+            this.loader_responder=true;
+            axios.post(url,{idchat:this.idchat,mensaje_chat:this.mensaje_chat}).then(response =>{
+                this.chat_mensajes.push(response.data.chat_enviado);
+                this.loader_responder=false;
+                this.mensaje_chat='';
+                this.$root.$emit('private_message_cli',response.data.chat_enviado);
+            }).catch(error =>{
+                this.loader_responder=false;
+            });
           }
         }
     }

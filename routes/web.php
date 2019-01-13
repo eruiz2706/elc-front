@@ -158,4 +158,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
 
   Route::get('usuarios','backend\modulos\UsuariosController@index');
   Route::post('usuarios/lista','backend\modulos\UsuariosController@lista');
+
+  Route::post('chatprivado/open','backend\modulos\ChatPrivado@open');
+  Route::post('chatprivado/responder','backend\modulos\ChatPrivado@responder');
 });
