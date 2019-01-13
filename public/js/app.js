@@ -4427,7 +4427,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log('Component integrantes mounted.');
         var vm = this;
         this.$root.$on('private_message_serve', function (data) {
-            if (data.chat_id == this.idchat) {
+            console.log(data.chat_id + "==" + vm.idchat + 'lleog');
+            if (data.chat_id == vm.idchat) {
                 vm.chat_mensajes.push(data);
             }
         });

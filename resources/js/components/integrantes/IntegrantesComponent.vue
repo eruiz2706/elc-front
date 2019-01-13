@@ -97,7 +97,8 @@
             console.log('Component integrantes mounted.');
             let vm = this;
             this.$root.$on('private_message_serve',function(data){
-              if(data.chat_id==this.idchat){
+              console.log(data.chat_id+"=="+vm.idchat+'lleog');
+              if(data.chat_id==vm.idchat){
                   vm.chat_mensajes.push(data);
               }
             });

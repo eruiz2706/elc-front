@@ -38,6 +38,7 @@ class ChatPrivado extends Controller
                                 from chatprivado_det c
                                 left join users u on(u.id=c.remitente)
                                 where chat_id=:chat_id
+                                order by c.id asc
                                 limit 100",
                           ['chat_id'=>$idchat]);
 
