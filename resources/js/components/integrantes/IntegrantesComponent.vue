@@ -7,7 +7,7 @@
         <div class='modal-header'>
             Chat directo<button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <div class="modal-body" style="height:400px;overflow-y: auto;">
+        <div class="modal-body" style="height:300px;overflow-y: auto;">
           <div class="row" v-if="preloadmodal">
             <div class="d-block mx-auto" >
               <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
@@ -97,7 +97,7 @@
             console.log('Component integrantes mounted.');
             let vm = this;
             this.$root.$on('private_message_serve',function(data){
-              console.log(data.chat_id+"=="+vm.idchat+'lleog');
+              //console.log(data.chat_id+"=="+vm.idchat+'lleog');
               if(data.chat_id==vm.idchat){
                   vm.chat_mensajes.push(data);
               }
