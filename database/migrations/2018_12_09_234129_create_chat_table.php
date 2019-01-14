@@ -19,6 +19,8 @@ class CreateChatTable extends Migration
             $table->foreign('emisor')->references('id')->on('users')->onDelete('cascade');
             $table->integer('receptor')->unsigned()->index();
             $table->foreign('receptor')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('pendiente_emisor')->default(0);//pendiente por leer
+            $table->integer('pendiente_receptor')->default(0);//pendiente por leer
             $table->dateTime('fecha_creacion');
             $table->timestamps();
         });

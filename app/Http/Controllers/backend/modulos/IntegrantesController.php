@@ -26,6 +26,32 @@ class IntegrantesController extends Controller
                              where curso_id = :curso_id and cu.user_id <> :user_id
                              order by r.name desc",
                            ['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
+
+     foreach($integrantes as $integ){
+       $chat     =DB::select("select id,emisor,receptor,pendiente_emisor,pendiente_receptor
+                               from chatprivado
+                               where (emisor=:user1 and receptor=:user2) or (emisor=:user2 and receptor=:user1)",
+                             ['user1'=>$user->id,'user2'=>$integ->iduser]);
+
+       if(!empty($chat)){
+         $emisor            =$chat[0]->emisor;
+         $receptor          =$chat[0]->receptor;
+         $pendiente_emisor  =$chat[0]->pendiente_emisor;
+         $pendiente_receptor=$chat[0]->pendiente_receptor;
+
+         if($emisor==$integ->iduser){
+            $integ->mensajeschat=$pendiente_emisor;
+         }
+         if($receptor==$integ->iduser){
+            $integ->mensajeschat=$pendiente_receptor;
+         }
+       }else{
+         $integ->mensajeschat=0;
+       }
+
+
+     }
+
      $jsonresponse=[
          'integrantes'=>$integrantes
      ];

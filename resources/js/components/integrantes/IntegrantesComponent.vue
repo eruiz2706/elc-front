@@ -68,7 +68,7 @@
             <a class="nav-link"  href="#" aria-expanded="true">
               <span class="badge navbar-badge">
                 <i class="fa fa-comments-o" style='font-size:24px' v-on:click.prevent='chatuser(integrante.iduser)'>
-                  <span class="badge badge-danger navbar-badge" style='top:-4px'> </span>
+                  <span class="badge badge-danger navbar-badge" style='top:-4px'><span v-if='integrante.mensajeschat>0' v-text='integrante.mensajeschat'></span></span>
                 </i>
               </span>
             </a>
@@ -99,7 +99,9 @@
             this.$root.$on('private_message_serve',function(data){
               //console.log(data.chat_id+"=="+vm.idchat+'lleog');
               if(data.chat_id==vm.idchat){
-                  vm.chat_mensajes.push(data);
+                  vm.leidochat(data);
+              }else{
+                  vm.listado();
               }
             });
         },created : function(){
@@ -127,6 +129,7 @@
             axios.post(url,{idcurso:this.idcurso}).then(response =>{
                 this.preload=false;
                 this.a_integrantes=response.data.integrantes;
+                console.log(this.a_integrantes);
             }).catch(error =>{
                 this.preload=false;
                 if(error.response.data.errors){
@@ -148,7 +151,7 @@
                 this.preloadmodal=false;
                 this.chat_mensajes=response.data.chat_mensajes;
                 this.idchat=response.data.idchat
-                console.log(this.chat_mensajes);
+                this.listado();
             }).catch(error =>{
                 this.preloadmodal=false;
                 if(error.response.data.errors){
@@ -172,6 +175,15 @@
             }).catch(error =>{
                 this.loader_responder=false;
             });
+          },
+          leidochat:function(data){
+              var url =this.base_url+'/chatprivado/leido';
+              axios.post(url,{idchat:data.chat_id,remitente:data.remitente}).then(response =>{
+                  this.chat_mensajes.push(data);
+                  this.listado();
+              }).catch(error =>{
+
+              });
           }
         }
     }

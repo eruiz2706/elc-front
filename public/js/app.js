@@ -4429,7 +4429,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.$root.$on('private_message_serve', function (data) {
             //console.log(data.chat_id+"=="+vm.idchat+'lleog');
             if (data.chat_id == vm.idchat) {
-                vm.chat_mensajes.push(data);
+                vm.leidochat(data);
+            } else {
+                vm.listado();
             }
         });
     },
@@ -4460,6 +4462,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post(url, { idcurso: this.idcurso }).then(function (response) {
                 _this.preload = false;
                 _this.a_integrantes = response.data.integrantes;
+                console.log(_this.a_integrantes);
             }).catch(function (error) {
                 _this.preload = false;
                 if (error.response.data.errors) {}
@@ -4482,7 +4485,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.preloadmodal = false;
                 _this2.chat_mensajes = response.data.chat_mensajes;
                 _this2.idchat = response.data.idchat;
-                console.log(_this2.chat_mensajes);
+                _this2.listado();
             }).catch(function (error) {
                 _this2.preloadmodal = false;
                 if (error.response.data.errors) {}
@@ -4506,6 +4509,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 _this3.loader_responder = false;
             });
+        },
+        leidochat: function leidochat(data) {
+            var _this4 = this;
+
+            var url = this.base_url + '/chatprivado/leido';
+            axios.post(url, { idchat: data.chat_id, remitente: data.remitente }).then(function (response) {
+                _this4.chat_mensajes.push(data);
+                _this4.listado();
+            }).catch(function (error) {});
         }
     }
 });
@@ -4700,10 +4712,25 @@ var render = function() {
                               }
                             },
                             [
-                              _c("span", {
-                                staticClass: "badge badge-danger navbar-badge",
-                                staticStyle: { top: "-4px" }
-                              })
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "badge badge-danger navbar-badge",
+                                  staticStyle: { top: "-4px" }
+                                },
+                                [
+                                  integrante.mensajeschat > 0
+                                    ? _c("span", {
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            integrante.mensajeschat
+                                          )
+                                        }
+                                      })
+                                    : _vm._e()
+                                ]
+                              )
                             ]
                           )
                         ])

@@ -161,4 +161,5 @@ Route::middleware(['auth','navcursos'])->group(function(){
 
   Route::post('chatprivado/open','backend\modulos\ChatPrivado@open');
   Route::post('chatprivado/responder','backend\modulos\ChatPrivado@responder');
+  Route::post('chatprivado/leido','backend\modulos\ChatPrivado@leido');
 });

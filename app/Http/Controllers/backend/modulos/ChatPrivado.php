@@ -26,6 +26,13 @@ class ChatPrivado extends Controller
 
     if(!empty($chat)){
       $idchat =$chat[0]->id;
+
+      DB::table('chatprivado')->where('id',$idchat)->where('emisor',$user2)->update([
+        'pendiente_emisor'=>0,
+      ]);
+      DB::table('chatprivado')->where('id',$idchat)->where('receptor',$user2)->update([
+        'pendiente_receptor'=>0,
+      ]);
     }else{
       $idchat=DB::table('chatprivado')->insertGetId([
            'emisor'=>$user1,
@@ -62,6 +69,14 @@ class ChatPrivado extends Controller
         'fecha_creacion'=>$fecha_creacion,
       ]);
 
+      /*actualiza solo el registro que corresponda, si es emisor o receptor el que envia el mensaje*/
+      DB::table('chatprivado')->where('id',$request->idchat)->where('emisor',$user->id)->update([
+        'pendiente_emisor'=>1,
+      ]);
+      DB::table('chatprivado')->where('id',$request->idchat)->where('receptor',$user->id)->update([
+        'pendiente_receptor'=>1,
+      ]);
+
       DB::commit();
       return response()->json([
           'chat_enviado' =>[
@@ -72,6 +87,37 @@ class ChatPrivado extends Controller
             'mensaje'=>nl2br($request->mensaje_chat),
             'fecha_creacion'=>$fecha_creacion
           ],
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('publicacion chat : '.$e->getMessage());
+        DB::rollback();
+        //$e->getMessage();
+
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar enviar el mensaje'
+        ], 400);
+    }
+  }
+
+  public function leido(Request $request){
+    $user  =Auth::user();
+
+
+    DB::beginTransaction();
+    try{
+
+      /*actualiza solo el registro que corresponda, si es emisor o receptor el que envia el mensaje*/
+      DB::table('chatprivado')->where('id',$request->idchat)->where('emisor',$user->id)->update([
+        'pendiente_emisor'=>0,
+      ]);
+      DB::table('chatprivado')->where('id',$request->idchat)->where('receptor',$user->id)->update([
+        'pendiente_receptor'=>0,
+      ]);
+
+      DB::commit();
+      return response()->json([
+          'leido' =>'OK'
       ]);
     }
     catch(\Exception $e){
