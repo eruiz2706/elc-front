@@ -8,13 +8,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use DB;
-use Session;
-
 
 class OfertadosController extends Controller
 {
     public function index(Request $request){
-      $rol  =Session::get('rol');
+      $user =Auth::user();
+      $rol  =$user->slugrol;
       if($rol !='es'){
         return view('layouts.errors.access_denied');
       }
@@ -107,8 +106,9 @@ class OfertadosController extends Controller
     }
 
     public function suscripcion(Request $request){
-      $rol  =Session::get('rol');
-      $id     =Auth::user()->id;
+      $user =Auth::user();
+      $rol  =$user->slugrol;
+      $id   =Auth::user()->id;
 
       if ($request->idcurso=='') {
           return response()->json([
@@ -125,16 +125,6 @@ class OfertadosController extends Controller
           'slugrol'=>$rol,
           'fecha_creacion'=>date('Y-m-d H:i:s')
         ]);
-
-        $cursos  =DB::select("select
-                              c.id,c.nombre
-                              from cursos_user cu
-                              left join cursos c on(cu.curso_id=c.id)
-                              where cu.user_id = :user_id
-                              order by cu.fecha_creacion desc"
-                         ,['user_id'=>$id]);
-        Session::put('navcursos',$cursos);
-
         DB::commit();
 
         return response()->json([
@@ -154,7 +144,8 @@ class OfertadosController extends Controller
     }
 
     public function respuestapago(){
-        $rol  =Session::get('rol');
+        $user =Auth::user();
+        $rol  =$user->slugrol;
         $id     =Auth::user()->id;
 
         $referenceCode    =$_REQUEST['referenceCode'];
@@ -184,16 +175,6 @@ class OfertadosController extends Controller
               'slugrol'=>$rol,
               'fecha_creacion'=>date('Y-m-d H:i:s')
             ]);
-
-            $cursos  =DB::select("select
-                              c.id,c.nombre
-                              from cursos_user cu
-                              left join cursos c on(cu.curso_id=c.id)
-                              where cu.user_id = :user_id
-                              order by cu.fecha_creacion desc"
-                         ,['user_id'=>$id]);
-            Session::put('navcursos',$cursos);
-
             DB::commit();
 
             return view('backend.modulos.ofertados.view_confirmacion');

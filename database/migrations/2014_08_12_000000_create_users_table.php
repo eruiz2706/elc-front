@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('linkedin')->nullable();
             $table->text('biografia')->nullable();
             $table->boolean('manual')->default(false);
+            $table->string('slugrol',25)->nullable(); 
             $table->rememberToken();
             $table->timestamps();
         });

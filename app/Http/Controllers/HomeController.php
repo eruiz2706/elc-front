@@ -197,6 +197,7 @@ class HomeController extends Controller
           'nombre'  =>$request->input('nombre'),
           'email'=>$request->input('email'),
           'password'=>Hash::make($password),
+          'slugrol'=>$request->input('rol'),
           'uniqid'=>uniqid('',true)
       ];
       $params=[

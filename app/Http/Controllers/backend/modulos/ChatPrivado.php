@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use DB;
 use Log;
-use Session;
 
 class ChatPrivado extends Controller
 {

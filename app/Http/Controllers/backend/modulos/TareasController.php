@@ -9,15 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use DB;
 use Log;
-use Session;
 
 class TareasController extends Controller
 {
 
   function view_listaent($idcurso,$id){
     $tab_tar='';
-    $user   =Auth::user();
-    $rol    =Session::get('rol');
+    $user =Auth::user();
+    $rol  =$user->slugrol;
     if(!in_array($rol,['pr','es'])){
       return view('layouts.errors.access_denied');
     }

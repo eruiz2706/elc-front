@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use DB;
 use Log;
-use Session;
 
 class ForoController extends Controller
 {
 
     /*muestra la vista del foro*/
     function index(){
-      $rol  =Session::get('rol');
+      $user =Auth::user();
+      $rol  =$user->slugrol;
       if($rol==''){
         return view('layouts.errors.access_denied');
       }

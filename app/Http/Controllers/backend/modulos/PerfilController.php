@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Validator;
-use Session;
 use DB;
 use Log;
 
 class PerfilController extends Controller
 {
     public function index(){
-      $rol  =Session::get('rol');
+      $user =Auth::user();
+      $rol  =$user->slugrol;
       if($rol != ''){
         if($rol=='es')return view('backend.modulos.perfil.view_index_es');
         return view('backend.modulos.perfil.view_index');

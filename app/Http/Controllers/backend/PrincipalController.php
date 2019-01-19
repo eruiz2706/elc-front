@@ -18,31 +18,18 @@ class PrincipalController extends Controller
     }
 
     function index(){
-      Session::put('rol','');
-      Session::put('user_tiempo','0');
+      //Session::put('rol','');
+      //Session::get('rol')
       $user =Auth::user();
-
-      //se consulta el rol al que esta asociado el usuario
-      $rol  =DB::select("select r.slug
-                          from roles r
-                          left join role_user ru on(r.id=ru.role_id)
-                          where user_id = :user_id"
-                       ,['user_id'=>$user->id]);
-      if(!empty($rol)){
-        $rol  =$rol[0];
-        Session::put('rol',$rol->slug);
-
-        if($rol->slug !=''){
-          return redirect('foro');
-        }
+      if($user->slugrol !=''){
+        return redirect('foro');
       }
-
       return redirect()->to('/noaccess');
     }
 
     function config(){
       $user =Auth::user();
-      $rol  =Session::get('rol');
+      $rol  =$user->slugrol;
 
       $nav_user=[];
       $nav_cursos=[];
@@ -87,6 +74,8 @@ class PrincipalController extends Controller
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
         $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
         $nav_user[]=['icono'=>'fa fa-plus-square-o','nombre'=>'Ofertas  de cursos','url'=>'ofertados'];
+
+        $nav_user[]=['icono'=>'nav-icon fa fa-th','nombre'=>'Herramientas','url'=>'herramientas','optionnew'=>1,'nombreopt'=>'Nuevo'];
       }
 
       if($rol=='pa'){
@@ -112,11 +101,15 @@ class PrincipalController extends Controller
 
     function conexion(){
       $user   =Auth::user();
+      $tiempo_uso=DB::select("select
+                              round(extract(epoch from age(fecha_ultimo_uso,fecha_ultimo_ingreso))/60) as tiempo
+                            from users
+                            where id = :user_id",['user_id'=>$user->id])[0]->tiempo;
       $jsonresponse=[
           'conexion_user'=>[
             'nombre'=>$user->nombre,
             'ultimo_ingreso'=>'Ultimo ingreso: '.$user->fecha_ultimo_ingreso,
-            'tiempo_uso'=>'Tiempo de uso: '.Session::get('user_tiempo').' minutos'
+            'tiempo_uso'=>'Tiempo de uso: '.$tiempo_uso.' minutos'
           ]
       ];
       return response()->json($jsonresponse,200);
@@ -132,8 +125,8 @@ class PrincipalController extends Controller
     }
 
     function abrirmanual(){
-      $rol      =Session::get('rol');
       $user      =Auth::user();
+      $rol       =$user->slugrol;
       $usermanual=true;
       if($rol !='ad'){
         $manual  =DB::select("select manual as estado

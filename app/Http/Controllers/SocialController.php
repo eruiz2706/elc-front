@@ -33,7 +33,7 @@ class SocialController extends Controller
           } else {
               $modo=session('f_modo');
 
-              $role  =DB::select("select id from roles
+              $role  =DB::select("select id,slug from roles
                                   where slug = :slug"
                                  ,['slug'=>$modo]);
 
@@ -42,6 +42,8 @@ class SocialController extends Controller
                     'nombre' => $social_user->name,
                     'email' => $social_user->email,
                     'password'=>Hash::make(substr( md5(microtime()), 1, 8)),
+                    'uniqid'=>uniqid('',true),
+                    'slugrol'=>$role[0]->slug,
                 ]);
 
                 DB::table('role_user')->insert([

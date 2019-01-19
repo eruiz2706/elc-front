@@ -285,6 +285,8 @@ Vue.component('preguntas-edit', __webpack_require__(102));
 Vue.component('resultados', __webpack_require__(105));
 Vue.component('resultados-es', __webpack_require__(108));
 Vue.component('usuarios-lista', __webpack_require__(111));
+Vue.component('reproductor', __webpack_require__(114));
+Vue.component('pronunciacion', __webpack_require__(117));
 
 var socket = io(url_servinotifi, { 'forceNew': true });
 
@@ -20640,6 +20642,638 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-2387d38e", module.exports)
+  }
+}
+
+/***/ }),
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(115)
+/* template */
+var __vue_template__ = __webpack_require__(116)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/herramientas/ReproductoComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0dddf283", Component.options)
+  } else {
+    hotAPI.reload("data-v-0dddf283", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 115 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var artyom = new Artyom();
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {},
+  created: function created() {
+    this.base_url = base_url;
+  },
+  data: function data() {
+    return {
+      texto_audio: '',
+      disabled_play: false,
+      artyom_speed: 0.7
+    };
+  },
+  methods: {
+    playAudio: function playAudio() {
+      var vm = this;
+      artyom.initialize({
+        lang: "en-US", // Más lenguajes son soportados, lee la documentación
+        continuous: false, // Reconoce 1 solo comando y basta de escuchar
+        listen: true, // Iniciar !
+        debug: false, // Muestra un informe en la consola
+        speed: vm.artyom_speed, // Habla normalmente,
+        volume: 1
+      }).then(function () {
+        //artyom.say("Artyom succesfully initialized");
+        console.log("Artyom succesfully initialized");
+      }).catch(function (err) {
+        //artyom.say("Artyom couldn't be initialized, please check the console for errors");
+        console.log("Artyom couldn't be initialized, please check the console for errors");
+        console.log(err);
+      });
+
+      artyom.say(vm.texto_audio, {
+        onStart: function onStart() {
+          vm.disabled_play = true;
+          console.log("Comenzando a leer texto");
+        },
+        onEnd: function onEnd() {
+          vm.disabled_play = false;
+          console.log("Texto leido satisfactoriamente");
+        }
+      });
+    }
+
+  }
+});
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "formControlRange" } }, [
+            _vm._v("Velocidad ("),
+            _c("span", { domProps: { textContent: _vm._s(_vm.artyom_speed) } }),
+            _vm._v(")")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.artyom_speed,
+                expression: "artyom_speed"
+              }
+            ],
+            staticClass: "form-control-range",
+            attrs: { type: "range", min: "0", max: "1", step: "0.1" },
+            domProps: { value: _vm.artyom_speed },
+            on: {
+              __r: function($event) {
+                _vm.artyom_speed = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary btn-sm",
+                attrs: { type: "button", disabled: _vm.disabled_play },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.playAudio()
+                  }
+                }
+              },
+              [
+                _vm._v("\n            Reproducir "),
+                _c("i", {
+                  staticClass: "fa fa-play",
+                  staticStyle: { "font-size": "20px" }
+                })
+              ]
+            ),
+            _vm._v("   \n        ")
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.texto_audio,
+                expression: "texto_audio"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              rows: "10",
+              placeholder: "Escriba el texto que desea ser reproducido"
+            },
+            domProps: { value: _vm.texto_audio },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.texto_audio = $event.target.value
+              }
+            }
+          })
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "callout callout-info" }, [
+      _c("p", [
+        _c("i", { staticClass: "fa fa-fw fa-info" }),
+        _vm._v(
+          "\n          Agrega una palabra o texto en ingles y da click en el boton reproducir para escucharlo,\n          recuerda que tienes la opcion de regular la velocidad de reproduccion\n      \t"
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0dddf283", module.exports)
+  }
+}
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(118)
+/* template */
+var __vue_template__ = __webpack_require__(119)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/herramientas/PronunciacionComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-38df2264", Component.options)
+  } else {
+    hotAPI.reload("data-v-38df2264", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 118 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var artyom = new Artyom();
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {},
+  created: function created() {
+    this.base_url = base_url;
+  },
+  data: function data() {
+    return {
+      disabled_play: false,
+      disabled_escuchar: false,
+      texto_escucha: ''
+    };
+  },
+  methods: {
+    playAudio: function playAudio() {
+      var vm = this;
+      artyom.addCommands([{
+        description: "",
+        indexes: [""],
+        action: function action(i) {}
+      }]);
+      artyom.redirectRecognizedTextOutput(function (recognized, isFinal) {
+        if (!isFinal) {
+          var texto_voz_audio = document.getElementById("texto_voz_audio");
+          texto_voz_audio.value = '';
+          console.log("Dictation started by the user");
+        } else {
+          vm.disabled_play = false;
+          var texto_voz_audio = document.getElementById("texto_voz_audio");
+          texto_voz_audio.value += recognized + '\n';
+          texto_voz_audio.scrollTop = texto_voz_audio.scrollHeight;
+        }
+      });
+      artyom.initialize({
+        lang: "en-GB", // Más lenguajes son soportados, lee la documentación
+        continuous: false, // Reconoce 1 solo comando y basta de escuchar
+        listen: true, // Iniciar !
+        debug: true, // Muestra un informe en la consola
+        speed: 1 // Habla normalmente
+      }).then(function () {
+        console.log("Artyom succesfully initialized");
+        var texto_voz_audio = document.getElementById("texto_voz_audio");
+        texto_voz_audio.value = '';
+        vm.disabled_play = true;
+      }).catch(function (err) {
+        //artyom.say("Artyom couldn't be initialized, please check the console for errors");
+        vm.disabled_play = false;
+        console.log("Artyom couldn't be initialized, please check the console for errors");
+        console.log(err);
+      });
+    },
+    stopAudio: function stopAudio() {
+      var vm = this;
+      artyom.fatality();
+      vm.disabled_play = false;
+    },
+    escucharAudio: function escucharAudio() {
+      var vm = this;
+      artyom.initialize({
+        lang: "en-US", // Más lenguajes son soportados, lee la documentación
+        continuous: false, // Reconoce 1 solo comando y basta de escuchar
+        listen: true, // Iniciar !
+        debug: false, // Muestra un informe en la consola
+        speed: 0.6, // Habla normalmente,
+        volume: 1
+      }).then(function () {
+        //artyom.say("Artyom succesfully initialized");
+        console.log("Artyom succesfully initialized");
+      }).catch(function (err) {
+        //artyom.say("Artyom couldn't be initialized, please check the console for errors");
+        console.log("Artyom couldn't be initialized, please check the console for errors");
+        console.log(err);
+      });
+
+      artyom.say(vm.texto_escucha, {
+        onStart: function onStart() {
+          vm.disabled_escuchar = true;
+          console.log("Comenzando a leer texto");
+        },
+        onEnd: function onEnd() {
+          vm.disabled_escuchar = false;
+          console.log("Texto leido satisfactoriamente");
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group mb-3" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.texto_escucha,
+                expression: "texto_escucha"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: "Palabra",
+              "aria-label": "Recipient's username",
+              "aria-describedby": "basic-addon2"
+            },
+            domProps: { value: _vm.texto_escucha },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.texto_escucha = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary",
+                attrs: { type: "button", disabled: _vm.disabled_escuchar },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.escucharAudio()
+                  }
+                }
+              },
+              [
+                _vm._v("\n            Escuchar "),
+                _c("i", { staticClass: "fa fa-play" })
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary btn-sm",
+                attrs: { type: "button", disabled: _vm.disabled_play },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.playAudio()
+                  }
+                }
+              },
+              [
+                _vm._v("\n            Hablar "),
+                _c("i", {
+                  staticClass: "fa fa-play",
+                  staticStyle: { "font-size": "20px" }
+                })
+              ]
+            ),
+            _vm._v("   \n        ")
+          ]),
+          _vm._v(" "),
+          _c("span", { attrs: { id: "resultado_pronun" } })
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary btn-sm",
+                attrs: { type: "button", disabled: _vm.disabled_play },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.playAudio()
+                  }
+                }
+              },
+              [
+                _vm._v("\n            Escuchar "),
+                _c("i", {
+                  staticClass: "fa fa-play",
+                  staticStyle: { "font-size": "20px" }
+                })
+              ]
+            ),
+            _vm._v("   \n          "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-danger btn-sm",
+                attrs: { type: "button", disabled: !_vm.disabled_play },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.stopAudio()
+                  }
+                }
+              },
+              [
+                _vm._v("\n            Detener "),
+                _c("i", { staticClass: "fa fa-stop" })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            staticClass: "form-control",
+            attrs: { rows: "10", id: "texto_voz_audio" }
+          })
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "callout callout-info" }, [
+      _c("p", [
+        _c("i", { staticClass: "fa fa-fw fa-info" }),
+        _vm._v(
+          "\n          Escribe la palabra a pronunciar y da en evaluar para verificar tu pronunciacion,\n        "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "callout callout-info" }, [
+      _c("p", [
+        _c("i", { staticClass: "fa fa-fw fa-info" }),
+        _vm._v(
+          "\n          Da click en el boton escuchar y verifica tu pronunciacion, una vez termines de hablar da click en el boton detener para\n          ver tus resultados\n      \t"
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-38df2264", module.exports)
   }
 }
 

@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use DB;
-use Session;
 use Validator;
 use Log;
 
@@ -17,7 +16,8 @@ use Log;
 class UsuariosController extends Controller
 {
   public function index(Request $request){
-    $rol  =Session::get('rol');
+    $user =Auth::user();
+    $rol  =$user->slugrol;
     if($rol !='ad'){
       return view('layouts.errors.access_denied');
     }

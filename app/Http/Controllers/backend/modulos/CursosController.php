@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use DB;
-use Session;
 use Validator;
 use Log;
 
@@ -18,7 +17,8 @@ class CursosController extends Controller
   ############################## VISTAS ##############################
   //vista para vializar listado de cursos
   public function view_list(){
-    $rol  =Session::get('rol');
+    $user =Auth::user();
+    $rol  =$user->slugrol;
     if($rol !='in'){
       return view('layouts.errors.access_denied');
     }
@@ -28,7 +28,7 @@ class CursosController extends Controller
   //vista para datos de configuracion de curso, solo se ve los cursos creados por mi usuario
   public function view_config($id){
     $user =Auth::user();
-    $rol  =Session::get('rol');
+    $rol  =$user->slugrol;
 
     if($rol !='in'){
       return view('layouts.errors.access_denied');
@@ -49,7 +49,7 @@ class CursosController extends Controller
   }
   public function view_gestion($id){
     $user =Auth::user();
-    $rol  =Session::get('rol');
+    $rol  =$user->slugrol;
 
     if($rol !='pr' && $rol !='es'){
       return view('layouts.errors.access_denied');
@@ -374,7 +374,8 @@ class CursosController extends Controller
 
   //metodo que redirige a un curso en especifico
   public function abrir($id){
-    $rol  =Session::get('rol');
+    $user =Auth::user();
+    $rol  =$user->slugrol;
 
     if($rol=='in'){
         return redirect('cursos/v_editar/'.$id);
