@@ -75,7 +75,13 @@ class PrincipalController extends Controller
         $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
         $nav_user[]=['icono'=>'fa fa-plus-square-o','nombre'=>'Ofertas  de cursos','url'=>'ofertados'];
 
-        $nav_user[]=['icono'=>'nav-icon fa fa-th','nombre'=>'Herramientas','url'=>'herramientas','optionnew'=>1,'nombreopt'=>'Nuevo'];
+        $pagos=DB::select("select sum(valor) as pagos
+                                  from pagos
+                                  where user_id= :user_id",['user_id'=>$user->id])[0]->pagos;
+
+        if($pagos>0){
+            $nav_user[]=['icono'=>'nav-icon fa fa-th','nombre'=>'Herramientas','url'=>'herramientas','optionnew'=>1,'nombreopt'=>'Nuevo'];
+        }
       }
 
       if($rol=='pa'){

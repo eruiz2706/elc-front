@@ -24,7 +24,7 @@
       <div class='row'>
       <div class="form-group col-md-2 col-sm-4">
         <label>Numero <code>*</code></label>
-        <input type="number" step="0.01" class="form-control" name='numero'  v-model='o_modulo.numero' v-bind:class="[e_modulo.numero ? 'is-invalid' : '']">
+        <input type="number" min="0"  step="0.01" class="form-control" name='numero'  v-model='o_modulo.numero' v-bind:class="[e_modulo.numero ? 'is-invalid' : '']">
         <span class="text-danger" v-if="e_modulo.numero" v-text='e_modulo.numero[0]'></span>
       </div>
 

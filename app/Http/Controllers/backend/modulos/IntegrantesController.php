@@ -17,7 +17,8 @@ class IntegrantesController extends Controller
    public function lista(Request $request){
      $user   =Auth::user();
      $integrantes   =DB::select("select u.id as iduser,u.nombre,r.name as perfil,u.imagen,u.fecha_ultimo_ingreso,
-                                round(extract(epoch from age(u.fecha_ultimo_uso,u.fecha_ultimo_ingreso))/60) as tiempouso
+                                round(extract(epoch from age(u.fecha_ultimo_uso,u.fecha_ultimo_ingreso))/60) as tiempouso,
+                                0 as mensajeschat
                              from cursos_user cu
                              left join users u on(cu.user_id=u.id)
                              left join role_user ru on(ru.user_id=u.id)
@@ -26,7 +27,7 @@ class IntegrantesController extends Controller
                              order by r.name desc",
                            ['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
 
-     foreach($integrantes as $integ){
+     /*foreach($integrantes as $integ){
        $chat     =DB::select("select id,emisor,receptor,pendiente_emisor,pendiente_receptor
                                from chatprivado
                                where (emisor=:user1 and receptor=:user2) or (emisor=:user2 and receptor=:user1)",
@@ -49,10 +50,11 @@ class IntegrantesController extends Controller
        }
 
 
-     }
+     }*/
 
      $jsonresponse=[
-         'integrantes'=>$integrantes
+         'integrantes'=>$integrantes,
+         'slugrol'=>$user->slugrol
      ];
      return response()->json($jsonresponse,200);
    }

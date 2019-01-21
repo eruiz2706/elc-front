@@ -37,7 +37,7 @@ class RolesTableSeeder extends Seeder
             'special'=>'all-access'
           ]);
           $rol5=Role::create([
-            'name' =>'Administrador',
+            'name' =>'Administrador de contenido',
             'slug'=>'ad',
             'special'=>'all-access'
           ]);
@@ -87,7 +87,7 @@ class RolesTableSeeder extends Seeder
             'role_id' =>$rol4->id
           ]);
           $user5=User::create([
-            'nombre' =>'Administrador',
+            'nombre' =>'Administrador de contenido',
             'email'=>'administrador@gmail.com',
             'password'=>Hash::make('123456'),
             'uniqid'=>uniqid('',true)

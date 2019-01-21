@@ -17,7 +17,7 @@
           <table class="table  table-valign-middle" v-if="!preloadmodal">
             <thead>
               <tr>
-                <th></th>
+                <th>Dar un toque</th>
                 <th>Estudiante</th>
                 <th>Estado</th>
                 <th>Lecciones</th>
@@ -27,7 +27,7 @@
               <tr v-for="progmod in a_progmod">
                   <td>
                     <a href="#" v-on:click.prevent="dartoque(progmod.id,progmod.idmodulo)">
-                    <i class="fa fa-fw fa-hand-pointer-o"></i>
+                    <i class="fa fa-hand-lizard-o"></i>
                     </a>
                   </td>
                   <td>

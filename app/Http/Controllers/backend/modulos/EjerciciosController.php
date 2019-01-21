@@ -29,7 +29,7 @@ class EjerciciosController extends Controller
                                 e.calificacion as notamaxima,e.entregas
                                 from ejercicios e
                                 where e.curso_id = :curso_id
-                                order by e.fecha_inicio desc",
+                                order by e.fecha_inicio asc",
                               ['curso_id'=>$request->idcurso]);
 
     $jsonresponse=[
@@ -53,7 +53,7 @@ class EjerciciosController extends Controller
                               left join ejercicios_user eu on(ej.id=eu.ejercicio_id and eu.user_id = :user_id)
                               left join estados es on(es.slug=eu.estado and es.tipo='ejercicios')
                               where ej.curso_id = :curso_id
-                              order by ej.fecha_inicio desc",
+                              order by ej.fecha_inicio asc",
                           ['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
 
     $jsonresponse=[

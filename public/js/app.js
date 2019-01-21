@@ -298,6 +298,8 @@ var app = new Vue({
     });
     this.$root.$on('setReload', function () {
       this.config();
+      this.notificaciones();
+      this.messages();
     });
     this.$root.$on('notifi_cli', function (data) {
       socket.emit('notifi_cli', {
@@ -313,6 +315,7 @@ var app = new Vue({
   created: function created() {
     this.config();
     this.notificaciones();
+    this.messages();
   },
   data: {
     menu_content: '',
@@ -325,7 +328,9 @@ var app = new Vue({
     preload_notifi: false,
     conexion_user: [],
     chk_manual: false,
-    loader_manual: false
+    loader_manual: false,
+    a_messages: [],
+    preload_messages: false
   },
   computed: {},
   methods: {
@@ -348,6 +353,8 @@ var app = new Vue({
     },
     setMenuContent: function setMenuContent(menuconten) {
       this.menu_content = menuconten;
+      this.notificaciones();
+      this.messages();
     },
     config: function config() {
       var _this = this;
@@ -394,7 +401,6 @@ var app = new Vue({
           nav_notifi.innerHTML = '';
         }
       }).catch(function (error) {
-        _this3.loader_guardar = false;
         if (error.response.data.errors) {
           _this3.e_tarea = error.response.data.errors;
         }
@@ -426,6 +432,48 @@ var app = new Vue({
         }
       });
     },
+    messages: function messages() {
+      var _this5 = this;
+
+      var url = base_url + '/mensajes/conteo';
+      axios.post(url, {}).then(function (response) {
+        var conteo = response.data.conteo;
+        var nav_messages = document.getElementById('nav_messages');
+        if (conteo > 0) {
+          nav_messages.innerHTML = conteo;
+        } else {
+          nav_messages.innerHTML = '';
+        }
+      }).catch(function (error) {
+        if (error.response.data.errors) {
+          _this5.e_tarea = error.response.data.errors;
+        }
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "2500"
+          });
+        }
+      });
+    },
+    listamessages: function listamessages() {
+      var _this6 = this;
+
+      var url = base_url + '/mensajes/lista';
+      this.preload_messages = true;
+      axios.post(url, {}).then(function (response) {
+        _this6.a_messages = response.data.mensajes;
+        _this6.preload_messages = false;
+        document.getElementById('nav_messages').innerHTML = '';
+      }).catch(function (error) {
+        _this6.preload_messages = false;
+        if (error.response.data.errors) {}
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "2500"
+          });
+        }
+      });
+    },
     manualuso: function manualuso() {
       var url = base_url + '/principal/abrirmanual';
       axios.post(url, { chk_manual: this.chk_manual }).then(function (response) {
@@ -435,16 +483,16 @@ var app = new Vue({
       }).catch(function (error) {});
     },
     updateManual: function updateManual() {
-      var _this5 = this;
+      var _this7 = this;
 
       $('#modal_manual').modal('hide');
       var url = base_url + '/principal/cerrarmanual';
       this.loader_manual = true;
       axios.post(url, { chk_manual: this.chk_manual }).then(function (response) {
-        _this5.loader_manual = false;
+        _this7.loader_manual = false;
       }).catch(function (error) {
         if (error.response.data.errors) {
-          _this5.e_tarea = error.response.data.errors;
+          _this7.e_tarea = error.response.data.errors;
         }
         if (error.response.data.error) {
           toastr.error(error.response.data.error, '', {
@@ -464,9 +512,9 @@ socket.on('notifi_serve', function (data) {
     var notifi_tk = data['notifi_tk'];
     for (var i = 0; i < notifi_tk.length; i++) {
       if (notifi_tk[i] == ident_tk) {
-        toastr.info('Tienes notificaciones nuevas', '', {
-          "timeOut": "3500"
-        });
+        /*toastr.info('Tienes notificaciones nuevas','',{
+            "timeOut": "3500"
+        });*/
         app.notificaciones();
       }
     }
@@ -3917,8 +3965,7 @@ var render = function() {
                                       },
                                       [
                                         _c("i", {
-                                          staticClass:
-                                            "fa fa-fw fa-hand-pointer-o"
+                                          staticClass: "fa fa-hand-lizard-o"
                                         })
                                       ]
                                     )
@@ -4257,7 +4304,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th"),
+        _c("th", [_vm._v("Dar un toque")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estudiante")]),
         _vm._v(" "),
@@ -4425,103 +4472,120 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component integrantes mounted.');
-        var vm = this;
-        this.$root.$on('private_message_serve', function (data) {
-            //console.log(data.chat_id+"=="+vm.idchat+'lleog');
-            if (data.chat_id == vm.idchat) {
-                vm.leidochat(data);
-            } else {
-                vm.listado();
-            }
-        });
+  mounted: function mounted() {
+    console.log('Component integrantes mounted.');
+    var vm = this;
+    this.$root.$on('private_message_serve', function (data) {
+      //console.log(data.chat_id+"=="+vm.idchat+'lleog');
+      if (data.chat_id == vm.idchat) {
+        vm.leidochat(data);
+      } else {
+        this.$root.$emit('private_message_cli', response.data.chat_enviado);
+      }
+    });
+
+    //se activa una vez se cierre el modal
+    $(this.$refs.ref_modal_chat).on("hidden.bs.modal", this.resetUserchat);
+  },
+  created: function created() {
+    this.base_url = base_url;
+    this.idcurso = document.getElementById('idcurso').value;
+    this.listado();
+  },
+  data: function data() {
+    return {
+      idcurso: 0,
+      preload: true,
+      a_integrantes: [],
+      preloadmodal: false,
+      chat_mensajes: [],
+      idchat: 0,
+      id_userchat: 0,
+      loader_responder: false,
+      mensaje_chat: '',
+      rol_user: ''
+    };
+  },
+  methods: {
+    resetUserchat: function resetUserchat() {
+      this.chat_mensajes = [];
+      this.idchat = 0;
+      this.id_userchat = 0;
     },
-    created: function created() {
-        this.base_url = base_url;
-        this.idcurso = document.getElementById('idcurso').value;
-        this.listado();
-    },
-    data: function data() {
-        return {
-            idcurso: 0,
-            preload: true,
-            a_integrantes: [],
-            preloadmodal: false,
-            chat_mensajes: [],
-            idchat: 0,
-            id_userchat: 0,
-            loader_responder: false,
-            mensaje_chat: ''
-        };
-    },
-    methods: {
-        listado: function listado() {
-            var _this = this;
+    listado: function listado() {
+      var _this = this;
 
-            var url = base_url + '/integrantes/lista';
-            this.preload = true;
-            axios.post(url, { idcurso: this.idcurso }).then(function (response) {
-                _this.preload = false;
-                _this.a_integrantes = response.data.integrantes;
-                console.log(_this.a_integrantes);
-            }).catch(function (error) {
-                _this.preload = false;
-                if (error.response.data.errors) {}
-                if (error.response.data.error) {
-                    toastr.error(error.response.data.error, '', {
-                        "timeOut": "3500"
-                    });
-                }
-            });
-        },
-        chatuser: function chatuser(iduser) {
-            var _this2 = this;
-
-            $('#modal_chat').modal('show');
-            var url = this.base_url + '/chatprivado/open';
-            this.preloadmodal = true;
-            this.chat_mensajes = [];
-            this.id_userchat = iduser;
-            axios.post(url, { iduser: iduser }).then(function (response) {
-                _this2.preloadmodal = false;
-                _this2.chat_mensajes = response.data.chat_mensajes;
-                _this2.idchat = response.data.idchat;
-                _this2.listado();
-            }).catch(function (error) {
-                _this2.preloadmodal = false;
-                if (error.response.data.errors) {}
-                if (error.response.data.error) {
-                    toastr.error(error.response.data.error, '', {
-                        "timeOut": "3500"
-                    });
-                }
-            });
-        },
-        responderchat: function responderchat() {
-            var _this3 = this;
-
-            var url = this.base_url + '/chatprivado/responder';
-            this.loader_responder = true;
-            axios.post(url, { idchat: this.idchat, mensaje_chat: this.mensaje_chat }).then(function (response) {
-                _this3.chat_mensajes.push(response.data.chat_enviado);
-                _this3.loader_responder = false;
-                _this3.mensaje_chat = '';
-                _this3.$root.$emit('private_message_cli', response.data.chat_enviado);
-            }).catch(function (error) {
-                _this3.loader_responder = false;
-            });
-        },
-        leidochat: function leidochat(data) {
-            var _this4 = this;
-
-            var url = this.base_url + '/chatprivado/leido';
-            axios.post(url, { idchat: data.chat_id, remitente: data.remitente }).then(function (response) {
-                _this4.chat_mensajes.push(data);
-                _this4.listado();
-            }).catch(function (error) {});
+      var url = base_url + '/integrantes/lista';
+      this.preload = true;
+      axios.post(url, { idcurso: this.idcurso }).then(function (response) {
+        _this.preload = false;
+        _this.a_integrantes = response.data.integrantes;
+        _this.rol_user = response.data.slugrol;
+      }).catch(function (error) {
+        _this.preload = false;
+        if (error.response.data.errors) {}
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "3500"
+          });
         }
+      });
+    },
+    chatuser: function chatuser(iduser) {
+      var _this2 = this;
+
+      $('#modal_chat').modal('show');
+      var url = this.base_url + '/chatprivado/open';
+      this.preloadmodal = true;
+      this.chat_mensajes = [];
+      this.id_userchat = iduser;
+      axios.post(url, { iduser: iduser }).then(function (response) {
+        _this2.preloadmodal = false;
+        _this2.chat_mensajes = response.data.chat_mensajes;
+        _this2.$nextTick(function () {
+          _this2.$refs.content_chat.scrollTop = _this2.$refs.content_chat.scrollHeight;
+        });
+        _this2.idchat = response.data.idchat;
+      }).catch(function (error) {
+        _this2.preloadmodal = false;
+        if (error.response.data.errors) {}
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "3500"
+          });
+        }
+      });
+    },
+    responderchat: function responderchat() {
+      var _this3 = this;
+
+      var url = this.base_url + '/chatprivado/responder';
+      this.loader_responder = true;
+      axios.post(url, { idchat: this.idchat, mensaje_chat: this.mensaje_chat, idcurso: this.idcurso }).then(function (response) {
+        _this3.chat_mensajes.push(response.data.chat_enviado);
+        _this3.$nextTick(function () {
+          _this3.$refs.content_chat.scrollTop = _this3.$refs.content_chat.scrollHeight;
+        });
+
+        _this3.loader_responder = false;
+        _this3.mensaje_chat = '';
+        _this3.$root.$emit('private_message_cli', response.data.chat_enviado);
+      }).catch(function (error) {
+        _this3.loader_responder = false;
+      });
+    },
+    leidochat: function leidochat(data) {
+      var _this4 = this;
+
+      var url = this.base_url + '/chatprivado/leido';
+      axios.post(url, { idchat: data.chat_id, remitente: data.remitente }).then(function (response) {
+        _this4.chat_mensajes.push(data);
+        _this4.$nextTick(function () {
+          _this4.$refs.content_chat.scrollTop = _this4.$refs.content_chat.scrollHeight;
+        });
+      }).catch(function (error) {});
     }
+  }
 });
 
 /***/ }),
@@ -4533,154 +4597,167 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "modal fade", attrs: { id: "modal_chat" } }, [
-      _c(
-        "div",
-        { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
-        [
-          _c("div", { staticClass: "modal-content" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "modal-body",
-                staticStyle: { height: "300px", "overflow-y": "auto" }
-              },
-              [
-                _vm.preloadmodal
-                  ? _c("div", { staticClass: "row" }, [_vm._m(1)])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "direct-chat-messages direct-chat-info",
-                    staticStyle: { overflow: "initial" }
-                  },
-                  _vm._l(_vm.chat_mensajes, function(chat) {
-                    return _c(
-                      "div",
+    _c(
+      "div",
+      {
+        ref: "ref_modal_chat",
+        staticClass: "modal fade",
+        attrs: { id: "modal_chat" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  ref: "content_chat",
+                  staticClass: "modal-body",
+                  staticStyle: { height: "300px", "overflow-y": "auto" }
+                },
+                [
+                  _vm.preloadmodal
+                    ? _c("div", { staticClass: "row" }, [_vm._m(1)])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "direct-chat-messages direct-chat-info",
+                      staticStyle: { overflow: "initial" }
+                    },
+                    _vm._l(_vm.chat_mensajes, function(chat) {
+                      return _c(
+                        "div",
+                        {
+                          staticClass: "direct-chat-msg",
+                          class:
+                            _vm.id_userchat == chat.remitente ? "" : "right"
+                        },
+                        [
+                          _vm.id_userchat == chat.remitente
+                            ? _c(
+                                "div",
+                                { staticClass: "direct-chat-info clearfix" },
+                                [
+                                  _c("span", {
+                                    staticClass: "direct-chat-name float-left",
+                                    domProps: {
+                                      textContent: _vm._s(chat.nomremitente)
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass:
+                                      "direct-chat-timestamp float-right",
+                                    domProps: {
+                                      textContent: _vm._s(chat.fecha_creacion)
+                                    }
+                                  })
+                                ]
+                              )
+                            : _c(
+                                "div",
+                                { staticClass: "direct-chat-info clearfix" },
+                                [
+                                  _c("span", {
+                                    staticClass: "direct-chat-name float-right",
+                                    domProps: {
+                                      textContent: _vm._s(chat.nomremitente)
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass:
+                                      "direct-chat-timestamp float-left",
+                                    domProps: {
+                                      textContent: _vm._s(chat.fecha_creacion)
+                                    }
+                                  })
+                                ]
+                              ),
+                          _vm._v(" "),
+                          _c("img", {
+                            staticClass: "direct-chat-img",
+                            attrs: {
+                              src: _vm.base_url + "/" + chat.imgremitente,
+                              alt: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", {
+                            staticClass: "direct-chat-text",
+                            domProps: { innerHTML: _vm._s(chat.mensaje) }
+                          })
+                        ]
+                      )
+                    })
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c("div", { staticClass: "input-group col-md-12" }, [
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "direct-chat-msg",
-                        class: _vm.id_userchat == chat.remitente ? "" : "right"
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.mensaje_chat,
+                        expression: "mensaje_chat"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.mensaje_chat },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.mensaje_chat = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: {
+                          type: "button",
+                          disabled: _vm.loader_responder
+                        },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.responderchat()
+                          }
+                        }
                       },
                       [
-                        _vm.id_userchat == chat.remitente
-                          ? _c(
-                              "div",
-                              { staticClass: "direct-chat-info clearfix" },
-                              [
-                                _c("span", {
-                                  staticClass: "direct-chat-name float-left",
-                                  domProps: {
-                                    textContent: _vm._s(chat.nomremitente)
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", {
-                                  staticClass:
-                                    "direct-chat-timestamp float-right",
-                                  domProps: {
-                                    textContent: _vm._s(chat.fecha_creacion)
-                                  }
-                                })
-                              ]
-                            )
-                          : _c(
-                              "div",
-                              { staticClass: "direct-chat-info clearfix" },
-                              [
-                                _c("span", {
-                                  staticClass: "direct-chat-name float-right",
-                                  domProps: {
-                                    textContent: _vm._s(chat.nomremitente)
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", {
-                                  staticClass:
-                                    "direct-chat-timestamp float-left",
-                                  domProps: {
-                                    textContent: _vm._s(chat.fecha_creacion)
-                                  }
-                                })
-                              ]
-                            ),
-                        _vm._v(" "),
-                        _c("img", {
-                          staticClass: "direct-chat-img",
-                          attrs: {
-                            src: _vm.base_url + "/" + chat.imgremitente,
-                            alt: ""
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", {
-                          staticClass: "direct-chat-text",
-                          domProps: { innerHTML: _vm._s(chat.mensaje) }
-                        })
+                        _vm._v("\n                Responder\n                "),
+                        _vm.loader_responder
+                          ? _c("i", {
+                              staticClass: "fa fa-spinner fa-spin fa-loader",
+                              staticStyle: { "font-size": "20px" }
+                            })
+                          : _vm._e()
                       ]
                     )
-                  })
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [
-              _c("div", { staticClass: "input-group col-md-12" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.mensaje_chat,
-                      expression: "mensaje_chat"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.mensaje_chat },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.mensaje_chat = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button", disabled: _vm.loader_responder },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          _vm.responderchat()
-                        }
-                      }
-                    },
-                    [
-                      _vm._v("\n                Responder\n                "),
-                      _vm.loader_responder
-                        ? _c("i", {
-                            staticClass: "fa fa-spinner fa-spin fa-loader",
-                            staticStyle: { "font-size": "20px" }
-                          })
-                        : _vm._e()
-                    ]
-                  )
+                  ])
                 ])
               ])
             ])
-          ])
-        ]
-      )
-    ]),
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
     _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(2)]) : _vm._e(),
     _vm._v(" "),
@@ -4692,53 +4769,55 @@ var render = function() {
           !_vm.preload
             ? _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticClass: "card-tools" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { href: "#", "aria-expanded": "true" }
-                      },
-                      [
-                        _c("span", { staticClass: "badge navbar-badge" }, [
-                          _c(
-                            "i",
-                            {
-                              staticClass: "fa fa-comments-o",
-                              staticStyle: { "font-size": "24px" },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.chatuser(integrante.iduser)
-                                }
-                              }
-                            },
-                            [
+                  _vm.rol_user == "es" || _vm.rol_user == "pr"
+                    ? _c("div", { staticClass: "card-tools" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { href: "#", "aria-expanded": "true" }
+                          },
+                          [
+                            _c("span", { staticClass: "badge navbar-badge" }, [
                               _c(
-                                "span",
+                                "i",
                                 {
-                                  staticClass:
-                                    "badge badge-danger navbar-badge",
-                                  staticStyle: { top: "-4px" }
+                                  staticClass: "fa fa-comments-o",
+                                  staticStyle: { "font-size": "24px" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.chatuser(integrante.iduser)
+                                    }
+                                  }
                                 },
                                 [
-                                  integrante.mensajeschat > 0
-                                    ? _c("span", {
-                                        domProps: {
-                                          textContent: _vm._s(
-                                            integrante.mensajeschat
-                                          )
-                                        }
-                                      })
-                                    : _vm._e()
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "badge badge-danger navbar-badge",
+                                      staticStyle: { top: "-4px" }
+                                    },
+                                    [
+                                      integrante.mensajeschat > 0
+                                        ? _c("span", {
+                                            domProps: {
+                                              textContent: _vm._s(
+                                                integrante.mensajeschat
+                                              )
+                                            }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  )
                                 ]
                               )
-                            ]
-                          )
-                        ])
-                      ]
-                    )
-                  ]),
+                            ])
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("div", { staticClass: "post" }, [
                     _c("div", { staticClass: "user-block" }, [
@@ -5591,7 +5670,11 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", {
                       staticClass: "course_price ml-auto",
-                      domProps: { textContent: _vm._s(curso.valor) }
+                      domProps: {
+                        textContent: _vm._s(
+                          curso.valor > 0 ? "$" + curso.valor : "Gratis"
+                        )
+                      }
                     })
                   ]
                 )
@@ -5841,6 +5924,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     redirectVolver: function redirectVolver() {
       document.getElementById('id').value = '';
       this.$root.$emit('setMenu', 'ofertados');
+    },
+    iracurso: function iracurso() {
+      var url = base_url + '/cursos/gestion/' + this.id_curso;
+      window.location.href = url;
     }
   }
 });
@@ -5947,7 +6034,13 @@ var render = function() {
                         _vm._v(" "),
                         _c("br"),
                         _c("span", {
-                          domProps: { textContent: _vm._s(_vm.o_curso.valor) }
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.o_curso.valor > 0
+                                ? "$" + _vm.o_curso.valor
+                                : "Gratis"
+                            )
+                          }
                         })
                       ])
                     ])
@@ -6117,7 +6210,27 @@ var render = function() {
                               )
                             : _vm._e()
                         ])
-                      : _c("th", { attrs: { colspan: "2" } }, [_vm._m(1)])
+                      : _c("th", { attrs: { colspan: "2" } }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-block btn-outline-primary btn-sm",
+                              staticStyle: { "margin-right": "5px" },
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.iracurso()
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fa fa-thumbs-o-up" }),
+                              _vm._v(" Suscrito\n                  ")
+                            ]
+                          )
+                        ])
                   ])
                 ])
               ])
@@ -6128,7 +6241,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card" }, [
-      _vm._m(2),
+      _vm._m(1),
       _vm._v(" "),
       _c("div", {
         staticClass: "card-body",
@@ -6151,23 +6264,6 @@ var staticRenderFns = [
       [
         _c("i", { staticClass: "fa fa-credit-card" }),
         _vm._v(" Comprar\n                     ")
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-block btn-outline-primary btn-sm",
-        staticStyle: { "margin-right": "5px" },
-        attrs: { type: "button", disabled: "" }
-      },
-      [
-        _c("i", { staticClass: "fa fa-thumbs-o-up" }),
-        _vm._v(" Suscrito\n                  ")
       ]
     )
   },
@@ -6939,7 +7035,7 @@ var render = function() {
               ],
               staticClass: "form-control",
               class: [_vm.e_curso.fecha_limite ? "is-invalid" : ""],
-              attrs: { type: "number", name: "fecha_limite" },
+              attrs: { type: "number", name: "fecha_limite", min: "0" },
               domProps: { value: _vm.o_curso.valor },
               on: {
                 input: function($event) {
@@ -7084,62 +7180,6 @@ var render = function() {
                   }
                 }),
                 _vm._v("Privado\n            ")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Inscripcion")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("label", { staticClass: "form-check-label" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.o_curso.inscripcion,
-                      expression: "o_curso.inscripcion"
-                    }
-                  ],
-                  staticClass: "form-check-input",
-                  attrs: { type: "radio", name: "permitradio", value: "true" },
-                  domProps: {
-                    checked: _vm._q(_vm.o_curso.inscripcion, "true")
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.$set(_vm.o_curso, "inscripcion", "true")
-                    }
-                  }
-                }),
-                _vm._v("Estudiante\n            ")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check" }, [
-              _c("label", { staticClass: "form-check-label" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.o_curso.inscripcion,
-                      expression: "o_curso.inscripcion"
-                    }
-                  ],
-                  staticClass: "form-check-input",
-                  attrs: { type: "radio", name: "permitradio", value: "false" },
-                  domProps: {
-                    checked: _vm._q(_vm.o_curso.inscripcion, "false")
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.$set(_vm.o_curso, "inscripcion", "false")
-                    }
-                  }
-                }),
-                _vm._v("Administrador\n            ")
               ])
             ])
           ]),
@@ -7597,7 +7637,7 @@ var render = function() {
                   ],
                   staticClass: "form-control",
                   class: [_vm.e_curso.fecha_limite ? "is-invalid" : ""],
-                  attrs: { type: "number", name: "fecha_limite" },
+                  attrs: { type: "number", min: "0", name: "fecha_limite" },
                   domProps: { value: _vm.o_curso.valor },
                   on: {
                     input: function($event) {
@@ -7685,71 +7725,6 @@ var render = function() {
                       }
                     })
                   : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Acceso al curso")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-check" }, [
-                  _c("label", { staticClass: "form-check-label" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.o_curso.visibilidad,
-                          expression: "o_curso.visibilidad"
-                        }
-                      ],
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        checked: "",
-                        name: "accesradio",
-                        value: "true"
-                      },
-                      domProps: {
-                        checked: _vm._q(_vm.o_curso.visibilidad, "true")
-                      },
-                      on: {
-                        change: function($event) {
-                          _vm.$set(_vm.o_curso, "visibilidad", "true")
-                        }
-                      }
-                    }),
-                    _vm._v("Publico\n            ")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-check" }, [
-                  _c("label", { staticClass: "form-check-label" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.o_curso.visibilidad,
-                          expression: "o_curso.visibilidad"
-                        }
-                      ],
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "accesradio",
-                        value: "false"
-                      },
-                      domProps: {
-                        checked: _vm._q(_vm.o_curso.visibilidad, "false")
-                      },
-                      on: {
-                        change: function($event) {
-                          _vm.$set(_vm.o_curso, "visibilidad", "false")
-                        }
-                      }
-                    }),
-                    _vm._v("Privado\n            ")
-                  ])
-                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
@@ -8926,7 +8901,7 @@ var render = function() {
               ],
               staticClass: "form-control",
               class: [_vm.e_modulo.numero ? "is-invalid" : ""],
-              attrs: { type: "number", step: "0.01", name: "numero" },
+              attrs: { type: "number", min: "0", step: "0.01", name: "numero" },
               domProps: { value: _vm.o_modulo.numero },
               on: {
                 input: function($event) {
@@ -9276,7 +9251,12 @@ var render = function() {
                   ],
                   staticClass: "form-control",
                   class: [_vm.e_modulo.numero ? "is-invalid" : ""],
-                  attrs: { type: "number", step: "0.01", name: "numero" },
+                  attrs: {
+                    type: "number",
+                    min: "0",
+                    step: "0.01",
+                    name: "numero"
+                  },
                   domProps: { value: _vm.o_modulo.numero },
                   on: {
                     input: function($event) {
@@ -10124,7 +10104,12 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 class: [_vm.e_leccion.numero ? "is-invalid" : ""],
-                attrs: { type: "number", step: "0.01", name: "numero" },
+                attrs: {
+                  type: "number",
+                  min: "0",
+                  step: "0.01",
+                  name: "numero"
+                },
                 domProps: { value: _vm.o_leccion.numero },
                 on: {
                   input: function($event) {
@@ -10655,7 +10640,12 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 class: [_vm.e_leccion.numero ? "is-invalid" : ""],
-                attrs: { type: "number", step: "0.01", name: "numero" },
+                attrs: {
+                  type: "number",
+                  min: "0",
+                  step: "0.01",
+                  name: "numero"
+                },
                 domProps: { value: _vm.o_leccion.numero },
                 on: {
                   input: function($event) {
@@ -13294,7 +13284,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-                    _c("b", [_vm._v("Nota sobre :")]),
+                    _c("b", [_vm._v("Nota maxima :")]),
                     _vm._v(" "),
                     _c("span", {
                       domProps: { textContent: _vm._s(ejercicio.notamaxima) }
@@ -16979,7 +16969,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "number", name: "puntaje" },
+                      attrs: { type: "number", min: "0", name: "puntaje" },
                       domProps: { value: _vm.o_resp_abierta.puntaje },
                       on: {
                         input: function($event) {
@@ -17103,7 +17093,11 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { type: "number", name: "puntaje" },
+                                attrs: {
+                                  type: "number",
+                                  min: "0",
+                                  name: "puntaje"
+                                },
                                 domProps: { value: fila.puntaje },
                                 on: {
                                   input: function($event) {
@@ -17277,7 +17271,11 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { type: "number", name: "puntaje" },
+                                attrs: {
+                                  type: "number",
+                                  min: "0",
+                                  name: "puntaje"
+                                },
                                 domProps: { value: fila.puntaje },
                                 on: {
                                   input: function($event) {
@@ -17430,7 +17428,11 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { type: "number", name: "puntaje" },
+                                attrs: {
+                                  type: "number",
+                                  min: "0",
+                                  name: "puntaje"
+                                },
                                 domProps: { value: fila.puntaje },
                                 on: {
                                   input: function($event) {
@@ -17594,7 +17596,11 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { type: "number", name: "puntaje" },
+                                attrs: {
+                                  type: "number",
+                                  min: "0",
+                                  name: "puntaje"
+                                },
                                 domProps: { value: fila.puntaje },
                                 on: {
                                   input: function($event) {
@@ -18525,7 +18531,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "number", name: "puntaje" },
+                      attrs: { type: "number", min: "0", name: "puntaje" },
                       domProps: { value: _vm.o_resp_abierta.puntaje },
                       on: {
                         input: function($event) {
@@ -18649,7 +18655,11 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { type: "number", name: "puntaje" },
+                                attrs: {
+                                  type: "number",
+                                  min: "0",
+                                  name: "puntaje"
+                                },
                                 domProps: { value: fila.puntaje },
                                 on: {
                                   input: function($event) {
@@ -18823,7 +18833,11 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { type: "number", name: "puntaje" },
+                                attrs: {
+                                  type: "number",
+                                  min: "0",
+                                  name: "puntaje"
+                                },
                                 domProps: { value: fila.puntaje },
                                 on: {
                                   input: function($event) {
@@ -18976,7 +18990,11 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { type: "number", name: "puntaje" },
+                                attrs: {
+                                  type: "number",
+                                  min: "0",
+                                  name: "puntaje"
+                                },
                                 domProps: { value: fila.puntaje },
                                 on: {
                                   input: function($event) {
@@ -19140,7 +19158,11 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { type: "number", name: "puntaje" },
+                                attrs: {
+                                  type: "number",
+                                  min: "0",
+                                  name: "puntaje"
+                                },
                                 domProps: { value: fila.puntaje },
                                 on: {
                                   input: function($event) {
@@ -21015,6 +21037,7 @@ var artyom = new Artyom();
     return {
       disabled_play: false,
       disabled_escuchar: false,
+      disabled_evaluar: false,
       texto_escucha: ''
     };
   },
@@ -21089,6 +21112,46 @@ var artyom = new Artyom();
           console.log("Texto leido satisfactoriamente");
         }
       });
+    },
+    evaluarAudio: function evaluarAudio() {
+      var vm = this;
+
+      artyom.addCommands([{
+        description: "",
+        indexes: [""],
+        action: function action(i) {}
+      }]);
+      artyom.redirectRecognizedTextOutput(function (recognized, isFinal) {
+        if (!isFinal) {
+          //var texto_voz_audio=document.getElementById("texto_voz_audio");
+          //texto_voz_audio.value ='';
+          console.log("Dictation started by the user");
+        } else {
+          vm.disabled_evaluar = false;
+          if (vm.texto_escucha.toLowerCase() == recognized) {
+            document.getElementById('resultado_pronun').innerHTML = recognized + " <i class='fa fa-check'></i>";
+            document.getElementById("resultado_pronun").style.color = '#4CAF50';
+          } else {
+            document.getElementById('resultado_pronun').innerHTML = recognized + " <i class='fa  fa-close'></i>";
+            document.getElementById("resultado_pronun").style.color = '#ff0000';
+          }
+        }
+      });
+      artyom.initialize({
+        lang: "en-GB", // Más lenguajes son soportados, lee la documentación
+        continuous: false, // Reconoce 1 solo comando y basta de escuchar
+        listen: true, // Iniciar !
+        debug: true, // Muestra un informe en la consola
+        speed: 1 // Habla normalmente
+      }).then(function () {
+        console.log("Artyom succesfully initialized");
+        vm.disabled_evaluar = true;
+        document.getElementById("resultado_pronun").value = '';
+      }).catch(function (err) {
+        vm.disabled_evaluar = false;
+        console.log("Artyom couldn't be initialized, please check the console for errors");
+        console.log(err);
+      });
     }
   }
 });
@@ -21161,11 +21224,11 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-outline-primary btn-sm",
-                attrs: { type: "button", disabled: _vm.disabled_play },
+                attrs: { type: "button", disabled: _vm.disabled_evaluar },
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    _vm.playAudio()
+                    _vm.evaluarAudio()
                   }
                 }
               },
@@ -21177,10 +21240,9 @@ var render = function() {
                 })
               ]
             ),
-            _vm._v("   \n        ")
-          ]),
-          _vm._v(" "),
-          _c("span", { attrs: { id: "resultado_pronun" } })
+            _vm._v("   \n          "),
+            _c("span", { attrs: { id: "resultado_pronun" } })
+          ])
         ])
       ])
     ]),
@@ -21204,11 +21266,8 @@ var render = function() {
                 }
               },
               [
-                _vm._v("\n            Escuchar "),
-                _c("i", {
-                  staticClass: "fa fa-play",
-                  staticStyle: { "font-size": "20px" }
-                })
+                _vm._v("\n            Hablar "),
+                _c("i", { staticClass: "fa fa-play" })
               ]
             ),
             _vm._v("   \n          "),
@@ -21262,7 +21321,7 @@ var staticRenderFns = [
       _c("p", [
         _c("i", { staticClass: "fa fa-fw fa-info" }),
         _vm._v(
-          "\n          Da click en el boton escuchar y verifica tu pronunciacion, una vez termines de hablar da click en el boton detener para\n          ver tus resultados\n      \t"
+          "\n          Da click en el boton hablar y verifica tu pronunciacion, una vez termines de hablar da click en el boton detener para\n          ver tus resultados\n      \t"
         )
       ])
     ])

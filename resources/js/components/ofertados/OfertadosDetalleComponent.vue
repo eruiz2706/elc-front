@@ -38,7 +38,7 @@
                   </p>
                   <p>
                     <strong>VALOR</strong>
-                    <br><span v-text='o_curso.valor'></span>
+                    <br><span v-text="o_curso.valor>0 ? '$'+o_curso.valor : 'Gratis'"></span>
                   </p>
                 </td>
               </tr>
@@ -69,7 +69,7 @@
                   </form>
                 </th>
                 <th colspan='2' v-else>
-                  <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" disabled>
+                  <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" v-on:click.prevent="iracurso();">
                     <i class="fa fa-thumbs-o-up"></i> Suscrito
                   </button>
                 </th>
@@ -168,6 +168,10 @@
           redirectVolver:function(){
             document.getElementById('id').value='';
             this.$root.$emit('setMenu','ofertados');
+          },
+          iracurso:function(){
+            var url =base_url+'/cursos/gestion/'+this.id_curso;
+            window.location.href =url;
           }
         }
     }

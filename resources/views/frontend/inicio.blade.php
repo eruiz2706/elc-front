@@ -143,7 +143,13 @@
                 <i class="fa fa-bank" aria-hidden="true"></i>
                 <span>{{$curso->nomestado}}</span>
               </div>
-              <div class="course_price ml-auto">${{$curso->valor}}</div>
+              <div class="course_price ml-auto">
+                @if($curso->valor>0)
+                  ${{$curso->valor}}
+                @else
+                  Gratis
+                @endif
+              </div>
             </div>
           </div>
         </div>

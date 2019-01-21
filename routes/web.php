@@ -165,4 +165,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
 
   Route::get('herramientas','backend\modulos\HerramientasController@index');
 
+  Route::post('mensajes/conteo', 'backend\modulos\MensagesController@conteo');
+  Route::post('mensajes/lista', 'backend\modulos\MensagesController@lista');
+
 });

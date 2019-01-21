@@ -66,6 +66,8 @@ const app = new Vue({
       });
       this.$root.$on('setReload', function () {
         this.config();
+        this.notificaciones();
+        this.messages();
       });
       this.$root.$on('notifi_cli',function(data){
         socket.emit('notifi_cli',{
@@ -82,6 +84,7 @@ const app = new Vue({
     created : function(){
       this.config();
       this.notificaciones();
+      this.messages();
     },
     data : {
       menu_content:'',
@@ -94,7 +97,9 @@ const app = new Vue({
       preload_notifi:false,
       conexion_user:[],
       chk_manual:false,
-      loader_manual:false
+      loader_manual:false,
+      a_messages:[],
+      preload_messages:false,
     },
     computed : {
 
@@ -121,6 +126,8 @@ const app = new Vue({
       },
       setMenuContent:function(menuconten){
         this.menu_content=menuconten;
+        this.notificaciones();
+        this.messages();
       },
       config:function(){
         var url =base_url+'/principal/config';
@@ -161,7 +168,6 @@ const app = new Vue({
             nav_notifi.innerHTML ='';
           }
        }).catch(error =>{
-            this.loader_guardar=false;
             if(error.response.data.errors){
               this.e_tarea=error.response.data.errors;
             }
@@ -183,6 +189,46 @@ const app = new Vue({
             this.preload_notifi=false;
             if(error.response.data.errors){
               this.e_tarea=error.response.data.errors;
+            }
+            if(error.response.data.error){
+              toastr.error(error.response.data.error,'',{
+                  "timeOut": "2500"
+              });
+            }
+        });
+      },
+      messages:function(){
+        var url =base_url+'/mensajes/conteo';
+        axios.post(url,{}).then(response =>{
+          var conteo=response.data.conteo;
+          var nav_messages = document.getElementById('nav_messages');
+          if(conteo>0){
+             nav_messages.innerHTML =conteo;
+          }else{
+            nav_messages.innerHTML ='';
+          }
+       }).catch(error =>{
+            if(error.response.data.errors){
+              this.e_tarea=error.response.data.errors;
+            }
+            if(error.response.data.error){
+              toastr.error(error.response.data.error,'',{
+                  "timeOut": "2500"
+              });
+            }
+        });
+      },
+      listamessages:function(){
+        var url =base_url+'/mensajes/lista';
+        this.preload_messages=true;
+        axios.post(url,{}).then(response =>{
+          this.a_messages=response.data.mensajes;
+          this.preload_messages=false;
+          document.getElementById('nav_messages').innerHTML='';
+        }).catch(error =>{
+            this.preload_messages=false;
+            if(error.response.data.errors){
+
             }
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{
@@ -230,9 +276,9 @@ socket.on('notifi_serve', function(data) {
     var notifi_tk=data['notifi_tk'];
     for(var i = 0; i < notifi_tk.length;i++){
       if(notifi_tk[i]==ident_tk){
-        toastr.info('Tienes notificaciones nuevas','',{
+        /*toastr.info('Tienes notificaciones nuevas','',{
             "timeOut": "3500"
-        });
+        });*/
         app.notificaciones();
       }
     }

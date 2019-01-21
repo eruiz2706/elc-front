@@ -43,7 +43,7 @@
 
         <div class="form-group">
           <label>Valor</label>
-          <input type="number" class="form-control" name='fecha_limite' v-model='o_curso.valor'  v-bind:class="[e_curso.fecha_limite ? 'is-invalid' : '']">
+          <input type="number" class="form-control" name='fecha_limite' min="0" v-model='o_curso.valor'  v-bind:class="[e_curso.fecha_limite ? 'is-invalid' : '']">
           <span class="text-danger" v-if="e_curso.valor" v-text='e_curso.valor[0]'></span>
         </div>
 
@@ -73,7 +73,7 @@
           </div>
         </div>
 
-        <div class='form-group'>
+        <!--<div class='form-group'>
           <label>Inscripcion</label>
           <div class="form-check">
             <label class="form-check-label">
@@ -85,7 +85,7 @@
               <input type="radio" class="form-check-input" name="permitradio" value='false' v-model='o_curso.inscripcion'>Administrador
             </label>
           </div>
-        </div>
+        </div>-->
 
         <button type="button" class="btn btn-outline-primary btn-sm float-left" :disabled="loader_guardar" v-on:click.prevent='guardar()'>
           Crear curso

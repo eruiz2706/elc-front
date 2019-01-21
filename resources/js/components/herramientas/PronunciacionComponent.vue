@@ -23,8 +23,8 @@
           <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='evaluarAudio()' :disabled="disabled_evaluar">
             Hablar <i class="fa fa-play" style="font-size:20px" ></i>
           </button>&nbsp;&nbsp;&nbsp;
+          <span id="resultado_pronun"></span>
         </label>
-        <span id="resultado_pronun"></span>
       </div>
     </div>
   </div>
@@ -34,14 +34,14 @@
       <div class="callout callout-info">
       	<p>
       	  <i class="fa fa-fw fa-info"></i>
-          Da click en el boton escuchar y verifica tu pronunciacion, una vez termines de hablar da click en el boton detener para
+          Da click en el boton hablar y verifica tu pronunciacion, una vez termines de hablar da click en el boton detener para
           ver tus resultados
       	</p>
       </div>
       <div class="form-group">
         <label>
           <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='playAudio()' :disabled="disabled_play">
-            Escuchar <i class="fa fa-play" style="font-size:20px" ></i>
+            Hablar <i class="fa fa-play"></i>
           </button>&nbsp;&nbsp;&nbsp;
           <button type="button" class="btn btn-outline-danger btn-sm" v-on:click.prevent='stopAudio()' :disabled="!disabled_play">
             Detener <i class="fa fa-stop" ></i>
@@ -149,6 +149,7 @@
           },
           evaluarAudio:function(){
               let vm=this;
+
               artyom.addCommands([
               {
                   description :"",
@@ -160,14 +161,18 @@
               ]);
               artyom.redirectRecognizedTextOutput(function(recognized,isFinal){
                 if(!isFinal){
-                  var texto_voz_audio=document.getElementById("texto_voz_audio");
-                  texto_voz_audio.value ='';
+                  //var texto_voz_audio=document.getElementById("texto_voz_audio");
+                  //texto_voz_audio.value ='';
                   console.log("Dictation started by the user");
                 }else{
-                  vm.disabled_play=false;
-                  var texto_voz_audio=document.getElementById("texto_voz_audio");
-                  texto_voz_audio.value +=recognized+'\n';
-                  texto_voz_audio.scrollTop = texto_voz_audio.scrollHeight;
+                  vm.disabled_evaluar=false;
+                  if(vm.texto_escucha.toLowerCase()==recognized){
+                    document.getElementById('resultado_pronun').innerHTML=recognized+" <i class='fa fa-check'></i>";
+                    document.getElementById("resultado_pronun").style.color='#4CAF50';
+                  }else{
+                    document.getElementById('resultado_pronun').innerHTML=recognized+" <i class='fa  fa-close'></i>";
+                    document.getElementById("resultado_pronun").style.color='#ff0000';
+                  }
                 }
               });
               artyom.initialize({
@@ -178,12 +183,10 @@
                     speed:1 // Habla normalmente
               }).then(() => {
                 console.log("Artyom succesfully initialized");
-                var texto_voz_audio=document.getElementById("texto_voz_audio");
-                texto_voz_audio.value ='';
-                vm.disabled_play=true;
+                vm.disabled_evaluar=true;
+                document.getElementById("resultado_pronun").value='';
               }).catch((err) => {
-                  //artyom.say("Artyom couldn't be initialized, please check the console for errors");
-                  vm.disabled_play=false;
+                  vm.disabled_evaluar=false;
                   console.log("Artyom couldn't be initialized, please check the console for errors");
                   console.log(err);
               });

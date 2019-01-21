@@ -45,9 +45,9 @@
         </div>
         <div class="col-md-4 col-sm-6">
           <b>Preguntas :</b> <span v-text='ejercicio.cant_preg'></span>
-        </div> 
+        </div>
         <div class="col-md-4 col-sm-6">
-          <b>Nota sobre :</b> <span v-text='ejercicio.notamaxima'></span>
+          <b>Nota maxima :</b> <span v-text='ejercicio.notamaxima'></span>
         </div>
         <div class="col-md-4 col-sm-6">
           <i class="fa fa-list-alt" style="cursor:pointer" v-on:click.prevent="redirectEnt(ejercicio.id)"></i> <b>Realizado :</b> <span v-text='ejercicio.entregas'></span>/<span v-text='cantUser'></span>

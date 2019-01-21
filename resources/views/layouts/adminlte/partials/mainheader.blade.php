@@ -9,7 +9,39 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown" id="vue-notifi">
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="fa fa-comments-o" style='padding-top:7px;font-size:24px' v-on:click.prevent='listamessages()'></i>
+          <span class="badge badge-warning navbar-badge" id='nav_messages'></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="height:250px;overflow-y: auto;">
+          <div class="row" v-if="preload_messages">
+            <div class="d-block mx-auto" >
+              <i class="fa fa-circle-o-notch fa-spin" style="font-size:40px"></i>
+            </div>
+          </div>
+          <div v-for='messages in a_messages' v-if="!preload_messages">
+            <a href="#" class="dropdown-item">
+              <!-- Message Start -->
+              <div class="media">
+                <img v-bind:src="base_url+'/'+messages.imagen" class="img-size-50 mr-3 img-circle">
+                <div class="media-body">
+                  <h3 class="dropdown-item-title">
+                    <span v-text="messages.nombre"></span>
+                    <span class="float-right text-sm text-warning" v-if="messages.pendiente==1"><i class="fa fa-star"></i></span>
+                  </h3>
+                  <p class="text-sm" v-text='messages.descrip'></p>
+                  <p class="text-sm text-muted"><i class="fa fa-clock-o mr-1"></i><span v-text="messages.fecha"></span></p>
+                </div>
+              </div>
+              <!-- Message End -->
+            </a>
+            <div class="dropdown-divider"></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fa fa-bell-o" style='padding-top:7px;font-size:24px' v-on:click.prevent='listanotificaciones()'></i>
           <span class="badge badge-warning navbar-badge" id='nav_notifi'></span>

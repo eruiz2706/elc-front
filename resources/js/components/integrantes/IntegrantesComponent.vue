@@ -1,19 +1,19 @@
 <template>
 <div>
   <!-- Modal -->
-  <div class="modal fade" id="modal_chat" >
+  <div class="modal fade" id="modal_chat" ref="ref_modal_chat">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class='modal-header'>
             Chat directo<button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <div class="modal-body" style="height:300px;overflow-y: auto;">
+        <div class="modal-body" style="height:300px;overflow-y: auto;" ref="content_chat">
           <div class="row" v-if="preloadmodal">
             <div class="d-block mx-auto" >
               <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
             </div>
           </div>
-          <div class="direct-chat-messages direct-chat-info" style='overflow:initial'>
+          <div class="direct-chat-messages direct-chat-info" style='overflow:initial' >
                   <!-- Message. Default to the left -->
                   <div class="direct-chat-msg" v-bind:class="(id_userchat==chat.remitente) ? '':'right'" v-for="chat in chat_mensajes" >
                     <div class="direct-chat-info clearfix" v-if="id_userchat==chat.remitente">
@@ -64,7 +64,7 @@
     <div class='col-md-6 col-sm-12' v-for="integrante in a_integrantes">
       <div class="card" v-if="!preload" >
         <div class="card-body">
-          <div class="card-tools">
+          <div class="card-tools" v-if="rol_user=='es' || rol_user=='pr'">
             <a class="nav-link"  href="#" aria-expanded="true">
               <span class="badge navbar-badge">
                 <i class="fa fa-comments-o" style='font-size:24px' v-on:click.prevent='chatuser(integrante.iduser)'>
@@ -101,9 +101,12 @@
               if(data.chat_id==vm.idchat){
                   vm.leidochat(data);
               }else{
-                  vm.listado();
+                this.$root.$emit('private_message_cli',response.data.chat_enviado);
               }
             });
+
+            //se activa una vez se cierre el modal
+            $(this.$refs.ref_modal_chat).on("hidden.bs.modal",this.resetUserchat);
         },created : function(){
           this.base_url=base_url;
           this.idcurso=document.getElementById('idcurso').value;
@@ -119,17 +122,23 @@
             idchat:0,
             id_userchat:0,
             loader_responder:false,
-            mensaje_chat:''
+            mensaje_chat:'',
+            rol_user:''
           }
         },
         methods : {
+          resetUserchat:function(){
+            this.chat_mensajes=[];
+            this.idchat=0;
+            this.id_userchat=0;
+          },
           listado:function(){
             var url =base_url+'/integrantes/lista';
             this.preload=true;
             axios.post(url,{idcurso:this.idcurso}).then(response =>{
                 this.preload=false;
                 this.a_integrantes=response.data.integrantes;
-                console.log(this.a_integrantes);
+                this.rol_user=response.data.slugrol;
             }).catch(error =>{
                 this.preload=false;
                 if(error.response.data.errors){
@@ -150,8 +159,11 @@
             axios.post(url,{iduser:iduser}).then(response =>{
                 this.preloadmodal=false;
                 this.chat_mensajes=response.data.chat_mensajes;
+                this.$nextTick(() => {
+                  this.$refs.content_chat.scrollTop = this.$refs.content_chat.scrollHeight;
+                });
                 this.idchat=response.data.idchat
-                this.listado();
+
             }).catch(error =>{
                 this.preloadmodal=false;
                 if(error.response.data.errors){
@@ -167,8 +179,12 @@
           responderchat:function(){
             var url =this.base_url+'/chatprivado/responder';
             this.loader_responder=true;
-            axios.post(url,{idchat:this.idchat,mensaje_chat:this.mensaje_chat}).then(response =>{
+            axios.post(url,{idchat:this.idchat,mensaje_chat:this.mensaje_chat,idcurso:this.idcurso}).then(response =>{
                 this.chat_mensajes.push(response.data.chat_enviado);
+                this.$nextTick(() => {
+                  this.$refs.content_chat.scrollTop = this.$refs.content_chat.scrollHeight;
+                });
+
                 this.loader_responder=false;
                 this.mensaje_chat='';
                 this.$root.$emit('private_message_cli',response.data.chat_enviado);
@@ -180,7 +196,9 @@
               var url =this.base_url+'/chatprivado/leido';
               axios.post(url,{idchat:data.chat_id,remitente:data.remitente}).then(response =>{
                   this.chat_mensajes.push(data);
-                  this.listado();
+                  this.$nextTick(() => {
+                    this.$refs.content_chat.scrollTop = this.$refs.content_chat.scrollHeight;
+                  });
               }).catch(error =>{
 
               });

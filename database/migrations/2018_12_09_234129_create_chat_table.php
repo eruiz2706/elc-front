@@ -22,6 +22,10 @@ class CreateChatTable extends Migration
             $table->integer('pendiente_emisor')->default(0);//pendiente por leer
             $table->integer('pendiente_receptor')->default(0);//pendiente por leer
             $table->dateTime('fecha_creacion');
+            $table->dateTime('fecha_emisor')->nullable();//fecha en que se actualiza pendiente
+            $table->dateTime('fecha_receptor')->nullable();
+            $table->text('descripcion_emisor')->nullable();
+            $table->text('descripcion_receptor')->nullable();
             $table->timestamps();
         });
     }

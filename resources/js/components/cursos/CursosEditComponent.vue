@@ -40,7 +40,7 @@
 
         <div class="form-group">
           <label>Valor</label>
-          <input type="number" class="form-control" name='fecha_limite' v-model='o_curso.valor'  v-bind:class="[e_curso.fecha_limite ? 'is-invalid' : '']">
+          <input type="number" min="0" class="form-control" name='fecha_limite' v-model='o_curso.valor'  v-bind:class="[e_curso.fecha_limite ? 'is-invalid' : '']">
           <span class="text-danger" v-if="e_curso.valor" v-text='e_curso.valor[0]'></span>
         </div>
 
@@ -56,7 +56,7 @@
           <span class="text-danger" v-if="e_curso.profesor2" v-text='e_curso.profesor2[0]'></span>
         </div>
 
-        <div class='form-group'>
+        <!--<div class='form-group'>
           <label>Acceso al curso</label>
           <div class="form-check">
             <label class="form-check-label">
@@ -68,7 +68,7 @@
               <input type="radio" class="form-check-input" name="accesradio" value='false' v-model='o_curso.visibilidad'>Privado
             </label>
           </div>
-        </div>
+        </div>-->
 
         <div class='form-group'>
           <label>Inscripcion</label>

@@ -49,7 +49,7 @@
           <div class="card-body">
             <div class="form-group">
               <label>Puntaje</label>
-              <input type="number" class="form-control" name='puntaje'  v-model='o_resp_abierta.puntaje'>
+              <input type="number" min="0"  class="form-control" name='puntaje'  v-model='o_resp_abierta.puntaje'>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@
                     <textarea class="form-control" rows="2" cols="100" v-model='fila.respuesta'></textarea>
                   </td>
                   <td>
-                    <input type="number" class="form-control" name='puntaje'  v-model='fila.puntaje'>
+                    <input type="number" min="0"  class="form-control" name='puntaje'  v-model='fila.puntaje'>
                   </td>
                   <td>
                     <button type="button" class="btn btn-outline-danger btn-sm float-left" v-if="fila.delete" v-on:click.prevent='removeRespUnica(index)'>
@@ -119,7 +119,7 @@
                     <textarea class="form-control" rows="2" cols="100" v-model='fila.respuesta'></textarea>
                   </td>
                   <td>
-                    <input type="number" class="form-control" name='puntaje'  v-model='fila.puntaje'>
+                    <input type="number" min="0"  class="form-control" name='puntaje'  v-model='fila.puntaje'>
                   </td>
                   <td>
                     <button type="button" class="btn btn-outline-danger btn-sm float-left" v-if="fila.delete" v-on:click.prevent='removeRespMultiple(index)'>
@@ -158,7 +158,7 @@
                     <textarea class="form-control" rows="2" cols="50" v-model='fila.relacionar'></textarea>
                   </td>
                   <td>
-                    <input type="number" class="form-control" name='puntaje'  v-model='fila.puntaje'>
+                    <input type="number" min="0"  class="form-control" name='puntaje'  v-model='fila.puntaje'>
                   </td>
                   <td>
                     <button type="button" class="btn btn-outline-danger btn-sm float-left" v-if="fila.delete" v-on:click.prevent='removeRespRelacionar(index)'>
@@ -197,7 +197,7 @@
                     <input type="text" class="form-control" name='relacionar'  v-model='fila.relacionar'>
                   </td>
                   <td>
-                    <input type="number" class="form-control" name='puntaje'  v-model='fila.puntaje'>
+                    <input type="number" min="0"  class="form-control" name='puntaje'  v-model='fila.puntaje'>
                   </td>
                 </tr>
               </tbody>

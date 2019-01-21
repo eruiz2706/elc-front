@@ -68,12 +68,20 @@ class ChatPrivado extends Controller
         'fecha_creacion'=>$fecha_creacion,
       ]);
 
+      $nombre_curso=DB::select("select nombre
+                                from cursos
+                                where id= :curso_id",['curso_id'=>$request->idcurso])[0]->nombre;
+
       /*actualiza solo el registro que corresponda, si es emisor o receptor el que envia el mensaje*/
       DB::table('chatprivado')->where('id',$request->idchat)->where('emisor',$user->id)->update([
         'pendiente_emisor'=>1,
+        'fecha_emisor'=>$fecha_creacion,
+        'descripcion_emisor'=>$nombre_curso
       ]);
       DB::table('chatprivado')->where('id',$request->idchat)->where('receptor',$user->id)->update([
         'pendiente_receptor'=>1,
+        'fecha_receptor'=>$fecha_creacion,
+        'descripcion_receptor'=>$nombre_curso
       ]);
 
       DB::commit();
@@ -94,7 +102,7 @@ class ChatPrivado extends Controller
         //$e->getMessage();
 
         return response()->json([
-            'error' =>'Hubo una inconsistencias al intentar enviar el mensaje'
+            'error' =>$request->idcurso
         ], 400);
     }
   }
@@ -105,18 +113,29 @@ class ChatPrivado extends Controller
 
     DB::beginTransaction();
     try{
+      $chat     =DB::select("select emisor,receptor
+                            from chatprivado
+                            where id= :id",
+                          ['id'=>$request->idchat]);
 
-      /*actualiza solo el registro que corresponda, si es emisor o receptor el que envia el mensaje*/
-      DB::table('chatprivado')->where('id',$request->idchat)->where('emisor',$user->id)->update([
-        'pendiente_emisor'=>0,
-      ]);
-      DB::table('chatprivado')->where('id',$request->idchat)->where('receptor',$user->id)->update([
-        'pendiente_receptor'=>0,
-      ]);
+      if(!empty($chat)){
+        $emisor   =$chat[0]->emisor;
+        $receptor =$chat[0]->receptor;
+        $userupd  =($user->id==$emisor) ? $receptor : $emisor;
+
+        /*actualiza solo el registro que corresponda, si es emisor o receptor el que envia el mensaje*/
+        DB::table('chatprivado')->where('id',$request->idchat)->where('emisor',$userupd)->update([
+          'pendiente_emisor'=>0,
+        ]);
+        DB::table('chatprivado')->where('id',$request->idchat)->where('receptor',$userupd)->update([
+          'pendiente_receptor'=>0,
+        ]);
+      }
 
       DB::commit();
       return response()->json([
-          'leido' =>'OK'
+          'leido' =>'OK',
+          'id'=>''
       ]);
     }
     catch(\Exception $e){

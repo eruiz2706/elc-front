@@ -28,7 +28,7 @@ class NotificacionesController extends Controller
     $notificaciones   =DB::select("select descripcion,fecha_creacion
                             from notificaciones
                             where user_id= :user_id order by fecha_creacion desc
-                            limit 20",
+                            limit 50",
                           ['user_id'=>$user->id]);
 
     DB::table('notificaciones')->where(['user_id'=>$user->id,'estado'=>'0'])->update([

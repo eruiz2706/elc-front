@@ -109,7 +109,7 @@ class ProgresoController extends Controller
                                 cu.user_id,u.nombre,u.imagen,u.id
                                 from cursos_user cu
                                 left join users u on(cu.user_id=u.id)
-                                where cu.curso_id=:curso_id and slugrol='es'",
+                                where cu.curso_id=:curso_id and cu.slugrol='es'",
                             ['curso_id'=>$request->idcurso]);
 
       foreach($progmod as $prog){
@@ -185,7 +185,7 @@ class ProgresoController extends Controller
       $notifi_tk[]=$request->id;
       DB::commit();
       return response()->json([
-          'message' => 'Se envio el toque correctamente!',
+          'message' => 'Se envio un toque al usuario!',
           'message2' => 'Click para continuar!',
           'notifi_tk'=>$notifi_tk
       ]);

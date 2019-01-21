@@ -31,7 +31,7 @@
               <i class="fa fa-bank" aria-hidden="true"></i>
               <span v-text='curso.nombestado'></span>
             </div>
-            <div class="course_price ml-auto" v-text='curso.valor'></div>
+            <div class="course_price ml-auto" v-text="curso.valor>0 ? '$'+curso.valor : 'Gratis'"></div>
           </div>
         </div>
       </div>
