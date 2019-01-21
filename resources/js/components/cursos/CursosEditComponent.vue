@@ -56,7 +56,7 @@
           <span class="text-danger" v-if="e_curso.profesor2" v-text='e_curso.profesor2[0]'></span>
         </div>
 
-        <!--<div class='form-group'>
+        <div class='form-group'>
           <label>Acceso al curso</label>
           <div class="form-check">
             <label class="form-check-label">
@@ -68,9 +68,9 @@
               <input type="radio" class="form-check-input" name="accesradio" value='false' v-model='o_curso.visibilidad'>Privado
             </label>
           </div>
-        </div>-->
+        </div>
 
-        <div class='form-group'>
+        <!--<div class='form-group'>
           <label>Inscripcion</label>
           <div class="form-check">
             <label class="form-check-label">
@@ -82,7 +82,7 @@
               <input type="radio" class="form-check-input" name="permitradio" value='false' v-model='o_curso.inscripcion'>Disponible para administrador del curso
             </label>
           </div>
-        </div>
+        </div>-->
 
         <button type="button" class="btn btn-outline-primary btn-sm float-left" :disabled="loader_actualizar" v-on:click.prevent='actualizar()'>
           Actualizar

@@ -42,11 +42,11 @@
           <span class="badge bg-success" v-if="curso.visibilidad">Publico</span>
           <span class="badge bg-danger" v-else>Privado</span>
         </div>
-        <div class="col-md-4 col-sm-6">
+        <!--<div class="col-md-4 col-sm-6">
           <b>Inscripcion :</b>
           <span class="badge bg-success" v-if="curso.inscripcion">Estudiante</span>
           <span class="badge bg-info" v-else>Administrador</span>
-        </div>
+        </div>-->
         <div class="col-md-4 col-sm-6">
           <b>Valor :</b>
           <span v-text='curso.valor'></span>
