@@ -330,7 +330,7 @@ class CursosTableSeeder extends Seeder
               'calificacion'=>5,
               'preguntas'=>5,
               'entregas'=>0,
-              'fecha_inicio'=>'2019-01-20',
+              'fecha_inicio'=>'2019-01-17',
               'fecha_finalizacion'=>'9999-12-31',
               'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:40:00'
@@ -344,7 +344,7 @@ class CursosTableSeeder extends Seeder
               'calificacion'=>4,
               'preguntas'=>4,
               'entregas'=>0,
-              'fecha_inicio'=>'2019-01-21',
+              'fecha_inicio'=>'2019-01-18',
               'fecha_finalizacion'=>'9999-12-31',
               'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:40:00'
@@ -358,7 +358,7 @@ class CursosTableSeeder extends Seeder
               'calificacion'=>1,
               'preguntas'=>1,
               'entregas'=>0,
-              'fecha_inicio'=>'2019-01-22',
+              'fecha_inicio'=>'2019-01-19',
               'fecha_finalizacion'=>'9999-12-31',
               'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:40:00'
@@ -372,7 +372,7 @@ class CursosTableSeeder extends Seeder
               'calificacion'=>8,
               'preguntas'=>5,
               'entregas'=>0,
-              'fecha_inicio'=>'2019-01-31',
+              'fecha_inicio'=>'2019-01-20',
               'fecha_finalizacion'=>'9999-12-31',
               'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:40:00'
@@ -387,7 +387,7 @@ class CursosTableSeeder extends Seeder
               'calificacion'=>5,
               'preguntas'=>1,
               'entregas'=>0,
-              'fecha_inicio'=>'2019-01-31',
+              'fecha_inicio'=>'2019-01-21',
               'fecha_finalizacion'=>'9999-12-31',
               'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:40:00'
