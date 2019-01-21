@@ -47,7 +47,8 @@ class RolesTableSeeder extends Seeder
             'nombre' =>'Estudiante',
             'email'=>'estudiante@gmail.com',
             'password'=>Hash::make('123456'),
-            'uniqid'=>uniqid('',true)
+            'uniqid'=>uniqid('',true),
+            'slugrol'=>'es'
           ]);
           RoleUser::create([
             'user_id' =>$user1->id,
@@ -58,7 +59,8 @@ class RolesTableSeeder extends Seeder
             'nombre' =>'Profesor',
             'email'=>'profesor@gmail.com',
             'password'=>Hash::make('123456'),
-            'uniqid'=>uniqid('',true)
+            'uniqid'=>uniqid('',true),
+            'slugrol'=>'pr'
           ]);
           RoleUser::create([
             'user_id' =>$user2->id,
@@ -69,7 +71,8 @@ class RolesTableSeeder extends Seeder
             'nombre' =>'Institucion',
             'email'=>'institucion@gmail.com',
             'password'=>Hash::make('123456'),
-            'uniqid'=>uniqid('',true)
+            'uniqid'=>uniqid('',true),
+            'slugrol'=>'in'
           ]);
           RoleUser::create([
             'user_id' =>$user3->id,
@@ -80,7 +83,8 @@ class RolesTableSeeder extends Seeder
             'nombre' =>'Padres',
             'email'=>'padres@gmail.com',
             'password'=>Hash::make('123456'),
-            'uniqid'=>uniqid('',true)
+            'uniqid'=>uniqid('',true),
+            'slugrol'=>'pa'
           ]);
           RoleUser::create([
             'user_id' =>$user4->id,
@@ -90,7 +94,8 @@ class RolesTableSeeder extends Seeder
             'nombre' =>'Administrador de contenido',
             'email'=>'administrador@gmail.com',
             'password'=>Hash::make('123456'),
-            'uniqid'=>uniqid('',true)
+            'uniqid'=>uniqid('',true),
+            'slugrol'=>'ad'
           ]);
           RoleUser::create([
             'user_id' =>$user5->id,
@@ -101,7 +106,8 @@ class RolesTableSeeder extends Seeder
             'nombre' =>'Profesor2',
             'email'=>'profesor2@gmail.com',
             'password'=>Hash::make('123456'),
-            'uniqid'=>uniqid('',true)
+            'uniqid'=>uniqid('',true),
+            'slugrol'=>'pr'
           ]);
           RoleUser::create([
             'user_id' =>$user6->id,
