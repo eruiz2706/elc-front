@@ -508,7 +508,7 @@ class CursosTableSeeder extends Seeder
               7. The [7.] will be closed until Monday<br />
               8. I am taking my son to the [8.] this afternoon.<br />
               9. The first [9.] was very slow<br />
-              10. The manager is [10.] is at the end of the corridor.'
+              10. The manager is [10.] is at the end of the corridor.',
               'calificacion'=>1,
               'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
