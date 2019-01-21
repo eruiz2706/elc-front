@@ -400,7 +400,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'unica',
               'descripcion'=>'<p><span id="docs-internal-guid-37b07518-7fff-c3a3-953c-0afad1b168f0"><img src="https://lh6.googleusercontent.com/cFB0WK1SkoJ_XfIEFezPkbwOCZxuRkqO0jc80zkaJASaWZSCmxA7JzEnraTVxOHgTyx2qjuEZcQmVfv6y75bb-lbVm8KlAoabDkqMOSHpj2LkCg0MjWt9U8YU1ktn0NE3fKftDKGxca6jrjl" width="309" height="164" style="border-width: initial; border-color: initial; border-image: initial; transform: rotate(0rad); float: none;" class=""></span><br></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -410,7 +410,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'unica',
               'descripcion'=>'<p><span id="docs-internal-guid-43a39b8d-7fff-796e-849b-3b91aadb194b"><img src="https://lh5.googleusercontent.com/HjZn_TbJ0jo_ncVizzYHmrLxRgK91vGuagG0cGFVZM2ulE93sZ79l-nJTVtUZFSlyDMezW7VtHtmszdezgHvW5cW-u92olu69gYH90qGbeRjG-JF2gnLyk-YL7g7bODQ3MDt8BHdEJ7bTxkx" width="309" height="168" style="border-width: initial; border-color: initial; border-image: initial; transform: rotate(0rad);"></span><br></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -420,7 +420,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'unica',
               'descripcion'=>'<p><span id="docs-internal-guid-c4765e29-7fff-12c3-92b1-b5c13c9b21c9"><img src="https://lh5.googleusercontent.com/3p4EdFi82Ktc9xbAAu1__peyjdc2zsqxrvLNsnhgAfREuoOzzwb-CDDGvZGHeclRfWf9_bgyT7DXQELqhBG9PyJ-iOdCRq2LXx1bMi8Ao1BZ5RShBcgFgnUbHg7bc1eEWaYlc2pqBL748nyz" width="308" height="199" style="border-width: initial; border-color: initial; border-image: initial; transform: rotate(0rad);"></span><br></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -430,7 +430,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'unica',
               'descripcion'=>'<p><span id="docs-internal-guid-8a0c89d0-7fff-1354-5d14-1813b6afa832"><img src="https://lh6.googleusercontent.com/W27e3og8MfX7ru1U6Z64FplHR6Que9YExUKVj-Do15D-K1EwzKmAi5p9j-OU5lWVFiZzHUCZMwR89r4UM5e0uv-1PFgi1K04NEDw5Xv93EwfnxFqzkmNPrN-EmXMK1jWCNvu35NlFnb33-h8" width="303" height="175" style="border-width: initial; border-color: initial; border-image: initial; transform: rotate(0rad);"></span><br></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -440,7 +440,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'unica',
               'descripcion'=>'<p><span id="docs-internal-guid-205f0ea5-7fff-d19e-b5a3-c059b532b34d"><img src="https://lh3.googleusercontent.com/KHpS1GUbSk0bODjlH61kcvaq7diz3ZfA7LWyF9fluEOqqHeKyxADgQqsVwUNaBTLo8CgcLJn9NPZLKys2Boa4BYACbsVyN7qDe4yzItQhMb84b-5zZj3fJFM3ogCP-7z_DOb3VSsNYpKNBhl" width="304" height="182" style="border-width: initial; border-color: initial; border-image: initial; transform: rotate(0rad);"></span><br></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -450,7 +450,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'abierta',
               'descripcion'=>'<p><span id="docs-internal-guid-cc8dc3c7-7fff-66e3-1b68-d13b14bab795"><span style="font-size: 12pt; font-family: Calibri; background-color: transparent; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Escriba el nombre del lugar de acuerdo a la imagen</span></span><img src="https://lh3.googleusercontent.com/P4Yc0Iz1QylQWGlJKH7PAAJYDkrfJk4f8mUKxoAm9vgWKr2v3BuVYx3JYPvbw0rd04DhH-T0ifk39t9ABy4pK1JnqxvijOMWtTzrfyo6tfJd1JdWekrRe1iQHyMLeO_OQtDwGwdOBSItviEX" width="342" height="210" style="font-family: &quot;Source Sans Pro&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 1rem; border-width: initial; border-color: initial; border-image: initial; transform: rotate(0rad);"></p><p><br></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -460,7 +460,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'abierta',
               'descripcion'=>'<p><span style="font-family: Calibri; font-weight: 700; white-space: pre-wrap;">Escriba el nombre del lugar de acuerdo a la imagen</span></p><p><span id="docs-internal-guid-d8912aaf-7fff-41e8-ccdd-fb88dc36aa4a"><img src="https://lh3.googleusercontent.com/sv7tqri_7lwEQ9lbwDb6gs-6WHJRFz5rH9c-6XRpYU9dRN3WjYRaGIvivHEX4KH46AoJ9F9ees31GlQSoZChgfqOBp2V_ZmeV7GtBWl2qDQcOCCAsK-YnY8y3a4xRr2TkHVNlXLNXlW0sg9l" width="332" height="210" style="border-width: initial; border-color: initial; border-image: initial; transform: rotate(0rad);"></span><span style="font-family: Calibri; font-weight: 700; white-space: pre-wrap;"><br></span><br></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -470,7 +470,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'abierta',
               'descripcion'=>'<p><span id="docs-internal-guid-3ac515e8-7fff-6e95-48b1-6b368ea23605"></span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Escriba el nombre del lugar de acuerdo a la imagen</span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"><span style="font-weight:normal;" id="docs-internal-guid-c26e8533-7fff-8da0-ba91-b2fd68981caf"><img src="https://lh6.googleusercontent.com/GHyaiXcGOjSsLlCX9BcyhbJQ6_QQlA_RKDWR4GKPrQhrWWSWPoKXEkAk7KQOplb_QXWxMbSd-iyOJNlwDF4uLoHlTJIJ0g0dVKeKgqPOitvsXJBTJ_SJs1shlqab3e_Vj0qMWDdMQADQL2C0" width="342" height="196" style="border-width: initial; border-color: initial; border-image: initial; transform: rotate(0rad);"></span><br></span></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -480,7 +480,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'abierta',
               'descripcion'=>'<p><span id="docs-internal-guid-32f168d6-7fff-c35c-e742-46eb81442b31"><span style="font-size: 12pt; font-family: Calibri; background-color: transparent; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Escriba el nombre del lugar de acuerdo a la imagen</span></span></p><p><span id="docs-internal-guid-32f168d6-7fff-c35c-e742-46eb81442b31"><span style="font-size: 12pt; font-family: Calibri; background-color: transparent; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;"><span style="font-weight:normal;" id="docs-internal-guid-4d39a060-7fff-d9d6-18ef-24cced64fba9"><img src="https://lh6.googleusercontent.com/tnujzP9EDapuOJzqyYJfsA3rDLHtSoWqWb1s4HrENbPFXy6kK2ZUqiTYc-PDANlb1Ox2s-KfYjv2XTVmCY53u186WgqsuZ421k6JNN2A5-MnsECmHgCGgOWkn3O2-S2umr4Cb1_VzMMM3yOA" width="332" height="196" style="border-width: initial; border-color: initial; border-image: initial; transform: rotate(0rad);"></span><br></span></span><br></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -510,7 +510,7 @@ class CursosTableSeeder extends Seeder
               9. The first [9.] was very slow<br />
               10. The manager is [10.] is at the end of the corridor.'
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -521,7 +521,7 @@ class CursosTableSeeder extends Seeder
               'descripcion'=>'<p><span id="docs-internal-guid-e8730095-7fff-141e-119e-3a5d2aab903d"><span style="font-size: 12pt; font-family: Calibri; background-color: transparent; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Escriba el lugar en el que se encontrarían los siguientes objetos
               </span></span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">desk, board, marker, chair, Window</span></p>',
               'calificacion'=>4,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -531,7 +531,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'abierta',
               'descripcion'=>'<p><span id="docs-internal-guid-00023a1a-7fff-de7f-7201-6cc61820ff32"></span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Escriba el lugar en el que se encontrarían los siguientes objetos</span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"><span style="font-weight:normal;" id="docs-internal-guid-95ad117e-7fff-f364-41c5-1b1230c7dca3"></span></span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">gate, luggage, plane, counter, trolley</span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"><span id="docs-internal-guid-666d431b-7fff-7e33-3ade-af89680578a1"><br></span></span></p><div dir="ltr" style="margin-left:-5.4pt;"><table style="border:none;border-collapse:collapse"><colgroup><col width="566"></colgroup><tbody><tr style="height:0pt"><td style="border-left:solid #000000 0.5pt;border-right:solid #000000 0.5pt;border-bottom:solid #000000 0.5pt;border-top:solid #000000 0.5pt;vertical-align:top;background-color:#00b0f0;padding:0pt 5.4pt 0pt 5.4pt;"><p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">REMEMBER THIS: </span></p></td></tr><tr style="height:0pt"><td style="border-left:solid #000000 0.5pt;border-right:solid #000000 0.5pt;border-bottom:solid #000000 0.5pt;border-top:solid #000000 0.5pt;vertical-align:top;padding:0pt 5.4pt 0pt 5.4pt;"><p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">1. Identificar el lugar es el principal objetivo. </span></p><p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">2. Conocer en inglés las palabras (sustantivos) que designan el nombre de lugares. </span></p><p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">3. Identificar algunas palabras claves en el aviso. </span></p><p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">4. Revisar con frecuencia las palabras que designan el nombre de lugares. </span></p><p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">5. Localizar los cognados y las palabras que ya conoce en el texto.</span></p></td></tr></tbody></table></div>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -542,7 +542,7 @@ class CursosTableSeeder extends Seeder
               'descripcion'=>'<p><span id="docs-internal-guid-ec412bac-7fff-3127-e9a0-a7ab3bce358a"></span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Escriba el lugar en el que se encontrarían los siguientes objetos</span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"><span style="font-weight:normal;" id="docs-internal-guid-04078094-7fff-5582-69f2-ef8a41629c8a"></span></span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">scales, shop, shelf, changing room, till </span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><br></p>',
               'textorellenar'=>'[1.]',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -552,7 +552,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'abierta',
               'descripcion'=>'<p><span id="docs-internal-guid-76d47395-7fff-1d26-7ccc-27eeaae15159"></span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Escriba el lugar en el que se encontrarían los siguientes objetos</span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"><span style="font-weight:normal;" id="docs-internal-guid-4434c4b5-7fff-4369-eab5-54127cfd0c89"></span></span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">key, room, bellboy, stairs, towel, shower</span></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -562,7 +562,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'abierta',
               'descripcion'=>'<p><span id="docs-internal-guid-11cc7a2a-7fff-9b3e-6fe9-cc3f8964e8ca"></span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Escriba el lugar en el que se encontrarían los siguientes objetos</span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span id="docs-internal-guid-2fb7d440-7fff-b4bf-c8bb-5b3ce15bcde2"></span></p><p dir="ltr" style="line-height:1.44;margin-top:0pt;margin-bottom:10pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">scissors, brush, comb, razor, hair dryer</span></p>',
               'calificacion'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -572,7 +572,7 @@ class CursosTableSeeder extends Seeder
               'tipo' =>'relacionar',
               'descripcion'=>'<p><span id="docs-internal-guid-ad35a617-7fff-2814-5bc3-118704d7ab0d"><span style="font-size: 12pt; font-family: Calibri; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Lea las descripciones de la izquierda y las palabras de la columna de la derecha (A-H). ¿Qué palabra concuerda con la descripción de cada frase de la izquierda? Escriba la letra correcta en el espacio. &nbsp;</span></span></p><p><span id="docs-internal-guid-ad35a617-7fff-2814-5bc3-118704d7ab0d"><span style="font-size: 12pt; font-family: Calibri; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;"><b style="font-weight:normal;" id="docs-internal-guid-292b3058-7fff-c28d-7ca0-c5edaffd6913"><br></b></span></span></p><div dir="ltr" style="margin-left:-14.65pt;"><table style="border:none;border-collapse:collapse"><colgroup><col width="468"><col width="144"></colgroup><tbody><tr style="height:45pt"><td style="border-left:solid #000000 0.5pt;border-right:solid #000000 0.5pt;border-bottom:solid #000000 0.5pt;border-top:solid #000000 0.5pt;vertical-align:middle;background-color:#ffffff;padding:0pt 5.4pt 0pt 5.4pt;"><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">1. You can borrow or keep your money there. &nbsp;_______ </span></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">2. People eat or drink it to keep them alive. &nbsp;&nbsp;_______ </span></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">3. One person drives it and it can carry three or four passengers. &nbsp;&nbsp;_______ </span></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">4. This is a place for people to buy and sell things. &nbsp;&nbsp;_______ </span></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">5. People go there to eat their meals. &nbsp;&nbsp;_______</span></p></td><td style="border-left:solid #000000 0.5pt;border-right:solid #000000 0.5pt;border-bottom:solid #000000 0.5pt;border-top:solid #000000 0.5pt;vertical-align:top;background-color:#00b0f0;padding:0pt 5.4pt 0pt 5.4pt;"><p dir="ltr" style="line-height:1.3800000000000001;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">A. garden </span></p><p dir="ltr" style="line-height:1.3800000000000001;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">B. car </span></p><p dir="ltr" style="line-height:1.3800000000000001;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">C. restaurant </span></p><p dir="ltr" style="line-height:1.3800000000000001;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">D. plane </span></p><p dir="ltr" style="line-height:1.3800000000000001;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">E. bank </span></p><p dir="ltr" style="line-height:1.3800000000000001;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">F. food </span></p><p dir="ltr" style="line-height:1.3800000000000001;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">G. bottle </span></p><p dir="ltr" style="line-height:1.3800000000000001;margin-top:0pt;margin-bottom:0pt;text-align: justify;"><span style="font-size:12pt;font-family:Calibri;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">H. market</span></p></td></tr></tbody></table></div><p><span><span style="font-size: 12pt; font-family: Calibri; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;"></span></span><br></p>',
               'calificacion'=>5,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -582,7 +582,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>true,
               'respuesta' =>'a. At the park',
               'pregunta_id'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -591,7 +591,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>false,
               'respuesta' =>'b. At the beach',
               'pregunta_id'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -600,7 +600,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>false,
               'respuesta' =>'c. At the hotel',
               'pregunta_id'=>1,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -609,7 +609,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>true,
               'respuesta' =>'a. On the contract',
               'pregunta_id'=>2,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -618,7 +618,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>false,
               'respuesta' =>'b. On a book',
               'pregunta_id'=>2,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -627,7 +627,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>false,
               'respuesta' =>'c. On the newspaper',
               'pregunta_id'=>2,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -636,7 +636,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>false,
               'respuesta' =>'a. At the clinic',
               'pregunta_id'=>3,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -645,7 +645,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>true,
               'respuesta' =>'b. At the bank',
               'pregunta_id'=>3,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -654,7 +654,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>false,
               'respuesta' =>'c. At the pool',
               'pregunta_id'=>3,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -663,7 +663,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>false,
               'respuesta' =>'a. At the cemetery',
               'pregunta_id'=>4,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -672,7 +672,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>true,
               'respuesta' =>'b. At the national bank',
               'pregunta_id'=>4,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -681,7 +681,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>false,
               'respuesta' =>'c. In a playground',
               'pregunta_id'=>4,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -690,7 +690,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>true,
               'respuesta' =>'a. At the vet is office',
               'pregunta_id'=>5,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -699,7 +699,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>false,
               'respuesta' =>'b. In an art gallery',
               'pregunta_id'=>5,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -708,7 +708,7 @@ class CursosTableSeeder extends Seeder
               'seleccion'=>false,
               'respuesta' =>'c. At the circus',
               'pregunta_id'=>5,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -716,7 +716,7 @@ class CursosTableSeeder extends Seeder
               'puntaje'=>1,
               'seleccion'=>false,
               'pregunta_id'=>6,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -724,7 +724,7 @@ class CursosTableSeeder extends Seeder
               'puntaje'=>1,
               'seleccion'=>false,
               'pregunta_id'=>7,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -732,7 +732,7 @@ class CursosTableSeeder extends Seeder
               'puntaje'=>1,
               'seleccion'=>false,
               'pregunta_id'=>8,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -740,7 +740,7 @@ class CursosTableSeeder extends Seeder
               'puntaje'=>1,
               'seleccion'=>false,
               'pregunta_id'=>9,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -750,7 +750,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'1.',
               'relacionar'=>'pool',
               'pregunta_id'=>10,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -760,7 +760,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'2.',
               'relacionar'=>'Bottle',
               'pregunta_id'=>10,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -770,7 +770,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'3.',
               'relacionar'=>'playground',
               'pregunta_id'=>10,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -780,7 +780,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'4.',
               'relacionar'=>'radio',
               'pregunta_id'=>10,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -790,7 +790,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'5.',
               'relacionar'=>'field',
               'pregunta_id'=>10,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -800,7 +800,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'6.',
               'relacionar'=>'computer',
               'pregunta_id'=>10,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -810,7 +810,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'7.',
               'relacionar'=>'office',
               'pregunta_id'=>10,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -820,7 +820,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'8.',
               'relacionar'=>'zoo',
               'pregunta_id'=>10,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -830,7 +830,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'9.',
               'relacionar'=>'shop',
               'pregunta_id'=>10,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -840,7 +840,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'10.',
               'relacionar'=>'college',
               'pregunta_id'=>10,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -848,7 +848,7 @@ class CursosTableSeeder extends Seeder
               'puntaje'=>1,
               'seleccion'=>false,
               'pregunta_id'=>12,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -856,7 +856,7 @@ class CursosTableSeeder extends Seeder
               'puntaje'=>1,
               'seleccion'=>false,
               'pregunta_id'=>14,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -864,7 +864,7 @@ class CursosTableSeeder extends Seeder
               'puntaje'=>1,
               'seleccion'=>false,
               'pregunta_id'=>15,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -872,7 +872,7 @@ class CursosTableSeeder extends Seeder
               'puntaje'=>4,
               'seleccion'=>false,
               'pregunta_id'=>11,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -880,7 +880,7 @@ class CursosTableSeeder extends Seeder
               'puntaje'=>1,
               'seleccion'=>false,
               'pregunta_id'=>13,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -890,7 +890,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'1',
               'relacionar'=>'E',
               'pregunta_id'=>16,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -900,7 +900,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'2',
               'relacionar'=>'F',
               'pregunta_id'=>16,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -910,7 +910,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'3',
               'relacionar'=>'B',
               'pregunta_id'=>16,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -920,7 +920,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'4',
               'relacionar'=>'H',
               'pregunta_id'=>16,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
 
@@ -930,7 +930,7 @@ class CursosTableSeeder extends Seeder
               'respuesta' =>'4',
               'relacionar'=>'C',
               'pregunta_id'=>16,
-              'user_id'=>2
+              'user_id'=>2,
               'fecha_creacion'=>'2019-01-20 13:42:50'
           ]);
     }
