@@ -6577,18 +6577,6 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-                      _c("b", [_vm._v("Inscripcion :")]),
-                      _vm._v(" "),
-                      curso.inscripcion
-                        ? _c("span", { staticClass: "badge bg-success" }, [
-                            _vm._v("Estudiante")
-                          ])
-                        : _c("span", { staticClass: "badge bg-info" }, [
-                            _vm._v("Administrador")
-                          ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-4 col-sm-6" }, [
                       _c("b", [_vm._v("Valor :")]),
                       _vm._v(" "),
                       _c("span", {
@@ -7728,7 +7716,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Inscripcion")]),
+                _c("label", [_vm._v("Acceso al curso")]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-check" }, [
                   _c("label", { staticClass: "form-check-label" }, [
@@ -7737,27 +7725,27 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.o_curso.inscripcion,
-                          expression: "o_curso.inscripcion"
+                          value: _vm.o_curso.visibilidad,
+                          expression: "o_curso.visibilidad"
                         }
                       ],
                       staticClass: "form-check-input",
                       attrs: {
                         type: "radio",
                         checked: "",
-                        name: "permitradio",
+                        name: "accesradio",
                         value: "true"
                       },
                       domProps: {
-                        checked: _vm._q(_vm.o_curso.inscripcion, "true")
+                        checked: _vm._q(_vm.o_curso.visibilidad, "true")
                       },
                       on: {
                         change: function($event) {
-                          _vm.$set(_vm.o_curso, "inscripcion", "true")
+                          _vm.$set(_vm.o_curso, "visibilidad", "true")
                         }
                       }
                     }),
-                    _vm._v("Permitido al usuario\n            ")
+                    _vm._v("Publico\n            ")
                   ])
                 ]),
                 _vm._v(" "),
@@ -7768,28 +7756,26 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.o_curso.inscripcion,
-                          expression: "o_curso.inscripcion"
+                          value: _vm.o_curso.visibilidad,
+                          expression: "o_curso.visibilidad"
                         }
                       ],
                       staticClass: "form-check-input",
                       attrs: {
                         type: "radio",
-                        name: "permitradio",
+                        name: "accesradio",
                         value: "false"
                       },
                       domProps: {
-                        checked: _vm._q(_vm.o_curso.inscripcion, "false")
+                        checked: _vm._q(_vm.o_curso.visibilidad, "false")
                       },
                       on: {
                         change: function($event) {
-                          _vm.$set(_vm.o_curso, "inscripcion", "false")
+                          _vm.$set(_vm.o_curso, "visibilidad", "false")
                         }
                       }
                     }),
-                    _vm._v(
-                      "Disponible para administrador del curso\n            "
-                    )
+                    _vm._v("Privado\n            ")
                   ])
                 ])
               ]),
