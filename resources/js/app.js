@@ -77,6 +77,11 @@ const app = new Vue({
       this.$root.$on('private_message_cli',function(data){
         socket.emit('private_message_cli',data);
       })
+      this.$root.$on('notifi_message_cli',function(data){
+        if(data.receptor==ident_tk){
+          this.messages();
+        }
+      })
       this.manualuso();
     },
     ready: function(){

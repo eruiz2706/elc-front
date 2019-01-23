@@ -101,7 +101,7 @@
               if(data.chat_id==vm.idchat){
                   vm.leidochat(data);
               }else{
-                this.$root.$emit('private_message_cli',response.data.chat_enviado);
+                this.$root.$emit('notifi_message_cli',data);
               }
             });
 
@@ -120,7 +120,7 @@
             preloadmodal:false,
             chat_mensajes:[],
             idchat:0,
-            id_userchat:0,
+            id_userchat:0,//usuario al que se envia el mensaje
             loader_responder:false,
             mensaje_chat:'',
             rol_user:''
@@ -179,7 +179,7 @@
           responderchat:function(){
             var url =this.base_url+'/chatprivado/responder';
             this.loader_responder=true;
-            axios.post(url,{idchat:this.idchat,mensaje_chat:this.mensaje_chat,idcurso:this.idcurso}).then(response =>{
+            axios.post(url,{idchat:this.idchat,mensaje_chat:this.mensaje_chat,idcurso:this.idcurso,iduser:this.id_userchat}).then(response =>{
                 this.chat_mensajes.push(response.data.chat_enviado);
                 this.$nextTick(() => {
                   this.$refs.content_chat.scrollTop = this.$refs.content_chat.scrollHeight;

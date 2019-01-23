@@ -309,6 +309,11 @@ var app = new Vue({
     this.$root.$on('private_message_cli', function (data) {
       socket.emit('private_message_cli', data);
     });
+    this.$root.$on('notifi_message_cli', function (data) {
+      if (data.receptor == ident_tk) {
+        this.messages();
+      }
+    });
     this.manualuso();
   },
   ready: function ready() {},
@@ -4480,7 +4485,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (data.chat_id == vm.idchat) {
         vm.leidochat(data);
       } else {
-        this.$root.$emit('private_message_cli', response.data.chat_enviado);
+        this.$root.$emit('notifi_message_cli', data);
       }
     });
 
@@ -4500,7 +4505,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       preloadmodal: false,
       chat_mensajes: [],
       idchat: 0,
-      id_userchat: 0,
+      id_userchat: 0, //usuario al que se envia el mensaje
       loader_responder: false,
       mensaje_chat: '',
       rol_user: ''
@@ -4561,7 +4566,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var url = this.base_url + '/chatprivado/responder';
       this.loader_responder = true;
-      axios.post(url, { idchat: this.idchat, mensaje_chat: this.mensaje_chat, idcurso: this.idcurso }).then(function (response) {
+      axios.post(url, { idchat: this.idchat, mensaje_chat: this.mensaje_chat, idcurso: this.idcurso, iduser: this.id_userchat }).then(function (response) {
         _this3.chat_mensajes.push(response.data.chat_enviado);
         _this3.$nextTick(function () {
           _this3.$refs.content_chat.scrollTop = _this3.$refs.content_chat.scrollHeight;

@@ -11,7 +11,7 @@
     <div class="col-md-9" style='padding-top:70px;'>
       <div class="card card-primary card-outline">
         <div class="card-header card-header-cuorse">
-          <h2 class="card-title-course">
+          <h2 class="card-title-course" style="padding-right:50px">
             @if(isset($curso))
               {{$curso->nombre}}
             @endif

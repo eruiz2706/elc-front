@@ -88,6 +88,7 @@ class ChatPrivado extends Controller
       return response()->json([
           'chat_enviado' =>[
             'chat_id'=>$request->idchat,
+            'receptor'=>$request->iduser,
             'remitente'=>$user->id,
             'nomremitente'=>$user->nombre,
             'imgremitente'=>$user->imagen,

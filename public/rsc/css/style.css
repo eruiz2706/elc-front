@@ -138,14 +138,19 @@
 
 /*header card curso actual*/
 .card-header-cuorse{
-  height: 90px;
-  background-color:#007bff
+  /*height: 90px;*/
+  background-color:#007bff;
 }
 .card-title-course{
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 400;
   margin: 0;
   color:white;
+}
+
+.card-title-course p{
+  font-size: 1.rem;
+  font-weight: 300;
 }
 
 /*estilos bordes color*/

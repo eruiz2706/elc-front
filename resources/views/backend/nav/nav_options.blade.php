@@ -21,7 +21,7 @@
   <div class="card-body p-0">
     <ul class="nav nav-pills flex-column">
       <li class="nav-item" v-for='nav in nav_cursos.content' v-bind:class='isSelectCurso(nav.id)'>
-        <a href="#" class="nav-link" v-bind:style="isSelectCurso2(nav.id)" v-on:click.prevent="setRedirect('cursos/gestion/'+nav.id)">
+        <a href="#" class="nav-link" style="line-height:16px;" v-bind:style="isSelectCurso2(nav.id)" v-on:click.prevent="setRedirect('cursos/gestion/'+nav.id)">
           <span v-text='nav.nombre'></span>
         </a>
       </li>
