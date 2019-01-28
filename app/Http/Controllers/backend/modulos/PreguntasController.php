@@ -43,9 +43,13 @@ class PreguntasController extends Controller
     ############guardar datos ########
     DB::beginTransaction();
     try{
+
+      $textoaudio=trim($request->texto_audio);
+
        $idpregunta=DB::table('preguntas')->insertGetId([
         'ejercicio_id'=>$request->idejerc,
         'nombre'=>'',
+        'textoaudio'=>$textoaudio,
         'descripcion'=>$request->descripcion,
         'tipo'=>$request->tipo,
         'textorellenar'=>nl2br($request->texto_rellenar),
@@ -141,7 +145,7 @@ class PreguntasController extends Controller
   //datos de edicion de un modulo
   public function editar(Request $request){
     $pregunta   =DB::select("select
-                            id,nombre,descripcion,tipo,textorellenar
+                            id,nombre,descripcion,tipo,textorellenar,textoaudio as texto_audio
                             from preguntas
                             where id = :id",
                           ['id'=>$request->id])[0];

@@ -144,7 +144,6 @@
             });
 
         },created : function(){
-
           this.base_url=base_url;
           this.getData();
         },

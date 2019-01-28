@@ -1,5 +1,11 @@
 <template>
 <div>
+  <div class="row" v-if="preload">
+    <div class="d-block mx-auto" >
+      <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
+    </div>
+  </div>
+
   <div class="card" v-for="(progreso,index) in a_progreso">
     <div class="card-header no-border">
       <h3 class="card-title" >

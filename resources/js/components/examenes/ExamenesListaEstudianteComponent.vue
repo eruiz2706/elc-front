@@ -1,6 +1,153 @@
 <template>
 <div>
-  <!-- Modal -->
+  <!-- Resultado -->
+  <div class="modal fade" id="modal_resultado" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class='modal-header' style='padding:0px'>
+          <h5 class="modal-title" style="padding-top:5px;padding-left:10px">
+            Resultado
+          </h5>
+          <ul class="nav nav-pills ml-auto" >
+            <li class="nav-item" v-for="(examen,index) in a_resultado">
+              <a class="nav-link  show" v-bind:href="'#tab_'+index"  v-bind:class="(index==tab_active) ? 'active':''" v-text="index+1" v-on:click.prevent="tabtoogle(index)"></a>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-body" style="height:450px;overflow-y: auto;">
+          <div class="row" v-if="preloadmodal">
+            <div class="d-block mx-auto" >
+              <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
+            </div>
+          </div>
+          <div class="tab-content">
+            <!--<p>@{{a_examen}}</p>-->
+            <div class="tab-pane show" v-bind:class="(index==tab_active) ? 'active':''" v-bind:id="'tab_'+index" v-for="(examen,index) in a_resultado">
+              <p>
+                <b> Puntuaciòn <span v-text='examen.puntaje'></span> de <span v-text='examen.calificacion'></span></b>
+              </p>
+              <strong v-text="(index+1)+')'+examen.tipo"></strong>
+              <p v-html="examen.descripcion"></p>
+              <p v-html="examen.textorellenar"></p>
+              <hr>
+              <div v-for='(fila,i) in examen.respuestas' v-if="examen.tipo=='abierta'">
+                <table class="table no-border">
+                  <thead>
+                    <th>Su respuesta</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p v-text="fila.respuesta_user"></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <table class="table no-border" v-if="examen.tipo=='unica'">
+                <thead>
+                  <th>Su seleccion</th>
+                  <th>Seleccion correcta</th>
+                  <th>Respuesta</th>
+                </thead>
+                <tbody>
+                  <tr v-for='(fila,i) in examen.respuestas'>
+                    <td>
+                      <i class="fa fa-fw fa-check" style="color:green;font-size:20px" v-if="fila.option"></i>
+                    </td>
+                    <td>
+                      <i class="fa fa-fw fa-check" style="color:green;font-size:20px" v-if="fila.seleccion_user"></i>
+                    </td>
+                    <td>
+                      <p v-text="fila.respuesta"></p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table no-border" v-if="examen.tipo=='multiple'">
+                <thead>
+                  <th>Su seleccion</th>
+                  <th>Seleccion correcta</th>
+                  <th>Respuesta</th>
+                </thead>
+                <tbody>
+                  <tr v-for='(fila,i) in examen.respuestas'>
+                    <td>
+                      <i class="fa fa-fw fa-check" style="color:green;font-size:20px" v-if="fila.option"></i>
+                    </td>
+                    <td>
+                      <i class="fa fa-fw fa-check" style="color:green;font-size:20px" v-if="fila.seleccion_user"></i>
+                    </td>
+                    <td>
+                      <p v-text="fila.respuesta"></p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table no-border" v-if="examen.tipo=='relacionar'">
+                <thead>
+                  <th>Su seleccion</th>
+                  <th>Seleccion correcta</th>
+                  <th>Respuesta</th>
+                </thead>
+                <tbody>
+                  <tr v-for='(fila,i) in examen.respuestas'>
+                    <td>
+                      <p v-text="fila.relacionar_user"></p>
+                    </td>
+                    <td>
+                      <p v-text="fila.relacionar"></p>
+                    </td>
+                    <td>
+                      <p v-text="fila.respuesta"></p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table no-border" v-if="examen.tipo=='rellenar'">
+                <thead>
+                  <th>Su seleccion</th>
+                  <th>Seleccion correcta</th>
+                  <th>Respuesta</th>
+                </thead>
+                <tbody>
+                  <tr v-for='(fila,i) in examen.respuestas'>
+                    <td>
+                      <p v-text="fila.relacionar_user"></p>
+                    </td>
+                    <td>
+                      <p v-text="fila.relacionar"></p>
+                    </td>
+                    <td>
+                      <p v-text="fila.respuesta"></p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class='modal-footer'>
+          <button type="button" class="btn btn-outline-primary btn-sm float-left"  v-on:click.prevent="tabtoogle_menos()">
+            <i style='font-size:20px' class="fa fa-angle-double-left"></i>
+          </button>
+          <button type="button" class="btn btn-outline-primary btn-sm float-left" v-if="!(tab_active==a_resultado.length-1)" v-on:click.prevent="tabtoogle_mas()">
+              <i style='font-size:20px' class="fa fa-angle-double-right"></i>
+          </button>
+
+          <button type="button" class="btn btn-outline-primary btn-sm float-left" v-if="(tab_active==a_resultado.length-1)" v-on:click.prevent="cerrarResultado()">
+            Cerrar
+          </button>
+        </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Examen -->
   <div class="modal fade" id="modal_ejercicio" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -29,6 +176,14 @@
               <strong v-text="(index+1)+')'+examen.tipo"></strong>
               <p v-html="examen.descripcion"></p>
               <p v-html="examen.textorellenar"></p>
+              <div class="form-group" v-if="examen.audio =='A'">
+                <label>
+                  Reproducir
+                  <button type="button" class="btn btn-outline-primary btn-sm" v-bind:id="'player_'+index" v-on:click.prevent="playAudio(index)">
+                    <i class="fa fa-play" ></i>
+                  </button>&nbsp;&nbsp;&nbsp;
+                </label>
+              </div>
 
               <hr>
               <div v-for='(fila,i) in examen.respuestas' v-if="examen.tipo=='abierta'">
@@ -43,8 +198,6 @@
                   <tr v-for='(fila,i) in examen.respuestas'>
                     <td>
                       <input type="radio" v-bind:id="fila.id" v-bind:value="fila.id" v-model="examen.idunica">
-                    </td>
-                    <td>
                       <p v-text="fila.respuesta"></p>
                     </td>
                   </tr>
@@ -56,8 +209,6 @@
                   <tr v-for='(fila,i) in examen.respuestas'>
                     <td>
                       <input type="checkbox"  v-model='fila.seleccion'>
-                    </td>
-                    <td>
                       <p v-text="fila.respuesta"></p>
                     </td>
                   </tr>
@@ -69,14 +220,12 @@
                   <tr v-for='(fila,i) in examen.respuestas'>
                     <td>
                       <p v-text="fila.respuesta"></p>
-                    </td>
-                    <td>
                       <div class="form-group">
                         <select class='form-control' v-model='fila.relacionar2'>
                           <option value="''"> - </option>
                           <option v-bind:value='select.relacionar' v-text='select.relacionar' v-for='select in examen.respuestas'></option>
                         </select>
-                    </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -87,13 +236,12 @@
                   <tr v-for='(fila,i) in examen.respuestas'>
                     <td>
                       <p v-text="fila.respuesta+')'"></p>
-                    </td>
-                    <td>
                       <input type="text" class="form-control" v-model="fila.relacionar2">
                     </td>
                   </tr>
                 </tbody>
               </table>
+              <textarea class="form-control" rows="2" v-text='examen.textoaudio' v-bind:id="'audio_'+index" style='display:none'></textarea>
             </div>
           </div>
         </div>
@@ -160,6 +308,8 @@
 </template>
 
 <script>
+    const artyom = new Artyom();
+
     export default {
         mounted() {
 
@@ -179,10 +329,42 @@
             toSecond:0,
             toMinute:0,
             loader_finalizar:false,
-            tab_active:0
+            tab_active:0,
+            a_resultado:[]
           }
         },
         methods : {
+          playAudio:function(id){
+            var vm=this;
+            artyom.initialize({
+                  lang:"en-US",// Más lenguajes son soportados, lee la documentación
+                  continuous:false,// Reconoce 1 solo comando y basta de escuchar
+                  listen:true, // Iniciar !
+                  debug:false, // Muestra un informe en la consola
+                  speed:0.7 // Habla normalmente
+            }).then(() => {
+              //artyom.say("Artyom succesfully initialized");
+              console.log("Artyom succesfully initialized");
+            }).catch((err) => {
+                //artyom.say("Artyom couldn't be initialized, please check the console for errors");
+                console.log("Artyom couldn't be initialized, please check the console for errors");
+                console.log(err);
+            });
+
+            var palabra=document.getElementById('audio_'+id).value;
+            artyom.say(palabra,{
+                onStart:function(){
+                    document.getElementById('player_'+id).disabled=true;
+                    console.log("Comenzando a leer texto");
+                },
+                onEnd:function(){
+                    document.getElementById('player_'+id).disabled=false;
+                    artyom.fatality();
+                    console.log("Texto leido satisfactoriamente");
+                }
+            });
+
+          },
           tabtoogle_mas:function(){
             if(!(this.tab_active==this.a_examen.length-1)){
               this.tab_active=this.tab_active+1;
@@ -246,6 +428,7 @@
               show: true
             });
             axios.post(url,{id:id}).then(response =>{
+                this.tab_active=0;
                 this.preloadmodal=false;
                 this.idejeruser=response.data.idejeruser;
                 this.a_examen=response.data.preguntas;
@@ -319,14 +502,14 @@
             }, 1000);
           },
           verresultado:function(id){
-            /*var url =this.base_url+'/ejercicios/resultadoes';
+            var url =this.base_url+'/ejercicios/verresultado';
             this.preloadmodal=true;
-            $('#modal_ejercicio').modal('show');
+            $('#modal_resultado').modal("show");
             axios.post(url,{id:id}).then(response =>{
+                this.tab_active=0;
                 this.preloadmodal=false;
-                this.idejeruser=response.data.idejeruser;
-                this.a_examen=response.data.preguntas;
-                this.toMinute=response.data.duracion;
+                this.a_resultado=response.data.preguntas;
+                console.log(this.a_resultado);
             }).catch(error =>{
                 this.preloadmodal=false;
                 if(error.response.data.errors){
@@ -337,7 +520,11 @@
                   });
                   //debe colocarse funcionalidad cerrar modal
                 }
-            });*/
+            });
+          },
+          cerrarResultado:function(){
+            this.a_resultado=[];
+            $('#modal_resultado').modal("hide");
           }
         }
     }

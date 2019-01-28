@@ -2118,7 +2118,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
     },
     created: function created() {
-
         this.base_url = base_url;
         this.getData();
     },
@@ -3326,6 +3325,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3408,227 +3413,252 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.a_progreso, function(progreso, index) {
-      return _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header no-border" }, [
-          _c("h3", { staticClass: "card-title" }, [
-            _c("div", { staticClass: "progress-group" }, [
-              _vm._v("\n            Modulo "),
-              _c("span", {
-                domProps: { textContent: _vm._s(progreso.numero) }
-              }),
-              _vm._v(" : "),
-              _c("span", {
-                domProps: { textContent: _vm._s(progreso.nombre) }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "float-right" }, [
+    [
+      _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(0)]) : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.a_progreso, function(progreso, index) {
+        return _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header no-border" }, [
+            _c("h3", { staticClass: "card-title" }, [
+              _c("div", { staticClass: "progress-group" }, [
+                _vm._v("\n            Modulo "),
                 _c("span", {
-                  domProps: { textContent: _vm._s(progreso.cantlec_leidas) }
+                  domProps: { textContent: _vm._s(progreso.numero) }
                 }),
-                _vm._v("/"),
-                _c("b", [
+                _vm._v(" : "),
+                _c("span", {
+                  domProps: { textContent: _vm._s(progreso.nombre) }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "float-right" }, [
                   _c("span", {
-                    domProps: { textContent: _vm._s(progreso.cantlec) }
-                  })
+                    domProps: { textContent: _vm._s(progreso.cantlec_leidas) }
+                  }),
+                  _vm._v("/"),
+                  _c("b", [
+                    _c("span", {
+                      domProps: { textContent: _vm._s(progreso.cantlec) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "progress" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "progress-bar bg-primary",
+                      style:
+                        "width:" +
+                        _vm.porcent(progreso.cantlec_leidas, progreso.cantlec) +
+                        "%"
+                    },
+                    [
+                      _vm._v("Progreso modulo "),
+                      _c("span", {
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.porcent(
+                              progreso.cantlec_leidas,
+                              progreso.cantlec
+                            )
+                          )
+                        }
+                      }),
+                      _vm._v("%")
+                    ]
+                  )
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "progress" }, [
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            _vm._l(progreso.lecciones, function(leccion) {
+              return _c("div", { staticClass: "card" }, [
                 _c(
                   "div",
                   {
-                    staticClass: "progress-bar bg-primary",
-                    style:
-                      "width:" +
-                      _vm.porcent(progreso.cantlec_leidas, progreso.cantlec) +
-                      "%"
+                    staticClass: "card-header",
+                    staticStyle: { padding: ".2rem 1.25rem" }
                   },
                   [
-                    _vm._v("Progreso modulo "),
-                    _c("span", {
-                      domProps: {
-                        textContent: _vm._s(
-                          _vm.porcent(progreso.cantlec_leidas, progreso.cantlec)
-                        )
-                      }
+                    _c(
+                      "h5",
+                      {
+                        staticClass: "card-title",
+                        staticStyle: { "font-size": "1rem" }
+                      },
+                      [
+                        leccion.leido
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "collapsed",
+                                attrs: {
+                                  "data-toggle": "collapse",
+                                  href: "#" + progreso.id + "-" + leccion.id,
+                                  "aria-expanded": "false"
+                                }
+                              },
+                              [
+                                _vm._v("\n              Leccion "),
+                                _c("span", {
+                                  domProps: {
+                                    textContent: _vm._s(leccion.numero)
+                                  }
+                                }),
+                                _vm._v(" : "),
+                                _c("span", {
+                                  domProps: {
+                                    textContent: _vm._s(leccion.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                leccion.leido
+                                  ? _c("i", { staticClass: "fa fa-check" })
+                                  : _vm._e()
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        leccion.leido
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "badge badge-primary float-right"
+                              },
+                              [
+                                _c("i", { staticClass: "fa fa-clock-o" }),
+                                _vm._v(" "),
+                                _c("span", {
+                                  domProps: {
+                                    textContent: _vm._s(leccion.tiempolectura)
+                                  }
+                                }),
+                                _vm._v(" minutos\n              ")
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !leccion.leido
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "collapsed",
+                                staticStyle: { color: "grey" },
+                                attrs: {
+                                  "data-toggle": "collapse",
+                                  href: "#" + progreso.id + "-" + leccion.id,
+                                  "aria-expanded": "false"
+                                }
+                              },
+                              [
+                                _vm._v("\n                Leccion "),
+                                _c("span", {
+                                  domProps: {
+                                    textContent: _vm._s(leccion.numero)
+                                  }
+                                }),
+                                _vm._v(" : "),
+                                _c("span", {
+                                  domProps: {
+                                    textContent: _vm._s(leccion.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                leccion.leido
+                                  ? _c("i", { staticClass: "fa fa-check" })
+                                  : _vm._e()
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !leccion.leido
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "badge badge-default float-right"
+                              },
+                              [
+                                _c("i", { staticClass: "fa fa-clock-o" }),
+                                _vm._v(" "),
+                                _c("span", {
+                                  domProps: {
+                                    textContent: _vm._s(leccion.tiempolectura)
+                                  }
+                                }),
+                                _vm._v(" minutos\n              ")
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "panel-collapse in collapse",
+                    attrs: { id: progreso.id + "-" + leccion.id }
+                  },
+                  [
+                    _c("div", {
+                      staticClass: "card-body",
+                      domProps: { innerHTML: _vm._s(leccion.descripcion) }
                     }),
-                    _vm._v("%")
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-footer" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "btn btn-outline-primary btn-sm collapsed",
+                          attrs: {
+                            "data-toggle": "collapse",
+                            href: "#" + progreso.id + "-" + leccion.id,
+                            "aria-expanded": "false"
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.leccionLeida(
+                                progreso.id,
+                                leccion.id,
+                                leccion.leido
+                              )
+                            }
+                          }
+                        },
+                        [_vm._v("\n                Finalizar\n              ")]
+                      )
+                    ])
                   ]
                 )
               ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "card-body" },
-          _vm._l(progreso.lecciones, function(leccion) {
-            return _c("div", { staticClass: "card" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "card-header",
-                  staticStyle: { padding: ".2rem 1.25rem" }
-                },
-                [
-                  _c(
-                    "h5",
-                    {
-                      staticClass: "card-title",
-                      staticStyle: { "font-size": "1rem" }
-                    },
-                    [
-                      leccion.leido
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "collapsed",
-                              attrs: {
-                                "data-toggle": "collapse",
-                                href: "#" + progreso.id + "-" + leccion.id,
-                                "aria-expanded": "false"
-                              }
-                            },
-                            [
-                              _vm._v("\n              Leccion "),
-                              _c("span", {
-                                domProps: {
-                                  textContent: _vm._s(leccion.numero)
-                                }
-                              }),
-                              _vm._v(" : "),
-                              _c("span", {
-                                domProps: {
-                                  textContent: _vm._s(leccion.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              leccion.leido
-                                ? _c("i", { staticClass: "fa fa-check" })
-                                : _vm._e()
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      leccion.leido
-                        ? _c(
-                            "small",
-                            { staticClass: "badge badge-primary float-right" },
-                            [
-                              _c("i", { staticClass: "fa fa-clock-o" }),
-                              _vm._v(" "),
-                              _c("span", {
-                                domProps: {
-                                  textContent: _vm._s(leccion.tiempolectura)
-                                }
-                              }),
-                              _vm._v(" minutos\n              ")
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      !leccion.leido
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "collapsed",
-                              staticStyle: { color: "grey" },
-                              attrs: {
-                                "data-toggle": "collapse",
-                                href: "#" + progreso.id + "-" + leccion.id,
-                                "aria-expanded": "false"
-                              }
-                            },
-                            [
-                              _vm._v("\n                Leccion "),
-                              _c("span", {
-                                domProps: {
-                                  textContent: _vm._s(leccion.numero)
-                                }
-                              }),
-                              _vm._v(" : "),
-                              _c("span", {
-                                domProps: {
-                                  textContent: _vm._s(leccion.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              leccion.leido
-                                ? _c("i", { staticClass: "fa fa-check" })
-                                : _vm._e()
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      !leccion.leido
-                        ? _c(
-                            "small",
-                            { staticClass: "badge badge-default float-right" },
-                            [
-                              _c("i", { staticClass: "fa fa-clock-o" }),
-                              _vm._v(" "),
-                              _c("span", {
-                                domProps: {
-                                  textContent: _vm._s(leccion.tiempolectura)
-                                }
-                              }),
-                              _vm._v(" minutos\n              ")
-                            ]
-                          )
-                        : _vm._e()
-                    ]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "panel-collapse in collapse",
-                  attrs: { id: progreso.id + "-" + leccion.id }
-                },
-                [
-                  _c("div", {
-                    staticClass: "card-body",
-                    domProps: { innerHTML: _vm._s(leccion.descripcion) }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-footer" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-outline-primary btn-sm collapsed",
-                        attrs: {
-                          "data-toggle": "collapse",
-                          href: "#" + progreso.id + "-" + leccion.id,
-                          "aria-expanded": "false"
-                        },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.leccionLeida(
-                              progreso.id,
-                              leccion.id,
-                              leccion.leido
-                            )
-                          }
-                        }
-                      },
-                      [_vm._v("\n                Finalizar\n              ")]
-                    )
-                  ])
-                ]
-              )
-            ])
-          })
-        )
-      ])
-    })
+            })
+          )
+        ])
+      })
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-block mx-auto" }, [
+      _c("i", {
+        staticClass: "fa fa-circle-o-notch fa-spin",
+        staticStyle: { "font-size": "80px" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -3691,6 +3721,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -4098,6 +4132,8 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
+      _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(3)]) : _vm._e(),
+      _vm._v(" "),
       _vm._l(_vm.a_progreso, function(progreso, index) {
         return _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header no-border" }, [
@@ -4317,6 +4353,17 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Lecciones")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-block mx-auto" }, [
+      _c("i", {
+        staticClass: "fa fa-circle-o-notch fa-spin",
+        staticStyle: { "font-size": "80px" }
+      })
     ])
   }
 ]
@@ -15084,6 +15131,156 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var artyom = new Artyom();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -15103,10 +15300,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       toSecond: 0,
       toMinute: 0,
       loader_finalizar: false,
-      tab_active: 0
+      tab_active: 0,
+      a_resultado: []
     };
   },
   methods: {
+    playAudio: function playAudio(id) {
+      var vm = this;
+      artyom.initialize({
+        lang: "en-US", // Más lenguajes son soportados, lee la documentación
+        continuous: false, // Reconoce 1 solo comando y basta de escuchar
+        listen: true, // Iniciar !
+        debug: false, // Muestra un informe en la consola
+        speed: 0.7 // Habla normalmente
+      }).then(function () {
+        //artyom.say("Artyom succesfully initialized");
+        console.log("Artyom succesfully initialized");
+      }).catch(function (err) {
+        //artyom.say("Artyom couldn't be initialized, please check the console for errors");
+        console.log("Artyom couldn't be initialized, please check the console for errors");
+        console.log(err);
+      });
+
+      var palabra = document.getElementById('audio_' + id).value;
+      artyom.say(palabra, {
+        onStart: function onStart() {
+          document.getElementById('player_' + id).disabled = true;
+          console.log("Comenzando a leer texto");
+        },
+        onEnd: function onEnd() {
+          document.getElementById('player_' + id).disabled = false;
+          artyom.fatality();
+          console.log("Texto leido satisfactoriamente");
+        }
+      });
+    },
     tabtoogle_mas: function tabtoogle_mas() {
       if (!(this.tab_active == this.a_examen.length - 1)) {
         this.tab_active = this.tab_active + 1;
@@ -15172,6 +15400,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         show: true
       });
       axios.post(url, { id: id }).then(function (response) {
+        _this2.tab_active = 0;
         _this2.preloadmodal = false;
         _this2.idejeruser = response.data.idejeruser;
         _this2.a_examen = response.data.preguntas;
@@ -15243,25 +15472,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, 1000);
     },
     verresultado: function verresultado(id) {
-      /*var url =this.base_url+'/ejercicios/resultadoes';
-      this.preloadmodal=true;
-      $('#modal_ejercicio').modal('show');
-      axios.post(url,{id:id}).then(response =>{
-          this.preloadmodal=false;
-          this.idejeruser=response.data.idejeruser;
-          this.a_examen=response.data.preguntas;
-          this.toMinute=response.data.duracion;
-      }).catch(error =>{
-          this.preloadmodal=false;
-          if(error.response.data.errors){
-          }
-          if(error.response.data.error){
-            toastr.error(error.response.data.error,'',{
-                "timeOut": "3500"
-            });
-            //debe colocarse funcionalidad cerrar modal
-          }
-      });*/
+      var _this4 = this;
+
+      var url = this.base_url + '/ejercicios/verresultado';
+      this.preloadmodal = true;
+      $('#modal_resultado').modal("show");
+      axios.post(url, { id: id }).then(function (response) {
+        _this4.tab_active = 0;
+        _this4.preloadmodal = false;
+        _this4.a_resultado = response.data.preguntas;
+        console.log(_this4.a_resultado);
+      }).catch(function (error) {
+        _this4.preloadmodal = false;
+        if (error.response.data.errors) {}
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "3500"
+          });
+          //debe colocarse funcionalidad cerrar modal
+        }
+      });
+    },
+    cerrarResultado: function cerrarResultado() {
+      this.a_resultado = [];
+      $('#modal_resultado').modal("hide");
     }
   }
 });
@@ -15277,6 +15511,445 @@ var render = function() {
   return _c(
     "div",
     [
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modal_resultado",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-lg",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-header",
+                    staticStyle: { padding: "0px" }
+                  },
+                  [
+                    _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        staticStyle: {
+                          "padding-top": "5px",
+                          "padding-left": "10px"
+                        }
+                      },
+                      [_vm._v("\n            Resultado\n          ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      { staticClass: "nav nav-pills ml-auto" },
+                      _vm._l(_vm.a_resultado, function(examen, index) {
+                        return _c("li", { staticClass: "nav-item" }, [
+                          _c("a", {
+                            staticClass: "nav-link  show",
+                            class: index == _vm.tab_active ? "active" : "",
+                            attrs: { href: "#tab_" + index },
+                            domProps: { textContent: _vm._s(index + 1) },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.tabtoogle(index)
+                              }
+                            }
+                          })
+                        ])
+                      })
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-body",
+                    staticStyle: { height: "450px", "overflow-y": "auto" }
+                  },
+                  [
+                    _vm.preloadmodal
+                      ? _c("div", { staticClass: "row" }, [_vm._m(0)])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "tab-content" },
+                      _vm._l(_vm.a_resultado, function(examen, index) {
+                        return _c(
+                          "div",
+                          {
+                            staticClass: "tab-pane show",
+                            class: index == _vm.tab_active ? "active" : "",
+                            attrs: { id: "tab_" + index }
+                          },
+                          [
+                            _c("p", [
+                              _c("b", [
+                                _vm._v(" Puntuaciòn "),
+                                _c("span", {
+                                  domProps: {
+                                    textContent: _vm._s(examen.puntaje)
+                                  }
+                                }),
+                                _vm._v(" de "),
+                                _c("span", {
+                                  domProps: {
+                                    textContent: _vm._s(examen.calificacion)
+                                  }
+                                })
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("strong", {
+                              domProps: {
+                                textContent: _vm._s(
+                                  index + 1 + ")" + examen.tipo
+                                )
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("p", {
+                              domProps: {
+                                innerHTML: _vm._s(examen.descripcion)
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("p", {
+                              domProps: {
+                                innerHTML: _vm._s(examen.textorellenar)
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _vm._l(examen.respuestas, function(fila, i) {
+                              return examen.tipo == "abierta"
+                                ? _c("div", [
+                                    _c(
+                                      "table",
+                                      { staticClass: "table no-border" },
+                                      [
+                                        _vm._m(1, true),
+                                        _vm._v(" "),
+                                        _c("tbody", [
+                                          _c("tr", [
+                                            _c("td", [
+                                              _c("p", {
+                                                domProps: {
+                                                  textContent: _vm._s(
+                                                    fila.respuesta_user
+                                                  )
+                                                }
+                                              })
+                                            ])
+                                          ])
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                : _vm._e()
+                            }),
+                            _vm._v(" "),
+                            examen.tipo == "unica"
+                              ? _c(
+                                  "table",
+                                  { staticClass: "table no-border" },
+                                  [
+                                    _vm._m(2, true),
+                                    _vm._v(" "),
+                                    _c(
+                                      "tbody",
+                                      _vm._l(examen.respuestas, function(
+                                        fila,
+                                        i
+                                      ) {
+                                        return _c("tr", [
+                                          _c("td", [
+                                            fila.option
+                                              ? _c("i", {
+                                                  staticClass:
+                                                    "fa fa-fw fa-check",
+                                                  staticStyle: {
+                                                    color: "green",
+                                                    "font-size": "20px"
+                                                  }
+                                                })
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            fila.seleccion_user
+                                              ? _c("i", {
+                                                  staticClass:
+                                                    "fa fa-fw fa-check",
+                                                  staticStyle: {
+                                                    color: "green",
+                                                    "font-size": "20px"
+                                                  }
+                                                })
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _c("p", {
+                                              domProps: {
+                                                textContent: _vm._s(
+                                                  fila.respuesta
+                                                )
+                                              }
+                                            })
+                                          ])
+                                        ])
+                                      })
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            examen.tipo == "multiple"
+                              ? _c(
+                                  "table",
+                                  { staticClass: "table no-border" },
+                                  [
+                                    _vm._m(3, true),
+                                    _vm._v(" "),
+                                    _c(
+                                      "tbody",
+                                      _vm._l(examen.respuestas, function(
+                                        fila,
+                                        i
+                                      ) {
+                                        return _c("tr", [
+                                          _c("td", [
+                                            fila.option
+                                              ? _c("i", {
+                                                  staticClass:
+                                                    "fa fa-fw fa-check",
+                                                  staticStyle: {
+                                                    color: "green",
+                                                    "font-size": "20px"
+                                                  }
+                                                })
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            fila.seleccion_user
+                                              ? _c("i", {
+                                                  staticClass:
+                                                    "fa fa-fw fa-check",
+                                                  staticStyle: {
+                                                    color: "green",
+                                                    "font-size": "20px"
+                                                  }
+                                                })
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _c("p", {
+                                              domProps: {
+                                                textContent: _vm._s(
+                                                  fila.respuesta
+                                                )
+                                              }
+                                            })
+                                          ])
+                                        ])
+                                      })
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            examen.tipo == "relacionar"
+                              ? _c(
+                                  "table",
+                                  { staticClass: "table no-border" },
+                                  [
+                                    _vm._m(4, true),
+                                    _vm._v(" "),
+                                    _c(
+                                      "tbody",
+                                      _vm._l(examen.respuestas, function(
+                                        fila,
+                                        i
+                                      ) {
+                                        return _c("tr", [
+                                          _c("td", [
+                                            _c("p", {
+                                              domProps: {
+                                                textContent: _vm._s(
+                                                  fila.relacionar_user
+                                                )
+                                              }
+                                            })
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _c("p", {
+                                              domProps: {
+                                                textContent: _vm._s(
+                                                  fila.relacionar
+                                                )
+                                              }
+                                            })
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _c("p", {
+                                              domProps: {
+                                                textContent: _vm._s(
+                                                  fila.respuesta
+                                                )
+                                              }
+                                            })
+                                          ])
+                                        ])
+                                      })
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            examen.tipo == "rellenar"
+                              ? _c(
+                                  "table",
+                                  { staticClass: "table no-border" },
+                                  [
+                                    _vm._m(5, true),
+                                    _vm._v(" "),
+                                    _c(
+                                      "tbody",
+                                      _vm._l(examen.respuestas, function(
+                                        fila,
+                                        i
+                                      ) {
+                                        return _c("tr", [
+                                          _c("td", [
+                                            _c("p", {
+                                              domProps: {
+                                                textContent: _vm._s(
+                                                  fila.relacionar_user
+                                                )
+                                              }
+                                            })
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _c("p", {
+                                              domProps: {
+                                                textContent: _vm._s(
+                                                  fila.relacionar
+                                                )
+                                              }
+                                            })
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _c("p", {
+                                              domProps: {
+                                                textContent: _vm._s(
+                                                  fila.respuesta
+                                                )
+                                              }
+                                            })
+                                          ])
+                                        ])
+                                      })
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ],
+                          2
+                        )
+                      })
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-primary btn-sm float-left",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.tabtoogle_menos()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-angle-double-left",
+                        staticStyle: { "font-size": "20px" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  !(_vm.tab_active == _vm.a_resultado.length - 1)
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-outline-primary btn-sm float-left",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.tabtoogle_mas()
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-angle-double-right",
+                            staticStyle: { "font-size": "20px" }
+                          })
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.tab_active == _vm.a_resultado.length - 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-outline-primary btn-sm float-left",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.cerrarResultado()
+                            }
+                          }
+                        },
+                        [_vm._v("\n            Cerrar\n          ")]
+                      )
+                    : _vm._e()
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -15304,7 +15977,7 @@ var render = function() {
                     staticStyle: { padding: "0px" }
                   },
                   [
-                    _vm._m(0),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c(
                       "ul",
@@ -15337,7 +16010,7 @@ var render = function() {
                   },
                   [
                     _vm.preloadmodal
-                      ? _c("div", { staticClass: "row" }, [_vm._m(1)])
+                      ? _c("div", { staticClass: "row" }, [_vm._m(7)])
                       : _vm._e(),
                     _vm._v(" "),
                     _c(
@@ -15371,6 +16044,35 @@ var render = function() {
                                 innerHTML: _vm._s(examen.textorellenar)
                               }
                             }),
+                            _vm._v(" "),
+                            examen.audio == "A"
+                              ? _c("div", { staticClass: "form-group" }, [
+                                  _c("label", [
+                                    _vm._v(
+                                      "\n                  Reproducir\n                  "
+                                    ),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-outline-primary btn-sm",
+                                        attrs: {
+                                          type: "button",
+                                          id: "player_" + index
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            _vm.playAudio(index)
+                                          }
+                                        }
+                                      },
+                                      [_c("i", { staticClass: "fa fa-play" })]
+                                    ),
+                                    _vm._v("   \n                ")
+                                  ])
+                                ])
+                              : _vm._e(),
                             _vm._v(" "),
                             _c("hr"),
                             _vm._v(" "),
@@ -15453,10 +16155,8 @@ var render = function() {
                                                   )
                                                 }
                                               }
-                                            })
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
+                                            }),
+                                            _vm._v(" "),
                                             _c("p", {
                                               domProps: {
                                                 textContent: _vm._s(
@@ -15543,10 +16243,8 @@ var render = function() {
                                                   }
                                                 }
                                               }
-                                            })
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
+                                            }),
+                                            _vm._v(" "),
                                             _c("p", {
                                               domProps: {
                                                 textContent: _vm._s(
@@ -15581,10 +16279,8 @@ var render = function() {
                                                   fila.respuesta
                                                 )
                                               }
-                                            })
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
+                                            }),
+                                            _vm._v(" "),
                                             _c(
                                               "div",
                                               { staticClass: "form-group" },
@@ -15684,10 +16380,8 @@ var render = function() {
                                                   fila.respuesta + ")"
                                                 )
                                               }
-                                            })
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
+                                            }),
+                                            _vm._v(" "),
                                             _c("input", {
                                               directives: [
                                                 {
@@ -15721,7 +16415,16 @@ var render = function() {
                                     )
                                   ]
                                 )
-                              : _vm._e()
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              staticClass: "form-control",
+                              staticStyle: { display: "none" },
+                              attrs: { rows: "2", id: "audio_" + index },
+                              domProps: {
+                                textContent: _vm._s(examen.textoaudio)
+                              }
+                            })
                           ],
                           2
                         )
@@ -15809,7 +16512,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(2)]) : _vm._e(),
+      _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(8)]) : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.a_ejercicios, function(ejercicio) {
         return !_vm.preload
@@ -15928,6 +16631,71 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-block mx-auto" }, [
+      _c("i", {
+        staticClass: "fa fa-circle-o-notch fa-spin",
+        staticStyle: { "font-size": "80px" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [_c("th", [_vm._v("Su respuesta")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Su seleccion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Seleccion correcta")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Respuesta")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Su seleccion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Seleccion correcta")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Respuesta")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Su seleccion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Seleccion correcta")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Respuesta")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Su seleccion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Seleccion correcta")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Respuesta")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -16569,9 +17337,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 var artyom = new Artyom();
 
@@ -16610,7 +17375,7 @@ var artyom = new Artyom();
         }
       },
       toolbar: [['font', ['fontname']], ['para', ['ul', 'ol', 'paragraph', 'strikethrough']], ['style', ['bold', 'italic', 'underline', 'clear']], ['fontsize', ['fontsize']], ['color', ['color']], ['height', ['height']], ['groupName', ['picture', 'link', 'video', 'table', 'hr', 'fullscreen']]],
-      height: 70
+      height: 200
     });
   },
   created: function created() {
@@ -16651,7 +17416,9 @@ var artyom = new Artyom();
       view_resp_rellenar: false,
       a_resp_rellenar: [],
       resp_rellenar: '',
-      id_rellenar: 0
+      id_rellenar: 0,
+
+      disabled_play: false
     };
   },
   methods: {
@@ -16696,6 +17463,7 @@ var artyom = new Artyom();
       });
     },
     playAudio: function playAudio() {
+      var vm = this;
       artyom.initialize({
         lang: "en-US", // Más lenguajes son soportados, lee la documentación
         continuous: false, // Reconoce 1 solo comando y basta de escuchar
@@ -16714,17 +17482,14 @@ var artyom = new Artyom();
       var palabra = this.o_pregunta.texto_audio;
       artyom.say(palabra, {
         onStart: function onStart() {
+          vm.disabled_play = true;
           console.log("Comenzando a leer texto");
         },
         onEnd: function onEnd() {
+          vm.disabled_play = false;
+          artyom.fatality();
           console.log("Texto leido satisfactoriamente");
         }
-      });
-    },
-    stopAudio: function stopAudio() {
-      console.log("stop");
-      artyom.fatality().then(function () {
-        console.log("Artyom succesfully stopped !");
       });
     },
     viewtipo: function viewtipo() {
@@ -17638,7 +18403,10 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-outline-primary btn-sm",
-                          attrs: { type: "button" },
+                          attrs: {
+                            type: "button",
+                            disabled: _vm.disabled_play
+                          },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -17648,21 +18416,7 @@ var render = function() {
                         },
                         [_c("i", { staticClass: "fa fa-play" })]
                       ),
-                      _vm._v("   \n                  "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-outline-danger btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.stopAudio()
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fa fa-stop" })]
-                      )
+                      _vm._v("   \n                ")
                     ]),
                     _vm._v(" "),
                     _c("textarea", {
@@ -18101,9 +18855,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 var artyom = new Artyom();
 
@@ -18142,7 +18893,7 @@ var artyom = new Artyom();
         }
       },
       toolbar: [['font', ['fontname']], ['para', ['ul', 'ol', 'paragraph', 'strikethrough']], ['style', ['bold', 'italic', 'underline', 'clear']], ['fontsize', ['fontsize']], ['color', ['color']], ['height', ['height']], ['groupName', ['picture', 'link', 'video', 'table', 'hr', 'fullscreen']]],
-      height: 70
+      height: 200
     });
   },
   created: function created() {
@@ -18186,7 +18937,9 @@ var artyom = new Artyom();
       view_resp_rellenar: false,
       a_resp_rellenar: [],
       resp_rellenar: '',
-      id_rellenar: 0
+      id_rellenar: 0,
+
+      disabled_play: false
     };
   },
   methods: {
@@ -18206,6 +18959,8 @@ var artyom = new Artyom();
         _this.a_resp_relacionar = response.data.resp_relacionar;
         _this.a_resp_rellenar = response.data.resp_rellenar;
         _this.resp_rellenar = _this.o_pregunta.textorellenar;
+
+        if (_this.o_pregunta.texto_audio != '') document.getElementById("colapse1").classList.add("show");;
 
         if (_this.o_pregunta.tipo == 'abierta') _this.view_resp_abierta = true;
         if (_this.o_pregunta.tipo == 'unica') _this.view_resp_unica = true;
@@ -18258,6 +19013,7 @@ var artyom = new Artyom();
       });
     },
     playAudio: function playAudio() {
+      var vm = this;
       artyom.initialize({
         lang: "en-US", // Más lenguajes son soportados, lee la documentación
         continuous: false, // Reconoce 1 solo comando y basta de escuchar
@@ -18276,17 +19032,14 @@ var artyom = new Artyom();
       var palabra = this.o_pregunta.texto_audio;
       artyom.say(palabra, {
         onStart: function onStart() {
+          vm.disabled_play = true;
           console.log("Comenzando a leer texto");
         },
         onEnd: function onEnd() {
+          vm.disabled_play = false;
+          artyom.fatality();
           console.log("Texto leido satisfactoriamente");
         }
-      });
-    },
-    stopAudio: function stopAudio() {
-      console.log("stop");
-      artyom.fatality().then(function () {
-        console.log("Artyom succesfully stopped !");
       });
     },
     viewtipo: function viewtipo() {
@@ -19200,7 +19953,10 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-outline-primary btn-sm",
-                          attrs: { type: "button" },
+                          attrs: {
+                            type: "button",
+                            disabled: _vm.disabled_play
+                          },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -19210,21 +19966,7 @@ var render = function() {
                         },
                         [_c("i", { staticClass: "fa fa-play" })]
                       ),
-                      _vm._v("   \n                  "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-outline-danger btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.stopAudio()
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fa fa-stop" })]
-                      )
+                      _vm._v("   \n                ")
                     ]),
                     _vm._v(" "),
                     _c("textarea", {
@@ -20044,7 +20786,7 @@ var render = function() {
                         domProps: { textContent: _vm._s(tarea.notaes) }
                       })
                     ]),
-                    _vm._v("/"),
+                    _vm._v(" de "),
                     _c("span", {
                       domProps: { textContent: _vm._s(tarea.calificacion) }
                     })
@@ -20087,7 +20829,7 @@ var render = function() {
                         domProps: { textContent: _vm._s(examen.notaes) }
                       })
                     ]),
-                    _vm._v("/"),
+                    _vm._v(" de "),
                     _c("span", {
                       domProps: { textContent: _vm._s(examen.notamaxima) }
                     })

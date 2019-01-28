@@ -221,14 +221,11 @@
               <div class="form-group">
                 <label>
                   Agregar audio(Ingles)
-                  <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='playAudio()'>
+                  <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='playAudio()' :disabled="disabled_play">
                     <i class="fa fa-play" ></i>
                   </button>&nbsp;&nbsp;&nbsp;
-                  <button type="button" class="btn btn-outline-danger btn-sm" v-on:click.prevent='stopAudio()'>
-                    <i class="fa fa-stop" ></i>
-                  </button>
                 </label>
-                <textarea class="form-control" rows="2" placeholder="Escriba el texto que desea ser reproducido"v-model="o_pregunta.texto_audio"></textarea>
+                <textarea class="form-control" rows="2" placeholder="Escriba el texto que desea ser reproducido" v-model="o_pregunta.texto_audio"></textarea>
               </div>
             </div>
           </div>
@@ -290,7 +287,7 @@
               ['height', ['height']],
               ['groupName', ['picture','link','video','table','hr','fullscreen']],
             ],
-            height: 70
+            height: 200
           });
         },created : function(){
           this.base_url=base_url;
@@ -330,7 +327,9 @@
             view_resp_rellenar:false,
             a_resp_rellenar:[],
             resp_rellenar:'',
-            id_rellenar:0
+            id_rellenar:0,
+
+            disabled_play:false
           }
         },
         methods : {
@@ -373,6 +372,7 @@
             });
           },
           playAudio:function(){
+            var vm=this;
             artyom.initialize({
                   lang:"en-US",// Más lenguajes son soportados, lee la documentación
                   continuous:false,// Reconoce 1 solo comando y basta de escuchar
@@ -391,19 +391,16 @@
             var palabra=this.o_pregunta.texto_audio;
             artyom.say(palabra,{
                 onStart:function(){
+                    vm.disabled_play=true;
                     console.log("Comenzando a leer texto");
                 },
                 onEnd:function(){
+                    vm.disabled_play=false;
+                    artyom.fatality();
                     console.log("Texto leido satisfactoriamente");
                 }
             });
 
-          },
-          stopAudio:function(){
-            console.log("stop");
-            artyom.fatality().then(() => {
-                console.log("Artyom succesfully stopped !");
-            });
           },
           viewtipo:function(){
             this.view_resp_abierta=false;

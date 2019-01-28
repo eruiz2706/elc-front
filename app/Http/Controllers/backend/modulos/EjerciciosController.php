@@ -162,7 +162,8 @@ class EjerciciosController extends Controller
             'user_id'=>$user->id
           ]);
 
-        $preguntas=DB::select("select p.id,p.nombre,p.tipo,p.descripcion,p.textorellenar,0 as idunica
+        $preguntas=DB::select("select p.id,p.nombre,p.tipo,p.descripcion,p.textorellenar,0 as idunica,
+                                p.textoaudio,case when p.textoaudio<>'' then 'A' else 'I' end as audio
                                 from preguntas p
                                 where ejercicio_id = :ejercicio_id
                                 order by p.id",
@@ -456,6 +457,62 @@ class EjerciciosController extends Controller
            'preguntas' => $preguntas,
            'duracion'=>$ejercicio->duracion
        ]);
+     }
+     catch(\Exception $e){
+         Log::info('iniciar ejercicio : '.$e->getMessage());
+         DB::rollback();
+         //$e->getMessage();
+
+         return response()->json([
+             'error' =>'Hubo una inconsistencias al intentar iniciar la prueba'
+         ], 400);
+     }
+
+  }
+
+  public function verresultado(Request $request){
+    $user   =Auth::user();
+
+   DB::beginTransaction();
+     try{
+       $preguntas=DB::select("select p.id,p.nombre,p.tipo,p.descripcion,p.textorellenar,0 as idunica,calificacion,0 as puntaje
+                                from preguntas p
+                               where ejercicio_id = :ejercicio_id
+                               order by p.id",
+                             ['ejercicio_id'=>$request->id]);
+
+        foreach($preguntas as $preg){
+              $respuestas=DB::select("select pregunta_id,id,puntaje,seleccion as option,false as seleccion,respuesta,relacionar,'' as relacionar2,
+                                      0 as puntaje_user,'' as seleccion_user,'' as respuesta_user,'' as relacionar_user
+                                      from respuestas
+                                      where pregunta_id= :pregunta_id"
+                             ,['pregunta_id'=>$preg->id]);
+
+              foreach($respuestas as $res){
+                  $resp_user=DB::select("select puntaje,seleccion,respuesta,relacionar
+                                            from respuestas_user
+                                            where respuesta_id= :respuesta_id"
+                               ,['respuesta_id'=>$res->id])[0];
+
+                 $res->puntaje_user     =$resp_user->puntaje;
+                 $res->seleccion_user   =$resp_user->seleccion;
+                 $res->respuesta_user   =$resp_user->respuesta;
+                 $res->relacionar_user   =$resp_user->relacionar;
+              }
+
+              $puntaje=DB::select("select sum(puntaje) as valor
+                                      from respuestas_user
+                                      where preguntas_id= :pregunta_id"
+                             ,['pregunta_id'=>$preg->id])[0];
+
+              $preg->puntaje=$puntaje->valor;
+              $preg->respuestas=$respuestas;
+        }
+
+       DB::commit();
+       return response()->json([
+           'preguntas' => $preguntas
+      ]);
      }
      catch(\Exception $e){
          Log::info('iniciar ejercicio : '.$e->getMessage());
