@@ -13,7 +13,7 @@
         <input type="text" class="form-control" placeholder="Palabra" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="texto_escucha">
         <div class="input-group-append">
           <button class="btn btn-outline-primary" type="button" v-on:click.prevent='escucharAudio()' :disabled="disabled_escuchar">
-            Escuchar <i class="fa fa-play"></i>
+            Escuchar <i class="fa fa-volume-up"></i>
           </button>
         </div>
       </div>
@@ -21,7 +21,7 @@
       <div class="form-group">
         <label>
           <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='evaluarAudio()' :disabled="disabled_evaluar">
-            Hablar <i class="fa fa-play" style="font-size:20px" ></i>
+            Hablar <i class="fa fa-microphone" style="font-size:20px" ></i>
           </button>&nbsp;&nbsp;&nbsp;
           <span id="resultado_pronun"></span>
         </label>
@@ -41,7 +41,7 @@
       <div class="form-group">
         <label>
           <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='playAudio()' :disabled="disabled_play">
-            Hablar <i class="fa fa-play"></i>
+            Hablar <i class="fa fa-microphone"></i>
           </button>&nbsp;&nbsp;&nbsp;
           <button type="button" class="btn btn-outline-danger btn-sm" v-on:click.prevent='stopAudio()' :disabled="!disabled_play">
             Detener <i class="fa fa-stop" ></i>

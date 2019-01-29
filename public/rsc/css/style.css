@@ -206,3 +206,14 @@ iframe {width: 100%; height: 350px;}
 @media (min-width: 1024px) {
   iframe {width: 760px; height: 350px;}
 }
+
+/*buscador*/
+.form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}

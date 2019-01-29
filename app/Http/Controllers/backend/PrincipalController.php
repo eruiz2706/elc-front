@@ -18,8 +18,6 @@ class PrincipalController extends Controller
     }
 
     function index(){
-      //Session::put('rol','');
-      //Session::get('rol')
       $user =Auth::user();
       if($user->slugrol !=''){
         return redirect('foro');
@@ -40,9 +38,9 @@ class PrincipalController extends Controller
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
         $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
 
-        $tit_options='Administracion';
-        $nav_options[]=['nombre'=>'Lista de usuarios','url'=>'usuarios'];
-        //$nav_options[]=['nombre'=>'Informacion de contacto','url'=>'contactos'];
+        $tit_options='Administraciòn';
+        $nav_options[]=['nombre'=>'Administraciòn','url'=>'administracion'];
+        $nav_options[]=['nombre'=>'Chat Soporte','url'=>'https://www.smartsupp.com/app/sign/in','extern'=>'1'];
       }
       if($rol=='in'){
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];

@@ -1,52 +1,54 @@
 <template>
 <div>
-  <div class="card">
-    <div class="card-body">
-      <div class="callout callout-info">
-      	<p>
-      	  <i class="fa fa-fw fa-info"></i>
-          Agrega una palabra o texto en ingles y da click en el boton reproducir para escucharlo,
-          recuerda que tienes la opcion de regular la velocidad de reproduccion
-      	</p>
+  <div class="row justify-content-center" style="padding-top:10%" v-if="!open_dicc">
+      <div class="col-12 col-md-10 col-lg-8">
+          <form class="card card-sm">
+              <div class="card-body row no-gutters align-items-center">
+                  <div class="col-auto">
+                      <i class="fa  fa-search"></i>
+                  </div>
+                  <div class="col">
+                      <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Buscar palabra clave" v-model="palabra_clave">
+                  </div>
+                  <div class="col-auto">
+                      <button class="btn btn-lg btn-success " v-on:click.prevent="busqueda();">Buscar</button>
+                  </div>
+              </div>
+          </form>
       </div>
-      <div class="form-group">
-        <label for="formControlRange">Velocidad (<span v-text="artyom_speed"></span>)</label>
-        <input type="range" min="0" max="1" step="0.1" class="form-control-range" v-model="artyom_speed">
-      </div>
-      <div class="form-group">
-        <label>
-          <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='playAudio()' :disabled="disabled_play">
-            Reproducir <i class="fa fa fa-volume-up" style="font-size:20px" ></i>
-          </button>&nbsp;&nbsp;&nbsp;
-        </label>
-        <textarea class="form-control" rows="10" placeholder="Escriba el texto que desea ser reproducido"v-model="texto_audio"></textarea>
-      </div>
-
-
-    </div>
+      <!--end of col-->
   </div>
+  <center v-if="open_dicc">
+    <iframe v-bind:src="url_dicc"  frameborder="0" allowfullscreen></iframe>
+  </center>
 </div>
 </template>
 
 <script>
-    const artyom = new Artyom();
+
 
     export default {
         mounted() {
 
         },created : function(){
           this.base_url=base_url;
+          this.url_dicc='https://www.wordreference.com/es/translation.asp';
         },
         data: function () {
           return {
-            texto_audio:'',
-            disabled_play:false,
-            artyom_speed:0.7
+            url_dicc:'',
+            palabra_clave:'',
+            open_dicc:false
           }
         },
         methods : {
+          busqueda:function(){
+            var palabra_clave=this.palabra_clave;
+            this.url_dicc +="?tranword="+palabra_clave.replace(/' '/g,'%20');
+            this.open_dicc=true;
+          },
           playAudio:function(){
-            let vm=this;
+            /*let vm=this;
             artyom.initialize({
                   lang:"en-US",// Más lenguajes son soportados, lee la documentación
                   continuous:false,// Reconoce 1 solo comando y basta de escuchar
@@ -72,9 +74,8 @@
                     vm.disabled_play=false;
                     console.log("Texto leido satisfactoriamente");
                 }
-            });
-          },
-
+            });*/
+          }
         }
     }
 </script>

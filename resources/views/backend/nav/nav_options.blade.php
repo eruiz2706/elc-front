@@ -6,7 +6,11 @@
   <div class="card-body p-0">
     <ul class="nav nav-pills flex-column">
       <li class="nav-item" v-for='nav in nav_options.content'>
-        <a href="#" class="nav-link" v-on:click.prevent="setRedirect(nav.url)">
+        <a href="#" class="nav-link" v-bind:href="nav.url" target="_blank" v-if="nav.extern==1">
+          <span v-text='nav.nombre'></span>
+        </a>
+
+        <a href="#" class="nav-link" v-on:click.prevent="setRedirect(nav.url)" v-else>
           <span v-text='nav.nombre'></span>
         </a>
       </li>

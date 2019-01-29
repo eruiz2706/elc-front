@@ -55,6 +55,7 @@ Vue.component('resultados-es', require('./components/resultados/ResultadosEstudi
 Vue.component('usuarios-lista', require('./components/usuarios/UsuariosListaComponent'));
 Vue.component('reproductor', require('./components/herramientas/ReproductoComponent'));
 Vue.component('pronunciacion', require('./components/herramientas/PronunciacionComponent'));
+Vue.component('diccionario', require('./components/herramientas/DiccionarioComponent'));
 
 var socket = io(url_servinotifi,{ 'forceNew': true });
 

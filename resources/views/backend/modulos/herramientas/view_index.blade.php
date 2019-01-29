@@ -42,11 +42,8 @@
       </div>
 
       <div v-if="menu_content=='' || menu_content=='diccionario'">
-        <center>
-          <iframe src="https://www.wordreference.com/es/translation.asp?"  frameborder="0" allowfullscreen></iframe>
-        </center>
+          <diccionario></diccionario>
       </div>
-
       <div v-if="menu_content=='reproductor'">
         <reproductor></reproductor>
       </div>

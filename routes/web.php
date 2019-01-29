@@ -157,7 +157,6 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('resultados/lista', 'backend\modulos\ResultadosController@lista');
   Route::post('resultados/lista_es', 'backend\modulos\ResultadosController@lista_es');
 
-  Route::get('usuarios','backend\modulos\UsuariosController@index');
   Route::post('usuarios/lista','backend\modulos\UsuariosController@lista');
 
   Route::post('chatprivado/open','backend\modulos\ChatPrivado@open');
@@ -168,5 +167,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
 
   Route::post('mensajes/conteo', 'backend\modulos\MensagesController@conteo');
   Route::post('mensajes/lista', 'backend\modulos\MensagesController@lista');
+
+  Route::get('administracion','backend\modulos\AdministracionController@view_index');
 
 });

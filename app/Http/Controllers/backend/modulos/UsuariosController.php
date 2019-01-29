@@ -15,14 +15,7 @@ use Log;
 
 class UsuariosController extends Controller
 {
-  public function index(Request $request){
-    $user =Auth::user();
-    $rol  =$user->slugrol;
-    if($rol !='ad'){
-      return view('layouts.errors.access_denied');
-    }
-    return view('backend.modulos.usuarios.view_index');
-  }
+
   public function lista(Request $request){
     $users   =DB::select("select
                             id,email,nombre,fecha_ultimo_ingreso,telefono,ciudad,direccion,facebook,

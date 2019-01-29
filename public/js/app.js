@@ -287,6 +287,7 @@ Vue.component('resultados-es', __webpack_require__(108));
 Vue.component('usuarios-lista', __webpack_require__(111));
 Vue.component('reproductor', __webpack_require__(114));
 Vue.component('pronunciacion', __webpack_require__(117));
+Vue.component('diccionario', __webpack_require__(120));
 
 var socket = io(url_servinotifi, { 'forceNew': true });
 
@@ -21589,7 +21590,7 @@ var render = function() {
               [
                 _vm._v("\n            Reproducir "),
                 _c("i", {
-                  staticClass: "fa fa-play",
+                  staticClass: "fa fa fa-volume-up",
                   staticStyle: { "font-size": "20px" }
                 })
               ]
@@ -21945,7 +21946,7 @@ var render = function() {
               },
               [
                 _vm._v("\n            Escuchar "),
-                _c("i", { staticClass: "fa fa-play" })
+                _c("i", { staticClass: "fa fa-volume-up" })
               ]
             )
           ])
@@ -21968,7 +21969,7 @@ var render = function() {
               [
                 _vm._v("\n            Hablar "),
                 _c("i", {
-                  staticClass: "fa fa-play",
+                  staticClass: "fa fa-microphone",
                   staticStyle: { "font-size": "20px" }
                 })
               ]
@@ -22000,7 +22001,7 @@ var render = function() {
               },
               [
                 _vm._v("\n            Hablar "),
-                _c("i", { staticClass: "fa fa-play" })
+                _c("i", { staticClass: "fa fa-microphone" })
               ]
             ),
             _vm._v("   \n          "),
@@ -22066,6 +22067,251 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-38df2264", module.exports)
+  }
+}
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(121)
+/* template */
+var __vue_template__ = __webpack_require__(122)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/herramientas/DiccionarioComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-76e9de3a", Component.options)
+  } else {
+    hotAPI.reload("data-v-76e9de3a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 121 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {},
+  created: function created() {
+    this.base_url = base_url;
+    this.url_dicc = 'https://www.wordreference.com/es/translation.asp';
+  },
+  data: function data() {
+    return {
+      url_dicc: '',
+      palabra_clave: '',
+      open_dicc: false
+    };
+  },
+  methods: {
+    busqueda: function busqueda() {
+      var palabra_clave = this.palabra_clave;
+      this.url_dicc += "?tranword=" + palabra_clave.replace(/' '/g, '%20');
+      this.open_dicc = true;
+    },
+    playAudio: function playAudio() {
+      /*let vm=this;
+      artyom.initialize({
+            lang:"en-US",// Más lenguajes son soportados, lee la documentación
+            continuous:false,// Reconoce 1 solo comando y basta de escuchar
+            listen:true, // Iniciar !
+            debug:false, // Muestra un informe en la consola
+            speed:vm.artyom_speed, // Habla normalmente,
+            volume:1
+      }).then(() => {
+        //artyom.say("Artyom succesfully initialized");
+        console.log("Artyom succesfully initialized");
+      }).catch((err) => {
+          //artyom.say("Artyom couldn't be initialized, please check the console for errors");
+          console.log("Artyom couldn't be initialized, please check the console for errors");
+          console.log(err);
+      });
+       artyom.say(vm.texto_audio,{
+          onStart:function(){
+            vm.disabled_play=true;
+            console.log("Comenzando a leer texto");
+          },
+          onEnd:function(){
+              vm.disabled_play=false;
+              console.log("Texto leido satisfactoriamente");
+          }
+      });*/
+    }
+  }
+});
+
+/***/ }),
+/* 122 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      !_vm.open_dicc
+        ? _c(
+            "div",
+            {
+              staticClass: "row justify-content-center",
+              staticStyle: { "padding-top": "10%" }
+            },
+            [
+              _c("div", { staticClass: "col-12 col-md-10 col-lg-8" }, [
+                _c("form", { staticClass: "card card-sm" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "card-body row no-gutters align-items-center"
+                    },
+                    [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.palabra_clave,
+                              expression: "palabra_clave"
+                            }
+                          ],
+                          staticClass:
+                            "form-control form-control-lg form-control-borderless",
+                          attrs: {
+                            type: "search",
+                            placeholder: "Buscar palabra clave"
+                          },
+                          domProps: { value: _vm.palabra_clave },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.palabra_clave = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-auto" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-lg btn-success ",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.busqueda()
+                              }
+                            }
+                          },
+                          [_vm._v("Buscar")]
+                        )
+                      ])
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.open_dicc
+        ? _c("center", [
+            _c("iframe", {
+              attrs: {
+                src: _vm.url_dicc,
+                frameborder: "0",
+                allowfullscreen: ""
+              }
+            })
+          ])
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("i", { staticClass: "fa  fa-search" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-76e9de3a", module.exports)
   }
 }
 
