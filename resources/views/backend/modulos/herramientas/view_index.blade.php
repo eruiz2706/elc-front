@@ -12,25 +12,8 @@
       <div class="card card-primary card-outline">
         <div class="card-header card-header-cuorse">
           <h2 class="card-title-course">
-            @if(isset($curso))
-              {{$curso->nombre}}
-            @endif
-
-            @if(isset($profesor))
-              @foreach($profesor as $prof)
-                <p><small>{{$prof->nombre}}</small></p>
-              @endforeach
-            @endif
+            Herramientas
           </h2>
-          <div class="card-tools">
-            <div style="width:50px;display:inline">
-              @if(isset($profesor))
-                @foreach($profesor as $prof)
-                  <img class="profile-user-img img-circle img-bordered-sm img-fluid" src="{{ URL::asset($prof->imagen) }}" style='cursor:pointer'>
-                @endforeach
-              @endif
-            </div>
-          </div>
         </div>
         <div class="card-body" style='padding:0px'>
           <ul class="nav nav-pills">
