@@ -289,7 +289,7 @@ Vue.component('reproductor', __webpack_require__(114));
 Vue.component('pronunciacion', __webpack_require__(117));
 Vue.component('diccionario', __webpack_require__(120));
 
-console.log("utl notifi=>" + url_servinotifi);
+console.log("utl noddtifi=>" + url_servinotifi);
 var socket = io(url_servinotifi, { 'forceNew': true });
 
 var app = new Vue({
