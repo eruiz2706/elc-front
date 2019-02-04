@@ -290,7 +290,7 @@ Vue.component('pronunciacion', __webpack_require__(117));
 Vue.component('diccionario', __webpack_require__(120));
 
 console.log("utl noddtifi=>" + url_servinotifi);
-var socket = io(url_servinotifi, { 'forceNew': true, 'secure': true });
+var socket = io(url_servinotifi, { 'forceNew': true, 'secure': false });
 
 var app = new Vue({
   el: '#v-app',
