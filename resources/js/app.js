@@ -58,7 +58,7 @@ Vue.component('pronunciacion', require('./components/herramientas/PronunciacionC
 Vue.component('diccionario', require('./components/herramientas/DiccionarioComponent'));
 
 console.log("utl noddtifi=>"+url_servinotifi);
-var socket = io("http://www.elcolp.com:8081",{ 'forceNew': true });
+var socket = io(url_servinotifi,{ 'forceNew': true });
 
 const app = new Vue({
     el: '#v-app',
