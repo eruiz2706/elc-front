@@ -57,6 +57,7 @@ Vue.component('reproductor', require('./components/herramientas/ReproductoCompon
 Vue.component('pronunciacion', require('./components/herramientas/PronunciacionComponent'));
 Vue.component('diccionario', require('./components/herramientas/DiccionarioComponent'));
 
+console.log(url_servinotifi);
 var socket = io(url_servinotifi,{ 'forceNew': true });
 
 const app = new Vue({
