@@ -289,6 +289,7 @@ Vue.component('reproductor', __webpack_require__(114));
 Vue.component('pronunciacion', __webpack_require__(117));
 Vue.component('diccionario', __webpack_require__(120));
 
+console.log("utl notifi=>" + url_servinotifi);
 var socket = io(url_servinotifi, { 'forceNew': true });
 
 var app = new Vue({
@@ -22169,34 +22170,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var palabra_clave = this.palabra_clave;
       this.url_dicc += "?tranword=" + palabra_clave.replace(/' '/g, '%20');
       this.open_dicc = true;
-    },
-    playAudio: function playAudio() {
-      /*let vm=this;
-      artyom.initialize({
-            lang:"en-US",// Más lenguajes son soportados, lee la documentación
-            continuous:false,// Reconoce 1 solo comando y basta de escuchar
-            listen:true, // Iniciar !
-            debug:false, // Muestra un informe en la consola
-            speed:vm.artyom_speed, // Habla normalmente,
-            volume:1
-      }).then(() => {
-        //artyom.say("Artyom succesfully initialized");
-        console.log("Artyom succesfully initialized");
-      }).catch((err) => {
-          //artyom.say("Artyom couldn't be initialized, please check the console for errors");
-          console.log("Artyom couldn't be initialized, please check the console for errors");
-          console.log(err);
-      });
-       artyom.say(vm.texto_audio,{
-          onStart:function(){
-            vm.disabled_play=true;
-            console.log("Comenzando a leer texto");
-          },
-          onEnd:function(){
-              vm.disabled_play=false;
-              console.log("Texto leido satisfactoriamente");
-          }
-      });*/
     }
   }
 });
