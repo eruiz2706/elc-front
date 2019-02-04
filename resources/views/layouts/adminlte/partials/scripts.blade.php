@@ -14,7 +14,7 @@
 <script src="{{ URL::asset('plugins/artyom/artyom.window.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
 
-<script src="{{ URL::asset('plugins/socket/socket.io.js') }}"></script>
+<script src="http://148.72.64.133/socket.io.js"></script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.0/socket.io.js"></script>-->
 <!-- Smartsupp Live Chat script -->
 <script type="text/javascript">
