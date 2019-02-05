@@ -22,6 +22,7 @@ class Navcursos
         DB::table('users')->where('id',$user->id)->update([
           'fecha_ultimo_uso'=>date('Y-m-d H:i:s')
         ]);
-        return $next($request);
+        return $next($request)->header('Access-Control-Allow-Origin', '*')
+        ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');;
     }
 }
