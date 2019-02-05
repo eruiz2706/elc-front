@@ -127,6 +127,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (parsed.query && !opts.query) {
 	    opts.query = parsed.query;
 	  }
+    console.log("parsed.path=>"+parsed.path);
 	  return io.socket(parsed.path, opts);
 	}
 
