@@ -186,6 +186,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function url(uri, loc) {
 	  var obj = uri;
+    console.log("uri=>"+uri);
 
 	  // default to window.location
 	  loc = loc || global.location;
