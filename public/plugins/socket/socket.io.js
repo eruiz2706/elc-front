@@ -283,6 +283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        uri.ipv6uri = true;
 	    }
 
+      console.log("uri2=>"+uri);
 	    return uri;
 	};
 
