@@ -189,7 +189,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // default to window.location
 	  loc = loc || global.location;
-	  if (null == uri) uri = loc.protocol + '//' + loc.host;
+	  //if (null == uri) uri = loc.protocol + '//' + loc.host;
+    if (null == uri) uri = 'http' + '//' + loc.host;
 
 	  // relative path support
 	  if ('string' === typeof uri) {
