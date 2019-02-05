@@ -127,7 +127,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (parsed.query && !opts.query) {
 	    opts.query = parsed.query;
 	  }
-	  return io.socket("http://holamundo", opts);
+	  return io.socket(parsed.path, opts);
 	}
 
 	/**
