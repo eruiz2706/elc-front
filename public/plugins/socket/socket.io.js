@@ -236,7 +236,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // define href
 	  obj.href = obj.protocol + '://' + host + (loc && loc.port === obj.port ? '' : ':' + obj.port);
 
-    console.log("hfred=>"+obj.href);
+    console.log("path=>"+obj.path);
 	  return obj;
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
