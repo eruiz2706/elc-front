@@ -17,10 +17,12 @@
 
 Vue.component('perfil-usu', require('./components/perfil/PerfilUsuarioComponent'));
 Vue.component('perfil-pagos', require('./components/perfil/PerfilPagosComponent'));
+Vue.component('perfil-parientes', require('./components/perfil/PerfilParientesComponent'));
 Vue.component('foro-general', require('./components/foro/ForoGeneralComponent'));
 Vue.component('foro-curso', require('./components/foro/ForoCursoComponent'));
 Vue.component('progreso-es', require('./components/progreso/ProgresoEstudianteComponent'));
 Vue.component('progreso-pr', require('./components/progreso/ProgresoProfesorComponent'));
+Vue.component('progreso-pa', require('./components/progreso/ProgresoParienteComponent'));
 Vue.component('integrantes', require('./components/integrantes/IntegrantesComponent'));
 Vue.component('calendario', require('./components/calendario/CalendarioComponent'));
 Vue.component('tareas-lista', require('./components/tareas/TareasListaComponent'));
@@ -52,12 +54,12 @@ Vue.component('preguntas-crear', require('./components/preguntas/PreguntasCrearC
 Vue.component('preguntas-edit', require('./components/preguntas/PreguntasEditComponent'));
 Vue.component('resultados', require('./components/resultados/ResultadosComponent'));
 Vue.component('resultados-es', require('./components/resultados/ResultadosEstudianteComponent'));
+Vue.component('resultados-pa', require('./components/resultados/ResultadosParienteComponent'));
 Vue.component('usuarios-lista', require('./components/usuarios/UsuariosListaComponent'));
 Vue.component('reproductor', require('./components/herramientas/ReproductoComponent'));
 Vue.component('pronunciacion', require('./components/herramientas/PronunciacionComponent'));
 Vue.component('diccionario', require('./components/herramientas/DiccionarioComponent'));
 
-console.log("utl noddtifi=>"+url_servinotifi);
 var socket = io(url_servinotifi,{ 'forceNew': true,'secure':true});
 
 const app = new Vue({
@@ -100,6 +102,7 @@ const app = new Vue({
       nav_user:[],
       nav_cursos:[],
       nav_options:[],
+      nav_parients:[],
       a_notifi:[],
       preload_notifi:false,
       conexion_user:[],
@@ -144,6 +147,7 @@ const app = new Vue({
           this.nav_user=response.data.nav_user;
           this.nav_cursos=response.data.nav_cursos;
           this.nav_options=response.data.nav_options;
+          this.nav_parients=response.data.nav_parients;
         }).catch(error =>{
             if(error.response.data.error){
               toastr.error(error.response.data.error,'',{

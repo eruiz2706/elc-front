@@ -79,4 +79,28 @@ class ResultadosController extends Controller
     ];
     return response()->json($jsonresponse,200);
   }
+  public function lista_pa(Request $request){
+    $tareas   =DB::select("select t.id,t.nombre,
+                              t.calificacion,
+                              case when tu.calificacion is null then 0 else tu.calificacion end as notaes
+                              from tareas t
+                              left join tareas_user tu on(t.id=tu.tarea_id and tu.user_id = :user_id)
+                              where curso_id = :curso_id
+                              order by t.fecha_vencimiento desc",
+                          ['curso_id'=>$request->idcurso,'user_id'=>$request->user_id]);
+
+    $ejercicios   =DB::select("select ej.id,ej.nombre,ej.calificacion as notamaxima,
+                              case when eu.calificacion is null then 0 else eu.calificacion end as notaes
+                              from ejercicios ej
+                              left join ejercicios_user eu on(ej.id=eu.ejercicio_id and eu.user_id = :user_id)
+                              where ej.curso_id = :curso_id
+                              order by ej.fecha_inicio desc",
+                          ['curso_id'=>$request->idcurso,'user_id'=>$request->user_id]);
+
+    $jsonresponse=[
+        'tareas'=>$tareas,
+        'examenes'=>$ejercicios
+    ];
+    return response()->json($jsonresponse,200);
+  }
 }

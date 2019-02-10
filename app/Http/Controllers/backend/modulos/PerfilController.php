@@ -162,4 +162,103 @@ class PerfilController extends Controller
       ];
       return response()->json($jsonresponse,200);
     }
+
+    public function agregarPariente(Request $request){
+      $id       =Auth::user()->id;
+      $pariente =$request->email_pariente;
+
+      $validator =Validator::make($request->all(),[
+        'email_pariente' =>'required|string',
+      ]);
+
+      if ($validator->fails()) {
+          return response()->json([
+              //'errors' => $validator->messages(),
+              'error' => 'Email pariente obligatorio',
+          ], 400);
+      }
+
+      $exisparient   =DB::select("select id
+                              from users
+                              where email =:email and slugrol='pa'",
+                          ['email'=>$pariente]);
+
+      if(empty($exisparient)){
+          return response()->json([
+            'error' => 'No existe el email para un perfil pariente',
+          ], 400);
+      }else{
+        $pariente_user   =DB::select("select count(*) as count
+                                from parientes_user
+                                where id_user=:id_user and id_pariente=:id_pariente",
+                            ['id_user'=>$id,'id_pariente'=>$exisparient[0]->id]);
+
+        if($pariente_user[0]->count>0){
+          return response()->json([
+            'error' => 'Ya se encuentra registrado el pariente',
+          ], 400);
+        }
+
+      }
+
+
+      DB::beginTransaction();
+      try{
+
+        DB::table('parientes_user')->insertGetId([
+          'id_user'=>$id,
+          'id_pariente'=>$exisparient[0]->id,
+          'fecha_creacion'=>date('Y-m-d H:i:s')
+        ]);
+
+        DB::commit();
+        return response()->json([
+            'message' => 'Registro creado correctamente!',
+            'message2' => 'Click para continuar!'
+        ]);
+      }
+      catch(\Exception $e){
+          Log::info('creacion pariente : '.$e->getMessage());
+          DB::rollback();
+          //$e->getMessage();
+          return response()->json([
+              'error' =>'Hubo una inconsistencias al intentar crear el registro'
+          ], 400);
+      }
+    }
+
+    public function dataPariente(Request $request){
+      $id  =Auth::user()->id;
+      $parientes =DB::select("select p.id,p.id_pariente,u.email,u.nombre,u.imagen
+                                from parientes_user p
+                                left join users u on(p.id_pariente=u.id)
+                                where p.id_user =:id_user",['id_user'=>$id]);
+
+      $jsonresponse=[
+          'parientes'=>$parientes,
+      ];
+      return response()->json($jsonresponse,200);
+    }
+
+    public function borrarPariente(Request $request){
+      DB::beginTransaction();
+      try{
+
+        DB::table('parientes_user')->where('id','=',$request->id)->delete();
+
+        DB::commit();
+        return response()->json([
+            'message' => 'Registro eliminado correctamente!',
+            'message2' => 'Click para continuar!'
+        ]);
+      }
+      catch(\Exception $e){
+          Log::info('creacion pariente : '.$e->getMessage());
+          DB::rollback();
+          //$e->getMessage();
+          return response()->json([
+              'error' =>'Hubo una inconsistencias al intentar realizar la accion'
+          ], 400);
+      }
+    }
 }

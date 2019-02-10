@@ -200,4 +200,20 @@ class ProgresoController extends Controller
         ], 400);
     }
   }
+
+  public function lista_pa(Request $request){
+    $progreso   =DB::select("select m.id,m.numero,m.nombre,count(l.id) as cantlec,count(lu.id) as cantlec_leidas
+                              from modulos m
+                              left join lecciones l on(m.id=l.modulo_id)
+                              left join lecciones_user lu on(l.id=lu.leccion_id and lu.user_id= :user_id)
+                              where m.curso_id = :curso_id
+                              group by m.id,m.nombre,m.numero
+                              order by m.numero  asc",
+                          ['curso_id'=>$request->idcurso,'user_id'=>$request->user_id]);
+
+    $jsonresponse=[
+        'progreso'=>$progreso
+    ];
+    return response()->json($jsonresponse,200);
+  }
 }

@@ -80,10 +80,13 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('perfil/data','backend\modulos\PerfilController@getData');
   Route::post('perfil/act','backend\modulos\PerfilController@actualizar');
   Route::post('perfil/pagos','backend\modulos\PerfilController@pagos');
+  Route::post('perfil/agregarPariente','backend\modulos\PerfilController@agregarPariente');
+  Route::post('perfil/dataPariente','backend\modulos\PerfilController@dataPariente');
+  Route::post('perfil/borrarPariente','backend\modulos\PerfilController@borrarPariente');
 
   Route::get('cursos','backend\modulos\CursosController@view_list');
   Route::get('cursos/config/{id}', 'backend\modulos\CursosController@view_config');
-  Route::get('cursos/gestion/{id}', 'backend\modulos\CursosController@view_gestion');
+  Route::get('cursos/gestion/{id}/{id2?}', 'backend\modulos\CursosController@view_gestion');
   Route::post('cursos/lista', 'backend\modulos\CursosController@lista');
   Route::post('cursos/editar', 'backend\modulos\CursosController@editar');
   Route::post('cursos/guardar', 'backend\modulos\CursosController@guardar');
@@ -117,6 +120,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
 
   Route::post('progreso/lista', 'backend\modulos\ProgresoController@lista');
   Route::post('progreso/lista_pr', 'backend\modulos\ProgresoController@lista_pr');
+  Route::post('progreso/lista_pa', 'backend\modulos\ProgresoController@lista_pa');
   Route::post('progreso/guardar', 'backend\modulos\ProgresoController@guardar');
   Route::post('progreso/progmod', 'backend\modulos\ProgresoController@lista_progreso_modulo');
   Route::post('progreso/toque', 'backend\modulos\ProgresoController@toque');
@@ -156,6 +160,7 @@ Route::middleware(['auth','navcursos'])->group(function(){
   Route::post('resultados/estudiante', 'backend\modulos\ResultadosController@getEstudiante');
   Route::post('resultados/lista', 'backend\modulos\ResultadosController@lista');
   Route::post('resultados/lista_es', 'backend\modulos\ResultadosController@lista_es');
+  Route::post('resultados/lista_pa', 'backend\modulos\ResultadosController@lista_pa');
 
   Route::post('usuarios/lista','backend\modulos\UsuariosController@lista');
 

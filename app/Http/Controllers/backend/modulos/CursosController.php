@@ -47,11 +47,11 @@ class CursosController extends Controller
     $curso    =$curso[0];
     return view('backend.modulos.cursos.view_config',compact('curso'));
   }
-  public function view_gestion($id){
+  public function view_gestion($id=0,$id2=0){
     $user =Auth::user();
     $rol  =$user->slugrol;
 
-    if($rol !='pr' && $rol !='es'){
+    if($rol !='pr' && $rol !='es' && $rol !='pa'){
       return view('layouts.errors.access_denied');
     }
 
@@ -65,7 +65,9 @@ class CursosController extends Controller
       return view('layouts.errors.not_page');
     }
     $curso    =$curso[0];
-    if($rol =='pr')return view('backend.modulos.cursos.view_config_pr',compact('curso'));
+    if($rol =='pr'){
+        return view('backend.modulos.cursos.view_config_pr',compact('curso'));
+    }
     if($rol =='es'){
       $profesor =DB::select("select u.imagen,u.nombre
                              from cursos_user cu
@@ -75,6 +77,9 @@ class CursosController extends Controller
                              ['curso_id'=>$id]);
 
       return view('backend.modulos.cursos.view_config_es',compact('curso','profesor'));
+    }
+    if($rol =='pa'){
+        return view('backend.modulos.cursos.view_config_pa',compact('curso','id2'));
     }
   }
 

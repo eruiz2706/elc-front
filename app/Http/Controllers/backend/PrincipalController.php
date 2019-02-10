@@ -34,6 +34,8 @@ class PrincipalController extends Controller
       $tit_cursos='';
       $nav_options=[];
       $tit_options='';
+      $nav_pariente=[];
+
       if($rol=='ad'){
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
         $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
@@ -85,6 +87,22 @@ class PrincipalController extends Controller
       if($rol=='pa'){
         $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
         $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
+
+        $nav_pariente  =DB::select("select  p.id_user,u.email,u.nombre,u.imagen
+                                  from parientes_user p
+                                  left join users u on(p.id_user=u.id)
+                                  where p.id_pariente =:id_pariente"
+                                    ,['id_pariente'=>$user->id]);
+
+        foreach($nav_pariente as $nav){
+            $cursos_es  =DB::select("select c.id,c.nombre
+                                      from cursos_user cu
+                                      left join cursos c on(cu.curso_id=c.id)
+                                      where cu.user_id = :user_id
+                                      order by cu.fecha_creacion desc"
+                                      ,['user_id'=>$nav->id_user]);
+            $nav->cursos=$cursos_es;
+        }
       }
 
 
@@ -98,6 +116,9 @@ class PrincipalController extends Controller
           'nav_options'=>[
             'titulo'=>$tit_options,
             'content'=>$nav_options
+          ],
+          'nav_parients'=>[
+            'content'=>$nav_pariente
           ]
       ];
       return response()->json($jsonresponse,200);
