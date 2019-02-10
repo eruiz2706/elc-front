@@ -4775,7 +4775,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('Component pregreso mounted.');
+    console.log('Component pregreso mounted.' + document.getElementById('idest').value);
   },
   created: function created() {
     this.base_url = base_url;

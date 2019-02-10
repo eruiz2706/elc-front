@@ -22,15 +22,6 @@
               @endforeach
             @endif
           </h2>
-          <div class="card-tools">
-            <div style="width:50px;display:inline">
-              @if(isset($profesor))
-                @foreach($profesor as $prof)
-                  <img class="profile-user-img img-circle img-bordered-sm img-fluid" src="{{ URL::asset($prof->imagen) }}" style='cursor:pointer'>
-                @endforeach
-              @endif
-            </div>
-          </div>
         </div>
         <div class="card-body" style='padding:0px'>
           <ul class="nav nav-pills">
@@ -41,7 +32,7 @@
         </div>
       </div>
 
-      <div v-if="menu_content=='progreso-pa'">
+      <div v-if="menu_content=='' || menu_content=='progreso-pa'">
         <progreso-pa></progreso-pa>
       </div>
       <div v-if="menu_content=='calendario'">
