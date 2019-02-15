@@ -128,7 +128,7 @@ class HomeController extends Controller
         return response()->json([
             'status' =>'error',
             'errors' => 'El email no se encuentra registrado',
-            'message' =>'Debe validar los campos obligatorios'
+            'message' =>'El email no se encuentra registrado'
         ], 400);
       }
 
