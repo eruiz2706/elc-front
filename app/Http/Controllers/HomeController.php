@@ -110,7 +110,7 @@ class HomeController extends Controller
           return response()->json([
               'status' =>'error',
               'errors' => $validator->messages(),
-              'message' =>$validator->messages()
+              'message' =>'El email es obligatorio'
           ], 400);
       }
 
