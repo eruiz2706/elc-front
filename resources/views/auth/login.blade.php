@@ -199,8 +199,8 @@
 
           <!-- Newsletter Content -->
           <div class="newsletter_content text-lg-left text-center">
-            <div class="newsletter_title">Lorem ipsum</div>
-            <div class="newsletter_subtitle">Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</div>
+            <div class="newsletter_title">{{ trans('frontend.newsletter_title') }}</div>
+            <div class="newsletter_subtitle">{{ trans('frontend.newsletter_subtitle') }}</div>
           </div>
         </div>
       </div>

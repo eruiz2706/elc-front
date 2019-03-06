@@ -12,11 +12,11 @@
               <div class="footer_section footer_about">
                 <div class="footer_logo_container">
                   <a href="#">
-                    <div class="footer_logo_text">EL<span>C</span></div>
+                    <div class="footer_logo_text">{{ trans('frontend.elcolp') }}</div>
                   </a>
                 </div>
                 <div class="footer_about_text">
-                  <p>The place for english and culture</p>
+                  <p>{{ trans('frontend.elcolp_text') }}</p>
                 </div>
                 <div class="footer_social">
                   <ul>
@@ -37,9 +37,8 @@
                 <div class="footer_title">{{ trans('frontend.contact') }}</div>
                 <div class="footer_contact_info">
                   <ul>
-                    <li>Email: elcquibdo@gmail.com </li>
-                    <li>{{ trans('frontend.telephone') }} :  6714563 – (+57) 320 320 4536</li>
-                    <li>Calle 31 # 5-21 Sede Anexa al IEFEM. Quibdó – Chocó – Colombia</li>
+                    <li>{{ trans('frontend.email') }} : {{ trans('frontend.elcolp_email') }} </li>
+                    <li>{{ trans('frontend.telephone') }} : {{ trans('frontend.elcolp_phone') }}</li>
                   </ul>
                 </div>
               </div>

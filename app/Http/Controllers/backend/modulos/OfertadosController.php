@@ -76,7 +76,7 @@ class OfertadosController extends Controller
       $tax=0;
       $taxReturnBase=0;
       $currency="COP";
-      $accountId="512321";
+      $accountId="512321";//pais
       $test="1";
       $buyerEmail=$user->email;
       $description=$curso->nombre;

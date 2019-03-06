@@ -9,35 +9,47 @@
 @section('content')
 <!-- Home -->
 <div class="home">
-  <div class="home_slider_container">
+  <div class="home_slider_container" style='padding-top:130px'>
 
     <!-- Home Slider -->
     <div class="owl-carousel owl-theme home_slider">
-
       <!-- Home Slider Item -->
       <div class="owl-item">
-        <div class="home_slider_background" style="background-image:url({{ URL::asset('rfend/images/home_slider_1.jpg') }})"></div>
+        <div class="home_slider_background" style="background-image:url({{ URL::asset('rfend/images/home_slider_2.png') }})"></div>
         <div class="home_slider_content">
           <div class="container">
             <div class="row">
               <div class="col text-center">
-                <div class="home_slider_title">Sistema educativo</div>
-                <div class="home_slider_subtitle">Futuro de la educacion online</div>
+                <div class="home_slider_title"></div>
+                <div class="home_slider_subtitle"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
       <!-- Home Slider Item -->
       <div class="owl-item">
-        <div class="home_slider_background" style="background-image:url({{ URL::asset('rfend/images/home_slider_1.jpg') }})"></div>
+        <div class="home_slider_background" style="background-image:url({{ URL::asset('rfend/images/home_slider_1.png') }})"></div>
         <div class="home_slider_content">
           <div class="container">
             <div class="row">
               <div class="col text-center">
-                <div class="home_slider_title">Sistema educativo</div>
-                <div class="home_slider_subtitle">Futuro de la educacion online</div>
+                <div class="home_slider_title"></div>
+                <div class="home_slider_subtitle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Home Slider Item -->
+      <div class="owl-item">
+        <div class="home_slider_background" style="background-image:url({{ URL::asset('rfend/images/home_slider_3.png') }})"></div>
+        <div class="home_slider_content">
+          <div class="container">
+            <div class="row">
+              <div class="col text-center">
+                <div class="home_slider_title"></div>
+                <div class="home_slider_subtitle"></div>
               </div>
             </div>
           </div>

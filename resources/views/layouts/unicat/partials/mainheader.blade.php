@@ -31,11 +31,11 @@
                 <li><div class="question">{{ trans('frontend.question') }}</div></li>
                 <li>
                   <i class="fa fa-phone" aria-hidden="true"></i>
-                  <div>6714563 – (+57) 320 320 4536</div>
+                  <div>{{ trans('frontend.elcolp_phone') }}</div>
                 </li>
                 <li>
                   <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                  <div>elcquibdo@gmail.com</div>
+                  <div>{{ trans('frontend.elcolp_email') }}</div>
                 </li>
 
 

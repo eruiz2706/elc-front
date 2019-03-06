@@ -69,8 +69,8 @@
             <div class="contact_info_location">
               <!--<div class="contact_info_location_title">Cali colombia</div>-->
               <ul class="location_list">
-                <li><strong>{{ trans('frontend.telephone') }}:</strong> 6714563 – (+57) 320 320 4536</li>
-                <li><strong>{{ trans('frontend.email') }}:</strong> elcquibdo@gmail.com </li>
+                <li><strong>{{ trans('frontend.telephone') }} : </strong>{{ trans('frontend.elcolp_phone') }}</li>
+                <li><strong>{{ trans('frontend.email') }} : </strong>{{ trans('frontend.elcolp_email') }}</li>
               </ul>
             </div>
             <div class="contact_map">

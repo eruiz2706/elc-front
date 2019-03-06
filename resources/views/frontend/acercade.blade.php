@@ -47,7 +47,7 @@
         <div class="about_item">
           <div class="about_item_image"><img src="{{ URL::asset('rfend/images/about_1.jpg') }}" alt=""></div>
           <div class="about_item_title"><a href="#">{{ trans('frontend.page_about.about_item1_title') }}</a></div>
-          <div class="about_item_text">
+          <div class="about_item_text text-justify">
             <p>{{ trans('frontend.page_about.about_item1_text') }}</p>
           </div>
         </div>
@@ -58,7 +58,7 @@
         <div class="about_item">
           <div class="about_item_image"><img src="{{ URL::asset('rfend/images/about_2.jpg') }}" alt=""></div>
           <div class="about_item_title"><a href="#">{{ trans('frontend.page_about.about_item2_title') }}</a></div>
-          <div class="about_item_text">
+          <div class="about_item_text text-justify">
             <p>{{ trans('frontend.page_about.about_item2_text') }}</p>
           </div>
         </div>
@@ -93,8 +93,8 @@
             <div class="elements_accordions">
 
               <div class="accordion_container">
-                <div class="accordion d-flex flex-row align-items-center active"><div>{{ trans('frontend.page_about.accordion_panel_tittle') }}</div></div>
-                <div class="accordion_panel" style='max-height: 800px;'>
+                <div class="accordion d-flex flex-row align-items-center  active"><div>{{ trans('frontend.page_about.accordion_panel_tittle') }}</div></div>
+                <div class="accordion_panel text-justify" style='max-height: 800px;'>
                   <p>{{ trans('frontend.page_about.accordion_panel_text1') }}</p>
                   <p>{{ trans('frontend.page_about.accordion_panel_text2') }}</p>
                   <p>{{ trans('frontend.page_about.accordion_panel_text3') }}</p>
