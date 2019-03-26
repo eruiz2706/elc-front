@@ -39,7 +39,7 @@
 
 						<!-- Course Image -->
 						<div class="course_image">
-              <img v-if="o_curso.urlvideo ==''" v-bind:src="base_url+'/'+o_curso.imagen" alt="">
+              <img v-if="o_curso.urlvideo ==''" v-bind:src="base_url+'/'+o_curso.imagen" alt="" style='width:100%;height:400px'>
               <iframe v-if="o_curso.urlvideo !=''" class="img-fluid" style='width:100%;height:400px' frameborder="0" allowfullscreen allow="autoplay; encrypted-media"
                   v-bind:src="o_curso.urlvideo">
                 </iframe>
@@ -85,9 +85,8 @@
 						<div class="sidebar_section">
 							<div class="sidebar_section_title">{{ trans('frontend.page_coursedet.feature') }}</div>
 							<div class="sidebar_feature">
-								<div class="course_price" v-text='o_curso.nombestado'></div>
-
-								<!-- Features -->
+								<div class="course_price" v-text="traduction[o_curso.slug]"></div>
+                <!-- Features -->
 								<div class="feature_list">
 
 									<!-- Feature -->

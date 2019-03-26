@@ -25,9 +25,9 @@
         </div>
         <div class="card-body" style='padding:0px'>
           <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='' || menu_content=='progreso-pa') ? 'active' : ''" v-on:click.prevent="setMenuContent('progreso-pa')">Progreso</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='calendario') ? 'active' : ''" v-on:click.prevent="setMenuContent('calendario')">Calendario</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='resultados-pa') ? 'active' : ''" v-on:click.prevent="setMenuContent('resultados-pa')">Resultados</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='' || menu_content=='progreso-pa') ? 'active' : ''" v-on:click.prevent="setMenuContent('progreso-pa')">{{trans('backend.progress')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='calendario') ? 'active' : ''" v-on:click.prevent="setMenuContent('calendario')">{{trans('backend.calendar')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='resultados-pa') ? 'active' : ''" v-on:click.prevent="setMenuContent('resultados-pa')">{{trans('backend.results')}}</a></li>
           </ul>
         </div>
       </div>

@@ -5,10 +5,10 @@
     <div class="modal-content">
       <div class='modal-header'>
         <div class="input-group">
-            <input type="text" name="message" placeholder="Escribe una respuesta" class="form-control" v-model='o_comentario.comentario' v-bind:class="[e_comentarios.comentario ? 'is-invalid' : '']">
+            <input type="text" name="message" v-bind:placeholder="traslate.write_answer" class="form-control" v-model='o_comentario.comentario' v-bind:class="[e_comentarios.comentario ? 'is-invalid' : '']">
             <span class="input-group-append">
               <button type="button" class="btn btn-outline-primary btn-sm" :disabled="loader_responder"  v-on:click.prevent='agregarComentario()'>
-                Responder
+                <span v-text='traslate.respond'></span>
                 <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_responder"></i>
               </button>
             </span>
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class='modal-footer'>
-          <button type="button" class="btn btn-default float-right btn-sm" v-on:click.prevent='cerrarComentarios()'><i class="fa fa-close"></i> Cerrar</button>
+          <button type="button" class="btn btn-default float-right btn-sm" v-on:click.prevent='cerrarComentarios()'><i class="fa fa-close"></i> <span v-text="traslate.close"></span></button>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
 
 <div class="card">
   <div class="card-header card-header-cuorse">
-    <h2 class="card-title-course">Ultimas noticias</h2>
+    <h2 class="card-title-course" v-text="traslate.last_new"></h2>
   </div>
   <div class="card-body">
     <div class="row">
@@ -57,7 +57,7 @@
       </div>
     </div>
     <button type="button" class="btn btn-outline-primary btn-sm float-right"  :disabled="loader_publicar" v-on:click.prevent='publicacion()'>
-      Publicar
+      <span v-text="traslate.topost"></span>
       <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_publicar"></i>
     </button>
   </div>
@@ -81,13 +81,13 @@
     <p v-html = "foro.descripcion"></p>
     <span class="float-right text-muted">
       <a href="#" v-on:click.prevent="openComentarios(foro.id,indexforo)">
-        <span v-text='foro.comentarios'></span> comentarios
+        <span v-text='foro.comentarios'></span> <span v-text="traslate.comments"></span>
       </a>
     </span>
   </div>
   <div class="card-footer">
       <div class="img-push">
-        <input type="text" class="form-control form-control-sm" placeholder="Escribe una respuesta"  v-on:click="openComentarios(foro.id,indexforo)">
+        <input type="text" class="form-control form-control-sm" v-bind:placeholder="traslate.write_answer"  v-on:click="openComentarios(foro.id,indexforo)">
       </div>
   </div>
 
@@ -99,7 +99,6 @@
 <script>
     export default {
         mounted() {
-            console.log('Component foro mounted.');
             $('#summernote').summernote({
               callbacks: {
                onImageUpload: function(image) {
@@ -132,7 +131,7 @@
                      }
                   }
               },
-              placeholder: 'Escribe tu comentario aqui',
+              placeholder: trans('backend.white_toy_comment'),
               toolbar: [
                 ['groupName', ['picture','link','video']],
 
@@ -159,7 +158,15 @@
             preload_coment:false,
             a_comentarios:[],
             loader_responder:false,
-            e_comentarios:[]
+            e_comentarios:[],
+            traslate:{
+              'last_new':trans('backend.last_new'),
+              'topost':trans('backend.topost'),
+              'comments':trans('backend.comments'),
+              'write_answer':trans('backend.write_answer'),
+              'respond':trans('backend.respond'),
+              'close':trans('backend.close'),
+            }
           }
         },
         methods : {

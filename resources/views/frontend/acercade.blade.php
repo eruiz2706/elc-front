@@ -5,6 +5,10 @@
 <link href="{{ URL::asset('rfend/plugins/colorbox/colorbox.css') }}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/about.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/about_responsive.css') }}">
+<style>
+.accordion::before{content:'';}
+.accordion_container{padding-left:15px;}
+</style>
 @stop
 
 @section('content')
@@ -93,7 +97,7 @@
             <div class="elements_accordions">
 
               <div class="accordion_container">
-                <div class="accordion d-flex flex-row align-items-center  active"><div>{{ trans('frontend.page_about.accordion_panel_tittle') }}</div></div>
+                <div class="accordion d-flex flex-row align-items-center"><div>{{ trans('frontend.page_about.accordion_panel_tittle') }}</div></div>
                 <div class="accordion_panel text-justify" style='max-height: 800px;'>
                   <p>{{ trans('frontend.page_about.accordion_panel_text1') }}</p>
                   <p>{{ trans('frontend.page_about.accordion_panel_text2') }}</p>

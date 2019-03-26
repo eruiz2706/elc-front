@@ -13,8 +13,9 @@
 <script src="{{ URL::asset('rsc/js/adminlte.js') }}"></script>
 <script src="{{ URL::asset('plugins/artyom/artyom.window.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
-
 <script src="{{ URL::asset('plugins/socket/socket.io.js') }}"></script>
+<script src="{{ URL::asset('js/translation.js') }}"></script>
+
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.0/socket.io.js"></script>-->
 <!-- Smartsupp Live Chat script -->
 <script type="text/javascript">
@@ -37,5 +38,9 @@ window.onload = function() {
 var base_url = '<?php echo url('/'); ?>';
 var ident_tk='<?php echo Auth::user()->id; ?>';
 var url_servinotifi='<?php echo env('URL_SERVINOTIFI'); ?>';
+//window.translations = {!! Cache::get('translations') !!};
+$.getJSON({url:base_url+"/trans",async: false},function(result){
+  window.translations =result;
+});
 </script>
 <script src="{{ URL::asset('js/app.js') }}"></script>

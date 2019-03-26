@@ -17,6 +17,7 @@ class Lang
     {
         if (!empty(session('lang'))) {
             \App::setLocale(session('lang'));
+            
         }
         return $next($request);
     }

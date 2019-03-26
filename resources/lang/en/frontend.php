@@ -15,10 +15,15 @@ return [
         'register'=>'Register',
         'coursesdet'=>'Course details'
     ],
+    'no_rol'=>'The user does not have a profile. Try again. If the error persists, contact the system administrator.',
+    'no_register'=>'You must be registered to access',
+    'error_send'=>'The action could not be performed.',
+    'pass'=>'Password',
     'recover_pass'=>'Recover password',
     'forget_pass'=>'Did you forget your password?',
     'send'=>'Send',
-    'sign_up'=>'SIGN UP',
+    'create_account'=>"CREATE AN ACCOUNT",
+    'sign_up'=>"SIGN UP",
     'log_in'=>'Login',
     'enter'=>'Enter',
     'question' =>'Do you have any question ?',
@@ -36,7 +41,7 @@ return [
     'elcolp_email'=>'elcolpvirtual@gmail.com',
     'page_home'  => [
         'welcome' => 'Welcome to ELCOLP',
-        'welcome_descrip'    => 'Welcome to our new bilingual learning platform (Spanish and English). This platform is possessed of special features that make it globally unique.'
+        'welcome_descrip'    => 'Welcome to our new bilingual learning platform (Spanish and English). This platform is possessed of special features that make it globally unique.',
         'feature1'  => 'Experts',
         'feature1_descrip'  => 'Our experience leading educational initiatives speaks for us.',
         'feature2'  => 'Unique content',
@@ -51,7 +56,13 @@ return [
     ],
     'page_courses'  => [
         'section_title' => 'Courses',
-        'button_search' =>'Search'
+        'button_search' =>'Search',
+        'selected_status'=>'search by state',
+        'abierto'=>'Open courses',
+        'encurso'=>'In course',
+        'finalizado'=>'Finalized',
+        'free'=>'Free',
+        'indefinido'=>'Undefined'
     ],
     'page_about'  => [
         'section_title' => 'About us',
@@ -60,8 +71,8 @@ return [
         'about_item2_title'=>'Vision',
         'about_item2_text'=>'Our vision is to be agents of change in the region and nation to provide more opportunities for people through quality educational programs. We firmly believe in education and using love as an instrument to unite and create brotherhood and sisterhood between people and their community.',
         'accordion_panel_tittle'=>'The English Learning Center',
-        'accordion_panel_text1'=>'The English Language Center (ELC) is a non‐profit private law entity, formed by a highly experienced teaching team, led by professionals with postgraduate studies from prestigious universities in the United States and Colombia. We are dedicated to the transformation of our environment through the teaching of English, special programs and cultural activities. The ELC was founded in 2014 and since then, the institution has developed meaningful programs that have had a huge impact on the community; in fact, both boards of education — city and state — have repeatedly entrusted us with the best training practices for teachers and students.',
-        'accordion_panel_text2'=>'The following programs have played a critical role in the development of the ELC: Nuquí Innovative 2015, Chocó Innovative 2016, Quibdó bilingual – Moving Forward 2017, program Committee Red Cross International 2018, Comfachico 2018, Prueba Saber Pro UTCH 2018.',
+        'accordion_panel_text1'=>'The English Language Center (ELCOLP) is a non‐profit private law entity, formed by a highly experienced teaching team, led by professionals with postgraduate studies from prestigious universities in the United States and Colombia. We are dedicated to the transformation of our environment through the teaching of English, special programs and cultural activities. The ELCOLP was founded in 2014 and since then, the institution has developed meaningful programs that have had a huge impact on the community; in fact, both boards of education — city and state — have repeatedly entrusted us with the best training practices for teachers and students.',
+        'accordion_panel_text2'=>'The following programs have played a critical role in the development of the ELCOLP: Nuquí Innovative 2015, Chocó Innovative 2016, Quibdó bilingual – Moving Forward 2017, program Committee Red Cross International 2018, Comfachico 2018, Prueba Saber Pro UTCH 2018.',
         'accordion_panel_text3'=>''
     ],
     'page_contact'  => [
@@ -71,17 +82,37 @@ return [
         'form_message'=>'Message',
         'button_send'=>'Send',
         'contact_info_title'=>'Contact information',
-        'contact_info_text'=>'We are located in the Calle 31 # 5-21 Sede Anexa al IEFEM. Quibdó – Chocó – Colombia'
+        'contact_info_text'=>'Contact us with your personal details. We will attend to your request as quickly as possible.'
     ],
     'page_coursedet'  => [
       'study_plan' =>'Study plan',
       'feature' =>'Characteristics',
       'start_date' =>'Start date',
-      'end_date' =>'End date'
+      'end_date' =>'End date',
+      'price'=>'Price',
+      'free'=>'Free',
+      'tobuy'=>'To buy',
+      'subscribed'=>'Subscribed'
     ],
     'page_register'  => [
       'form_name' =>'Name',
       'form_email' =>'Email',
-      'form_pass' =>'Password'
+      'form_pass' =>'Password',
+      'tittle_type'=>'What kind of user you are?',
+      'type_es'=>'I\'m a student',
+      'type_pr'=>'I\'m a teacher',
+      'type_pa'=>'I\'m parent or guardian',
+      'msg_register'=>'Registration made correctly',
+      'msg_recovery'  =>"An automatic password has been generated, remember that you can change it at any time from your user's profile.",
+      'msg_send' => 'Your password has been sent, to the email entered!',
+      'required_email' =>'The email is required',
+      'email_noregister'=>'The email is not registered',
+      'msg_pasrecovery'=>'Recovery password'
+    ],
+    'page_login'  => [
+      'tittle'=>'Begin session',
+      'text1' =>'If you have already subscribed, enter the email you used to register and the password you were assigned.',
+      'text2' =>'If you are signing on for the first time, click register and enter your details. A password will be sent to the registered email',
+      'text3' =>'Don’t forget that you can change your details from your profile whenever you like.'
     ],
 ];

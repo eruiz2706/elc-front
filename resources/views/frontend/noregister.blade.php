@@ -13,12 +13,8 @@
     <div class="row">
       <div class="col">
         <div class="section_title_container text-center">
-          <h2 class="section_title">&nbsp;</h2>
-          <div class="section_subtitle">
-            <p>
-            &nbsp;&nbsp;
-            </p>
-          </div>
+          <h2 class="section_title">{{trans('frontend.no_register')}}</h2>
+          
         </div>
       </div>
     </div>
@@ -31,5 +27,5 @@
 @endsection
 @section('scripts')
   @parent
-  <script src="{{ URL::asset('js/fe/noregister.js') }}"></script>
+  <!--<script src="{{ URL::asset('js/fe/noregister.js') }}"></script>-->
 @stop

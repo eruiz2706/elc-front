@@ -15,6 +15,7 @@ new Vue({
       o_curso:{},
       e_curso:[],
       preload :false,
+      traduction:{}
     },
     computed : {
 
@@ -25,6 +26,7 @@ new Vue({
           var url =base_url+'/getcursodet/'+this.id;
           axios.get(url,{}).then(response =>{
               this.o_curso=response.data.curso;
+              this.traduction=response.data.traduction;
               this.preload=false;
               console.log(this.o_curso);
           }).catch(error =>{

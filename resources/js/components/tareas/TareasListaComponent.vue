@@ -9,7 +9,7 @@
   <div class="row" v-if="!preload">
     <div class="col-sm-6">
       <h5 class="m-0 text-dark">
-        <strong>Lista de tareas</strong>
+        <strong v-text='traslate.list_homework'></strong>
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectCrear()">
           <i class="fa fa-plus-circle"  style="font-size: 24px;"></i>
         </button>
@@ -28,16 +28,16 @@
 
       <div class='row'>
         <div class="col-md-4 col-sm-6">
-          <b>Creado :</b> <span v-text='tarea.fecha_creacion'></span>
+          <b><span v-text='traslate.created'></span> :</b> <span v-text='tarea.fecha_creacion'></span>
         </div>
         <div class="col-md-4 col-sm-6">
-          <b>Vence :</b> <span v-text='tarea.fecha_vencimiento'></span>
+          <b><span v-text='traslate.expires'></span> :</b> <span v-text='tarea.fecha_vencimiento'></span>
         </div>
         <div class="col-md-4 col-sm-6">
-          <b>Califacion Sobre :</b> <span v-text='tarea.calificacion'></span>
+          <b><span v-text='traslate.maximum_note'></span> :</b> <span v-text='tarea.calificacion'></span>
         </div>
         <div class="col-md-4 col-sm-6">
-          <i class="fa fa-list-alt" style="cursor:pointer" v-on:click.prevent="redirectEnt(tarea.id)"></i> <b>Entregas :</b> <span v-text='tarea.cant_respuest'></span>/<span v-text='cantUser'></span>
+          <i class="fa fa-list-alt" style="cursor:pointer" v-on:click.prevent="redirectEnt(tarea.id)"></i> <b><span v-text='traslate.deliveries'></span> :</b> <span v-text='tarea.cant_respuest'></span>/<span v-text='cantUser'></span>
         </div>
       </div>
   </div>
@@ -58,7 +58,14 @@
             idcurso : 0,
             preload:true,
             a_tareas:[],
-            cantUser : 0
+            cantUser : 0,
+            traslate:{
+              'list_homework':trans('backend.list_homework'),
+              'created':trans('backend.created'),
+              'expires':trans('backend.expires'),
+              'maximum_note':trans('backend.maximum_note'),
+              'deliveries':trans('backend.deliveries'),
+            }
           }
         },
         methods : {

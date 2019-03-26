@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class='modal-header'>
-            Chat directo<button type="button" class="close" data-dismiss="modal">&times;</button>
+            <span v-text='traslate.direct_chat'></span><button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" style="height:300px;overflow-y: auto;" ref="content_chat">
           <div class="row" v-if="preloadmodal">
@@ -43,7 +43,7 @@
             <input type="text" class="form-control" v-model="mensaje_chat">
             <span class="input-group-append">
               <button type="button" class="btn btn-primary" :disabled="loader_responder"  v-on:click.prevent='responderchat()'>
-                Responder
+                <span v-text='traslate.respond'></span>
                 <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_responder"></i>
               </button>
             </span>
@@ -80,8 +80,8 @@
                 <a><span v-text='integrante.nombre'></span></a>
               </span>
               <span class="description" v-text='integrante.perfil'></span>
-              <span class="description">Ultimo ingreso: <span v-text='integrante.fecha_ultimo_ingreso'></span></span>
-              <span class="description">Tiempo de uso: <span v-text='integrante.tiempouso'></span> minutos</span>
+              <span class="description"><span v-text='traslate.last_access'></span>: <span v-text='integrante.fecha_ultimo_ingreso'></span></span>
+              <span class="description"><span v-text='traslate.time_use'></span>: <span v-text='integrante.tiempouso'></span> <span v-text='traslate.minutes'></span></span>
             </div>
           </div>
         </div>
@@ -123,7 +123,14 @@
             id_userchat:0,//usuario al que se envia el mensaje
             loader_responder:false,
             mensaje_chat:'',
-            rol_user:''
+            rol_user:'',
+            traslate:{
+              'direct_chat':trans('backend.direct_chat'),
+              'last_access':trans('backend.last_access'),
+              'time_use':trans('backend.time_use'),
+              'minutes':trans('backend.minutes'),
+              'respond':trans('backend.respond'),
+            }
           }
         },
         methods : {

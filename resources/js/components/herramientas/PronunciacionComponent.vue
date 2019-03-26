@@ -5,15 +5,15 @@
       <div class="callout callout-info">
         <p>
           <i class="fa fa-fw fa-info"></i>
-          Escribe la palabra a pronunciar y da en evaluar para verificar tu pronunciacion,
+          <span v-text='traslate.msg_pronunciation'></span>
         </p>
       </div>
 
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Palabra" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="texto_escucha">
+        <input type="text" class="form-control" v-bind:placeholder="traslate.word" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="texto_escucha">
         <div class="input-group-append">
           <button class="btn btn-outline-primary" type="button" v-on:click.prevent='escucharAudio()' :disabled="disabled_escuchar">
-            Escuchar <i class="fa fa-volume-up"></i>
+            <span v-text='traslate.hear_button'></span> <i class="fa fa-volume-up"></i>
           </button>
         </div>
       </div>
@@ -21,7 +21,7 @@
       <div class="form-group">
         <label>
           <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='evaluarAudio()' :disabled="disabled_evaluar">
-            Hablar <i class="fa fa-microphone" style="font-size:20px" ></i>
+            <span v-text='traslate.talk'></span> <i class="fa fa-microphone" style="font-size:20px" ></i>
           </button>&nbsp;&nbsp;&nbsp;
           <span id="resultado_pronun"></span>
         </label>
@@ -34,17 +34,16 @@
       <div class="callout callout-info">
       	<p>
       	  <i class="fa fa-fw fa-info"></i>
-          Da click en el boton hablar y verifica tu pronunciacion, una vez termines de hablar da click en el boton detener para
-          ver tus resultados
+          <span v-text='traslate.msg_pronunciation2'></span>
       	</p>
       </div>
       <div class="form-group">
         <label>
           <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='playAudio()' :disabled="disabled_play">
-            Hablar <i class="fa fa-microphone"></i>
+            <span v-text='traslate.talk'></span> <i class="fa fa-microphone"></i>
           </button>&nbsp;&nbsp;&nbsp;
           <button type="button" class="btn btn-outline-danger btn-sm" v-on:click.prevent='stopAudio()' :disabled="!disabled_play">
-            Detener <i class="fa fa-stop" ></i>
+            <span v-text='traslate.stop'></span> <i class="fa fa-stop" ></i>
           </button>
         </label>
         <textarea class="form-control" rows="10" id="texto_voz_audio"></textarea>
@@ -67,7 +66,15 @@
             disabled_play:false,
             disabled_escuchar:false,
             disabled_evaluar:false,
-            texto_escucha:''
+            texto_escucha:'',
+            traslate:{
+              'msg_pronunciation':trans('backend.msg_pronunciation'),
+              'word':trans('backend.word'),
+              'talk':trans('backend.talk'),
+              'hear_button':trans('backend.hear_button'),
+              'stop':trans('backend.stop'),
+              'msg_pronunciation2':trans('backend.msg_pronunciation2'),
+            }
           }
         },
         methods : {

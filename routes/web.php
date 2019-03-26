@@ -28,6 +28,15 @@ Route::get('lang/{lang}', function ($lang) {
     'lang' => 'en|es'
 ]);
 
+Route::get('trans', function() {
+  $langPath = resource_path('lang/'.App::getLocale());
+  return collect(File::allFiles($langPath))->flatMap(function ($file) {
+    return [
+        ($translation = $file->getBasename('.php')) => trans($translation),
+    ];
+  });
+})->middleware(['lang']);
+
 Route::middleware(['lang'])->group(function(){
   Route::get('/', 'HomeController@index');
   Route::get('/cursosd/{estado?}', 'HomeController@cursos');
@@ -48,7 +57,7 @@ Route::middleware(['lang'])->group(function(){
 });
 
 
-Route::middleware(['auth','navcursos'])->group(function(){
+Route::middleware(['lang','auth','navcursos'])->group(function(){
 
   Route::get('/principalpa', 'backend\PrincipalController@indexpa');
 

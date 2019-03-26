@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Helpers\Mailgun;
 use App\Helpers\Templatehtml;
+use Lang;
 use Validator;
 use DB;
 
@@ -39,7 +40,7 @@ class HomeController extends Controller
     {
       $cursos   =DB::select("select
                               c.id,c.nombre,c.imagen,u.nombre as usercrea,
-                              e.nombre as nomestado,c.valor
+                              e.nombre as nomestado,c.valor,e.slug
                               from cursos c
                               left join users u on(c.user_id=u.id)
                               left join estados e on(c.estado=e.slug and e.tipo='cursos')
@@ -79,7 +80,7 @@ class HomeController extends Controller
       }
 
       $cursos =$cursos->where('visibilidad',true)
-                  ->select('e.nombre as nomestado','c.id','c.nombre', 'c.imagen', 'u.nombre as usercrea','c.valor')
+                  ->select('e.slug','e.nombre as nomestado','c.id','c.nombre', 'c.imagen', 'u.nombre as usercrea','c.valor')
                   ->paginate(6);
 
       $link_curs='';
@@ -110,7 +111,7 @@ class HomeController extends Controller
           return response()->json([
               'status' =>'error',
               'errors' => $validator->messages(),
-              'message' =>'El email es obligatorio'
+              'message' =>Lang::get('frontend.page_register.required_email')
           ], 400);
       }
 
@@ -127,12 +128,10 @@ class HomeController extends Controller
       if($iduser==''){
         return response()->json([
             'status' =>'error',
-            'errors' => 'El email no se encuentra registrado',
-            'message' =>'El email no se encuentra registrado'
+            'errors' => Lang::get('frontend.page_register.email_noregister'),
+            'message' =>Lang::get('frontend.page_register.email_noregister')
         ], 400);
       }
-
-
 
       $password   = substr( md5(microtime()),1,8);
       DB::beginTransaction();
@@ -142,18 +141,18 @@ class HomeController extends Controller
           'password'=>Hash::make($password),
         ]);
 
-        $titulo='Contraseña de recuperacion';
-        $content="<p>Se te ha generado una contraseña automatica, recuerda que puedes cambiarla en cualquier momento desde el perfil de tu usuario.</p>
-                  <br><p><strong>Contraseña</strong><br>$password</p>";
+        $content="<p>".Lang::get('frontend.page_register.msg_recovery')."</p>";
+        $content.="<br><p><strong>".Lang::get('frontend.page_register.form_pass')."</strong><br>$password</p>";
+
 
         $html=$this->templatehtml->generic([
-          'titulo'=>$titulo,
+          'titulo'=>Lang::get('frontend.page_register.msg_pasrecovery'),
           'content'=>$content
         ]);
 
         $response =$this->mailgun->send([
           'to'=>$request->input('email'),
-          'subject'=>'Registro de usuario',
+          'subject'=>Lang::get('frontend.elcolp'),
           'html'=>$html
         ]);
 
@@ -161,16 +160,16 @@ class HomeController extends Controller
         return response()->json([
             'status' =>'success',
             'message' => '',
-            'message2' => 'Se te ha enviado una contraeña de acceso al email ingresado'.$iduser
+            'message2' => Lang::get('frontend.page_register.msg_send')
         ]);
       }
       catch(\Exception $e){
-          Log::info('creacion tarea : '.$e->getMessage());
+          Log::info('recuperacion de contraseña : '.$e->getMessage());
           DB::rollback();
           //$e->getMessage();
 
           return response()->json([
-              'error' =>'Hubo una inconsistencias al intentar recuperar la contraseña'
+              'error' =>Lang::get('frontend.error_send')
           ], 400);
       }
     }
@@ -179,15 +178,15 @@ class HomeController extends Controller
       $validator =Validator::make($request->all(),[
         'nombre' =>'required|string',
         'email' =>'required|string|email|max:255|unique:users',
-        //'password' =>'required|string|min:6',
         'rol' =>'required'
+        //'password' =>'required|string|min:6',
       ]);
 
       if ($validator->fails()) {
           return response()->json([
               'status' =>'error',
               'errors' => $validator->messages(),
-              'message' =>'Debe validar los campos obligatorios'
+              'message' =>Lang::get('validation.required_all')
           ], 400);
       }
 
@@ -203,44 +202,44 @@ class HomeController extends Controller
       $params=[
         'rol'=>$request->input('rol')
       ];
-      $return   =$this->user_repo->create($attributes,$params);
+      $return   =$this->user_repo->createUser($attributes,$params);
 
       if($return->response){
-        $titulo='Tu registro se realizo satisfactoriamente';
-        $content="<p>Se te ha generado una contraseña automatica, recuerda que puedes cambiarla en cualquier momento desde el perfil de tu usuario.</p>
-                  <br><p><strong>Contraseña</strong><br>$password</p>";
+        $content="<p>".Lang::get('frontend.page_register.msg_recovery')."</p>";
+        $content.="<br><p><strong>".Lang::get('frontend.page_register.form_pass')."</strong><br>$password</p>";
 
         $html=$this->templatehtml->generic([
-          'titulo'=>$titulo,
+          'titulo'=>Lang::get('frontend.page_register.msg_register'),
           'content'=>$content
         ]);
 
         $response =$this->mailgun->send([
           'to'=>$request->input('email'),
-          'subject'=>'Registro de usuario',
+          'subject'=>Lang::get('frontend.elcolp'),
           'html'=>$html
         ]);
 
         return response()->json([
             'status' =>'success',
-            'message' => 'Tu registro ha sido exitoso!',
-            'message2' => 'Se te ha enviado tu contraseña de acceso al email ingresado!'
+            'message' => Lang::get('frontend.page_register.msg_register'),
+            'message2' => Lang::get('frontend.page_register.msg_send')
         ]);
       }else{
           return response()->json([
               'status' =>'error',
-              'message' =>'Hubo una inconsistencias al intentar guardar los datos',
+              'message' =>Lang::get('frontend.error_send'),
               'error' =>$return->error
           ], 400);
       }
     }
 
     public function getCursodet($id){
+      $indefinido=Lang::get('frontend.page_courses.indefinido');
       $curso   =DB::select("select
                               c.id,c.nombre,c.imagen,u.nombre as usercrea,c.urlvideo,
                               c.plan_estudio,u.imagen as imgusucrea,c.fecha_inicio,
-                              case when c.fecha_finalizacion='9999-12-31' then 'Indefinido'else c.fecha_finalizacion::varchar  end as fecha_finalizacion,
-                              e.nombre as nombestado
+                              case when c.fecha_finalizacion='9999-12-31' then '$indefinido' else c.fecha_finalizacion::varchar  end as fecha_finalizacion,
+                              e.nombre as nombestado,e.slug
                               from cursos c
                               left join users u on(c.user_id=u.id)
                               left join estados e on(c.estado=e.slug and e.tipo='cursos')
@@ -251,7 +250,8 @@ class HomeController extends Controller
       }
 
       $jsonresponse=[
-          'curso'=>$curso
+          'curso'=>$curso,
+          'traduction'=>Lang::get('frontend.page_courses')
       ];
       return response()->json($jsonresponse,200);
     }

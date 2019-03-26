@@ -83,18 +83,18 @@
               <div class="card ">
                   <div class="card-body">
                     <h5 class="widget-user-desc" v-text='conexion_user.nombre'></h5>
-                    <h7 class="widget-user-desc" v-text='conexion_user.ultimo_ingreso'></h7>
+                    <h6 class="widget-user-desc" v-text='conexion_user.ultimo_ingreso'></h6>
                     <h6 class="widget-user-desc" v-text='conexion_user.tiempo_uso'></h6>
                     <div class="row">
                       <div class="col-sm-6 border-right">
                           <button class="btn btn-block btn-outline-primary btn-sm" onclick="window.location.href='{{url('/perfil')}}'">
-                            Perfil
+                            {{trans('backend.profile')}}
                           </button>
                       </div>
                       <!-- /.col -->
                       <div class="col-sm-6 border-right">
                           <button class="btn btn-block btn-outline-primary btn-sm" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Cerrar Sesion
+                            {{trans('backend.sign_off')}}
                           </button>
 
                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

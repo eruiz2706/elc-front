@@ -5,21 +5,20 @@
       <div class="callout callout-info">
       	<p>
       	  <i class="fa fa-fw fa-info"></i>
-          Agrega una palabra o texto en ingles y da click en el boton reproducir para escucharlo,
-          recuerda que tienes la opcion de regular la velocidad de reproduccion
+          <span v-text='traslate.msg_listen'></span>
       	</p>
       </div>
       <div class="form-group">
-        <label for="formControlRange">Velocidad (<span v-text="artyom_speed"></span>)</label>
+        <label for="formControlRange"><span v-text='traslate.speed'></span> (<span v-text="artyom_speed"></span>)</label>
         <input type="range" min="0" max="1" step="0.1" class="form-control-range" v-model="artyom_speed">
       </div>
       <div class="form-group">
         <label>
           <button type="button" class="btn btn-outline-primary btn-sm" v-on:click.prevent='playAudio()' :disabled="disabled_play">
-            Reproducir <i class="fa fa fa-volume-up" style="font-size:20px" ></i>
+            <span v-text='traslate.hear'></span> <i class="fa fa fa-volume-up" style="font-size:20px" ></i>
           </button>&nbsp;&nbsp;&nbsp;
         </label>
-        <textarea class="form-control" rows="10" placeholder="Escriba el texto que desea ser reproducido"v-model="texto_audio"></textarea>
+        <textarea class="form-control" rows="10" v-bind:placeholder="traslate.msg_listen2" v-model="texto_audio"></textarea>
       </div>
 
 
@@ -41,7 +40,15 @@
           return {
             texto_audio:'',
             disabled_play:false,
-            artyom_speed:0.7
+            artyom_speed:0.7,
+            traslate:{
+              'stop':trans('backend.stop'),
+              'speed':trans('backend.speed'),
+              'play':trans('backend.play'),
+              'hear':trans('backend.hear'),
+              'msg_listen':trans('backend.msg_listen'),
+              'msg_listen2':trans('backend.msg_listen2'),
+            }
           }
         },
         methods : {

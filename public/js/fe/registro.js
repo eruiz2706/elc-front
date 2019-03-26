@@ -40,7 +40,8 @@ new Vue({
                   text:response.data.message2,
                   type: "success"
               }, function() {
-                  window.location = "login";
+                  //window.location = "login";
+                  window.location = "";
               });
           }).catch(error =>{
               this.loader_crear=false;
@@ -63,7 +64,8 @@ new Vue({
                   text:response.data.message2,
                   type: "success"
               }, function() {
-                  window.location = "login";
+                  /*window.location = "login";*/
+                  window.location = "";
               });
           }).catch(error =>{
               this.loader_recover=false;
@@ -79,18 +81,20 @@ new Vue({
         this.o_user.password='';
         this.o_user.repassword='';
         this.o_user.rol='';
+        this.errores=[];
         $('#modal_register').modal('show');
       },
       openrecover:function(){
         $('#modal_recover').modal('show');
+        this.errores_recover=[];
       },
       crearRedes:function(provider){
-        var modo =document.getElementById('counter_select').value;
+        var modo =document.getElementById('counter_select');
 
-        if(modo==''){
+        if(modo.value==''){
           swal({
               title:'',
-              text:'Seleccione el tipo de usuario',
+              text:modo.options[modo.selectedIndex].text,
               type: "info"
           });
           return;

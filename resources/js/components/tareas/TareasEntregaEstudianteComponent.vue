@@ -9,7 +9,7 @@
   <div class="row" v-show="!preload">
     <div class="col-md-6 col-sm-6">
       <h5 class="m-0 text-dark">
-        <strong v-html='o_tarea.nombre'>ver tarea</strong>
+        <strong v-html='o_tarea.nombre'></strong>
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectVolver()">
           <i class="fa fa-arrow-circle-left"  style="font-size: 24px;"></i>
         </button>
@@ -19,11 +19,11 @@
 
   <div class="card" v-show="!preload">
     <div class="card-body">
-      <label>Descripcion</label>
+      <label v-text='traslate.description'></label>
     	<p v-html='o_tarea.descripcion'></p>
       <hr>
 
-      <label>Respuesta</label>
+      <label v-text='traslate.answer'></label>
       <div class="form-group" v-show="o_tarea.entrega">
         <div id="summernote"></div>
       </div>
@@ -32,13 +32,13 @@
       </div>
 
       <hr>
-      <label v-if="!o_tarea.entrega">Comentarios Profesor</label>
+      <label v-if="!o_tarea.entrega" v-text='traslate.teacher_comments'></label>
       <div class="form-group" >
         <div v-html="o_tarea.comentario"   v-if="!o_tarea.entrega"></div>
       </div>
 
       <button type="button" class="btn btn-outline-primary btn-sm float-left" :disabled="loader_actualizar" v-on:click.prevent='entregar()' v-if="o_tarea.entrega">
-        Entregar tarea
+        <span v-text='traslate.deliver_homework'></span>
         <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_actualizar"></i>
       </button>
     </div>
@@ -106,6 +106,12 @@
             o_tarea:{},
             e_tarea:[],
             preload :true,
+            traslate:{
+              'description':trans('backend.description'),
+              'answer':trans('backend.answer'),
+              'teacher_comments':trans('backend.teacher_comments'),
+              'deliver_homework':trans('backend.deliver_homework'),
+            }
           }
         },
         methods : {

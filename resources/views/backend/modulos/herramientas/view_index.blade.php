@@ -12,14 +12,14 @@
       <div class="card card-primary card-outline">
         <div class="card-header card-header-cuorse">
           <h2 class="card-title-course">
-            Herramientas
+            {{trans('backend.tools')}}
           </h2>
         </div>
         <div class="card-body" style='padding:0px'>
           <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='' || menu_content=='diccionario') ? 'active' : ''" v-on:click.prevent="setMenuContent('diccionario')">Diccionario</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='reproductor') ? 'active' : ''" v-on:click.prevent="setMenuContent('reproductor')">Reproductor</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='pronunciacion') ? 'active' : ''" v-on:click.prevent="setMenuContent('pronunciacion')">Pronunciacion</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='' || menu_content=='diccionario') ? 'active' : ''" v-on:click.prevent="setMenuContent('diccionario')">{{trans('backend.dictionary')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='reproductor') ? 'active' : ''" v-on:click.prevent="setMenuContent('reproductor')">{{trans('backend.hear')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='pronunciacion') ? 'active' : ''" v-on:click.prevent="setMenuContent('pronunciacion')">{{trans('backend.pronunciation')}}</a></li>
           </ul>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ app()->getLocale() }}" >
 
 @section('htmlheader')
     @include('layouts.unicat.partials.htmlheader')

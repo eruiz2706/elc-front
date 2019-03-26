@@ -46,9 +46,9 @@
         <div class="courses_search_container">
           <form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
             <select id="courses_search_select" class="courses_search_select courses_search_input">
-              <option value=''>Seleccione el estado</option>
+              <option value=''>{{ trans('frontend.page_courses.selected_status') }}</option>
               @foreach($select_curso as $select)
-                <option value='{{$select->slug}}'>{{$select->nombre}}</option>
+                <option value='{{$select->slug}}'>{{ trans('frontend.page_courses.'.$select->slug) }}</option>
               @endforeach
             </select>
             <button type='button' onclick="busqueda();" class="courses_search_button ml-auto">{{ trans('frontend.page_courses.button_search') }}</button>
@@ -77,13 +77,13 @@
     							<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
     								<div class="course_info">
     									<i class="fa fa-bank" aria-hidden="true"></i>
-    									<span>{{$curso->nomestado}}</span>
+    									<span>{{ trans('frontend.page_courses.'.$curso->slug) }}</span>
     								</div>
     								<div class="course_price ml-auto">
                       @if($curso->valor>0)
                         ${{$curso->valor}}
                       @else
-                        Gratis
+                      {{ trans('frontend.page_courses.free') }}
                       @endif
                     </div>
     							</div>

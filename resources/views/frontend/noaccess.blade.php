@@ -13,14 +13,10 @@
     <div class="row">
       <div class="col">
         <div class="section_title_container text-center">
-          <h2 class="section_title">El usuario no tiene un rol asignado</h2>
-          <div class="section_subtitle">
-            <p>
-              El usuario no cuenta con un rol asignado valido,
-             por favor intente de nuevo, de persistir el error
-             comuniquese con el administrador del sistema
-            </p>
-          </div>
+          <h3 class="section_title">
+             {{trans('frontend.no_rol')}}
+          </h3>
+          <!--<div class="section_subtitle"></div>-->
         </div>
       </div>
     </div>

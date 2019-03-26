@@ -5,10 +5,10 @@
       <div class="card">
           <div class="card-body">
             <select class="form-control" v-model='select_bsq' v-on:change="getBusqueda();">
-              <option value=''>Seleccione el estado</option>
-              <option value='abierto'>Abierto</option>
-              <option value='encurso'>En curso</option>
-              <option value='finalizado'>Finalizado</option>
+              <option value='' v-text='traslate.selected_status'></option>
+              <option value='abierto' v-text='traslate.abierto'></option>
+              <option value='encurso' v-text='traslate.encurso'></option>
+              <option value='finalizado' v-text='traslate.finalizado'></option>
             </select>
           </div>
       </div>
@@ -29,9 +29,9 @@
           <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
             <div class="course_info">
               <i class="fa fa-bank" aria-hidden="true"></i>
-              <span v-text='curso.nombestado'></span>
+              <span v-text='gettraslate(curso.slug)'></span>
             </div>
-            <div class="course_price ml-auto" v-text="curso.valor>0 ? '$'+curso.valor : 'Gratis'"></div>
+            <div class="course_price ml-auto" v-text="curso.valor>0 ? '$'+curso.valor : traslate.free"></div>
           </div>
         </div>
       </div>
@@ -66,10 +66,21 @@
             cursos:[],
             errores :[],
             preload :false,
-            select_bsq:''
+            select_bsq:'',
+            traslate:{
+              'abierto':trans('frontend.page_courses.abierto'),
+              'encurso':trans('frontend.page_courses.encurso'),
+              'finalizado':trans('frontend.page_courses.finalizado'),
+              'free':trans('frontend.page_courses.free'),
+              'indefinido':trans('frontend.page_courses.indefinido'),
+              'selected_status':trans('frontend.page_courses.selected_status'),
+            }
           }
         },
         methods : {
+          gettraslate:function(estado){
+            return trans('frontend.page_courses.'+estado);
+          },
           getBusqueda:function(){
               this.preload=true;
               var url =base_url+'/ofertados/busq';

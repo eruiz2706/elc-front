@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class='modal-header'>
-            Progreso modulo<button type="button" class="close" data-dismiss="modal">&times;</button>
+            <span v-text='traslate.progress'></span> <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" style="height:350px;overflow-y: auto;">
           <div class="row" v-if="preloadmodal">
@@ -17,10 +17,10 @@
           <table class="table  table-valign-middle" v-if="!preloadmodal">
             <thead>
               <tr>
-                <th>Dar un toque</th>
-                <th>Estudiante</th>
-                <th>Estado</th>
-                <th>Lecciones</th>
+                <th v-text='traslate.give_touch'></th>
+                <th v-text='traslate.student'></th>
+                <th v-text='traslate.status'></th>
+                <th v-text='traslate.lessons'></th>
               </tr>
             </thead>
             <tbody>
@@ -35,12 +35,12 @@
                     <span v-text='progmod.nombre'></span>
                   </td>
                   <td>
-                      <small class="badge badge-success" v-if="estadoporcent(progmod.cantleccuser,progmod.cantlecc)"> Completo <span v-text='progmod.cantleccuser'></span>/<span v-text='progmod.cantlecc'></span></small>
-                      <small class="badge badge-danger" v-if="!estadoporcent(progmod.cantleccuser,progmod.cantlecc)"> Incompleto <span v-text='progmod.cantleccuser'></span>/<span v-text='progmod.cantlecc'></span></small>
+                      <small class="badge badge-success" v-if="estadoporcent(progmod.cantleccuser,progmod.cantlecc)"> <span v-text='traslate.full'></span> <span v-text='progmod.cantleccuser'></span>/<span v-text='progmod.cantlecc'></span></small>
+                      <small class="badge badge-danger" v-if="!estadoporcent(progmod.cantleccuser,progmod.cantlecc)"> <span v-text='traslate.incomplete'></span> <span v-text='progmod.cantleccuser'></span>/<span v-text='progmod.cantlecc'></span></small>
                   </td>
                   <td>
                     <div class="progress">
-                      <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progmod.cantleccuser,progmod.cantlecc)+'%'">Progreso <span v-text='porcent(progmod.cantleccuser,progmod.cantlecc)'></span>%</div>
+                      <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progmod.cantleccuser,progmod.cantlecc)+'%'"><span v-text='porcent(progmod.cantleccuser,progmod.cantlecc)'></span>%</div>
                     </div>
                   </td>
               </tr>
@@ -61,9 +61,10 @@
     <div class="card-header no-border">
       <h3 class="card-title" >
         <div class="progress-group">
-            Modulo <span v-text='progreso.numero'></span> : <span v-text='progreso.nombre'></span>
-            <span class="float-right">
-              <span v-text='progreso.cant_leccuser'></span>/<b><span v-text='progreso.cant_user'></span></b>
+            <span v-text='traslate.module'></span> <span v-text='progreso.numero'></span> : <span v-text='progreso.nombre'></span>
+            <span class="float-right" style='font-size:14px'>
+              <span v-text='traslate.lessons'></span> <span v-text='progreso.cant_leccuser'></span> <span v-text='traslate.of'></span> <b><span v-text='progreso.cant_user'></span></b>
+              
               <button type="button" class="btn btn-tool" data-toggle="modal" v-on:click.prevent="progresomodulo(progreso.id)">
                 <i class="fa fa-eye" style='font-size:20px'></i>
               </button>
@@ -82,10 +83,10 @@
           <div class="card-header" style="padding:.2rem 1.25rem">
             <h5 class="card-title" style="font-size:1rem">
               <a data-toggle="collapse" v-bind:href="'#'+progreso.id+'-'+leccion.id" class="collapsed" aria-expanded="false">
-              Leccion <span v-text='leccion.numero'></span> : <span v-text='leccion.nombre'></span>
+              <span v-text='traslate.lesson'></span> <span v-text='leccion.numero'></span> : <span v-text='leccion.nombre'></span>
               </a>
               <small class="badge badge-primary float-right">
-                <i class="fa fa-clock-o"></i> <span v-text='leccion.tiempolectura'></span> minutos
+                <i class="fa fa-clock-o"></i> <span v-text='leccion.tiempolectura'></span> <span v-text='traslate.minutes'></span>
               </small>
             </h5>
           </div>
@@ -94,7 +95,7 @@
             </div>
             <div class="card-footer">
               <a class="btn btn-outline-primary btn-sm collapsed" data-toggle="collapse" v-bind:href="'#'+progreso.id+'-'+leccion.id"  aria-expanded="false">
-                Finalizar
+                <span v-text='traslate.finalize'></span>
               </a>
 
             </div>
@@ -121,7 +122,21 @@
             preload:false,
             preloadmodal:false,
             a_progreso:[],
-            a_progmod:[]
+            a_progmod:[],
+            traslate:{
+              'module':trans('backend.module'),
+              'lesson':trans('backend.lesson'),
+              'lessons':trans('backend.lessons'),
+              'minutes':trans('backend.minutes'),
+              'finalize':trans('backend.finalize'),
+              'of':trans('backend.of'),
+              'progress':trans('backend.progress'),
+              'status':trans('backend.status'),
+              'student':trans('backend.student'),
+              'give_touch':trans('backend.give_touch'),
+              'full':trans('backend.full'),
+              'incomplete':trans('backend.incomplete'),
+            }
           }
         },
         methods : {

@@ -14,7 +14,7 @@ class UserRepository extends Repository{
      parent::__construct($model);
   }
 
-  public function create($attributes=[],$params=[]){
+  public function createUser($attributes=[],$params=[]){
       $return =(Object)[
           'response' => false,
       ];

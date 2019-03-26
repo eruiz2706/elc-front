@@ -262,7 +262,8 @@ section
 }
 .header.scrolled
 {
-	top: -40px;
+	/*top: -40px;*/
+	top: -60px;
 }
 
 /*********************************
@@ -286,7 +287,8 @@ section
 .top_bar_content
 {
 	width: 100%;
-	height: 40px;
+	height: 60px;
+	/*height: 40px;*/
 }
 .top_bar_contact_list li
 {
@@ -2022,3 +2024,106 @@ section
 {
 	color: #14bdee;
 }
+
+
+/*********************************
+SOBRE ESCRITURA
+*********************************/
+.counter_background{
+	height:550px;
+	top:130px;
+  }
+  
+  .counter_form{
+	top:180px;
+	height:initial;
+	padding-top:15px;
+	padding-bottom:15px;
+  }
+  .features{
+	padding-top:0px;
+  }
+  
+  .container_input_login{
+	width: 200%;
+  }
+  
+  .counter_input_login {
+	  height: 25px;
+	  border: solid 1px #e5e5e5;
+	  margin-left:10px;
+	  border-radius: 3px;
+		padding-left: 10px;
+		margin-bottom: 3px;
+	  outline: none;
+	  color: #384158;
+	  font-size: 14px;
+  }
+  
+  .container_input_login a{
+	color:white;
+	font-weight: 500;
+	}
+	
+	.container_input_login .text-validate{
+		display: block;
+		line-height: 10px;
+		font-weight: 200;
+		font-size: 11px;
+		color:red;
+	}
+
+	.error_input{
+		border: solid 1px red;
+	}
+  
+  .counter_form_button_login {
+	  width: 100%;
+	  height: 25px;
+	  color: #FFFFFF;
+	  font-size: 14px;
+	  font-weight: 700;
+	  padding:0 5px;
+	  text-transform: uppercase;
+	  /* border: none; */
+	  outline: none;
+	  /*background: #14bdee;*/
+	  background:#0f7592;
+	  cursor: pointer;
+	  margin-left:15px;
+	  box-shadow: 0px 5px 40px rgba(29,34,47,0.15);
+	  -webkit-transition: all 200ms ease;
+	  -moz-transition: all 200ms ease;
+	  -ms-transition: all 200ms ease;
+	  -o-transition: all 200ms ease;
+	  transition: all 200ms ease;
+  }
+  
+  .social_login {
+	  height: 30px;
+	  margin-left: 10px;
+	  padding: 3px 5px 0 12px;
+	  
+  }
+  
+  .hr-vertical{ 
+	position:relative;
+	margin-left:8px;
+	border:none;
+	border-left:1px solid hsl(200, 24%, 97%);
+	background-color:white;
+	height:30px;
+	width:1px;   
+	top:-15px;    
+  }
+  
+  #form_login_head{
+	padding-top:8px;
+	}
+	
+	#counter_form_login{
+		display: none;
+	}
+	#counter_form_register{
+		display: block;
+	}

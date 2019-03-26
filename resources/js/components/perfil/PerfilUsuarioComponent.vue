@@ -4,7 +4,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Cambiar contraseña</h5>
+        <h5 class="modal-title" v-text="traslate.change_pass"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,20 +13,20 @@
       <div class="modal-body">
         <div class="col-md-12">
           <div class="form-group">
-              <input type="password" class="form-control" placeholder="Nueva contraseña" v-model='o_cambiocl.password' v-bind:class="[e_cambiocl.password ? 'is-invalid' : '']">
+              <input type="password" class="form-control" v-bind:placeholder="traslate.new_pass" v-model='o_cambiocl.password' v-bind:class="[e_cambiocl.password ? 'is-invalid' : '']">
               <span class="text-danger" v-if="e_cambiocl.password" v-text='e_cambiocl.password[0]'></span>
           </div>
         </div>
         <div class="col-md-12">
           <div class="form-group">
-              <input type="password" class="form-control" placeholder="Confirmar contraseña"  v-model='o_cambiocl.repassword' v-bind:class="[e_cambiocl.repassword ? 'is-invalid' : '']">
+              <input type="password" class="form-control" v-bind:placeholder="traslate.confirm_pass"  v-model='o_cambiocl.repassword' v-bind:class="[e_cambiocl.repassword ? 'is-invalid' : '']">
               <span class="text-danger" v-if="e_cambiocl.repassword" v-text='e_cambiocl.repassword[0]'></span>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary" :disabled="loader_cambiocl">
-          Actualizar
+          <span v-text='traslate.update'></span>
           <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_cambiocl"></i>
         </button>
       </div>
@@ -44,7 +44,7 @@
               <tbody>
               <tr>
                 <td colspan='2' style="padding-top:1px">
-                  <p style='margin:0px'><strong>Nombre:</strong></p>
+                  <p style='margin:0px'><strong v-text='traslate.name'></strong></p>
                   <span v-if='!modo_edit' v-text='o_user.nombre'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -56,20 +56,20 @@
               <tr>
                 <td colspan='2' style="padding-top:1px">
                   <p style='margin:0px'>
-                    <strong>Contraseña:</strong>
+                    <strong v-text='traslate.password'></strong>
                   </p>
                   <span>************</span>  <i class="fa  fa-pencil" style='cursor:pointer' v-on:click.prevent="modalcambiocl()"></i>
                 </td>
               </tr>
               <tr>
                 <td colspan='2' style="padding-top:1px">
-                  <p style='margin:0px'><strong>Email:</strong></p>
+                  <p style='margin:0px'><strong v-text='traslate.email'></strong></p>
                   <span v-text='o_user.email'></span>
                 </td>
               </tr>
               <tr>
                 <td colspan='2' style="padding-top:1px">
-                  <p style='margin:0px'><strong>Telefono:</strong></p>
+                  <p style='margin:0px'><strong v-text='traslate.telefono'></strong></p>
                   <span v-if='!modo_edit' v-text='o_user.telefono'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -80,7 +80,7 @@
               </tr>
               <tr>
                 <td colspan='2' style="padding-top:1px">
-                  <p style='margin:0px'> <strong>Ciudad:</strong></p>
+                  <p style='margin:0px'> <strong v-text='traslate.city'></strong></p>
                   <span v-if='!modo_edit' v-text='o_user.ciudad'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -91,7 +91,7 @@
               </tr>
               <tr>
                 <td colspan='2' style="padding-top:1px">
-                  <p style='margin:0px'><strong>Direccion:</strong></p>
+                  <p style='margin:0px'><strong v-text='traslate.address'></strong></p>
                   <span v-if='!modo_edit' v-text='o_user.direccion'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -102,7 +102,7 @@
               </tr>
               <tr>
                 <td colspan='2' style="padding-top:1px">
-                  <p style='margin:0px'><strong>Facebook:</strong></p>
+                  <p style='margin:0px'><strong v-text='traslate.facebook'></strong></p>
                   <span v-if='!modo_edit' v-text='o_user.facebook'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -113,7 +113,7 @@
               </tr>
               <tr>
                 <td colspan='2' style="padding-top:1px">
-                  <p style='margin:0px'><strong>Linkedin:</strong></p>
+                  <p style='margin:0px'><strong v-text='traslate.linkedin'></strong></p>
                   <span v-if='!modo_edit'  v-text='o_user.linkedin'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -124,7 +124,7 @@
               </tr>
               <tr>
                 <td colspan='2' style="padding-top:1px">
-                  <p style='margin:0px'><strong>Biografia:</strong></p>
+                  <p style='margin:0px'><strong v-text='traslate.biography'></strong></p>
                   <span v-if='!modo_edit' v-text='o_user.biografia'></span>
                   <div class="col-md-12" v-if='modo_edit'>
                     <div class="form-group">
@@ -135,12 +135,12 @@
               </tr>
               <tr>
                 <th>
-                  <button type="button" class="btn btn-outline-primary btn-sm" v-if='!modo_edit' v-on:click.prevent='editar()'>Editar</button>
+                  <button type="button" class="btn btn-outline-primary btn-sm" v-if='!modo_edit' v-on:click.prevent='editar()'><span v-text='traslate.edit'></span></button>
                   <button type="button" class="btn btn-outline-primary btn-sm" v-if='modo_edit' v-on:click.prevent='actualizar()' :disabled="loader_act" >
-                    Actualizar
+                    <span v-text='traslate.update'></span>
                     <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_act"></i>
                   </button>
-                  <button type="button" class="btn btn-outline-primary btn-sm" v-if='modo_edit' v-on:click.prevent='cancelar()'>Cancelar</button>
+                  <button type="button" class="btn btn-outline-primary btn-sm" v-if='modo_edit' v-on:click.prevent='cancelar()'><span v-text='traslate.cancel'></span></button>
                 </th>
               </tr>
             </tbody></table>
@@ -158,7 +158,7 @@
       <form method="post" enctype="multipart/form-data" id="uploadForm" v-on:submit.prevent="actualizarImg()">
         <input type="file" class="form-control-file border" id="file_avatar" >
         <button type="submit" class="btn btn-block btn-outline-primary btn-sm" :disabled="loader_img"  >
-          Cargar Imagen
+          <span v-text='traslate.upload_image'></span>
           <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_img"></i>
         </button>
       </form>
@@ -204,7 +204,25 @@
             e_cambiocl :[],
 
             modo_edit:false,
-            loader_act:false
+            loader_act:false,
+            traslate:{
+              'name':trans('backend.name'),
+              'password':trans('backend.password'),
+              'email':trans('backend.email'),
+              'telefono':trans('backend.telefono'),
+              'city':trans('backend.city'),
+              'address':trans('backend.address'),
+              'facebook':trans('backend.facebook'),
+              'linkedin':trans('backend.linkedin'),
+              'biography':trans('backend.biography'),
+              'edit':trans('backend.edit'),
+              'upload_image':trans('backend.upload_image'),
+              'update':trans('backend.update'),
+              'cancel':trans('backend.cancel'),
+              'change_pass':trans('backend.change_pass'),
+              'new_pass':trans('backend.new_pass'),
+              'confirm_pass':trans('backend.confirm_pass'),
+            }
           }
         },
         methods : {

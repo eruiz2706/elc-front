@@ -8,8 +8,9 @@
 
   <div class="card" v-if="!preload">
     <div class="card-body">
-    <p class="text-center">
-        <strong>TAREAS</strong>
+      <p>
+        <strong v-text='traslate.homework.toUpperCase()'></strong>
+        <strong class='float-right' v-text='traslate.note'></strong>
       </p>
       <div class="progress-group" v-for="tarea in a_tareas">
         <span v-text="tarea.nombre"></span>
@@ -25,8 +26,9 @@
 
   <div class="card" v-if="!preload" >
     <div class="card-body">
-    <p class="text-center">
-        <strong>EXAMENES</strong>
+      <p>
+        <strong v-text='traslate.test.toUpperCase()'></strong>
+        <strong class='float-right' v-text='traslate.note'></strong>
       </p>
       <div class="progress-group" v-for="examen in a_examenes">
         <span v-text="examen.nombre"></span>
@@ -56,6 +58,12 @@
             preload:true,
             a_tareas:[],
             a_examenes:[],
+            traslate:{
+              'homework':trans('backend.homework'),
+              'test':trans('backend.test'),
+              'note':trans('backend.note'),
+              'of':trans('backend.of'),
+            }
           }
         },
         methods : {

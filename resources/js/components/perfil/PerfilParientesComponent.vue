@@ -2,11 +2,11 @@
 <div>
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Parientes</h3>
+    <h3 class="card-title" v-text='traslate.family_member'></h3>
 
     <div class="card-tools">
       <div class="input-group input-group-sm" style="width: 250px;">
-        <input type="text" name="table_search" class="form-control float-right" placeholder="Email pariente" v-model="email_pariente">
+        <input type="text" name="table_search" class="form-control float-right" v-bind:placeholder="traslate.email" v-model="email_pariente">
         <div class="input-group-append">
           <button type="button" class="btn btn-primary" v-on:click.prevent='agregarpariente();'>
             <i class="fa fa-plus" v-if="!loader_add"></i>
@@ -45,7 +45,13 @@
             preload :false,
             email_pariente:'',
             loader_add :false,
-            o_pariente:[]
+            o_pariente:[],
+            traslate:{
+              'family_member':trans('backend.family_member'),
+              'email':trans('backend.email'),
+              'delete_confirm':trans('backend.delete_confirm'),
+              'accept':trans('backend.accept'),
+            }
           }
         },
         methods : {
@@ -82,12 +88,12 @@
           eliminar:function(id){
             let inst = this;
             swal({
-              title: "Seguro desea desasociar el pariente",
+              title: inst.traslate.delete_confirm,
               text: "",
               type: "info",
               showCancelButton: true,
               confirmButtonClass: "btn-success",
-              confirmButtonText: "Aceptar",
+              confirmButtonText: inst.traslate.accept,
               closeOnConfirm: true
             },
             function(){

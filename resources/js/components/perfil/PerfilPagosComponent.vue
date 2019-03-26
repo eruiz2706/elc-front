@@ -8,16 +8,16 @@
 
   <div class="card" v-if="!preload">
     <div class="card-header">
-      <h3 class="card-title">Pagos realizados</h3>
+      <h3 class="card-title" v-text='traslate.pay_made'></h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
       <table class="table table-hover">
         <tbody><tr>
-          <th>Id</th>
-          <th>Curso</th>
-          <th>Valor</th>
-          <th>Fecha de Pago</th>
+          <th v-text='traslate.id'></th>
+          <th v-text='traslate.course'></th>
+          <th v-text='traslate.price'></th>
+          <th v-text='traslate.date'></th>
         </tr>
         <tr v-for="pago in a_pagos">
           <td v-text='pago.reference_code'></td>
@@ -43,7 +43,14 @@
         data: function () {
           return {
             preload :false,
-            a_pagos:[]
+            a_pagos:[],
+            traslate:{
+              'pay_made':trans('backend.pay_made'),
+              'course':trans('backend.course'),
+              'price':trans('backend.price'),
+              'date':trans('backend.date'),
+              'id':trans('backend.id'),
+            }
           }
         },
         methods : {

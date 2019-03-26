@@ -8,10 +8,10 @@
                       <i class="fa  fa-search"></i>
                   </div>
                   <div class="col">
-                      <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Buscar palabra clave" v-model="palabra_clave">
+                      <input class="form-control form-control-lg form-control-borderless" type="search" v-bind:placeholder="traslate.search_keyword" v-model="palabra_clave">
                   </div>
                   <div class="col-auto">
-                      <button class="btn btn-lg btn-success " v-on:click.prevent="busqueda();">Buscar</button>
+                      <button class="btn btn-lg btn-success " v-on:click.prevent="busqueda();"><span v-text='traslate.search'></span></button>
                   </div>
               </div>
           </form>
@@ -38,7 +38,11 @@
           return {
             url_dicc:'',
             palabra_clave:'',
-            open_dicc:false
+            open_dicc:false,
+            traslate:{
+              'search_keyword':trans('backend.search_keyword'),
+              'search':trans('backend.search'),
+            }
           }
         },
         methods : {

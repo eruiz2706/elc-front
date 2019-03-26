@@ -29,23 +29,23 @@
               <tr>
                 <td>
                   <p>
-                    <strong>FECHA INICIO</strong>
+                    <strong v-text='traslate.start_date'></strong>
                     <br><span v-text='o_curso.fecha_inicio'></span>
                   </p>
                   <p>
-                    <strong>FECHA FINALIZACION</strong>
+                    <strong v-text='traslate.end_date'></strong>
                     <br><span v-text='o_curso.fecha_finalizacion'></span>
                   </p>
                   <p>
-                    <strong>VALOR</strong>
-                    <br><span v-text="o_curso.valor>0 ? '$'+o_curso.valor : 'Gratis'"></span>
+                    <strong v-text='traslate.price'></strong>
+                    <br><span v-text="o_curso.valor>0 ? '$'+o_curso.valor :traslate.free"></span>
                   </p>
                 </td>
               </tr>
               <tr>
                 <th colspan='2' v-if='!subscrip'>
                   <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" :disabled="loader_suscrip" v-on:click.prevent="suscribirse()" v-if="o_curso.estado !='finalizado' && o_curso.valor==0">
-                    <i class="fa fa-thumbs-o-up"></i> Gratis
+                    <i class="fa fa-thumbs-o-up"></i> <span v-text='traslate.free'></span>
                     <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_suscrip"></i>
                   </button>
 
@@ -64,13 +64,13 @@
                      <input name="responseUrl"    type="hidden" v-bind:value="webcheckout.responseUrl" >
                      <input name="confirmationUrl"    type="hidden" v-bind:value="webcheckout.responseUrl" >
                      <button name="Submit"        type="submit"  class="btn btn-block btn-outline-primary btn-sm">
-                        <i class="fa fa-credit-card"></i> Comprar
+                        <i class="fa fa-credit-card"></i> <span v-text='traslate.tobuy'></span>
                      </button>
                   </form>
                 </th>
                 <th colspan='2' v-else>
                   <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" v-on:click.prevent="iracurso();">
-                    <i class="fa fa-thumbs-o-up"></i> Suscrito
+                    <i class="fa fa-thumbs-o-up"></i> <span v-text='traslate.subscribed'></span>
                   </button>
                 </th>
               </tr>
@@ -84,8 +84,7 @@
 
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">
-        Plan de Estudio
+      <h3 class="card-title" v-text='traslate.study_plan'>
       </h3>
     </div>
     <div class="card-body" v-html="o_curso.plan_estudio">
@@ -111,6 +110,16 @@
             preload :false,
             subscrip:false,
             webcheckout:{},
+            traslate:{
+              'study_plan':trans('frontend.page_coursedet.study_plan'),
+              'feature':trans('frontend.page_coursedet.feature'),
+              'start_date':trans('frontend.page_coursedet.start_date'),
+              'end_date':trans('frontend.page_coursedet.end_date'),
+              'price':trans('frontend.page_coursedet.price'),
+              'free':trans('frontend.page_coursedet.free'),
+              'tobuy':trans('frontend.page_coursedet.tobuy'),
+              'subscribed':trans('frontend.page_coursedet.subscribed'),
+            }
           }
         },
         methods : {

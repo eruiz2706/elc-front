@@ -267,7 +267,7 @@
 
 @media only screen and (max-width: 880px)
 {
-	
+
 }
 
 /************
@@ -276,15 +276,23 @@
 
 @media only screen and (max-width: 768px)
 {
-	
+	.counter_form{
+		top:270px;
+	}
+	.features{
+		padding-top:180px;
+	}	
+	.top_bar_contact_list li > div{
+		font-size: 10px;
+	}
 }
 
 /************
 10. 767px
 ************/
-
 @media only screen and (max-width: 767px)
 {
+	
 	.top_bar
 	{
 		display: none;
@@ -327,6 +335,21 @@
 	.team_col:nth-child(even) .team_item
 	{
 		padding-left: 0px;
+	}
+	.counter_background{
+		top:91px;
+	}
+	.counter_form{
+		top:230px;
+	}
+	.features{
+		padding-top:180px;
+	}
+	#counter_form_login{
+		display:block;
+	}
+	#counter_form_register{
+		display:none;
 	}
 }
 

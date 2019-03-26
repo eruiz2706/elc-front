@@ -8,13 +8,14 @@
 
   <div class="card" v-if="!preload">
     <div class="card-body">
-    <p class="text-center">
-        <strong>TAREAS</strong>
+      <p>
+        <strong v-text='traslate.homework.toUpperCase()'></strong>
+        <strong class='float-right' v-text='traslate.note'></strong>
       </p>
       <div class="progress-group" v-for="tarea in a_tareas">
         <span v-text="tarea.nombre"></span>
         <span class="float-right">
-          <b><span v-text='tarea.notaes'></span></b> de <span v-text='tarea.calificacion'></span>
+          <b><span v-text='tarea.notaes'></span></b> <span v-text='traslate.of'></span> <span v-text='tarea.calificacion'></span>
         </span>
         <div class="progress progress-sm">
           <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(tarea.notaes,tarea.calificacion)+'%'"></div>
@@ -25,13 +26,14 @@
 
   <div class="card" v-if="!preload" >
     <div class="card-body">
-    <p class="text-center">
-        <strong>EXAMENES</strong>
+    <p>
+        <strong v-text='traslate.test.toUpperCase()'></strong>
+        <strong class='float-right' v-text='traslate.note'></strong>
       </p>
       <div class="progress-group" v-for="examen in a_examenes">
         <span v-text="examen.nombre"></span>
         <span class="float-right">
-          <b><span v-text='examen.notaes'></span></b> de <span v-text='examen.notamaxima'></span>
+          <b><span v-text='examen.notaes'></span></b> <span v-text='traslate.of'></span> <span v-text='examen.notamaxima'></span>
         </span>
         <div class="progress progress-sm">
           <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(examen.notaes,examen.notamaxima)+'%'"></div>
@@ -58,6 +60,12 @@
             preload:true,
             a_tareas:[],
             a_examenes:[],
+            traslate:{
+              'homework':trans('backend.homework'),
+              'test':trans('backend.test'),
+              'note':trans('backend.note'),
+              'of':trans('backend.of'),
+            }
           }
         },
         methods : {

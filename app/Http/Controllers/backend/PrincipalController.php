@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use DB;
 use Session;
+use Lang;
 
 class PrincipalController extends Controller
 {
-
+  protected $langPath; 
     function indexpa(){
       return view('backend/modulos/manual/view_padres');
     }
@@ -37,22 +38,22 @@ class PrincipalController extends Controller
       $nav_pariente=[];
 
       if($rol=='ad'){
-        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
-        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
+        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>Lang::get('backend.nav.last_new'),'url'=>'foro'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>Lang::get('backend.nav.user_manual'),'url'=>'principal/manualuso'];
 
-        $tit_options='Administraciòn';
-        $nav_options[]=['nombre'=>'Administraciòn','url'=>'administracion'];
-        $nav_options[]=['nombre'=>'Chat Soporte','url'=>'https://www.smartsupp.com/app/sign/in','extern'=>'1'];
+        $tit_options=Lang::get('backend.nav.administration');
+        $nav_options[]=['nombre'=>Lang::get('backend.nav.administration'),'url'=>'administracion'];
+        $nav_options[]=['nombre'=>Lang::get('backend.nav.support_chat'),'url'=>'https://www.smartsupp.com/app/sign/in','extern'=>'1'];
       }
       if($rol=='in'){
-        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
-        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
+        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>Lang::get('backend.nav.last_new'),'url'=>'foro'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>Lang::get('backend.nav.user_manual'),'url'=>'principal/manualuso'];
 
-        $tit_options='Administracion';
-        $nav_options[]=['nombre'=>'Lista de cursos','url'=>'cursos'];
+        $tit_options=Lang::get('backend.nav.administration');
+        $nav_options[]=['nombre'=>Lang::get('backend.nav.list_courses'),'url'=>'cursos'];
       }
       if($rol=='pr'){
-        $tit_cursos='Cursos Profesor';
+        $tit_cursos=Lang::get('backend.nav.teacher_course');
         $nav_cursos  =DB::select("select c.id,c.nombre
                                     from cursos_user cu
                                     left join cursos c on(cu.curso_id=c.id)
@@ -60,33 +61,34 @@ class PrincipalController extends Controller
                                     order by cu.fecha_creacion desc"
                                     ,['user_id'=>$user->id]);
 
-        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
-        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
+        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>Lang::get('backend.nav.last_new'),'url'=>'foro'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>Lang::get('backend.nav.user_manual'),'url'=>'principal/manualuso'];
       }
       if($rol=='es'){
-        $tit_cursos='Cursos Estudiante';
+        $tit_cursos=Lang::get('backend.nav.student_course');
         $nav_cursos  =DB::select("select c.id,c.nombre
                                     from cursos_user cu
                                     left join cursos c on(cu.curso_id=c.id)
                                     where cu.user_id = :user_id
                                     order by cu.fecha_creacion desc"
                                     ,['user_id'=>$user->id]);
-        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
-        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
-        $nav_user[]=['icono'=>'fa fa-plus-square-o','nombre'=>'Ofertas  de cursos','url'=>'ofertados'];
+
+        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>Lang::get('backend.nav.last_new'),'url'=>'foro'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>Lang::get('backend.nav.user_manual'),'url'=>'principal/manualuso'];
+        $nav_user[]=['icono'=>'fa fa-plus-square-o','nombre'=>Lang::get('backend.nav.course_offers'),'url'=>'ofertados'];
 
         $pagos=DB::select("select sum(valor) as pagos
                                   from pagos
                                   where user_id= :user_id",['user_id'=>$user->id])[0]->pagos;
 
         if($pagos>0){
-            $nav_user[]=['icono'=>'nav-icon fa fa-th','nombre'=>'Herramientas','url'=>'herramientas','optionnew'=>1,'nombreopt'=>'Nuevo'];
+            $nav_user[]=['icono'=>'nav-icon fa fa-th','nombre'=>Lang::get('backend.nav.tools'),'url'=>'herramientas','optionnew'=>1,'nombreopt'=>Lang::get('backend.nav.new')];
         }
       }
 
       if($rol=='pa'){
-        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>'Ultimas noticias','url'=>'foro'];
-        $nav_user[]=['icono'=>'fa fa-book','nombre'=>'Manual de uso','url'=>'principal/manualuso'];
+        $nav_user[]=['icono'=>'fa fa-inbox','nombre'=>Lang::get('backend.nav.last_new'),'url'=>'foro'];
+        $nav_user[]=['icono'=>'fa fa-book','nombre'=>Lang::get('backend.nav.user_manual'),'url'=>'principal/manualuso'];
 
         $nav_pariente  =DB::select("select  p.id_user,u.email,u.nombre,u.imagen
                                   from parientes_user p

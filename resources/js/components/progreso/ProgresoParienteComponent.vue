@@ -10,12 +10,12 @@
     <div class="card-header no-border">
       <h3 class="card-title" >
         <div class="progress-group">
-            Modulo <span v-text='progreso.numero'></span></span>
-            <span class="float-right">
-              <span v-text='progreso.cantlec_leidas'></span>/<b><span v-text='progreso.cantlec'></span></b>
+            <span v-text='traslate.module'></span> <span v-text='progreso.numero'></span></span>
+            <span class="float-right" style='font-size:14px'>
+             <span v-text='traslate.lessons'></span> <span v-text='progreso.cantlec_leidas'></span> <span v-text='traslate.of'></span> <b><span v-text='progreso.cantlec'></span></b>
             </span>
             <div class="progress">
-              <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progreso.cantlec_leidas,progreso.cantlec)+'%'">Progreso modulo <span v-text='porcent(progreso.cantlec_leidas,progreso.cantlec)'></span>%</div>
+              <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progreso.cantlec_leidas,progreso.cantlec)+'%'"><span v-text="porcent(progreso.cantlec_leidas,progreso.cantlec)+'%'"></span></div>
             </div>
           </div>
       </h3>
@@ -41,6 +41,11 @@
             idest:0,
             preload:false,
             a_progreso:[],
+            traslate:{
+              'module':trans('backend.module'),
+              'lessons':trans('backend.lessons'),
+              'of':trans('backend.of'),
+            }
           }
         },
         methods : {

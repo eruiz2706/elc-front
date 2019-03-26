@@ -12,23 +12,23 @@
 
       <div class='row'>
         <div class="col-md-4 col-sm-6">
-          <b><i class="fa  fa-clock-o"></i> Vence :</b> <span v-text='tarea.fecha_vencimiento'></span>
+          <b><i class="fa  fa-clock-o"></i> <span v-text='traslate.expires'></span> :</b> <span v-text='tarea.fecha_vencimiento'></span>
         </div>
         <div class="col-md-4 col-sm-6">
-          <b>Calificacion Sobre :</b> <span v-text='tarea.calificacion'></span>
+          <b><span v-text='traslate.maximum_note'></span> :</b> <span v-text='tarea.calificacion'></span>
         </div>
         <div class="col-md-4 col-sm-6">
-          <b>Estado :</b>
+          <b><span v-text='traslate.status'></span> :</b>
           <small v-bind:class="'badge badge-'+tarea.status"><span v-text='tarea.nombestado'></span></small>
         </div>
         <div class="col-md-4 col-sm-6">
-          <b>Nota : <span v-text='tarea.notaes'></span></b>
+          <b><span v-text='traslate.note'></span> : <span v-text='tarea.notaes'></span></b>
         </div>
       </div>
     </div>
     <div class="card-body">
       <button type="button" class="btn btn-outline-primary btn-sm float-left" v-on:click="abrir(tarea.id)">
-        Abrir tarea
+        <span v-text='traslate.open_task'></span>
       </button>
     </div>
 
@@ -49,6 +49,13 @@
             idcurso : 0,
             preload:true,
             a_tareas:[],
+            traslate:{
+              'expires':trans('backend.expires'),
+              'maximum_note':trans('backend.maximum_note'),
+              'status':trans('backend.status'),
+              'open_task':trans('backend.open_task'),
+              'note':trans('backend.note'),
+            }
           }
         },
         methods : {

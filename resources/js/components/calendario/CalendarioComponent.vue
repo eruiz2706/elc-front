@@ -8,9 +8,9 @@
 
   <div class="callout callout-info">
     <i class="icon fa fa-info"></i>
-    Las siguientes etiquetas corresponden al tipo de actividad
-    <span class="badge badge-info">Tareas</span>
-    <span class="badge badge-success">Evaluaciones</span>
+    <span v-text='traslate.msg_type_activity'></span>
+    <span class="badge badge-info" v-text='traslate.homework'></span>
+    <span class="badge badge-success" v-text='traslate.test'></span>
   </div>
 
   <div class="card card-primary">
@@ -59,6 +59,11 @@
             id : 0,
             preload:false,
             a_eventos:[],
+            traslate:{
+              'homework':trans('backend.homework'),
+              'test':trans('backend.test'),
+              'msg_type_activity':trans('backend.msg_type_activity'),
+            }
           }
         },
         methods : {

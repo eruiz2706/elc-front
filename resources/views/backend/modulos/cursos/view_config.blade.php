@@ -19,12 +19,12 @@
         </div>
         <div class="card-body" style='padding:0px'>
           <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='' || menu_content=='cursos-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('cursos-edit')">Datos Basicos</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='cursos-config') ? 'active' : ''" v-on:click.prevent="setMenuContent('cursos-config')">Datos Avanzados</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='modulos-lista' || menu_content=='modulos-crear' || menu_content=='modulos-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('modulos-lista')">Modulos</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='lecciones-lista' || menu_content=='lecciones-crear' || menu_content=='lecciones-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('lecciones-lista')">Lecciones</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='foro-curso') ? 'active' : ''" v-on:click.prevent="setMenuContent('foro-curso')">Foro</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='integrantes') ? 'active' : ''" v-on:click.prevent="setMenuContent('integrantes')">Integrantes</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='' || menu_content=='cursos-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('cursos-edit')">{{trans('backend.basic_data')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='cursos-config') ? 'active' : ''" v-on:click.prevent="setMenuContent('cursos-config')">{{trans('backend.advanced_data')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='modulos-lista' || menu_content=='modulos-crear' || menu_content=='modulos-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('modulos-lista')">{{trans('backend.modules')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='lecciones-lista' || menu_content=='lecciones-crear' || menu_content=='lecciones-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('lecciones-lista')">{{trans('backend.lessons')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='foro-curso') ? 'active' : ''" v-on:click.prevent="setMenuContent('foro-curso')">{{trans('backend.forum')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='integrantes') ? 'active' : ''" v-on:click.prevent="setMenuContent('integrantes')">{{trans('backend.members')}}</a></li>
           </ul>
         </div>
       </div>

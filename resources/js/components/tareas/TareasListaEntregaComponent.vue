@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class='modal-header'>
-            Revision<button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" style="height:450px;overflow-y: auto;">
           <div class="row" v-if="preloadmodal">
@@ -14,20 +14,20 @@
             </div>
           </div>
 
-          <label>Descripcion</label>
+          <label v-text='traslate.description'></label>
         	<p v-html='o_revision.descripcion'></p>
           <hr>
 
-          <label>Entrega</label>
+          <label v-text='traslate.delivery'></label>
         	<p v-html='o_revision.respuesta'></p>
           <hr>
 
           <div class="form-group">
-            <label>Calificacion sobre <span v-text='o_revision.notasobre'></span></label>
+            <label><span v-text='traslate.maximum_note'></span> <span v-text='o_revision.notasobre'></span></label>
             <input type="number" name="calificacion" min="0" max="1000" class="form-control" v-model='o_revision.notaes'>
           </div>
 
-          <label>Comentario</label>
+          <label v-text='traslate.comments'></label>
         	<div class="form-group">
             <textarea rows="3" placeholder="Escribe tu comentario aqui" name="p_descripcion" class="form-control" v-model='o_revision.comentario'>
             </textarea>
@@ -36,7 +36,7 @@
 
         <div class='modal-footer'>
           <button type="button" class="btn btn-outline-primary btn-sm float-left" :disabled="loader_revision" v-on:click.prevent='updrevision()'>
-            Enviar revision
+            <span v-text='traslate.submit'></span>
             <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_revision"></i>
           </button>
         </div>
@@ -53,7 +53,7 @@
   <div class="row" v-if="!preload">
     <div class="col-sm-6">
       <h5 class="m-0 text-dark">
-        <strong>Entrega: </strong><span v-text="o_tarea.nombre"></span>
+        <strong><span v-text='traslate.delivery'></span>: </strong><span v-text="o_tarea.nombre"></span>
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectVolver()">
           <i class="fa fa-arrow-circle-left"  style="font-size: 24px;"></i>
         </button>
@@ -72,11 +72,11 @@
 
       <div class='row'>
         <div class="col-md-4 col-sm-6">
-          <b>Estado :</b>
+          <b><span v-text='traslate.status'></span> :</b>
           <small v-bind:class="'badge badge-'+tarea.status"><span v-text='tarea.nombestado'></span></small>
         </div>
         <div class="col-md-4 col-sm-6">
-          <b>Calificacion :</b> <span v-text='tarea.notaes'></span>/<span v-text='tarea.calificacion'></span>
+          <b><span v-text='traslate.note'></span> :</b> <span v-text='tarea.notaes'></span>/<span v-text='tarea.calificacion'></span>
         </div>
       </div>
   </div>
@@ -105,6 +105,16 @@
             preloadmodal:true,
             o_revision:{},
             loader_revision :false,
+            traslate:{
+              'delivery':trans('backend.delivery'),
+              'status':trans('backend.status'),
+              'note':trans('backend.note'),
+              'submit':trans('backend.submit'),
+              'description':trans('backend.description'),
+              'delivery':trans('backend.delivery'),
+              'maximum_note':trans('backend.maximum_note'),
+              'comments':trans('backend.comments'),
+            }
           }
         },
         methods : {

@@ -31,7 +31,7 @@ class OfertadosController extends Controller
 
       $id       =Auth::user()->id;
       $cursos   =DB::select("select
-                              c.id,c.nombre,c.imagen,e.nombre as nombestado,c.valor
+                              c.id,c.nombre,c.imagen,e.nombre as nombestado,c.valor,e.slug
                               from cursos c
                               left join estados e on(c.estado=e.slug and e.tipo='cursos')
                               where c.visibilidad=true $where

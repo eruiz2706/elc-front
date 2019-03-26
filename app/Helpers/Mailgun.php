@@ -13,7 +13,7 @@ class Mailgun{
 
     public function send($params=[]){
 
-      $mailfromname =isset($params['mailfromname']) ? $params['mailfromname'] : 'Correo automatico ELC, no responda este correo';
+      $mailfromname =isset($params['mailfromname']) ? $params['mailfromname'] : 'ELCOLP';
       $mailfrom     =isset($params['mailfrom']) ? $params['mailfrom'] :'soporte@infoapp.site';
       $toname       =isset($params['toname']) ? $params['toname'] : '';
       $to           =isset($params['to']) ? $params['to'] : '';

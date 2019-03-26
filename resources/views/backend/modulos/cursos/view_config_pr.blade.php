@@ -19,13 +19,13 @@
         </div>
         <div class="card-body" style='padding:0px'>
           <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='' || menu_content=='foro-curso') ? 'active' : ''" v-on:click.prevent="setMenuContent('foro-curso')">Foro</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='progreso-pr') ? 'active' : ''" v-on:click.prevent="setMenuContent('progreso-pr')">Progreso</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='tareas-lista' || menu_content=='tareas-crear' || menu_content=='tareas-edit' || menu_content=='tareas-lista-entrega') ? 'active' : ''" v-on:click.prevent="setMenuContent('tareas-lista')">Tareas</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='examenes-lista' || menu_content=='examenes-crear' || menu_content=='examenes-edit' || menu_content=='examenes-lista-entrega' || menu_content=='preguntas-lista' || menu_content=='preguntas-crear' || menu_content=='preguntas-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('examenes-lista')">Examenes</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='calendario') ? 'active' : ''" v-on:click.prevent="setMenuContent('calendario')">Calendario</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='resultados') ? 'active' : ''" v-on:click.prevent="setMenuContent('resultados')">Resultados</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='integrantes') ? 'active' : ''" v-on:click.prevent="setMenuContent('integrantes')">Integrantes</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='' || menu_content=='foro-curso') ? 'active' : ''" v-on:click.prevent="setMenuContent('foro-curso')">{{trans('backend.forum')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='progreso-pr') ? 'active' : ''" v-on:click.prevent="setMenuContent('progreso-pr')">{{trans('backend.progress')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='tareas-lista' || menu_content=='tareas-crear' || menu_content=='tareas-edit' || menu_content=='tareas-lista-entrega') ? 'active' : ''" v-on:click.prevent="setMenuContent('tareas-lista')">{{trans('backend.homework')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='examenes-lista' || menu_content=='examenes-crear' || menu_content=='examenes-edit' || menu_content=='examenes-lista-entrega' || menu_content=='preguntas-lista' || menu_content=='preguntas-crear' || menu_content=='preguntas-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('examenes-lista')">{{trans('backend.test')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='calendario') ? 'active' : ''" v-on:click.prevent="setMenuContent('calendario')">{{trans('backend.calendar')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='resultados') ? 'active' : ''" v-on:click.prevent="setMenuContent('resultados')">{{trans('backend.results')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='integrantes') ? 'active' : ''" v-on:click.prevent="setMenuContent('integrantes')">{{trans('backend.members')}}</a></li>
           </ul>
         </div>
       </div>

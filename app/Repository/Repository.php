@@ -13,46 +13,56 @@ abstract class Repository implements InterfaceRepository {
       $this->model  =$modelClass;
     }
 
-    public function all($attributes=['*'],$orderBy=[['column'=>'id','direction'=>'desc']]){
-      $model  =$this->model;
-      if(!empty($orderBy)){
-        foreach ($orderBy as $order) {
-            $model=$model->orderBy($order['column'],$order['direction']);
+    public function all($data=['*'],$orderBy=[['column'=>'id','direction'=>'desc']]){
+        $return =(Object)[
+            'response' => false,
+        ];
+
+        try{
+            $model  =$this->model;
+            if(!empty($orderBy)){
+                foreach ($orderBy as $order) {
+                    $model=$model->orderBy($order['column'],$order['direction']);
+                }
+            }
+            $return->response=true;
+            $return->success=$model->get($data);
         }
-      }
-       $model=$model->get($attributes);
+        catch(\Exception $e){
+            Log::info('find : '.$e->getMessage());
+            $return->response=false;
+            $return->error=$e->getMessage();
+        }
 
-       return $model;
+        return $return;
     }
 
-    public function find($id,$attributes=['*']){
-
-    }
-
-    public function findByField($field, $value,$attributes=['*'],$orderBy=[]){
-
-    }
-
-    public function findWhere(array $where,$attributes=['*'],$orderBy=[]){
-
-    }
-
-    public function findWhereIn($field, array $where,$attributes=['*'],$orderBy=[]){
-
-    }
-
-    public function findWhereNotIn($field,array $where,$attributes=['*'],$orderBy=[]){
-
-    }
-
-    public function create($attributes=[],$params=[]){
+    public function find($id,$data=['*']){
         $return =(Object)[
             'response' => false,
         ];
 
         try{
             $return->response=true;
-            $return->success=$this->model->create($attributes);
+            $return->success=$this->model->find($id,$data);
+        }
+        catch(\Exception $e){
+            Log::info('find : '.$e->getMessage());
+            $return->response=false;
+            $return->error=$e->getMessage();
+        }
+
+        return $return;
+    }
+
+    public function create($data=[]){
+        $return =(Object)[
+            'response' => false,
+        ];
+
+        try{
+            $return->response=true;
+            $return->success=$this->model->create($data);
         }
         catch(\Exception $e){
             Log::info('create : '.$e->getMessage());
@@ -63,14 +73,14 @@ abstract class Repository implements InterfaceRepository {
         return $return;
     }
 
-    public function update($id,$attributes=[],$params=[]){
+    public function update($id,$data=[]){
         $return =(Object)[
             'response' => false,
         ];
 
         try{
             $return->response=true;
-            $return->success=$this->model->where('id',$id)->update($attributes);
+            $return->success=$this->model->where('id',$id)->update($data);
         }
         catch(\Exception $e){
             Log::info('update : '.$e->getMessage());
@@ -82,7 +92,21 @@ abstract class Repository implements InterfaceRepository {
     }
 
     public function delete($id){
+        $return =(Object)[
+            'response' => false,
+        ];
 
+        try{
+            $return->response=true;
+            $return->success=$this->model->destroy($id);
+        }
+        catch(\Exception $e){
+            Log::info('find : '.$e->getMessage());
+            $return->response=false;
+            $return->error=$e->getMessage();
+        }
+
+        return $return;
     }
 
 

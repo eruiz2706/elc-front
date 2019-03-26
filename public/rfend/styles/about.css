@@ -5,7 +5,7 @@
 
 [Table of Contents]
 
-1. Fonts
+1. Fontsaccordion
 2. Body and some general stuff
 3. Header
 	3.1 Top Bar
@@ -986,6 +986,7 @@ section
 	content: '\f107';
 	color: #14bdee;
 }
+
 .accordion_panel
 {
 	padding-right: 8px;
