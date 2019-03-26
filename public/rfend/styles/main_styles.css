@@ -2060,9 +2060,10 @@ SOBRE ESCRITURA
 	  font-size: 14px;
   }
   
-  .container_input_login a{
-	color:white;
-	font-weight: 500;
+	.container_input_login a {
+    color: white;
+    font-weight: 600;
+		font-size: 12px;
 	}
 	
 	.container_input_login .text-validate{
