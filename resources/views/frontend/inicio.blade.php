@@ -50,21 +50,17 @@
                 </span>
             @endif
 
-            <button type="submit" class="counter_form_button">
-              {{ trans('frontend.enter') }}
-            </button>
-
-            <hr>
-            <div class="social-auth-links text-center mb-3">
+            <p class='mb-1'>-------- OR --------</p>  
+            <div class="social-auth-links text-center ">
               <div class='row'>
-              <div class='col-md-6'>
+              <div class='col-md-6 col-sm-6'>
                 <div class='form-group'>
                 <a href="{{ url('/redirect/facebook') }}" class="btn  btn-primary">
                   <i class="fa fa-facebook mr-2"></i> Facebook
                 </a>
                 </div>
               </div>
-              <div class='col-md-6'>
+              <div class='col-md-6 col-sm-6'>
                 <div class='form-group'>
                 <a href="{{ url('/redirect/google') }}" class="btn  btn-danger">
                   <i class="fa fa-google mr-2"></i> Google
@@ -73,8 +69,16 @@
               </div>
               </div>
             </div>
-            <a href="#" class="text-left float-left" v-on:click.prevent='openregister();'>{{ trans('frontend.sign_up') }}</a>
-            <a href="#" class="text-left float-left" v-on:click.prevent='openrecover()'>{{ trans('frontend.forget_pass') }}</a>
+
+            <button type="submit" class="counter_form_button mb-1">
+              {{ trans('frontend.enter') }}
+            </button>
+
+            <hr style='border:.4px solid grey;width:70%'> 
+            <button  sytle='cursor:pointer' class="btn btn-success mb-2" v-on:click.prevent='openregister();'>
+              {{ trans('frontend.sign_up') }}
+            </button>
+            <a href="#" class="text-left float-left " v-on:click.prevent='openrecover()'>{{ trans('frontend.forget_pass') }}</a>
           </form>
         </div>
       </div>
