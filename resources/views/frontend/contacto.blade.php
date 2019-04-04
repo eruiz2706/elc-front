@@ -3,6 +3,8 @@
 @section('htmlheader')
 @parent
 <link href="{{ URL::asset('rfend/plugins/colorbox/colorbox.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/main_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/contact.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/contact_responsive.css') }}">
 <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
@@ -96,6 +98,7 @@
 
 @section('scripts')
 @parent
+<script src="{{ URL::asset('js/fe/registro.js') }}"></script>
 <script>
 var map = L.map('map').
 setView([5.690039698717132,-76.66133874254979],
@@ -110,3 +113,5 @@ L.control.scale().addTo(map);
 L.marker([5.690466155074229,-76.66156768798828], {draggable: true}).addTo(map);
 </script>
 @stop
+
+

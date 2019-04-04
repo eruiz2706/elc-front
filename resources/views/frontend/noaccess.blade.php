@@ -3,7 +3,9 @@
 @section('htmlheader')
 @parent
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/main_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/responsive.css') }}">
+
 @stop
 
 @section('content')
@@ -26,6 +28,9 @@
 
 <!-- Newsletter -->
 @include('frontend.partials.newsletter')
-
-
 @endsection
+
+@section('scripts')
+  @parent
+  <script src="{{ URL::asset('js/fe/registro.js') }}"></script>
+@stop

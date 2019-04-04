@@ -15,7 +15,12 @@ new Vue({
       o_curso:{},
       e_curso:[],
       preload :false,
-      traduction:{}
+      traduction:{},
+      o_user:{'nombre':'','email':'','password':'','repassword':'','rol':''},
+      o_recover:{'email':''},
+      errores :[],
+      errores_recover :[],
+      loader_recover :false,
     },
     computed : {
 
@@ -33,6 +38,34 @@ new Vue({
               this.preload=false;
               console.log(error.response.data);
           });
-      }
-    }
+      },
+      recover: function(){
+        this.loader_recover=true;
+        var url =base_url+'/registro/recover';
+        axios.post(url,{
+          email : this.o_recover.email,
+        }).then(response =>{
+            this.errores_recover=[];
+            $('#modal_recover').modal('hide');
+            swal({
+                title:response.data.message,
+                text:response.data.message2,
+                type: "success"
+            }, function() {
+                /*window.location = "login";*/
+                window.location = "";
+            });
+        }).catch(error =>{
+            this.loader_recover=false;
+            this.errores_recover=error.response.data.errors;
+            toastr.error(error.response.data.message,'',{
+                "timeOut": "2500"
+            });
+        });
+    },
+    openrecover:function(){
+      $('#modal_recover').modal('show');
+      this.errores_recover=[];
+    },
+  }
 });

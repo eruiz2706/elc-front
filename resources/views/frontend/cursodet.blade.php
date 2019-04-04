@@ -3,6 +3,8 @@
 @section('htmlheader')
 @parent
 <link href="{{ URL::asset('rfend/plugins/colorbox/colorbox.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/main_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/course.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/course_responsive.css') }}">
 @stop

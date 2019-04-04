@@ -3,6 +3,7 @@
 @section('htmlheader')
 @parent
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/main_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/responsive.css') }}">
 @stop
 
@@ -27,5 +28,6 @@
 @endsection
 @section('scripts')
   @parent
+  <script src="{{ URL::asset('js/fe/registro.js') }}"></script>
   <!--<script src="{{ URL::asset('js/fe/noregister.js') }}"></script>-->
 @stop

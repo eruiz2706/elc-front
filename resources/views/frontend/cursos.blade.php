@@ -3,6 +3,8 @@
 @section('htmlheader')
 @parent
 <link href="{{ URL::asset('rfend/plugins/colorbox/colorbox.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/main_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/courses.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/courses_responsive.css') }}">
 @stop
@@ -135,4 +137,5 @@
 @section('scripts')
   @parent
   <script src="{{ URL::asset('js/fe/curso.js') }}"></script>
+  <script src="{{ URL::asset('js/fe/registro.js') }}"></script>
 @stop
