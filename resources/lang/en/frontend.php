@@ -29,6 +29,7 @@ return [
     'question' =>'Do you have any question ?',
     'terms_use' =>'Terms of use',
     'policies' =>'Privacy policies',
+    'terms_and_condic'=>'Terms and conditions of the site',
     'navigation' =>'Navigation',
     'contact' =>'Contact Us',
     'telephone' =>'Telephone',
