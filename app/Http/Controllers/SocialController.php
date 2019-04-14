@@ -15,6 +15,8 @@ class SocialController extends Controller
 {
     public function redirect($provider,$type='',$modo=''){
 
+      echo "$provider ** $type ** $modo";
+      die();
       session(['f_type' =>$type]);
       session(['f_modo' =>$modo]);
       return Socialite::driver($provider)->redirect();
