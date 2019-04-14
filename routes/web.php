@@ -111,6 +111,7 @@ Route::middleware(['lang','auth','navcursos'])->group(function(){
   Route::post('modulos/guardar', 'backend\modulos\ModulosController@guardar');
   Route::post('modulos/actualizar', 'backend\modulos\ModulosController@actualizar');
   Route::post('modulos/editar', 'backend\modulos\ModulosController@editar');
+  Route::post('modulos/borrar', 'backend\modulos\ModulosController@borrar');
 
   Route::post('lecciones/lista', 'backend\modulos\LeccionesController@lista');
   Route::post('lecciones/editar', 'backend\modulos\LeccionesController@editar');
