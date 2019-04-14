@@ -170,6 +170,7 @@ Route::middleware(['lang','auth','navcursos'])->group(function(){
   Route::post('preguntas/guardar', 'backend\modulos\PreguntasController@guardar');
   Route::post('preguntas/actualizar', 'backend\modulos\PreguntasController@actualizar');
   Route::post('preguntas/editar', 'backend\modulos\PreguntasController@editar');
+  Route::post('preguntas/borrar', 'backend\modulos\PreguntasController@borrar');
 
   Route::post('resultados/estudiante', 'backend\modulos\ResultadosController@getEstudiante');
   Route::post('resultados/lista', 'backend\modulos\ResultadosController@lista');
