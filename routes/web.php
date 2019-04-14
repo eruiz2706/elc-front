@@ -59,13 +59,13 @@ Route::middleware(['lang'])->group(function(){
 
 Route::middleware(['lang','auth','navcursos'])->group(function(){
 
-  Route::get('/principalpa', 'backend\PrincipalController@indexpa');
+  //Route::get('/principalpa', 'backend\PrincipalController@indexpa');
 
   Route::get('/principal', 'backend\PrincipalController@index');
   Route::post('/principal/config', 'backend\PrincipalController@config');
   Route::post('/principal/conexion', 'backend\PrincipalController@conexion');
-  Route::post('/principal/abrirmanual', 'backend\PrincipalController@abrirmanual');
-  Route::post('/principal/cerrarmanual', 'backend\PrincipalController@cerrarmanual');
+  Route::post('/principal/abrirBienvenida', 'backend\PrincipalController@abrirBienvenida');
+  Route::post('/principal/cerrarBienvenida', 'backend\PrincipalController@cerrarBienvenida');
   Route::get('/principal/manualuso', 'backend\PrincipalController@manualuso');
 
   //Route::get('storage/{archivo}','backend\StorageController@index');

@@ -14,9 +14,6 @@ use Lang;
 class PrincipalController extends Controller
 {
   protected $langPath; 
-    function indexpa(){
-      return view('backend/modulos/manual/view_padres');
-    }
 
     function index(){
       $user =Auth::user();
@@ -143,16 +140,12 @@ class PrincipalController extends Controller
     }
 
     function manualuso(){
-      $user     =Auth::user();
-
-      DB::table('users')->where('id',$user->id)->update([
-        'manual'=>false
-      ]);
-      return redirect('foro');
+      $user =Auth::user();
+      return view('backend/modulos/manual/view_padres');
     }
 
-    function abrirmanual(){
-      $user      =Auth::user();
+    function abrirBienvenida(){
+      /*$user      =Auth::user();
       $rol       =$user->slugrol;
       $usermanual=true;
       if($rol !='ad'){
@@ -161,7 +154,14 @@ class PrincipalController extends Controller
                               where id = :iduser"
                          ,['iduser'=>$user->id]);
         $usermanual=$manual[0]->estado;
-      }
+      }*/
+
+      $user      =Auth::user();
+      $manual  =DB::select("select manual as estado
+                              from users
+                              where id = :iduser"
+                         ,['iduser'=>$user->id]);
+      $usermanual=$manual[0]->estado;
 
       $jsonresponse=[
           'usermanual'=>$usermanual
@@ -169,7 +169,7 @@ class PrincipalController extends Controller
       return response()->json($jsonresponse,200);
     }
 
-    function cerrarmanual(Request $request){
+    function cerrarBienvenida(Request $request){
       $user     =Auth::user();
       DB::beginTransaction();
       try{

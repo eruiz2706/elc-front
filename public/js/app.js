@@ -318,7 +318,7 @@ var app = new Vue({
         this.messages();
       }
     });
-    this.manualuso();
+    this.mensajeBienvenida();
   },
   ready: function ready() {},
   created: function created() {
@@ -485,19 +485,19 @@ var app = new Vue({
         }
       });
     },
-    manualuso: function manualuso() {
-      var url = base_url + '/principal/abrirmanual';
+    mensajeBienvenida: function mensajeBienvenida() {
+      var url = base_url + '/principal/abrirBienvenida';
       axios.post(url, { chk_manual: this.chk_manual }).then(function (response) {
         if (response.data.usermanual == false) {
-          $('#modal_manual').modal('show');
+          $('#modal_bienvenida').modal('show');
         }
       }).catch(function (error) {});
     },
-    updateManual: function updateManual() {
+    updateMensajeBienvenida: function updateMensajeBienvenida() {
       var _this7 = this;
 
-      $('#modal_manual').modal('hide');
-      var url = base_url + '/principal/cerrarmanual';
+      $('#modal_bienvenida').modal('hide');
+      var url = base_url + '/principal/cerrarBienvenida';
       this.loader_manual = true;
       axios.post(url, { chk_manual: this.chk_manual }).then(function (response) {
         _this7.loader_manual = false;

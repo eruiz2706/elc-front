@@ -86,7 +86,7 @@ const app = new Vue({
           this.messages();
         }
       })
-      this.manualuso();
+      this.mensajeBienvenida();
     },
     ready: function(){
     },
@@ -248,20 +248,20 @@ const app = new Vue({
             }
         });
       },
-      manualuso:function(){
-        var url =base_url+'/principal/abrirmanual';
+      mensajeBienvenida:function(){
+        var url =base_url+'/principal/abrirBienvenida';
         axios.post(url,{chk_manual:this.chk_manual}).then(response =>{
           if(response.data.usermanual==false){
-              $('#modal_manual').modal('show');
+              $('#modal_bienvenida').modal('show');
           }
         }).catch(error =>{
 
         });
 
       },
-      updateManual:function(){
-        $('#modal_manual').modal('hide');
-        var url =base_url+'/principal/cerrarmanual';
+      updateMensajeBienvenida:function(){
+        $('#modal_bienvenida').modal('hide');
+        var url =base_url+'/principal/cerrarBienvenida';
         this.loader_manual=true;
         axios.post(url,{chk_manual:this.chk_manual}).then(response =>{
           this.loader_manual=false;
