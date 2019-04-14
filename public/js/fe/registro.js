@@ -99,7 +99,7 @@ new Vue({
           });
           return;
         }
-        var url=base_url+"/redirect/"+provider+"/registro/"+modo;
+        var url=base_url+"/redirect/"+provider+"/registro/"+modo.value;
         window.location.href =url;
       }
     }
