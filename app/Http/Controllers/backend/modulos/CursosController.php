@@ -463,7 +463,7 @@ class CursosController extends Controller
     $user     =Auth::user();
     if($request->file('avatar') != null){
       $file   =$request->file('avatar');
-      $nombre =Auth::user()->uniqid.'.'.$file->getClientOriginalExtension();
+      $nombre =uniqid('',true).'_'.$id.'.'.$file->getClientOriginalExtension();
 
       $responseImg  =Storage::disk('public_cursos')->put($nombre,  \File::get($file));
       if($responseImg){
@@ -486,5 +486,37 @@ class CursosController extends Controller
        }
     }
 
+  }
+
+  public function borrar(Request $request){
+
+    $cantidadCursosUser=DB::select("select count(id) as conteo
+                                      from cursos_user
+                                      where curso_id=:curso_id",
+                                    ['curso_id'=>$request->id])[0];
+    
+    if($cantidadCursosUser->conteo>0){
+      return response()->json([
+          'error' =>'No se puede eliminar el curso, por que ya tiene estudiantes inscritos'
+      ], 400);
+    }
+
+    DB::beginTransaction();
+    try{
+      DB::table('cursos')->where('id','=',$request->id)->delete();
+      DB::commit();
+
+      return response()->json([
+          'message' => 'Curso eliminado correctamente!',
+          'message2' => 'Click para continuar!'
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('borrado de cursos : '.$e->getMessage());
+        DB::rollback();
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar realizar la accion'
+        ], 400);
+    }
   }
 }

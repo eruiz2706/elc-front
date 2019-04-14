@@ -105,6 +105,7 @@ Route::middleware(['lang','auth','navcursos'])->group(function(){
   Route::post('cursos/u_configvideo/{id}', 'backend\modulos\CursosController@upd_configvideo');
   Route::post('cursos/u_configlogo/{id}', 'backend\modulos\CursosController@upd_configlogo');
   Route::get('cursos/abrir/{id}', 'backend\modulos\CursosController@abrir');
+  Route::post('cursos/borrar', 'backend\modulos\CursosController@borrar');
 
   Route::post('modulos/lista', 'backend\modulos\ModulosController@lista');
   Route::post('modulos/guardar', 'backend\modulos\ModulosController@guardar');
