@@ -6040,6 +6040,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -6094,6 +6097,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     redirectEnt: function redirectEnt(id) {
       document.getElementById('id').value = id;
       this.$root.$emit('setMenu', 'tareas-lista-entrega');
+    },
+    optionBorrar: function optionBorrar(id) {
+      var inst = this;
+      swal({
+        title: "Seguro desea borrar el registro!",
+        text: "",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-success",
+        confirmButtonText: "Aceptar",
+        closeOnConfirm: true
+      }, function () {
+        inst.borrarTarea(id);
+      });
+    },
+    borrarTarea: function borrarTarea(id) {
+      var _this2 = this;
+
+      var url = base_url + '/tareas/borrar';
+      axios.post(url, { id: id }).then(function (response) {
+        _this2.listado();
+        swal({
+          title: response.data.message,
+          text: response.data.message2,
+          type: "success"
+        });
+      }).catch(function (error) {
+        if (error.response.data.errors) {
+          _this2.e_curso = error.response.data.errors;
+        }
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "3500"
+          });
+        }
+      });
     }
   }
 });
@@ -6175,6 +6214,26 @@ var render = function() {
                     [
                       _c("i", {
                         staticClass: "fa  fa-pencil",
+                        staticStyle: { "font-size": "20px" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-tool",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.optionBorrar(tarea.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa  fa-trash",
                         staticStyle: { "font-size": "20px" }
                       })
                     ]

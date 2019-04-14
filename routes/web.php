@@ -147,6 +147,7 @@ Route::middleware(['lang','auth','navcursos'])->group(function(){
   Route::post('tareas/lista_es', 'backend\modulos\TareasController@lista_es');
   Route::post('tareas/editent', 'backend\modulos\TareasController@editent');
   Route::post('tareas/entregar', 'backend\modulos\TareasController@entregar');
+  Route::post('tareas/borrar', 'backend\modulos\TareasController@borrar');
 
   Route::post('notificaciones/conteo', 'backend\modulos\NotificacionesController@conteo');
   Route::post('notificaciones/lista', 'backend\modulos\NotificacionesController@lista');

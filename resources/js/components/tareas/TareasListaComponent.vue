@@ -24,6 +24,9 @@
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectEdit(tarea.id)">
           <i class="fa  fa-pencil" style="font-size: 20px;"></i>
         </button>
+        <button type="button" class="btn btn-tool" v-on:click.prevent="optionBorrar(tarea.id)">
+              <i class="fa  fa-trash" style="font-size:20px"></i>
+        </button>
       </div>
 
       <div class='row'>
@@ -98,6 +101,41 @@
           redirectEnt:function(id){
             document.getElementById('id').value=id;
             this.$root.$emit('setMenu','tareas-lista-entrega');
+          },
+          optionBorrar:function(id){
+            let inst=this;
+            swal({
+              title: "Seguro desea borrar el registro!",
+              text: "",
+              type: "info",
+              showCancelButton: true,
+              confirmButtonClass: "btn-success",
+              confirmButtonText: "Aceptar",
+              closeOnConfirm: true
+            },
+            function(){
+              inst.borrarTarea(id);
+            });  
+          },
+          borrarTarea:function(id){
+            var url =base_url+'/tareas/borrar';
+              axios.post(url,{id}).then(response =>{
+                  this.listado();
+                  swal({
+                      title:response.data.message,
+                      text:response.data.message2,
+                      type: "success"
+                  });
+              }).catch(error =>{
+                  if(error.response.data.errors){
+                    this.e_curso=error.response.data.errors;
+                  }
+                  if(error.response.data.error){
+                    toastr.error(error.response.data.error,'',{
+                        "timeOut": "3500"
+                    });
+                  }
+            });
           }
         }
     }

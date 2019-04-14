@@ -339,4 +339,24 @@ class TareasController extends Controller
         ], 400);
     }
   }
+
+  public function borrar(Request $request){
+    DB::beginTransaction();
+    try{
+      DB::table('tareas')->where('id','=',$request->id)->delete();
+      DB::commit();
+
+      return response()->json([
+          'message' => 'Registro eliminado correctamente!',
+          'message2' => 'Click para continuar!'
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('borrado de tareas : '.$e->getMessage());
+        DB::rollback();
+        return response()->json([
+            'error' =>'Hubo una inconsistencias al intentar realizar la accion'
+        ], 400);
+    }
+  }
 }
