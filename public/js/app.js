@@ -5290,6 +5290,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -5324,6 +5340,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       loader_responder: false,
       mensaje_chat: '',
       rol_user: '',
+      email_integrante: '',
+      loader_addintegrante: false,
       traslate: {
         'direct_chat': trans('backend.direct_chat'),
         'last_access': trans('backend.last_access'),
@@ -5411,6 +5429,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this4.$refs.content_chat.scrollTop = _this4.$refs.content_chat.scrollHeight;
         });
       }).catch(function (error) {});
+    },
+    agregarIntegrante: function agregarIntegrante() {
+      var _this5 = this;
+
+      this.loader_addintegrante = true;
+      var url = this.base_url + '/integrantes/agregar';
+      axios.post(url, { email_integrante: this.email_integrante, idcurso: this.idcurso }).then(function (response) {
+        _this5.loader_addintegrante = false;
+        _this5.listado();
+        swal({
+          title: response.data.message,
+          text: response.data.message2,
+          type: "success"
+        });
+        _this5.getData();
+      }).catch(function (error) {
+        _this5.loader_addintegrante = false;
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "2500"
+          });
+        }
+      });
     }
   }
 });
@@ -5604,6 +5645,76 @@ var render = function() {
     ),
     _vm._v(" "),
     _vm.preload ? _c("div", { staticClass: "row" }, [_vm._m(1)]) : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _vm.rol_user == "in"
+        ? _c("div", { staticClass: "col-md-6 col-sm-12" }, [
+            _c(
+              "div",
+              {
+                staticClass: "input-group input-group-sm",
+                staticStyle: { width: "250px" }
+              },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.email_integrante,
+                      expression: "email_integrante"
+                    }
+                  ],
+                  staticClass: "form-control float-right",
+                  attrs: {
+                    type: "text",
+                    name: "table_search",
+                    placeholder: "Email estudiante"
+                  },
+                  domProps: { value: _vm.email_integrante },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.email_integrante = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.agregarIntegrante()
+                        }
+                      }
+                    },
+                    [
+                      !_vm.loader_addintegrante
+                        ? _c("i", { staticClass: "fa fa-plus" })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.loader_addintegrante
+                        ? _c("i", {
+                            staticClass: "fa fa-spinner fa-spin fa-loader"
+                          })
+                        : _vm._e()
+                    ]
+                  )
+                ])
+              ]
+            )
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("hr"),
     _vm._v(" "),
     _c(
       "div",

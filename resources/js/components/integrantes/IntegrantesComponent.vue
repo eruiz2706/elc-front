@@ -60,10 +60,25 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-md-6 col-sm-12" v-if="rol_user=='in'">
+      <div class="input-group input-group-sm" style="width: 250px;">
+        <input type="text" name="table_search" class="form-control float-right" placeholder="Email estudiante" v-model="email_integrante">
+        <div class="input-group-append">
+          <button type="button" class="btn btn-primary" v-on:click.prevent="agregarIntegrante();">
+            <i class="fa fa-plus" v-if="!loader_addintegrante"></i>
+            <i class="fa fa-spinner fa-spin fa-loader"  v-if="loader_addintegrante"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
   <div class='row'>
     <div class='col-md-6 col-sm-12' v-for="integrante in a_integrantes">
       <div class="card" v-if="!preload" >
-        <div class="card-body">
+        <div class="card-body">  
           <div class="card-tools" v-if="rol_user=='es' || rol_user=='pr'">
             <a class="nav-link"  href="#" aria-expanded="true">
               <span class="badge navbar-badge">
@@ -73,6 +88,7 @@
               </span>
             </a>
           </div>
+            
           <div class="post">
             <div class="user-block">
               <img class="img-circle img-bordered" v-bind:src="base_url+'/'+integrante.imagen" alt="user image">
@@ -124,6 +140,8 @@
             loader_responder:false,
             mensaje_chat:'',
             rol_user:'',
+            email_integrante:'',
+            loader_addintegrante:false,
             traslate:{
               'direct_chat':trans('backend.direct_chat'),
               'last_access':trans('backend.last_access'),
@@ -209,6 +227,27 @@
               }).catch(error =>{
 
               });
+          },
+          agregarIntegrante:function(){
+            this.loader_addintegrante=true;
+            var url =this.base_url+'/integrantes/agregar';
+            axios.post(url,{email_integrante:this.email_integrante,idcurso:this.idcurso}).then(response =>{
+                this.loader_addintegrante=false;
+                this.listado();
+                swal({
+                    title:response.data.message,
+                    text:response.data.message2,
+                    type: "success"
+                });
+                this.getData();
+            }).catch(error =>{
+                this.loader_addintegrante=false;
+                if(error.response.data.error){
+                  toastr.error(error.response.data.error,'',{
+                      "timeOut": "2500"
+                  });
+                }
+            });
           }
         }
     }

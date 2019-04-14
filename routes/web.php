@@ -123,6 +123,7 @@ Route::middleware(['lang','auth','navcursos'])->group(function(){
   Route::post('lecciones/borrar', 'backend\modulos\LeccionesController@borrar');
 
   Route::post('integrantes/lista', 'backend\modulos\IntegrantesController@lista');
+  Route::post('integrantes/agregar', 'backend\modulos\IntegrantesController@agregar');
 
   Route::post('calendario/lista', 'backend\modulos\CalendarioController@lista');
 
