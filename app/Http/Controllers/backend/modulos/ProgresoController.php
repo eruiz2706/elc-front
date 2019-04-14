@@ -16,27 +16,32 @@ class ProgresoController extends Controller
   public function lista(Request $request){
     $user     =Auth::user();
     $progreso   =DB::select("select m.id,m.numero,m.nombre,count(l.id) as cantlec,count(lu.id) as cantlec_leidas
-                              from modulos m
+                              from(
+                                select m.id,m.numero,m.nombre
+                                  from modulos m
+                                  where m.curso_id = :curso_id
+                              ) as m
                               left join lecciones l on(m.id=l.modulo_id)
                               left join lecciones_user lu on(l.id=lu.leccion_id and lu.user_id= :user_id)
-                              where m.curso_id = :curso_id
                               group by m.id,m.nombre,m.numero
                               order by m.numero  asc",
-                          ['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
+                      ['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
 
-    foreach($progreso as $prog){
-      $lecciones=DB::select("select
-                              l.id,l.nombre,l.numero,l.descripcion,l.tiempolectura,case when lu.id is not null then true else false end as leido
-                              from lecciones l
-                              left join lecciones_user lu on(l.id=lu.leccion_id and lu.user_id= :user_id)
-                              where l.modulo_id = :modulo_id
-                              order by l.numero asc"
-                         ,['modulo_id'=>$prog->id,'user_id'=>$user->id]);
-      $prog->lecciones=$lecciones;
-    }
+    $lecciones=DB::select("select
+                            l.modulo_id,l.id,l.nombre,l.numero,l.descripcion,l.tiempolectura,case when lu.id is not null then true else false end as leido
+                            from(
+                              select m.id
+                                  from modulos m
+                                  where m.curso_id = :curso_id 
+                            ) as m
+                            left join lecciones l on(l.modulo_id=m.id)
+                            left join lecciones_user lu on(l.id=lu.leccion_id  and lu.user_id=:user_id)
+                            order by l.modulo_id,l.numero asc"
+                            ,['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
 
     $jsonresponse=[
-        'progreso'=>$progreso
+        'progreso'=>$progreso,
+        'lecciones'=>$lecciones,
     ];
     return response()->json($jsonresponse,200);
   }

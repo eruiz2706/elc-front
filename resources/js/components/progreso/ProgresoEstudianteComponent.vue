@@ -23,7 +23,7 @@
       </h3>
   </div>
     <div class="card-body">
-        <div class="card" v-for="leccion in progreso.lecciones">
+        <div class="card" v-for="leccion in a_lecciones" v-if="leccion.modulo_id==progreso.id">
           <div class="card-header" style="padding:.2rem 1.25rem">
             <h5 class="card-title" style="font-size:1rem">
               <a data-toggle="collapse" v-bind:href="'#'+progreso.id+'-'+leccion.id" class="collapsed" aria-expanded="false" v-if="leccion.leido">
@@ -72,6 +72,7 @@
             id : 0,
             preload:false,
             a_progreso:[],
+            a_lecciones:[],
             traslate:{
               'module':trans('backend.module'),
               'lesson':trans('backend.lesson'),
@@ -89,6 +90,7 @@
             axios.post(url,{idcurso:this.idcurso}).then(response =>{
                 this.preload=false;
                 this.a_progreso=response.data.progreso;
+                this.a_lecciones=response.data.lecciones;
             }).catch(error =>{
                 this.preload=false;
                 this.a_progreso=[];

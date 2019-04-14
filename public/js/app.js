@@ -3737,6 +3737,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       id: 0,
       preload: false,
       a_progreso: [],
+      a_lecciones: [],
       traslate: {
         'module': trans('backend.module'),
         'lesson': trans('backend.lesson'),
@@ -3756,6 +3757,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.post(url, { idcurso: this.idcurso }).then(function (response) {
         _this.preload = false;
         _this.a_progreso = response.data.progreso;
+        _this.a_lecciones = response.data.lecciones;
       }).catch(function (error) {
         _this.preload = false;
         _this.a_progreso = [];
@@ -3890,195 +3892,209 @@ var render = function() {
           _c(
             "div",
             { staticClass: "card-body" },
-            _vm._l(progreso.lecciones, function(leccion) {
-              return _c("div", { staticClass: "card" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "card-header",
-                    staticStyle: { padding: ".2rem 1.25rem" }
-                  },
-                  [
+            _vm._l(_vm.a_lecciones, function(leccion) {
+              return leccion.modulo_id == progreso.id
+                ? _c("div", { staticClass: "card" }, [
                     _c(
-                      "h5",
+                      "div",
                       {
-                        staticClass: "card-title",
-                        staticStyle: { "font-size": "1rem" }
+                        staticClass: "card-header",
+                        staticStyle: { padding: ".2rem 1.25rem" }
                       },
                       [
-                        leccion.leido
-                          ? _c(
-                              "a",
-                              {
-                                staticClass: "collapsed",
-                                attrs: {
-                                  "data-toggle": "collapse",
-                                  href: "#" + progreso.id + "-" + leccion.id,
-                                  "aria-expanded": "false"
+                        _c(
+                          "h5",
+                          {
+                            staticClass: "card-title",
+                            staticStyle: { "font-size": "1rem" }
+                          },
+                          [
+                            leccion.leido
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "collapsed",
+                                    attrs: {
+                                      "data-toggle": "collapse",
+                                      href:
+                                        "#" + progreso.id + "-" + leccion.id,
+                                      "aria-expanded": "false"
+                                    }
+                                  },
+                                  [
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(_vm.traslate.lesson)
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(leccion.numero)
+                                      }
+                                    }),
+                                    _vm._v(" : "),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(leccion.nombre)
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    leccion.leido
+                                      ? _c("i", { staticClass: "fa fa-check" })
+                                      : _vm._e()
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            leccion.leido
+                              ? _c(
+                                  "small",
+                                  {
+                                    staticClass:
+                                      "badge badge-primary float-right"
+                                  },
+                                  [
+                                    _c("i", { staticClass: "fa fa-clock-o" }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(
+                                          leccion.tiempolectura
+                                        )
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(
+                                          _vm.traslate.minutes
+                                        )
+                                      }
+                                    })
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            !leccion.leido
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "collapsed",
+                                    staticStyle: { color: "grey" },
+                                    attrs: {
+                                      "data-toggle": "collapse",
+                                      href:
+                                        "#" + progreso.id + "-" + leccion.id,
+                                      "aria-expanded": "false"
+                                    }
+                                  },
+                                  [
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(_vm.traslate.lesson)
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(leccion.numero)
+                                      }
+                                    }),
+                                    _vm._v(" : "),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(leccion.nombre)
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    leccion.leido
+                                      ? _c("i", { staticClass: "fa fa-check" })
+                                      : _vm._e()
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            !leccion.leido
+                              ? _c(
+                                  "small",
+                                  {
+                                    staticClass:
+                                      "badge badge-default float-right"
+                                  },
+                                  [
+                                    _c("i", { staticClass: "fa fa-clock-o" }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(
+                                          leccion.tiempolectura
+                                        )
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      domProps: {
+                                        textContent: _vm._s(
+                                          _vm.traslate.minutes
+                                        )
+                                      }
+                                    })
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "panel-collapse in collapse",
+                        attrs: { id: progreso.id + "-" + leccion.id }
+                      },
+                      [
+                        _c("div", {
+                          staticClass: "card-body",
+                          domProps: { innerHTML: _vm._s(leccion.descripcion) }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-footer" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "btn btn-outline-primary btn-sm collapsed",
+                              attrs: {
+                                "data-toggle": "collapse",
+                                href: "#" + progreso.id + "-" + leccion.id,
+                                "aria-expanded": "false"
+                              },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.leccionLeida(
+                                    progreso.id,
+                                    leccion.id,
+                                    leccion.leido
+                                  )
                                 }
-                              },
-                              [
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(_vm.traslate.lesson)
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(leccion.numero)
-                                  }
-                                }),
-                                _vm._v(" : "),
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(leccion.nombre)
-                                  }
-                                }),
-                                _vm._v(" "),
-                                leccion.leido
-                                  ? _c("i", { staticClass: "fa fa-check" })
-                                  : _vm._e()
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        leccion.leido
-                          ? _c(
-                              "small",
-                              {
-                                staticClass: "badge badge-primary float-right"
-                              },
-                              [
-                                _c("i", { staticClass: "fa fa-clock-o" }),
-                                _vm._v(" "),
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(leccion.tiempolectura)
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(_vm.traslate.minutes)
-                                  }
-                                })
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        !leccion.leido
-                          ? _c(
-                              "a",
-                              {
-                                staticClass: "collapsed",
-                                staticStyle: { color: "grey" },
-                                attrs: {
-                                  "data-toggle": "collapse",
-                                  href: "#" + progreso.id + "-" + leccion.id,
-                                  "aria-expanded": "false"
+                              }
+                            },
+                            [
+                              _c("span", {
+                                domProps: {
+                                  textContent: _vm._s(_vm.traslate.finalize)
                                 }
-                              },
-                              [
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(_vm.traslate.lesson)
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(leccion.numero)
-                                  }
-                                }),
-                                _vm._v(" : "),
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(leccion.nombre)
-                                  }
-                                }),
-                                _vm._v(" "),
-                                leccion.leido
-                                  ? _c("i", { staticClass: "fa fa-check" })
-                                  : _vm._e()
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        !leccion.leido
-                          ? _c(
-                              "small",
-                              {
-                                staticClass: "badge badge-default float-right"
-                              },
-                              [
-                                _c("i", { staticClass: "fa fa-clock-o" }),
-                                _vm._v(" "),
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(leccion.tiempolectura)
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", {
-                                  domProps: {
-                                    textContent: _vm._s(_vm.traslate.minutes)
-                                  }
-                                })
-                              ]
-                            )
-                          : _vm._e()
+                              })
+                            ]
+                          )
+                        ])
                       ]
                     )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "panel-collapse in collapse",
-                    attrs: { id: progreso.id + "-" + leccion.id }
-                  },
-                  [
-                    _c("div", {
-                      staticClass: "card-body",
-                      domProps: { innerHTML: _vm._s(leccion.descripcion) }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-footer" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "btn btn-outline-primary btn-sm collapsed",
-                          attrs: {
-                            "data-toggle": "collapse",
-                            href: "#" + progreso.id + "-" + leccion.id,
-                            "aria-expanded": "false"
-                          },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.leccionLeida(
-                                progreso.id,
-                                leccion.id,
-                                leccion.leido
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _c("span", {
-                            domProps: {
-                              textContent: _vm._s(_vm.traslate.finalize)
-                            }
-                          })
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              ])
+                  ])
+                : _vm._e()
             })
           )
         ])
