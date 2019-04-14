@@ -65,8 +65,7 @@ class OfertadosController extends Controller
                               where c.visibilidad=true and c.id = :id",['id'=>$request->id])[0];
 
 
-
-      $action='https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/';
+      /*$action='https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/';
       $responseUrl=env('APP_URL').'ofertados/respuestapago';
       $confirmationUrl=env('APP_URL')."ofertados/cofirmacionpago";
       $apiKey="4Vj8eK4rloUd272L48hsrarnUA";
@@ -77,6 +76,22 @@ class OfertadosController extends Controller
       $taxReturnBase=0;
       $currency="COP";
       $accountId="512321";//pais
+      $test="1";
+      $buyerEmail=$user->email;
+      $description=$curso->nombre;
+      $signature=md5($apiKey."~".$merchantId."~".$referenceCode."~".$amount."~".$currency);*/
+  
+      $action='https://checkout.payulatam.com/ppp-web-gateway-payu/';
+      $responseUrl=env('APP_URL').'ofertados/respuestapago';
+      $confirmationUrl=env('APP_URL')."ofertados/cofirmacionpago";
+      $apiKey="Zfl5A7AnRXN46ogamlRJfBd81E";
+      $merchantId="787130";
+      $referenceCode=$curso->id.'-'.$user->id.'-'.date('hidmY');
+      $amount=$curso->valor;
+      $tax=0;
+      $taxReturnBase=0;
+      $currency="COP";
+      $accountId="793967";//pais
       $test="1";
       $buyerEmail=$user->email;
       $description=$curso->nombre;

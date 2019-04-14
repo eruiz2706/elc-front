@@ -44,7 +44,11 @@
               </tr>
               <tr>
                 <th colspan='2' v-if='!subscrip'>
-                  <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" :disabled="loader_suscrip" v-on:click.prevent="suscribirse()" v-if="o_curso.estado !='finalizado' && o_curso.valor==0">
+                  <p>
+                    <input type="checkbox" v-model="check_terminos" class="fantasma"/>
+                    <a v-bind:href="base_url+'/TERMINOS_Y_CONDICIONES.pdf'" target="_blank">Aceptas los terminos y condiciones</a>
+                  </p>
+                  <button type="button" class="btn btn-block btn-primary btn-sm" style="margin-right: 5px;" :disabled="!check_terminos || loader_suscrip==true" v-on:click.prevent="suscribirse()" v-if="o_curso.estado !='finalizado' && o_curso.valor==0">
                     <i class="fa fa-thumbs-o-up"></i> <span v-text='traslate.free'></span>
                     <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_suscrip"></i>
                   </button>
@@ -63,13 +67,13 @@
                      <input name="buyerEmail"    type="hidden"  v-bind:value="webcheckout.buyerEmail" >
                      <input name="responseUrl"    type="hidden" v-bind:value="webcheckout.responseUrl" >
                      <input name="confirmationUrl"    type="hidden" v-bind:value="webcheckout.responseUrl" >
-                     <button name="Submit"        type="submit"  class="btn btn-block btn-outline-primary btn-sm">
+                     <button name="Submit" type="submit"  class="btn btn-block btn-primary btn-sm" :disabled="!check_terminos">
                         <i class="fa fa-credit-card"></i> <span v-text='traslate.tobuy'></span>
                      </button>
                   </form>
                 </th>
                 <th colspan='2' v-else>
-                  <button type="button" class="btn btn-block btn-outline-primary btn-sm" style="margin-right: 5px;" v-on:click.prevent="iracurso();">
+                  <button type="button" class="btn btn-block btn-primary btn-sm" style="margin-right: 5px;" v-on:click.prevent="iracurso();" >
                     <i class="fa fa-thumbs-o-up"></i> <span v-text='traslate.subscribed'></span>
                   </button>
                 </th>
@@ -109,6 +113,7 @@
             o_curso:{},
             preload :false,
             subscrip:false,
+            check_terminos:false,
             webcheckout:{},
             traslate:{
               'study_plan':trans('frontend.page_coursedet.study_plan'),
@@ -163,7 +168,7 @@
                     type: "success"
                 },function(){
                   inst.$root.$emit('setReload');
-                  inst.redirectVolver();
+                  inst.iracurso();
                 });
             }).catch(error =>{
                 this.loader_suscrip=false;

@@ -6450,6 +6450,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -6600,10 +6602,24 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "course_body" }, [
-                _c("h6", {
-                  staticClass: "course_title",
-                  domProps: { textContent: _vm._s(curso.nombre) }
-                })
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.detcurso(curso.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("h6", {
+                      staticClass: "course_title",
+                      domProps: { textContent: _vm._s(curso.nombre) }
+                    })
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "course_footer" }, [
@@ -6806,6 +6822,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -6823,6 +6843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       o_curso: {},
       preload: false,
       subscrip: false,
+      check_terminos: false,
       webcheckout: {},
       traslate: {
         'study_plan': trans('frontend.page_coursedet.study_plan'),
@@ -6880,7 +6901,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           type: "success"
         }, function () {
           inst.$root.$emit('setReload');
-          inst.redirectVolver();
+          inst.iracurso();
         });
       }).catch(function (error) {
         _this2.loader_suscrip = false;
@@ -7029,17 +7050,74 @@ var render = function() {
                   _c("tr", [
                     !_vm.subscrip
                       ? _c("th", { attrs: { colspan: "2" } }, [
+                          _c("p", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.check_terminos,
+                                  expression: "check_terminos"
+                                }
+                              ],
+                              staticClass: "fantasma",
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: Array.isArray(_vm.check_terminos)
+                                  ? _vm._i(_vm.check_terminos, null) > -1
+                                  : _vm.check_terminos
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.check_terminos,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.check_terminos = $$a.concat([$$v]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.check_terminos = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.check_terminos = $$c
+                                  }
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href:
+                                    _vm.base_url +
+                                    "/TERMINOS_Y_CONDICIONES.pdf",
+                                  target: "_blank"
+                                }
+                              },
+                              [_vm._v("Aceptas los terminos y condiciones")]
+                            )
+                          ]),
+                          _vm._v(" "),
                           _vm.o_curso.estado != "finalizado" &&
                           _vm.o_curso.valor == 0
                             ? _c(
                                 "button",
                                 {
                                   staticClass:
-                                    "btn btn-block btn-outline-primary btn-sm",
+                                    "btn btn-block btn-primary btn-sm",
                                   staticStyle: { "margin-right": "5px" },
                                   attrs: {
                                     type: "button",
-                                    disabled: _vm.loader_suscrip
+                                    disabled:
+                                      !_vm.check_terminos ||
+                                      _vm.loader_suscrip == true
                                   },
                                   on: {
                                     click: function($event) {
@@ -7195,8 +7273,12 @@ var render = function() {
                                     "button",
                                     {
                                       staticClass:
-                                        "btn btn-block btn-outline-primary btn-sm",
-                                      attrs: { name: "Submit", type: "submit" }
+                                        "btn btn-block btn-primary btn-sm",
+                                      attrs: {
+                                        name: "Submit",
+                                        type: "submit",
+                                        disabled: !_vm.check_terminos
+                                      }
                                     },
                                     [
                                       _c("i", {
@@ -7220,8 +7302,7 @@ var render = function() {
                           _c(
                             "button",
                             {
-                              staticClass:
-                                "btn btn-block btn-outline-primary btn-sm",
+                              staticClass: "btn btn-block btn-primary btn-sm",
                               staticStyle: { "margin-right": "5px" },
                               attrs: { type: "button" },
                               on: {

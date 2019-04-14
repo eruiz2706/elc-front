@@ -22,7 +22,9 @@
           </a>
         </div>
         <div class="course_body">
+           <a href="#" v-on:click.prevent="detcurso(curso.id)">
           <h6 class="course_title" v-text='curso.nombre'></h6>
+          </a>
           <!--<div class="course_teacher"></div>-->
         </div>
         <div class="course_footer">
