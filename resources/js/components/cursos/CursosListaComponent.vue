@@ -22,6 +22,9 @@
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectAbrir(curso.id)">
               Ingresar <i class="fa fa-folder-open" style="font-size:20px"></i>
         </button>
+        <button type="button" class="btn btn-tool" v-on:click.prevent="duplicar(curso.id)">
+              <i class="fa fa-mail-reply-all " style="font-size:20px"></i>
+        </button>
         <button type="button" class="btn btn-tool" v-on:click.prevent="optionBorrarCurso(curso.id)">
               <i class="fa  fa-trash" style="font-size:20px"></i>
         </button>
@@ -120,6 +123,41 @@
           },
           borrarCurso:function(id){
             var url =base_url+'/cursos/borrar';
+              axios.post(url,{id}).then(response =>{
+                  this.listado();
+                  swal({
+                      title:response.data.message,
+                      text:response.data.message2,
+                      type: "success"
+                  });
+              }).catch(error =>{
+                  if(error.response.data.errors){
+                    this.e_curso=error.response.data.errors;
+                  }
+                  if(error.response.data.error){
+                    toastr.error(error.response.data.error,'',{
+                        "timeOut": "3500"
+                    });
+                  }
+            });
+          },
+          duplicar:function(id){
+            let inst=this;
+            swal({
+              title: "Seguro desea replicar el curso!",
+              text: "",
+              type: "info",
+              showCancelButton: true,
+              confirmButtonClass: "btn-success",
+              confirmButtonText: "Aceptar",
+              closeOnConfirm: true
+            },
+            function(){
+              inst.replicarCurso(id);
+            });  
+          },
+          replicarCurso:function(id){
+            var url =base_url+'/cursos/replicar';
               axios.post(url,{id}).then(response =>{
                   this.listado();
                   swal({

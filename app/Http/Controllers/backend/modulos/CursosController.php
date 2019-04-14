@@ -519,4 +519,75 @@ class CursosController extends Controller
         ], 400);
     }
   }
+
+  public function replicar(Request $request){
+    $user     =Auth::user();
+    DB::beginTransaction();
+    try{
+
+      $cursoOriginal=DB::select("select nombre,fecha_inicio,fecha_finalizacion,fecha_limite,visibilidad,inscripcion,plan_estudio,estado,valor,urlvideo
+                                    from cursos 
+                                  where id=:id",
+                                ['id'=>$request->id])[0];
+
+      $idcurso=DB::table('cursos')->insertGetId([
+        'nombre'=>"(COPIA)".$cursoOriginal->nombre,
+        'fecha_inicio'=>$cursoOriginal->fecha_inicio,
+        'fecha_finalizacion'=>$cursoOriginal->fecha_finalizacion,
+        'fecha_limite'=>$cursoOriginal->fecha_limite,
+        'visibilidad'=>$cursoOriginal->visibilidad,
+        'inscripcion'=>$cursoOriginal->inscripcion,
+        'plan_estudio'=>$cursoOriginal->plan_estudio,
+        'estado'=>$cursoOriginal->estado,
+        'valor'=>$cursoOriginal->valor,
+        'urlvideo'=>$cursoOriginal->urlvideo,
+        'fecha_creacion'=>date('Y-m-d H:i:s'),
+        'user_id'=>$user->id
+      ]);
+
+      $moduloscurso=DB::select("select id,nombre,numero
+                                  from modulos
+                                  where curso_id=:curso_id",
+                                ['curso_id'=>$request->id]);
+      foreach($moduloscurso as $modulo){
+          $idmodulo=DB::table('modulos')->insertGetId([
+            'curso_id'=>$idcurso,
+            'nombre'=>$modulo->nombre,
+            'numero'=>$modulo->numero,
+            'fecha_creacion'=>date('Y-m-d H:i:s'),
+            'user_id'=>$user->id
+          ]);
+
+          $leccionescurso=DB::select("select numero,nombre,descripcion,tiempolectura
+                                        from lecciones
+                                        where modulo_id=:modulo_id",
+                                ['modulo_id'=>$modulo->id]);
+          foreach($leccionescurso as $leccion){
+              DB::table('lecciones')->insertGetId([
+                'modulo_id'=>$idmodulo,
+                'numero'=>$leccion->numero,
+                'nombre'=>$leccion->nombre,
+                'descripcion'=>$leccion->descripcion,
+                'tiempolectura'=>$leccion->tiempolectura,
+                'fecha_creacion'=>date('Y-m-d H:i:s'),
+                'user_id'=>$user->id
+              ]);
+          }
+      }
+
+
+      DB::commit();
+      return response()->json([
+          'message' => 'Curso replicado correctamente!',
+          'message2' => 'Click para continuar!'
+      ]);
+    }
+    catch(\Exception $e){
+        Log::info('replica de cursos : '.$e->getMessage());
+        DB::rollback();
+        return response()->json([
+            'error' =>$e->getMessage()
+        ], 400);
+    }
+  }
 }
