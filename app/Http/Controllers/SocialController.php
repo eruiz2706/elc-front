@@ -14,10 +14,7 @@ use DB;
 class SocialController extends Controller
 {
     public function redirect($provider,$type='',$modo=''){
-
-      echo "$provider ** $type ** $modo";
-      die();
-      session(['f_type' =>$type]);
+     session(['f_type' =>$type]);
       session(['f_modo' =>$modo]);
       return Socialite::driver($provider)->redirect();
     }
@@ -38,10 +35,7 @@ class SocialController extends Controller
               $role  =DB::select("select id,slug from roles
                                   where slug = :slug"
                                  ,['slug'=>$modo]);
-             echo "modo?>".$modo;
-              print_r($role);
-
-              die();
+        
               if(!empty($role)){
                 $user = User::create([
                     'nombre' => $social_user->name,
