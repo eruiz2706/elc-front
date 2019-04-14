@@ -10,10 +10,12 @@
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
+        @if(Auth::user()->slugrol=='es' || Auth::user()->slugrol=='pr')
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fa fa-comments-o" style='padding-top:7px;font-size:24px' v-on:click.prevent='listamessages()'></i>
           <span class="badge badge-warning navbar-badge" id='nav_messages'></span>
         </a>
+        @endif
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="height:250px;overflow-y: auto;">
           <div class="row" v-if="preload_messages">
             <div class="d-block mx-auto" >
