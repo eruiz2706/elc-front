@@ -92,7 +92,7 @@ class OfertadosController extends Controller
       $taxReturnBase=0;
       $currency="COP";
       $accountId="793967";//pais
-      $test="1";
+      $test="0";
       $buyerEmail=$user->email;
       $description=$curso->nombre;
       $signature=md5($apiKey."~".$merchantId."~".$referenceCode."~".$amount."~".$currency);
