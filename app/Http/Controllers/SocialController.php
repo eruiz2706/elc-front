@@ -36,7 +36,10 @@ class SocialController extends Controller
               $role  =DB::select("select id,slug from roles
                                   where slug = :slug"
                                  ,['slug'=>$modo]);
+             echo "modo?>".$modo;
+              print_r($role);
 
+              die();
               if(!empty($role)){
                 $user = User::create([
                     'nombre' => $social_user->name,
@@ -54,7 +57,7 @@ class SocialController extends Controller
                 return $this->authAndRedirect($user);
               }
 
-              return redirect()->to('registro#');
+              return redirect()->to('inicio#');
           }
       }else{
         if ($user = User::where('email', $social_user->email)->first()) {
