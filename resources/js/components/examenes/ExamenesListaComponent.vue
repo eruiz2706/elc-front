@@ -27,6 +27,9 @@
           <button type="button" class="btn btn-tool" v-on:click.prevent="redirectPreguntas(ejercicio.id)">
             <i class="fa  fa-list-alt" style="font-size: 20px;"></i>
           </button>
+          <button type="button" class="btn btn-tool" v-on:click.prevent="optionBorrar(ejercicio.id)">
+              <i class="fa  fa-trash" style="font-size:20px"></i>
+        </button>
         </div>
       </div>
 
@@ -107,6 +110,41 @@
           redirectEnt:function(id){
             document.getElementById('id').value=id;
             this.$root.$emit('setMenu','examenes-lista-entrega');
+          },
+                    optionBorrar:function(id){
+            let inst=this;
+            swal({
+              title: "Seguro desea borrar el registro!",
+              text: "",
+              type: "info",
+              showCancelButton: true,
+              confirmButtonClass: "btn-success",
+              confirmButtonText: "Aceptar",
+              closeOnConfirm: true
+            },
+            function(){
+              inst.borrarEjercicio(id);
+            });  
+          },
+          borrarEjercicio:function(id){
+            var url =base_url+'/ejercicios/borrar';
+              axios.post(url,{id}).then(response =>{
+                  this.listado();
+                  swal({
+                      title:response.data.message,
+                      text:response.data.message2,
+                      type: "success"
+                  });
+              }).catch(error =>{
+                  if(error.response.data.errors){
+                    this.e_curso=error.response.data.errors;
+                  }
+                  if(error.response.data.error){
+                    toastr.error(error.response.data.error,'',{
+                        "timeOut": "3500"
+                    });
+                  }
+            });
           }
         }
     }
