@@ -54,7 +54,7 @@ class SocialController extends Controller
                 return $this->authAndRedirect($user);
               }
 
-              return redirect()->to('principal#');
+              return redirect()->to('inicio#');
           }
       }else{
         if ($user = User::where('email', $social_user->email)->first()) {

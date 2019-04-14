@@ -87,7 +87,7 @@ new Vue({
       openrecover:function(){
         $('#modal_recover').modal('show');
         this.errores_recover=[];
-      },
+      }, 
       crearRedes:function(provider){
         var modo =document.getElementById('counter_select');
 
@@ -100,6 +100,7 @@ new Vue({
           return;
         }
         var url=base_url+"/redirect/"+provider+"/registro/"+modo;
+        console.log(url);
         window.location.href =url;
       }
     }

@@ -39,6 +39,7 @@ Route::get('trans', function() {
 
 Route::middleware(['lang'])->group(function(){
   Route::get('/', 'HomeController@index');
+  Route::get('/inicio', 'HomeController@index');
   Route::get('/cursosd/{estado?}', 'HomeController@cursos');
   Route::get('/cursodet/{id}', 'HomeController@cursosdet');
   Route::get('/getcursodet/{id}', 'HomeController@getCursodet');
