@@ -10529,6 +10529,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -10586,6 +10589,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.preload = false;
         _this2.a_leccion = [];
         if (error.response.data.errors) {}
+        if (error.response.data.error) {
+          toastr.error(error.response.data.error, '', {
+            "timeOut": "3500"
+          });
+        }
+      });
+    },
+    optionBorrar: function optionBorrar(id) {
+      var inst = this;
+      swal({
+        title: "Seguro desea borrar el registro!",
+        text: "",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-success",
+        confirmButtonText: "Aceptar",
+        closeOnConfirm: true
+      }, function () {
+        inst.borrarLeccion(id);
+      });
+    },
+    borrarLeccion: function borrarLeccion(id) {
+      var _this3 = this;
+
+      var url = base_url + '/lecciones/borrar';
+      axios.post(url, { id: id }).then(function (response) {
+        _this3.listado();
+        swal({
+          title: response.data.message,
+          text: response.data.message2,
+          type: "success"
+        });
+      }).catch(function (error) {
+        if (error.response.data.errors) {
+          _this3.e_curso = error.response.data.errors;
+        }
         if (error.response.data.error) {
           toastr.error(error.response.data.error, '', {
             "timeOut": "3500"
@@ -10736,6 +10775,26 @@ var render = function() {
                     [
                       _c("i", {
                         staticClass: "fa  fa-pencil",
+                        staticStyle: { "font-size": "20px" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-tool",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.optionBorrar(leccion.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa  fa-trash",
                         staticStyle: { "font-size": "20px" }
                       })
                     ]

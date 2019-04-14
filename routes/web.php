@@ -119,6 +119,7 @@ Route::middleware(['lang','auth','navcursos'])->group(function(){
   Route::post('lecciones/select_mod', 'backend\modulos\LeccionesController@select_mod');
   Route::post('lecciones/guardar', 'backend\modulos\LeccionesController@guardar');
   Route::post('lecciones/actualizar', 'backend\modulos\LeccionesController@actualizar');
+  Route::post('lecciones/borrar', 'backend\modulos\LeccionesController@borrar');
 
   Route::post('integrantes/lista', 'backend\modulos\IntegrantesController@lista');
 
