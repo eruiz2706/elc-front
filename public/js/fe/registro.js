@@ -100,7 +100,7 @@ new Vue({
           return;
         }
         var url=base_url+"/redirect/"+provider+"/registro/"+modo;
-        console.log(url+"datourl");
+        alert(url+"datourl");
         return ;
         window.location.href =url;
       }
