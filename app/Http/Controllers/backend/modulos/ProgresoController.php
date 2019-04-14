@@ -15,17 +15,11 @@ class ProgresoController extends Controller
   //listado de modulos de un curso
   public function lista(Request $request){
     $user     =Auth::user();
-    $progreso   =DB::select("select m.id,m.numero,m.nombre,count(l.id) as cantlec,count(lu.id) as cantlec_leidas
-                              from(
-                                select m.id,m.numero,m.nombre
-                                  from modulos m
-                                  where m.curso_id = :curso_id
-                              ) as m
-                              left join lecciones l on(m.id=l.modulo_id)
-                              left join lecciones_user lu on(l.id=lu.leccion_id and lu.user_id= :user_id)
-                              group by m.id,m.nombre,m.numero
+    $progreso   =DB::select("select m.id,m.numero,m.nombre,0 as cantlec,0 as cantlec_leidas
+                              from modulos m
+                              where m.curso_id = :curso_id
                               order by m.numero  asc",
-                      ['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
+                              ['curso_id'=>$request->idcurso]);
 
     $lecciones=DB::select("select
                             l.modulo_id,l.id,l.nombre,l.numero,l.descripcion,l.tiempolectura,case when lu.id is not null then true else false end as leido
@@ -38,6 +32,20 @@ class ProgresoController extends Controller
                             left join lecciones_user lu on(l.id=lu.leccion_id  and lu.user_id=:user_id)
                             order by l.modulo_id,l.numero asc"
                             ,['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
+
+    foreach($progreso as $prog){
+        $cantidadLecciones=0;
+        $cantidadLeidas=0;
+        foreach($lecciones as $lecc){
+          if($prog->id==$lecc->modulo_id){
+            $cantidadLecciones++;
+            if($lecc->leido==true)$cantidadLeidas++;
+          }
+        }
+
+        $prog->cantlec=$cantidadLecciones;
+        $prog->cantlec_leidas=$cantidadLeidas;
+    }
 
     $jsonresponse=[
         'progreso'=>$progreso,
