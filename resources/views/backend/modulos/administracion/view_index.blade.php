@@ -18,7 +18,7 @@
         <div class="card-body" style='padding:0px'>
           <ul class="nav nav-pills">
             <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='' || menu_content=='usuarios-lista') ? 'active' : ''" v-on:click.prevent="setMenuContent('usuarios-lista')">Lista de Usuarios</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='pago-manual') ? 'active' : ''" v-on:click.prevent="setMenuContent('pago-manual')">Pago Manual</a></li>
+            <!--<li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='pago-manual') ? 'active' : ''" v-on:click.prevent="setMenuContent('pago-manual')">Pago Manual</a></li>-->
           </ul>
         </div>
       </div>
