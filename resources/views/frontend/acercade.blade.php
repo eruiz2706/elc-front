@@ -51,7 +51,7 @@
       <!-- About Item -->
       <div class="col-lg-5 about_col about_col_left">
         <div class="about_item">
-          <div class="about_item_image"><img src="{{ URL::asset('rfend/images/about_1.jpg') }}" alt=""></div>
+          <div class="about_item_image"><img src="{{ URL::asset('rfend/images/mision.jpg') }}" alt=""></div>
           <div class="about_item_title"><a href="#">{{ trans('frontend.page_about.about_item1_title') }}</a></div>
           <div class="about_item_text text-justify">
             <p>{{ trans('frontend.page_about.about_item1_text') }}</p>
@@ -62,7 +62,7 @@
       <!-- About Item -->
       <div class="col-lg-5 about_col about_col_middle">
         <div class="about_item">
-          <div class="about_item_image"><img src="{{ URL::asset('rfend/images/about_2.jpg') }}" alt=""></div>
+          <div class="about_item_image"><img src="{{ URL::asset('rfend/images/vision.jpg') }}" alt=""></div>
           <div class="about_item_title"><a href="#">{{ trans('frontend.page_about.about_item2_title') }}</a></div>
           <div class="about_item_text text-justify">
             <p>{{ trans('frontend.page_about.about_item2_text') }}</p>
@@ -118,7 +118,7 @@
       <!-- Feature Video -->
       <div class="col-lg-5 feature_col">
         <div class="feature_video d-flex flex-column align-items-center justify-content-center">
-          <div class="feature_video_background" style="background-image:url({{ URL::asset('rfend/images/video.jpg') }})"></div>
+          <div class="feature_video_background" style="background-image:url({{ URL::asset('rfend/images/about_3.jpg') }})"></div>
           <a class="vimeo feature_video_button" href="https://player.vimeo.com/video/99340873?title=0" title="OH, PORTUGAL - IN 4K - Basti Hansen - Stock Footage">
             <img src="images/play.png" alt="">
           </a>

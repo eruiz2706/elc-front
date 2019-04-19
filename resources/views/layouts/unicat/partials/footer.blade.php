@@ -75,7 +75,7 @@
           </div>-->
           <div class="ml-lg-auto cr_links">
             <ul class="cr_list">
-              <li><a href="{{url('/TERMINOS_Y_CONDICIONES.pdf')}}">{{ trans('frontend.terms_and_condic') }}</a></li>
+              <li><a href="{{url('/TERMINOS_Y_CONDICIONES.pdf')}}" target="_blank">{{ trans('frontend.terms_and_condic') }}</a></li>
               <!--<li><a href="#">{{ trans('frontend.terms_use') }}</a></li>-->
               <!--<li><a href="#">{{ trans('frontend.policies') }}</a></li>-->
             </ul>
