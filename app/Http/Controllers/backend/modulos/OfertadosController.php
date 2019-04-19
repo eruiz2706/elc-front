@@ -160,7 +160,7 @@ class OfertadosController extends Controller
 
     public function respuestapago(){
         $user =Auth::user();
-        $rol  =$user->slugrol;
+        $rol  =$user->slugrol; 
         $id     =Auth::user()->id;
 
         $referenceCode    =$_REQUEST['referenceCode'];
