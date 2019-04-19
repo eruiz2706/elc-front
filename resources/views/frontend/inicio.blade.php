@@ -98,17 +98,17 @@
             </div>
             
             <input type="text" class="counter_input" name='nombre' placeholder="{{ trans('frontend.page_register.form_name') }}" autocomplete="off"  v-model="o_user.nombre">
-            <label v-if="errores.nombre" class="text-danger">@{{ errores.nombre[0] }}</label>
+            <label v-if="errores.nombre" class="text-danger" v-text='errores.nombre[0]'></label>
 
             <input type="text" class="counter_input" name='email' placeholder="{{ trans('frontend.page_register.form_email') }}" autocomplete="off"  v-model="o_user.email">
-            <label v-if="errores.email" class="text-danger">@{{ errores.email[0] }}</label>
+            <label v-if="errores.email" class="text-danger" v-text='errores.email[0]'></label>
             <select name="counter_select" id="counter_select" class="counter_input counter_options"  v-model="o_user.rol">
               <option value=''>{{ trans('frontend.page_register.tittle_type') }}</option>
               <option value='es'>{{ trans('frontend.page_register.type_es') }}</option>
               <option value='pr'>{{ trans('frontend.page_register.type_pr') }}</option>
               <option value='pa'>{{ trans('frontend.page_register.type_pa') }}</option>
             </select>
-            <label v-if="errores.rol" class="text-danger">@{{ errores.rol[0] }}</label>
+            <label v-if="errores.rol" class="text-danger" v-text='errores.rol[0]'></label>
 
             <p>---------- OR ----------</p>
             <div class="social-auth-links text-center mt-2">
