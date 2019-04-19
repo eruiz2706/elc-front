@@ -20,7 +20,7 @@
 <!-- Smartsupp Live Chat script -->
 <script type="text/javascript">
 var _smartsupp = _smartsupp || {};
-_smartsupp.key = '6b4991cdfba52af295440711538f01117f8ce67c';
+_smartsupp.key = 'cb7dd4e6a41f12ffdf49ddc2a7d7d003fa918c27';
 window.smartsupp||(function(d) {
   var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
   s=d.getElementsByTagName('script')[0];c=d.createElement('script');
