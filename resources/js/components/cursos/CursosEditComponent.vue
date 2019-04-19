@@ -60,12 +60,12 @@
           <label>Acceso al curso</label>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="radio" class="form-check-input" checked name="accesradio" value='true' v-model='o_curso.visibilidad'>Publico
+              <input type="radio" class="form-check-input" checked name="accesradio" value='true' v-model='o_curso.visibilidad'>Visible al publico
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="accesradio" value='false' v-model='o_curso.visibilidad'>Privado
+              <input type="radio" class="form-check-input" name="accesradio" value='false' v-model='o_curso.visibilidad'>Oculto al publico
             </label>
           </div>
         </div>

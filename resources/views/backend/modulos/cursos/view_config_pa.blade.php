@@ -44,7 +44,7 @@
     </div>
 
 </div>
-<input type='hidden' name='idcurso' id='idcurso' value="{{$curso->id}}"></input>
-<input type='hidden' name='id' id='id' value=""></input>
-<input type='hidden' name='idest' id='idest' value="{{$id2}}"></input>
+<input type='text' name='idcurso' id='idcurso' value="{{$curso->id}}"></input>
+<input type='text' name='id' id='id' value=""></input>
+<input type='text' name='idest' id='idest' value="{{$id2}}"></input>
 @endsection

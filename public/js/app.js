@@ -7868,10 +7868,10 @@ var render = function() {
                       _vm._v(" "),
                       curso.visibilidad
                         ? _c("span", { staticClass: "badge bg-success" }, [
-                            _vm._v("Publico")
+                            _vm._v("Visible al publico")
                           ])
                         : _c("span", { staticClass: "badge bg-danger" }, [
-                            _vm._v("Privado")
+                            _vm._v("Oculto al publico")
                           ])
                     ]),
                     _vm._v(" "),
@@ -8440,7 +8440,7 @@ var render = function() {
                     }
                   }
                 }),
-                _vm._v("Publico\n            ")
+                _vm._v("Visible al publico\n            ")
               ])
             ]),
             _vm._v(" "),
@@ -8466,7 +8466,7 @@ var render = function() {
                     }
                   }
                 }),
-                _vm._v("Privado\n            ")
+                _vm._v("Oculto al publico\n            ")
               ])
             ])
           ]),
@@ -9044,7 +9044,7 @@ var render = function() {
                         }
                       }
                     }),
-                    _vm._v("Publico\n            ")
+                    _vm._v("Visible al publico\n            ")
                   ])
                 ]),
                 _vm._v(" "),
@@ -9074,7 +9074,7 @@ var render = function() {
                         }
                       }
                     }),
-                    _vm._v("Privado\n            ")
+                    _vm._v("Oculto al publico\n            ")
                   ])
                 ])
               ]),
