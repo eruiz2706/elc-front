@@ -490,7 +490,7 @@ class CursosController extends Controller
 
   public function borrar(Request $request){
 
-    $cantidadCursosUser=DB::select("select count(id) as conteo
+    /*$cantidadCursosUser=DB::select("select count(id) as conteo
                                       from cursos_user
                                       where curso_id=:curso_id",
                                     ['curso_id'=>$request->id])[0];
@@ -499,7 +499,7 @@ class CursosController extends Controller
       return response()->json([
           'error' =>'No se puede eliminar el curso, por que ya tiene estudiantes inscritos'
       ], 400);
-    }
+    }*/
 
     DB::beginTransaction();
     try{
