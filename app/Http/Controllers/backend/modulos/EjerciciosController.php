@@ -13,7 +13,7 @@ use Log;
 class EjerciciosController extends Controller
 {
   public function lista(Request $request){
-
+    $user   =Auth::user();
     $cantUser     =DB::select("select count(id) as cant
                                 from cursos_user
                                 where curso_id= :curso_id and slugrol='es'",
@@ -28,9 +28,9 @@ class EjerciciosController extends Controller
                                 e.fecha_creacion,e.preguntas as cant_preg,
                                 e.calificacion as notamaxima,e.entregas
                                 from ejercicios e
-                                where e.curso_id = :curso_id
+                                where e.curso_id = :curso_id and user_id=:user_id
                                 order by e.fecha_inicio asc",
-                              ['curso_id'=>$request->idcurso]);
+                              ['curso_id'=>$request->idcurso,'user_id'=>$user->id]);
 
     $jsonresponse=[
         'ejercicios'=>$ejercicios,

@@ -23,6 +23,7 @@
             <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='cursos-config') ? 'active' : ''" v-on:click.prevent="setMenuContent('cursos-config')">{{trans('backend.advanced_data')}}</a></li>
             <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='modulos-lista' || menu_content=='modulos-crear' || menu_content=='modulos-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('modulos-lista')">{{trans('backend.modules')}}</a></li>
             <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='lecciones-lista' || menu_content=='lecciones-crear' || menu_content=='lecciones-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('lecciones-lista')">{{trans('backend.lessons')}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='examenes-lista' || menu_content=='examenes-crear' || menu_content=='examenes-edit' || menu_content=='examenes-lista-entrega' || menu_content=='preguntas-lista' || menu_content=='preguntas-crear' || menu_content=='preguntas-edit') ? 'active' : ''" v-on:click.prevent="setMenuContent('examenes-lista')">{{trans('backend.test')}}</a></li>
             <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='foro-curso') ? 'active' : ''" v-on:click.prevent="setMenuContent('foro-curso')">{{trans('backend.forum')}}</a></li>
             <li class="nav-item"><a class="nav-link" href="#" v-bind:class="(menu_content=='integrantes') ? 'active' : ''" v-on:click.prevent="setMenuContent('integrantes')">{{trans('backend.members')}}</a></li>
           </ul>
@@ -52,6 +53,27 @@
       </div>
       <div v-if="menu_content=='lecciones-edit'">
         <lecciones-edit></lecciones-edit>
+      </div>
+      <div v-if="menu_content=='examenes-lista'">
+        <examenes-lista></examenes-lista>
+      </div>
+      <div v-if="menu_content=='examenes-crear'">
+        <examenes-crear></examenes-crear>
+      </div>
+      <div v-if="menu_content=='examenes-edit'">
+        <examenes-edit></examenes-edit>
+      </div>
+      <div v-if="menu_content=='examenes-lista-entrega'">
+        <examenes-lista-entrega></examenes-lista-entrega>
+      </div>
+      <div v-if="menu_content=='preguntas-lista'">
+        <preguntas-lista></preguntas-lista>
+      </div>
+      <div v-if="menu_content=='preguntas-crear'">
+        <preguntas-crear></preguntas-crear>
+      </div>
+      <div v-if="menu_content=='preguntas-edit'">
+        <preguntas-edit></preguntas-edit>
       </div>
       <div v-if="menu_content=='foro-curso'">
         <foro-curso></foro-curso>
