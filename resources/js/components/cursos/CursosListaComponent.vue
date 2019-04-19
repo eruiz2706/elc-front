@@ -23,7 +23,7 @@
               Ingresar <i class="fa fa-folder-open" style="font-size:20px"></i>
         </button>
         <button type="button" class="btn btn-tool" v-on:click.prevent="duplicar(curso.id)">
-              <i class="fa fa-mail-reply-all " style="font-size:20px"></i>
+              <i class="fa fa-copy" style="font-size:20px"></i>
         </button>
         <button type="button" class="btn btn-tool" v-on:click.prevent="optionBorrarCurso(curso.id)">
               <i class="fa  fa-trash" style="font-size:20px"></i>
@@ -144,7 +144,7 @@
           duplicar:function(id){
             let inst=this;
             swal({
-              title: "Seguro desea replicar el curso!",
+              title: "Seguro desea duplicar el curso!",
               text: "",
               type: "info",
               showCancelButton: true,
