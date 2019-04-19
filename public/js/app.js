@@ -7668,7 +7668,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     duplicar: function duplicar(id) {
       var inst = this;
       swal({
-        title: "Seguro desea replicar el curso!",
+        title: "Seguro desea duplicar el curso!",
         text: "",
         type: "info",
         showCancelButton: true,
@@ -7786,7 +7786,7 @@ var render = function() {
                     },
                     [
                       _c("i", {
-                        staticClass: "fa fa-mail-reply-all ",
+                        staticClass: "fa fa-copy",
                         staticStyle: { "font-size": "20px" }
                       })
                     ]
