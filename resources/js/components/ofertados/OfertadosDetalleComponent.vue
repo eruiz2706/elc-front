@@ -12,13 +12,14 @@
 
     <div class="card-body" >
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 mt-2">
           <iframe class="img-fluid" style='width:100%;height:400px' frameborder="0" allowfullscreen allow="autoplay; encrypted-media"
-            v-bind:src="o_curso.urlvideo">
+            v-bind:src="o_curso.urlvideo" v-if="o_curso.urlvideo!=''">
           </iframe>
+          <img v-bind:src="base_url+'/'+o_curso.imagen"  alt="Ample Admin" class="media-object" style="width: 100%;height: auto;border-radius: 4px;box-shadow: 0 1px 3px rgba(0,0,0,.15);" v-else>
         </div>
         <div class="col-md-4">
-          <div class="table-responsive">
+          <div class="table-responsive ">
             <table class="table no-border">
               <tbody>
               <tr>

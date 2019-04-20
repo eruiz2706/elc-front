@@ -6937,6 +6937,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -7073,16 +7074,30 @@ var render = function() {
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-8" }, [
-            _c("iframe", {
-              staticClass: "img-fluid",
-              staticStyle: { width: "100%", height: "400px" },
-              attrs: {
-                frameborder: "0",
-                allowfullscreen: "",
-                allow: "autoplay; encrypted-media",
-                src: _vm.o_curso.urlvideo
-              }
-            })
+            _vm.o_curso.urlvideo != ""
+              ? _c("iframe", {
+                  staticClass: "img-fluid",
+                  staticStyle: { width: "100%", height: "400px" },
+                  attrs: {
+                    frameborder: "0",
+                    allowfullscreen: "",
+                    allow: "autoplay; encrypted-media",
+                    src: _vm.o_curso.urlvideo
+                  }
+                })
+              : _c("img", {
+                  staticClass: "media-object",
+                  staticStyle: {
+                    width: "100%",
+                    height: "auto",
+                    "border-radius": "4px",
+                    "box-shadow": "0 1px 3px rgba(0,0,0,.15)"
+                  },
+                  attrs: {
+                    src: _vm.base_url + "/" + _vm.o_curso.imagen,
+                    alt: "Ample Admin"
+                  }
+                })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-4" }, [
