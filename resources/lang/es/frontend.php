@@ -17,6 +17,7 @@ return [
     ],
     'no_rol'=>'El usuario no tiene un perfil. Inténtelo de nuevo. Si el error persiste, póngase en contacto con el administrador del sistema.',
     'no_register'=>'Debes estar registrado para acceder',
+    'redirect_create_account'=>'Click aquí, para redirigir a crear cuenta',
     'error_send'=>'La acción no se pudo realizar.',
     'pass'=>'Contraseña',
     'recover_pass'=>'Recuperar contraseña',

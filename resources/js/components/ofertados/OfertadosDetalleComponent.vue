@@ -44,7 +44,7 @@
               </tr>
               <tr>
                 <th colspan='2' v-if='!subscrip'>
-                  <p>
+                  <p v-if="o_curso.estado !='finalizado' && o_curso.valor==0">
                     <input type="checkbox" v-model="check_terminos" class="fantasma"/>
                     <a v-bind:href="base_url+'/TERMINOS_Y_CONDICIONES.pdf'" target="_blank">Aceptas los terminos y condiciones</a>
                   </p>

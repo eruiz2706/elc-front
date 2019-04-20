@@ -143,12 +143,12 @@ class OfertadosController extends Controller
         DB::commit();
 
         return response()->json([
-            'message' => 'Tu subscripcion se realizo correctamente!',
+            'message' => 'Tu suscripción se realizo correctamente!',
             'message2' => 'Click para continuar!'
         ]);
       }
       catch(\Exception $e){
-          Log::info('suscripcion curso : '.$e->getMessage());
+          Log::info('suscripción curso : '.$e->getMessage());
           DB::rollback();
           //$e->getMessage();
 

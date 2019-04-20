@@ -14,8 +14,12 @@
     <div class="row">
       <div class="col">
         <div class="section_title_container text-center">
-          <h2 class="section_title">{{trans('frontend.no_register')}}</h2>
-          
+          <h3 class="section_title">
+            {{trans('frontend.no_register')}}
+          </h3>
+          <h4 class="section_title">
+            <a href="{{url('/')}}">{{trans('frontend.redirect_create_account')}}</a>
+          </h4>
         </div>
       </div>
     </div>

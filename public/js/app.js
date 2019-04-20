@@ -7161,60 +7161,65 @@ var render = function() {
                   _c("tr", [
                     !_vm.subscrip
                       ? _c("th", { attrs: { colspan: "2" } }, [
-                          _c("p", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.check_terminos,
-                                  expression: "check_terminos"
-                                }
-                              ],
-                              staticClass: "fantasma",
-                              attrs: { type: "checkbox" },
-                              domProps: {
-                                checked: Array.isArray(_vm.check_terminos)
-                                  ? _vm._i(_vm.check_terminos, null) > -1
-                                  : _vm.check_terminos
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.check_terminos,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = null,
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        (_vm.check_terminos = $$a.concat([$$v]))
-                                    } else {
-                                      $$i > -1 &&
-                                        (_vm.check_terminos = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                          _vm.o_curso.estado != "finalizado" &&
+                          _vm.o_curso.valor == 0
+                            ? _c("p", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.check_terminos,
+                                      expression: "check_terminos"
                                     }
-                                  } else {
-                                    _vm.check_terminos = $$c
+                                  ],
+                                  staticClass: "fantasma",
+                                  attrs: { type: "checkbox" },
+                                  domProps: {
+                                    checked: Array.isArray(_vm.check_terminos)
+                                      ? _vm._i(_vm.check_terminos, null) > -1
+                                      : _vm.check_terminos
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$a = _vm.check_terminos,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = null,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            (_vm.check_terminos = $$a.concat([
+                                              $$v
+                                            ]))
+                                        } else {
+                                          $$i > -1 &&
+                                            (_vm.check_terminos = $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1)))
+                                        }
+                                      } else {
+                                        _vm.check_terminos = $$c
+                                      }
+                                    }
                                   }
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                attrs: {
-                                  href:
-                                    _vm.base_url +
-                                    "/TERMINOS_Y_CONDICIONES.pdf",
-                                  target: "_blank"
-                                }
-                              },
-                              [_vm._v("Aceptas los terminos y condiciones")]
-                            )
-                          ]),
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        _vm.base_url +
+                                        "/TERMINOS_Y_CONDICIONES.pdf",
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [_vm._v("Aceptas los terminos y condiciones")]
+                                )
+                              ])
+                            : _vm._e(),
                           _vm._v(" "),
                           _vm.o_curso.estado != "finalizado" &&
                           _vm.o_curso.valor == 0

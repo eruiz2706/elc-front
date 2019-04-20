@@ -17,6 +17,7 @@ return [
     ],
     'no_rol'=>'The user does not have a profile. Try again. If the error persists, contact the system administrator.',
     'no_register'=>'You must be registered to access',
+    'redirect_create_account'=>'Click here, to redirect to create account',
     'error_send'=>'The action could not be performed.',
     'pass'=>'Password',
     'recover_pass'=>'Recover password',
