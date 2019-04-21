@@ -116,10 +116,11 @@ p a:hover::after
 {
 	opacity: 0.2;
 }
-::selection
+/*para poder seleccionar*/
+/*::selection
 {
 
-}
+}*/
 p::selection
 {
 
