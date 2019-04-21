@@ -82,7 +82,7 @@
               
                 <div class='container_input_login'>
                 <input type="password" class="counter_input_login {{ $errors->has('password') ? 'error_input' : ''  }}" id="password" name="password" autocomplete="off" placeholder="{{ trans('frontend.pass') }}" >
-                <br><a href="#" class="text-left float-left" v-on:click.prevent='openrecover()'>{{ trans('frontend.forget_pass') }}</a>
+                <br><a href="#" class="text-left float-left" style='margin-left:5px;width:170px' v-on:click.prevent='openrecover()'>{{ trans('frontend.forget_pass') }}</a>
                 </div>
 
             <button type="submit" class="counter_form_button_login">
@@ -90,11 +90,11 @@
             </button>
 
             <hr class='hr-vertical'>
-            <a href="{{ url('/redirect/facebook') }}" class="btn  btn-primary social_login">
+            <a href="{{ url('/redirect/facebook') }}" class="btn  btn-primary social_login_facebook">
               <i class="fa fa-facebook mr-2"></i>
             </a>
             
-            <a href="{{ url('/redirect/google') }}" class="btn  btn-danger social_login">
+            <a href="{{ url('/redirect/google') }}" class="btn  btn-danger social_login_google">
               <i class="fa fa-google mr-2"></i>
             </a>
             

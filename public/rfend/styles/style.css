@@ -20,7 +20,7 @@
   .counter_input_login {
 	  height: 25px;
 	  border: solid 1px #e5e5e5;
-	  margin-left:10px;
+	  margin-left:5px;
 	  border-radius: 3px;
 		padding-left: 10px;
 		margin-bottom: 3px;
@@ -69,10 +69,17 @@
 	  transition: all 200ms ease;
   }
   
-  .social_login {
+  .social_login_facebook {
 	  height: 30px;
 	  margin-left: 10px;
-	  padding: 3px 5px 0 12px;
+	  padding: 3px 8px 0 17px;
+	  
+	}
+	
+	.social_login_google {
+	  height: 30px;
+	  margin-left: 10px;
+	  padding: 3px 5px 0 13px;
 	  
   }
   
