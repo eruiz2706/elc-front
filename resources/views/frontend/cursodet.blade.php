@@ -3,7 +3,6 @@
 @section('htmlheader')
 @parent
 <link href="{{ URL::asset('rfend/plugins/colorbox/colorbox.css') }}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/main_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/course.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('rfend/styles/course_responsive.css') }}">
@@ -66,8 +65,8 @@
 				</div>
 
 				<!-- Course Sidebar -->
-				<div class="col-lg-4">
-					<div class="sidebar">
+				<div class="col-lg-4 mt-4">
+					<div class="">
 
             <!-- Feature -->
             <div class="sidebar_section">
@@ -113,10 +112,7 @@
                 </div>
 							</div>
 						</div>
-
-
-
-					</div>
+          </div>
 				</div>
 			</div>
 		</div>
