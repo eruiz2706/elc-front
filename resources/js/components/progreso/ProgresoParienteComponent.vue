@@ -73,7 +73,7 @@
             if(denominador==0){
               return 0;
             }else{
-              return (numerador/denominador)*100;
+              return Math.round((numerador/denominador)*100);
             }
           }
         }

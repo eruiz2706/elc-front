@@ -3798,7 +3798,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (denominador == 0) {
         return 0;
       } else {
-        return numerador / denominador * 100;
+        return Math.round(numerador / denominador * 100);
       }
     }
   }
@@ -4367,7 +4367,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (denominador == 0) {
         return 0;
       } else {
-        return numerador / denominador * 100;
+        return Math.round(numerador / denominador * 100);
       }
     },
     estadoporcent: function estadoporcent(numerador, denominador) {
@@ -4633,11 +4633,10 @@ var render = function() {
                                                 _vm.porcent(
                                                   progmod.cantleccuser,
                                                   progmod.cantlecc
-                                                )
+                                                ) + "%"
                                               )
                                             }
-                                          }),
-                                          _vm._v("%")
+                                          })
                                         ]
                                       )
                                     ])
@@ -5030,7 +5029,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (denominador == 0) {
         return 0;
       } else {
-        return numerador / denominador * 100;
+        return Math.round(numerador / denominador * 100);
       }
     }
   }
@@ -7073,7 +7072,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "col-md-8 mt-2" }, [
             _vm.o_curso.urlvideo != ""
               ? _c("iframe", {
                   staticClass: "img-fluid",
@@ -7101,7 +7100,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-4" }, [
-            _c("div", { staticClass: "table-responsive" }, [
+            _c("div", { staticClass: "table-responsive " }, [
               _c("table", { staticClass: "table no-border" }, [
                 _c("tbody", [
                   _c("tr", [

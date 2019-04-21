@@ -40,7 +40,7 @@
                   </td>
                   <td>
                     <div class="progress">
-                      <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progmod.cantleccuser,progmod.cantlecc)+'%'"><span v-text='porcent(progmod.cantleccuser,progmod.cantlecc)'></span>%</div>
+                      <div class="progress-bar bg-primary" v-bind:style="'width:'+porcent(progmod.cantleccuser,progmod.cantlecc)+'%'"><span v-text="porcent(progmod.cantleccuser,progmod.cantlecc)+'%'"></span></div>
                     </div>
                   </td>
               </tr>
@@ -185,7 +185,7 @@
             if(denominador==0){
               return 0;
             }else{
-              return (numerador/denominador)*100;
+              return Math.round((numerador/denominador)*100);
             }
           },
           estadoporcent:function(numerador,denominador){
