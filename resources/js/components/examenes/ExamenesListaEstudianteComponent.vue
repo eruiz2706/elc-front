@@ -309,6 +309,7 @@
 
 <script>
     const artyom = new Artyom();
+    var timeOut;
 
     export default {
         mounted() {
@@ -433,8 +434,8 @@
                 this.idejeruser=response.data.idejeruser;
                 this.a_examen=response.data.preguntas;
                 this.toMinute=response.data.duracion;
+                this.toSecond=0;
                 this.countDown();
-                console.log(this.a_examen);
             }).catch(error =>{
                 this.preloadmodal=false;
                 if(error.response.data.errors){
@@ -452,13 +453,17 @@
             this.loader_finalizar=true;
             axios.post(url,{idejeruser:this.idejeruser,examen:this.a_examen}).then(response =>{
                 this.loader_finalizar=false;
+                var vm=this;
                 $('#modal_ejercicio').modal('hide');
                 swal({
                     title:response.data.message,
                     text:response.data.message2,
                     type: "success"
                 },function(){
-                  location.reload();
+                  clearTimeout(timeOut);
+                  vm.$root.$emit('setMenu','examenes-lista-es');
+                  vm.listado();
+                  //location.reload();
                 });
             }).catch(error =>{
                 this.loader_finalizar=false;
@@ -497,8 +502,9 @@
             document.getElementById('minute').innerHTML=toMinute;
             this.toMinute=toMinute;
 
-            setTimeout(function(){
+            timeOut=setTimeout(function(){
                 inst.countDown();
+                console.log(this.toSecond+'**'+this.toMinute);
             }, 1000);
           },
           verresultado:function(id){

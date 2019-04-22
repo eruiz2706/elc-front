@@ -16827,6 +16827,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 var artyom = new Artyom();
+var timeOut;
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -16951,8 +16952,8 @@ var artyom = new Artyom();
         _this2.idejeruser = response.data.idejeruser;
         _this2.a_examen = response.data.preguntas;
         _this2.toMinute = response.data.duracion;
+        _this2.toSecond = 0;
         _this2.countDown();
-        console.log(_this2.a_examen);
       }).catch(function (error) {
         _this2.preloadmodal = false;
         if (error.response.data.errors) {}
@@ -16971,13 +16972,17 @@ var artyom = new Artyom();
       this.loader_finalizar = true;
       axios.post(url, { idejeruser: this.idejeruser, examen: this.a_examen }).then(function (response) {
         _this3.loader_finalizar = false;
+        var vm = _this3;
         $('#modal_ejercicio').modal('hide');
         swal({
           title: response.data.message,
           text: response.data.message2,
           type: "success"
         }, function () {
-          location.reload();
+          clearTimeout(timeOut);
+          vm.$root.$emit('setMenu', 'examenes-lista-es');
+          vm.listado();
+          //location.reload();
         });
       }).catch(function (error) {
         _this3.loader_finalizar = false;
@@ -17013,8 +17018,9 @@ var artyom = new Artyom();
       document.getElementById('minute').innerHTML = toMinute;
       this.toMinute = toMinute;
 
-      setTimeout(function () {
+      timeOut = setTimeout(function () {
         inst.countDown();
+        console.log(this.toSecond + '**' + this.toMinute);
       }, 1000);
     },
     verresultado: function verresultado(id) {
