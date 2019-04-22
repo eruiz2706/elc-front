@@ -4,6 +4,11 @@
     margin-right: 8px;
 }
 
+/*imagen profesor en curso banner*/
+.curso-teacher-img{
+  height:90px;
+}
+
 /*deja fijo el menu superior*/
 .main-header-fixed{
     position:fixed;

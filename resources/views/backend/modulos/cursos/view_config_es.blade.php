@@ -23,10 +23,10 @@
             @endif
           </h2>
           <div class="card-tools">
-            <div style="width:50px;display:inline">
+            <div style="width:30px;display:inline">
               @if(isset($profesor))
                 @foreach($profesor as $prof)
-                  <img class="profile-user-img img-circle img-bordered-sm img-fluid" src="{{ URL::asset($prof->imagen) }}" style='cursor:pointer'>
+                  <img class="curso-teacher-img img-circle  img-fluid " src="{{ URL::asset($prof->imagen) }}" style='cursor:pointer'>
                 @endforeach
               @endif
             </div>
