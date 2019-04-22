@@ -50,7 +50,7 @@
                     <a v-bind:href="base_url+'/TERMINOS_Y_CONDICIONES.pdf'" target="_blank">Aceptas los terminos y condiciones</a>
                   </p>
                   <button type="button" class="btn btn-block btn-primary btn-sm" style="margin-right: 5px;" :disabled="!check_terminos || loader_suscrip==true" v-on:click.prevent="suscribirse()" v-if="o_curso.estado !='finalizado' && o_curso.valor==0">
-                    <i class="fa fa-thumbs-o-up"></i> <span v-text='traslate.free'></span>
+                    <i class="fa fa-thumbs-o-up"></i> <span v-text='traslate.to_subscribe'></span>
                     <i style='font-size:20px' class="fa fa-spinner fa-spin fa-loader"  v-if="loader_suscrip"></i>
                   </button>
 
@@ -116,7 +116,7 @@
             subscrip:false,
             check_terminos:false,
             webcheckout:{},
-            traslate:{
+            traslate:{ 
               'study_plan':trans('frontend.page_coursedet.study_plan'),
               'feature':trans('frontend.page_coursedet.feature'),
               'start_date':trans('frontend.page_coursedet.start_date'),
@@ -125,6 +125,7 @@
               'free':trans('frontend.page_coursedet.free'),
               'tobuy':trans('frontend.page_coursedet.tobuy'),
               'subscribed':trans('frontend.page_coursedet.subscribed'),
+              'to_subscribe':trans('frontend.page_coursedet.to_subscribe'),
             }
           }
         },

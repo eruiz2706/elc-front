@@ -94,7 +94,8 @@ return [
       'price'=>'Valor',
       'free'=>'Gratis',
       'tobuy'=>'Comprar',
-      'subscribed'=>'Suscrito'
+      'subscribed'=>'Suscrito',
+      'to_subscribe'=>'Suscribirse'
     ],
     'page_register'  => [
       'form_name' =>'Nombre',

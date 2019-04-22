@@ -6712,24 +6712,18 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "course_body" }, [
-                _c(
-                  "a",
-                  {
+                _c("h3", { staticClass: "course_title" }, [
+                  _c("a", {
                     attrs: { href: "#" },
+                    domProps: { textContent: _vm._s(curso.nombre) },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
                         _vm.detcurso(curso.id)
                       }
                     }
-                  },
-                  [
-                    _c("h6", {
-                      staticClass: "course_title",
-                      domProps: { textContent: _vm._s(curso.nombre) }
-                    })
-                  ]
-                )
+                  })
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "course_footer" }, [
@@ -6964,7 +6958,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'price': trans('frontend.page_coursedet.price'),
         'free': trans('frontend.page_coursedet.free'),
         'tobuy': trans('frontend.page_coursedet.tobuy'),
-        'subscribed': trans('frontend.page_coursedet.subscribed')
+        'subscribed': trans('frontend.page_coursedet.subscribed'),
+        'to_subscribe': trans('frontend.page_coursedet.to_subscribe')
       }
     };
   },
@@ -7261,7 +7256,9 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("span", {
                                     domProps: {
-                                      textContent: _vm._s(_vm.traslate.free)
+                                      textContent: _vm._s(
+                                        _vm.traslate.to_subscribe
+                                      )
                                     }
                                   }),
                                   _vm._v(" "),
