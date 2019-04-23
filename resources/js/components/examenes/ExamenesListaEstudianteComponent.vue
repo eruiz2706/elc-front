@@ -287,7 +287,7 @@
         </div>
         <div class="col-md-4 col-sm-6">
           <b>Calificacion :</b>
-          <span v-text='ejercicio.calificacion'></span>/<span v-text='ejercicio.notamaxima'></span>
+          <span v-text='ejercicio.calificacion'></span> de <span v-text='ejercicio.notamaxima'></span>
         </div>
       </div>
     </div>

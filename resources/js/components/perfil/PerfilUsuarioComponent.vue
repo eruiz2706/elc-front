@@ -308,6 +308,8 @@
                   title:response.data.message,
                   text:response.data.message2,
                   type: "success"
+              }, function() {
+                  location.reload(true);
               });
           }).catch(error =>{
               this.loader_act=false;

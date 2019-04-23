@@ -908,6 +908,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           title: response.data.message,
           text: response.data.message2,
           type: "success"
+        }, function () {
+          location.reload(true);
         });
       }).catch(function (error) {
         _this4.loader_act = false;
@@ -18118,7 +18120,7 @@ var render = function() {
                     _c("span", {
                       domProps: { textContent: _vm._s(ejercicio.calificacion) }
                     }),
-                    _vm._v("/"),
+                    _vm._v(" de "),
                     _c("span", {
                       domProps: { textContent: _vm._s(ejercicio.notamaxima) }
                     })
@@ -18500,7 +18502,7 @@ var render = function() {
       !_vm.preload
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-sm-6" }, [
-              _c("h5", { staticClass: "m-0 text-dark" }, [
+              _c("h4", { staticClass: "m-0 text-dark" }, [
                 _c("strong", [_vm._v("Preguntas ")]),
                 _vm._v(" "),
                 _c(
@@ -19203,7 +19205,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6 col-sm-6" }, [
-        _c("h5", { staticClass: "m-0 text-dark" }, [
+        _c("h4", { staticClass: "m-0 text-dark" }, [
           _c("strong", [_vm._v("Nueva pregunta")]),
           _vm._v(" "),
           _c(
@@ -20753,7 +20755,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6 col-sm-6" }, [
-        _c("h5", { staticClass: "m-0 text-dark" }, [
+        _c("h4", { staticClass: "m-0 text-dark" }, [
           _c("strong", [_vm._v("Actualizar pregunta")]),
           _vm._v(" "),
           _c(
@@ -21997,7 +21999,7 @@ var render = function() {
                                         }
                                       })
                                     ]),
-                                    _vm._v("/"),
+                                    _vm._v(" de "),
                                     _c("span", {
                                       domProps: {
                                         textContent: _vm._s(tarea.calificacion)
@@ -22057,7 +22059,7 @@ var render = function() {
                                         }
                                       })
                                     ]),
-                                    _vm._v("/"),
+                                    _vm._v(" de "),
                                     _c("span", {
                                       domProps: {
                                         textContent: _vm._s(examen.notamaxima)
