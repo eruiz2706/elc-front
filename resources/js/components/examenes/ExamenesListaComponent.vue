@@ -8,12 +8,12 @@
 
   <div class="row" v-if="!preload">
     <div class="col-sm-6">
-      <h5 class="m-0 text-dark">
+      <h4 class="m-0 text-dark">
         <strong>Lista de examenes</strong>
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectCrear()">
           <i class="fa fa-plus-circle"  style="font-size: 24px;"></i>
         </button>
-      </h5>
+      </h4>
     </div>
   </div>
 
@@ -53,7 +53,7 @@
           <b>Nota maxima :</b> <span v-text='ejercicio.notamaxima'></span>
         </div>
         <div class="col-md-4 col-sm-6">
-          <i class="fa fa-list-alt" style="cursor:pointer" v-on:click.prevent="redirectEnt(ejercicio.id)"></i> <b>Realizado :</b> <span v-text='ejercicio.entregas'></span>/<span v-text='cantUser'></span>
+          <i class="fa fa-list-alt" style="cursor:pointer" v-on:click.prevent="redirectEnt(ejercicio.id)"></i> <b>Realizado :</b> <span v-text='ejercicio.entregas'></span> de <span v-text='cantUser'></span>
         </div>
       </div>
     </div>

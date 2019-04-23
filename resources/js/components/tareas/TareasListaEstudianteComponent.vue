@@ -8,7 +8,7 @@
 
   <div class="card" v-if="!preload" v-for="tarea in a_tareas">
     <div class="card-header no-border">
-      <h5 class="card-title" v-text='tarea.nombre'></h5>
+      <h4 class="card-title" v-text='tarea.nombre'></h4>
 
       <div class='row'>
         <div class="col-md-4 col-sm-6">

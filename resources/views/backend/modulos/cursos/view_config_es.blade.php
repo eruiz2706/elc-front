@@ -18,7 +18,7 @@
 
             @if(isset($profesor))
               @foreach($profesor as $prof)
-                <p><small>{{$prof->nombre}}</small></p>
+                <br>{{$prof->nombre}}
               @endforeach
             @endif
           </h2>

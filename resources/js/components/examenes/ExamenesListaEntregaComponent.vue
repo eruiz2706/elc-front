@@ -25,7 +25,7 @@
               <p v-html="revision.respuesta"></p>
             </div>
             <div class="form-group">
-              <label>Calificaion sobre <span v-text="revision.notapreg"></span></label>
+              <label>Calificacion sobre <span v-text="revision.notapreg"></span></label>
               <input type="number" name="calificacion" min="0" max="1000" class="form-control" v-model='revision.calificacion'>
             </div>
             <hr>
@@ -52,12 +52,12 @@
 
   <div class="row" v-if="!preload">
     <div class="col-sm-6">
-      <h5 class="m-0 text-dark">
+      <h4 class="m-0 text-dark">
         <strong>Entrega: </strong><span v-text="o_ejercicio.nombre"></span>
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectVolver()">
           <i class="fa fa-arrow-circle-left"  style="font-size: 24px;"></i>
         </button>
-      </h5>
+      </h4>
     </div>
   </div>
 

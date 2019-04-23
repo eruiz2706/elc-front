@@ -8,12 +8,12 @@
 
   <div class="row" v-if="!preload">
     <div class="col-sm-6">
-      <h5 class="m-0 text-dark">
+      <h4 class="m-0 text-dark">
         <strong v-text='traslate.list_homework'></strong>
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectCrear()">
           <i class="fa fa-plus-circle"  style="font-size: 24px;"></i>
         </button>
-      </h5>
+      </h4>
     </div>
   </div>
 

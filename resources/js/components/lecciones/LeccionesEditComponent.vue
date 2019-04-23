@@ -8,12 +8,12 @@
 
   <div class="row" v-if="!preload">
     <div class="col-md-6 col-sm-6">
-      <h5 class="m-0 text-dark">
+      <h4 class="m-0 text-dark">
         <strong>Actualizar leccion</strong>
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectVolver()">
           <i class="fa fa-arrow-circle-left"  style="font-size: 24px;"></i>
         </button>
-      </h5>
+      </h4>
     </div>
   </div>
 

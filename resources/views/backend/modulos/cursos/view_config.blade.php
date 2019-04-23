@@ -86,4 +86,5 @@
 </div>
 <input type='hidden' name='idcurso' id='idcurso' value="{{$curso->id}}"></input>
 <input type='hidden' name='id' id='id' value=""></input>
+<input type='hidden' name='id2' id='id2' value=""></input>
 @endsection

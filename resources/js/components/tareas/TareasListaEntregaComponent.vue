@@ -52,12 +52,12 @@
 
   <div class="row" v-if="!preload">
     <div class="col-sm-6">
-      <h5 class="m-0 text-dark">
+      <h4 class="m-0 text-dark">
         <strong><span v-text='traslate.delivery'></span>: </strong><span v-text="o_tarea.nombre"></span>
         <button type="button" class="btn btn-tool" v-on:click.prevent="redirectVolver()">
           <i class="fa fa-arrow-circle-left"  style="font-size: 24px;"></i>
         </button>
-      </h5>
+      </h4>
     </div>
   </div>
 
@@ -76,7 +76,7 @@
           <small v-bind:class="'badge badge-'+tarea.status"><span v-text='tarea.nombestado'></span></small>
         </div>
         <div class="col-md-4 col-sm-6">
-          <b><span v-text='traslate.note'></span> :</b> <span v-text='tarea.notaes'></span>/<span v-text='tarea.calificacion'></span>
+          <b><span v-text='traslate.note'></span> :</b> <span v-text='tarea.notaes'></span> de <span v-text='tarea.calificacion'></span>
         </div>
       </div>
   </div>

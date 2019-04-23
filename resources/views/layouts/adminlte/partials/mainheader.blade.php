@@ -84,10 +84,10 @@
 
               <div class="card ">
                   <div class="card-body">
-                    <h5 class="widget-user-desc" v-text='conexion_user.nombre'></h5>
+                    <h6 class="widget-user-desc" v-text='conexion_user.nombre'></h6>
                     <h6 class="widget-user-desc" v-text='conexion_user.ultimo_ingreso'></h6>
                     <h6 class="widget-user-desc" v-text='conexion_user.tiempo_uso'></h6>
-                    <div class="row">
+                    <div class="row mt-3">
                       <div class="col-sm-6 border-right">
                           <button class="btn btn-block btn-outline-primary btn-sm" onclick="window.location.href='{{url('/perfil')}}'">
                             {{trans('backend.profile')}}

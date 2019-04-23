@@ -6263,7 +6263,7 @@ var render = function() {
       !_vm.preload
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-sm-6" }, [
-              _c("h5", { staticClass: "m-0 text-dark" }, [
+              _c("h4", { staticClass: "m-0 text-dark" }, [
                 _c("strong", {
                   domProps: { textContent: _vm._s(_vm.traslate.list_homework) }
                 }),
@@ -9909,7 +9909,7 @@ var render = function() {
       !_vm.preload
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-12 col-sm-12" }, [
-              _c("h5", { staticClass: "m-0 text-dark" }, [
+              _c("h4", { staticClass: "m-0 text-dark" }, [
                 _c("strong", [_vm._v("Lista de modulos")]),
                 _vm._v(" "),
                 _c(
@@ -10216,7 +10216,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12 col-sm-12" }, [
-        _c("h5", { staticClass: "m-0 text-dark" }, [
+        _c("h4", { staticClass: "m-0 text-dark" }, [
           _c("strong", [_vm._v("Nuevo modulo")]),
           _vm._v(" "),
           _c(
@@ -10564,7 +10564,7 @@ var render = function() {
     !_vm.preload
       ? _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-12 col-sm-12" }, [
-            _c("h5", { staticClass: "m-0 text-dark" }, [
+            _c("h4", { staticClass: "m-0 text-dark" }, [
               _c("strong", [_vm._v("Actualizar modulo")]),
               _vm._v(" "),
               _c(
@@ -10977,7 +10977,7 @@ var render = function() {
       !_vm.preload
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-12 col-sm-12" }, [
-              _c("h5", { staticClass: "m-0 text-dark" }, [
+              _c("h4", { staticClass: "m-0 text-dark" }, [
                 _c("strong", [_vm._v("Lista de lecciones")]),
                 _vm._v(" "),
                 _c(
@@ -11464,7 +11464,7 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "col-md-6 col-sm-6" }, [
-          _c("h5", { staticClass: "m-0 text-dark" }, [
+          _c("h4", { staticClass: "m-0 text-dark" }, [
             _c("strong", [_vm._v("Nueva leccion")]),
             _vm._v(" "),
             _c(
@@ -12000,7 +12000,7 @@ var render = function() {
     !_vm.preload
       ? _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 col-sm-6" }, [
-            _c("h5", { staticClass: "m-0 text-dark" }, [
+            _c("h4", { staticClass: "m-0 text-dark" }, [
               _c("strong", [_vm._v("Actualizar leccion")]),
               _vm._v(" "),
               _c(
@@ -12511,7 +12511,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6 col-sm-6" }, [
-        _c("h5", { staticClass: "m-0 text-dark" }, [
+        _c("h4", { staticClass: "m-0 text-dark" }, [
           _c("strong", {
             domProps: { textContent: _vm._s(_vm.traslate.new_homework) }
           }),
@@ -12968,7 +12968,7 @@ var render = function() {
     !_vm.preload
       ? _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 col-sm-6" }, [
-            _c("h5", { staticClass: "m-0 text-dark" }, [
+            _c("h4", { staticClass: "m-0 text-dark" }, [
               _c("strong", {
                 domProps: { textContent: _vm._s(_vm.traslate.update_task) }
               }),
@@ -13663,7 +13663,7 @@ var render = function() {
       !_vm.preload
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-sm-6" }, [
-              _c("h5", { staticClass: "m-0 text-dark" }, [
+              _c("h4", { staticClass: "m-0 text-dark" }, [
                 _c("strong", [
                   _c("span", {
                     domProps: { textContent: _vm._s(_vm.traslate.delivery) }
@@ -13757,7 +13757,7 @@ var render = function() {
                     _c("span", {
                       domProps: { textContent: _vm._s(tarea.notaes) }
                     }),
-                    _vm._v("/"),
+                    _vm._v(" de "),
                     _c("span", {
                       domProps: { textContent: _vm._s(tarea.calificacion) }
                     })
@@ -13976,7 +13976,7 @@ var render = function() {
         return !_vm.preload
           ? _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header no-border" }, [
-                _c("h5", {
+                _c("h4", {
                   staticClass: "card-title",
                   domProps: { textContent: _vm._s(tarea.nombre) }
                 }),
@@ -14342,7 +14342,7 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "col-md-6 col-sm-6" }, [
-          _c("h5", { staticClass: "m-0 text-dark" }, [
+          _c("h4", { staticClass: "m-0 text-dark" }, [
             _c("strong", {
               domProps: { innerHTML: _vm._s(_vm.o_tarea.nombre) }
             }),
@@ -14716,7 +14716,7 @@ var render = function() {
       !_vm.preload
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-sm-6" }, [
-              _c("h5", { staticClass: "m-0 text-dark" }, [
+              _c("h4", { staticClass: "m-0 text-dark" }, [
                 _c("strong", [_vm._v("Lista de examenes")]),
                 _vm._v(" "),
                 _c(
@@ -14892,7 +14892,7 @@ var render = function() {
                     _c("span", {
                       domProps: { textContent: _vm._s(ejercicio.entregas) }
                     }),
-                    _vm._v("/"),
+                    _vm._v(" de "),
                     _c("span", {
                       domProps: { textContent: _vm._s(_vm.cantUser) }
                     })
@@ -15141,7 +15141,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6 col-sm-6" }, [
-        _c("h5", { staticClass: "m-0 text-dark" }, [
+        _c("h4", { staticClass: "m-0 text-dark" }, [
           _c("strong", [_vm._v("Nuevo examen")]),
           _vm._v(" "),
           _c(
@@ -15639,7 +15639,7 @@ var render = function() {
     !_vm.preload
       ? _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 col-sm-6" }, [
-            _c("h5", { staticClass: "m-0 text-dark" }, [
+            _c("h4", { staticClass: "m-0 text-dark" }, [
               _c("strong", [_vm._v("Actualizar examen")]),
               _vm._v(" "),
               _c(
@@ -16237,7 +16237,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
                           _c("label", [
-                            _vm._v("Calificaion sobre "),
+                            _vm._v("Calificacion sobre "),
                             _c("span", {
                               domProps: {
                                 textContent: _vm._s(revision.notapreg)
@@ -16319,7 +16319,7 @@ var render = function() {
       !_vm.preload
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-sm-6" }, [
-              _c("h5", { staticClass: "m-0 text-dark" }, [
+              _c("h4", { staticClass: "m-0 text-dark" }, [
                 _c("strong", [_vm._v("Entrega: ")]),
                 _c("span", {
                   domProps: { textContent: _vm._s(_vm.o_ejercicio.nombre) }
