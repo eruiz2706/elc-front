@@ -18,9 +18,10 @@ class UsuariosController extends Controller
 
   public function lista(Request $request){
     $users   =DB::select("select
-                            id,email,nombre,fecha_ultimo_ingreso,telefono,ciudad,direccion,facebook,
-                            linkedin,biografia,created_at,fecha_ultimo_ingreso
-                            from users
+                            u.id,u.email,u.nombre,u.fecha_ultimo_ingreso,u.telefono,u.ciudad,u.direccion,u.facebook,
+                            u.linkedin,u.biografia,u.created_at,u.fecha_ultimo_ingreso,r.name as nombrerol
+                            from users u
+                            left join roles r on(u.slugrol=r.slug) 
                             order by created_at desc");
 
     $jsonresponse=[

@@ -26,9 +26,6 @@
       <div v-if="menu_content=='' || menu_content=='usuarios-lista'">
         <usuarios-lista></usuarios-lista>
       </div>
-      <div v-if="menu_content=='pago-manual'">
-        
-      </div>
     </div>
 
 </div>

@@ -6,7 +6,7 @@
         <h2 class="card-title-course">
           Nuevo curso
           <button type="button" class="btn btn-tool" v-on:click.prevent="redirectVolver()">
-            <i class="fa fa-arrow-circle-left"  style="font-size: 24px;"></i>
+            <i class="fa fa-arrow-circle-left"  style="font-size: 24px;color:white"></i>
           </button>
         </h2>
       </div>

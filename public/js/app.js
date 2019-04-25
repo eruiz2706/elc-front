@@ -7060,7 +7060,7 @@ var render = function() {
             [
               _c("i", {
                 staticClass: "fa fa-arrow-circle-left",
-                staticStyle: { "font-size": "24px" }
+                staticStyle: { "font-size": "24px", color: "white" }
               })
             ]
           )
@@ -7755,7 +7755,7 @@ var render = function() {
                   [
                     _c("i", {
                       staticClass: "fa fa-plus-circle",
-                      staticStyle: { "font-size": "24px" }
+                      staticStyle: { "font-size": "24px", color: "white" }
                     })
                   ]
                 )
@@ -8174,7 +8174,7 @@ var render = function() {
               [
                 _c("i", {
                   staticClass: "fa fa-arrow-circle-left",
-                  staticStyle: { "font-size": "24px" }
+                  staticStyle: { "font-size": "24px", color: "white" }
                 })
               ]
             )
@@ -22948,6 +22948,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {},
@@ -23147,6 +23149,10 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", {
+                        domProps: { textContent: _vm._s(usuario.nombrerol) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
                         domProps: { textContent: _vm._s(usuario.email) }
                       }),
                       _vm._v(" "),
@@ -23303,6 +23309,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("th", [_vm._v("#")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Rol")]),
       _vm._v(" "),
       _c("th", [_vm._v("Email")]),
       _vm._v(" "),

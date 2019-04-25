@@ -219,6 +219,17 @@ class HomeController extends Controller
           'html'=>$html
         ]);
 
+        $users_notifi   =DB::select("select id
+                                      from users
+                                      where slugrol in('in','ad')");
+        foreach ($users_notifi as $u_notifi) {
+          DB::table('notificaciones')->insert([
+              'descripcion'=>'Se creo nuevo usuario:<strong> '.$request->input('email').'</strong>',
+              'fecha_creacion'=>date('Y-m-d H:i:s'),
+              'user_id'=>$u_notifi->id
+          ]);
+        }
+
         return response()->json([
             'status' =>'success',
             'message' => Lang::get('frontend.page_register.msg_register'),

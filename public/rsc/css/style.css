@@ -29,6 +29,15 @@ p
   font-size: 14px;
 }
 
+.navbar-badge{
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.user-block .username{
+  font-size: 14px;
+}
+
 .profile-username{
   font-size: 18px;
 }

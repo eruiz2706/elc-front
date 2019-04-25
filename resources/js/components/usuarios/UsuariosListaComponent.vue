@@ -26,6 +26,7 @@
       <table class="table table-hover">
         <tbody><tr>
           <th>#</th>
+          <th>Rol</th>
           <th>Email</th>
           <th>Nombre</th>
           <th>Telefono</th>
@@ -38,6 +39,7 @@
         </tr>
         <tr v-for="usuario in pagination.datafilter">
           <td v-text='usuario.id'></td>
+          <td v-text='usuario.nombrerol'></td>
           <td v-text='usuario.email'></td>
           <td v-text='usuario.nombre'></td>
           <td v-text='usuario.telefono'></td>
