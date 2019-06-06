@@ -575,6 +575,49 @@ class CursosController extends Controller
           }
       }
 
+      $examenesCurosInst=DB::select("select id,nombre,descripcion,duracion,calificacion,preguntas,fecha_inicio,fecha_finalizacion from ejercicios
+                                        where curso_id=:curso_id and user_id=:user_id",
+                              ['curso_id'=>$request->id,'user_id'=>$user->id]);
+
+      foreach($examenesCurosInst as $examenInst){
+          $idexamen=DB::table('ejercicios')->insertGetId([
+            'curso_id'=>$idcurso,
+            'nombre'=>$examenInst->nombre,
+            'descripcion'=>$examenInst->descripcion,
+            'duracion'=>$examenInst->duracion,
+            'calificacion'=>$examenInst->calificacion,
+            'preguntas'=>$examenInst->preguntas,
+            'entregas'=>0,
+            'fecha_inicio'=>$examenInst->fecha_inicio,
+            'fecha_finalizacion'=>$examenInst->fecha_finalizacion,
+            'fecha_creacion'=>date('Y-m-d H:i:s'),
+            'user_id'=>$user->id
+          ]);
+
+          $preguntasExamen=DB::select("select id,nombre,tipo,descripcion,textoaudio,textorellenar,calificacion
+                            from preguntas
+                            where ejercicio_id=:ejercicio_id",
+              ['ejercicio_id'=>$examenInst->id]);
+
+          foreach($preguntasExamen as $pregunta){
+              $idpregunta=DB::table('preguntas')->insertGetId([
+                'ejercicio_id'=>$idexamen,
+                'nombre'=>$pregunta->nombre,
+                'tipo'=>$pregunta->tipo,
+                'descripcion'=>$pregunta->descripcion,
+                'textoaudio'=>$pregunta->textoaudio,
+                'textorellenar'=>$pregunta->textorellenar,
+                'calificacion'=>$pregunta->calificacion,
+                'fecha_creacion'=>date('Y-m-d H:i:s'),
+                'user_id'=>$user->id
+              ]);
+
+              DB::update("insert into respuestas(puntaje,seleccion,respuesta,relacionar,pregunta_id,user_id,fecha_creacion)
+                            select puntaje,seleccion,respuesta,relacionar,".$idpregunta.",".$user->id.",'".date('Y-m-d H:i:s')."' from respuestas where pregunta_id=".$pregunta->id);
+          }
+      }
+
+
 
       DB::commit();
       return response()->json([
@@ -586,7 +629,8 @@ class CursosController extends Controller
         Log::info('replica de cursos : '.$e->getMessage());
         DB::rollback();
         return response()->json([
-            'error' =>$e->getMessage()
+            //'error' =>$e->getMessage()
+            'error' =>'Hubo inconsistencias el intentar replicar el curso'
         ], 400);
     }
   }
