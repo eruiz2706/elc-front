@@ -575,6 +575,7 @@ class CursosController extends Controller
           }
       }
 
+      /*se replica los examenes creados por la institucion*/
       $examenesCurosInst=DB::select("select id,nombre,descripcion,duracion,calificacion,preguntas,fecha_inicio,fecha_finalizacion from ejercicios
                                         where curso_id=:curso_id and user_id=:user_id",
                               ['curso_id'=>$request->id,'user_id'=>$user->id]);
