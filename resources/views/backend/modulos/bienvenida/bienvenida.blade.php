@@ -1,3 +1,50 @@
+@if(Auth::user()->slugrol=='ad')
+<p class="MsoNormal" style="text-align:justify"><span lang="ES-CO" style="font-size:12.0pt;line-height:107%;mso-bidi-font-family:Calibri;
+mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">Bienvenidos a <b style="mso-bidi-font-weight:normal">ELCOLP</b>, la innovadora plataforma
+virtual orientada a brindar soluciones, avances y mejoras a los procesos de
+enseñanza y aprendizaje. Esta plataforma aloja y habilita perfiles para todos:
+estudiantes, profesores y padres de familia. <o:p></o:p></span></p><p class="MsoNormal" style="text-align:justify"><span lang="ES-CO" style="font-size:12.0pt;line-height:107%;mso-bidi-font-family:Calibri;
+mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">ELCOLP constituye un
+recurso único que facilitará y dará un plus a la educación de hoy,
+especialmente, a la manera como los docentes enseñan y los estudiantes
+aprenden, incorporando el enfoque tecnológico como aspecto facilitador de
+conducción de procesos educativos. En general, nuestros usuarios podrán tener
+una excelente experiencia a través del acceso a: <o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+115%"><span lang="ES-CO" style="font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+Calibri;mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">• Salas de
+chat (grupales personalizadas y globales)<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+115%"><span lang="ES-CO" style="font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+Calibri;mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">• Teaching
+tools<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+115%"><span lang="ES-CO" style="font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+Calibri;mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">• QNA<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+115%"><span lang="ES-CO" style="font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+Calibri;mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">• Herramientas
+de aprendizaje independiente <o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+115%"><span lang="ES-CO" style="font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+Calibri;mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">• Frases y
+vocabulario más usado <o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+115%"><span lang="ES-CO" style="font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+Calibri;mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">• Diccionarios
+<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+115%"><span lang="ES-CO" style="font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+Calibri;mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">•
+Pronunciation buddy <o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+115%"><span lang="ES-CO" style="font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+Calibri;mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">• Sección
+preguntas y respuestas <o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+115%"><span lang="ES-CO" style="font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+Calibri;mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">• Chats
+grupales y globales<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+115%"><span lang="ES-CO" style="font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+Calibri;mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO"></span></p><p class="MsoNormal" style="text-align:justify">
+</p><p class="MsoNormal" style="text-align:justify"><span style="font-size: 12pt;">Y lo mejor de todo es
+que las instituciones educativas tendrán la posibilidad de supervisar el
+trabajo realizado por sus estudiantes y docentes.</span><br></p><p class="MsoNormal" style="text-align:justify"><span lang="ES-CO" style="font-size:12.0pt;line-height:107%;mso-bidi-font-family:Calibri;
+mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO"><br></span></p><p class="MsoNormal" style="text-align:justify"><span lang="ES-CO" style="font-size:12.0pt;line-height:107%;mso-bidi-font-family:Calibri;
+mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO"><o:p></o:p></span></p>
+@endif
+
 @if(Auth::user()->slugrol=='pa')
 <p class="MsoNormal" style="text-align:justify"><span lang="ES-CO" style="font-size:12.0pt;line-height:107%;mso-bidi-font-family:Calibri;
 mso-bidi-theme-font:minor-latin;mso-ansi-language:ES-CO">Le damos la bienvenida

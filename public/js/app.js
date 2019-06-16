@@ -22950,6 +22950,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {},
@@ -22960,6 +22962,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             preload: false,
+            selectRol: '',
             pagination: {
                 page: 0,
                 per_page: 8,
@@ -23025,12 +23028,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         listado: function listado() {
             var _this = this;
 
+            var idrol = this.selectRol;
             var url = this.base_url + '/usuarios/lista';
             this.preload = true;
-            console.log('entros');
-            axios.post(url, {}).then(function (response) {
+            this.pagination.search = '';
+            axios.post(url, { 'idrol': idrol }).then(function (response) {
                 _this.preload = false;
-                console.log("**" + response.data.users);
+                console.log("**" + response.data.rol);
                 _this.pagination.data = response.data.users;
                 _this.changePage(1);
 
@@ -23099,9 +23103,69 @@ var render = function() {
                 "div",
                 {
                   staticClass: "input-group input-group-sm",
-                  staticStyle: { width: "150px" }
+                  staticStyle: { width: "300px" }
                 },
                 [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectRol,
+                          expression: "selectRol"
+                        }
+                      ],
+                      staticClass: "form-control mr-2",
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.selectRol = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          function($event) {
+                            _vm.listado()
+                          }
+                        ]
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Seleccione el rol")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "ad" } }, [
+                        _vm._v("Administrador")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "in" } }, [
+                        _vm._v("Institucion")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "pr" } }, [
+                        _vm._v("Profesor")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "es" } }, [
+                        _vm._v("Estudiante")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "pa" } }, [
+                        _vm._v("Acudiente")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
                   _c("input", {
                     directives: [
                       {

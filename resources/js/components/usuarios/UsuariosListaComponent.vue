@@ -10,14 +10,16 @@
     <div class="card-header">
       <h3 class="card-title">Lista de Usuarios</h3>
       <div class="card-tools">
-        <div class="input-group input-group-sm" style="width: 150px;">
+        <div class="input-group input-group-sm" style="width: 300px;">
+          <select class='form-control mr-2' v-on:change="listado();" v-model="selectRol">
+            <option value=''>Seleccione el rol</option>
+            <option value='ad'>Administrador</option>
+            <option value='in'>Institucion</option> 
+            <option value='pr'>Profesor</option>
+            <option value='es'>Estudiante</option>
+            <option value='pa'>Acudiente</option>
+          </select> 
           <input type="text" name="table_search" class="form-control float-right" placeholder="Buscar.." v-model="pagination.search" v-on:keyup="changeSearch()">
-
-          <!--<div class="input-group-append">
-            <button type="text" class="btn btn-default" >
-              <i class="fa fa-search"></i>
-            </button>
-          </div>-->
         </div>
       </div>
     </div>
@@ -82,6 +84,7 @@
         data: function () {
           return {
             preload:false,
+            selectRol:'',
             pagination :{
                   page : 0,
                   per_page : 8,
@@ -146,12 +149,13 @@
         },
         methods : {
           listado:function(){
+            var idrol =this.selectRol;
             var url =this.base_url+'/usuarios/lista';
             this.preload=true;
-            console.log('entros');
-            axios.post(url,{}).then(response =>{
+            this.pagination.search='';
+            axios.post(url,{'idrol':idrol}).then(response =>{
                 this.preload=false;
-                console.log("**"+response.data.users);
+                console.log("**"+response.data.rol);
                 this.pagination.data =response.data.users;
                 this.changePage(1);
 
