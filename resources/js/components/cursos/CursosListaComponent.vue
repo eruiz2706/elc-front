@@ -1,5 +1,30 @@
 <template>
 <div>
+  <div class="modal fade" id="modalexportar" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="post" v-on:submit.prevent="cambiocl()">
+      <div class="modal-body">
+          <div class="row" v-if="preload_modal">
+            <div class="d-block mx-auto" >
+              <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
+            </div>
+          </div>
+          <a href="urlArchivo" download v-if="!preload_modal">Click aqui,para descargar el archivo <span v-text="urlArchivo"></span></a>
+      </div>
+      <div class="modal-footer">
+      </div>
+      </form>
+    </div>
+  </div>
+  </div>
+
   <div class="row" v-if="preload">
     <div class="d-block mx-auto" >
       <i class="fa fa-circle-o-notch fa-spin" style="font-size:80px"></i>
@@ -27,6 +52,9 @@
         </button>
         <button type="button" class="btn btn-tool" v-on:click.prevent="optionBorrarCurso(curso.id)">
               <i class="fa  fa-trash" style="font-size:20px"></i>
+        </button>
+        <button type="button" class="btn btn-tool" v-on:click.prevent="exportarCurso(curso.id)">
+              <i class="fa fa-file-excel-o" style="font-size:20px"></i>
         </button>
       </div>
       <h5 class="card-title" style='cursor:pointer' v-on:click.prevent="redirectAbrir(curso.id)" v-text='curso.nombre'></h5>
@@ -78,7 +106,9 @@
         data: function () {
           return {
             preload:false,
+            preload_modal:false,
             a_cursos:[],
+            urlArchivo : ''
           }
         },
         methods : {
@@ -106,6 +136,25 @@
           redirectAbrir:function(id){
             window.location.href=this.base_url+'/cursos/config/'+id;
           },
+          exportarCurso:function(id){
+            $("#modalexportar").modal();
+            var url =base_url+'/cursos/exportar';
+            this.preload_modal = true;
+            axios.post(url,{id}).then(response =>{
+                  this.preload_modal = false;
+                  this.urlArchivo = response.data.urlArchivo;
+              }).catch(error =>{
+                  this.preload_modal = false;
+                  if(error.response.data.errors){
+                    this.e_curso=error.response.data.errors;
+                  }
+                  if(error.response.data.error){
+                    toastr.error(error.response.data.error,'',{
+                        "timeOut": "3500"
+                    });
+                  }
+            });
+          },
           optionBorrarCurso:function(id){
             let inst=this;
             swal({
@@ -122,7 +171,7 @@
             });  
           },
           borrarCurso:function(id){
-            var url =base_url+'/cursos/borrar';
+              var url =base_url+'/cursos/borrar';
               axios.post(url,{id}).then(response =>{
                   this.listado();
                   swal({

@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Storage;
 use DB;
 use Validator;
 use Log;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
 
 class CursosController extends Controller
 {
@@ -634,5 +638,60 @@ class CursosController extends Controller
             'error' =>'Hubo inconsistencias el intentar replicar el curso'
         ], 400);
     }
+  }
+
+  function exportar(Request $request){
+    $user =Auth::user();
+    $rol  =$user->slugrol;
+
+    $nombreArchivo = 'export_xls/nuevo_archivo.xlsx';
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    $sheet->setCellValue('A1', 'Hello World !');
+    $writer = new Xlsx($spreadsheet);
+    $writer->save($nombreArchivo);
+  
+    $public_path = public_path();
+    $url =storage_path('app/public/' . $nombreArchivo);
+
+    if (Storage::disk('public')->exists($nombreArchivo))
+    {
+      return response()->download($url);
+    }
+
+    /*if($rol !='in'){
+      return view('layouts.errors.access_denied');
+    }*/
+
+    return response()->json([
+          'message' => 'Curso eliminado correctamente!',
+          'urlArchivo' => $nombreArchivo
+    ]);
+    
+    return response()->json([
+        'error' =>'Hubo una inconsistencias al intentar realizar la descarga'
+    ], 400);
+  }
+
+  function exportar2(Request $request){
+    $user =Auth::user();
+    $rol  =$user->slugrol;
+
+    $nombreArchivo = 'nuevo_archivo.xlsx';
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    $sheet->setCellValue('A1', 'Hello World !');
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('export_xls/'.$nombreArchivo);
+  
+    $public_path = public_path();
+    $url =storage_path('app/public/export_xls/' . $nombreArchivo);
+
+    if (Storage::disk('public_export')->exists('/'.$nombreArchivo))
+    {
+      return response()->download($url);
+    }
+    echo "llego";
+
   }
 }

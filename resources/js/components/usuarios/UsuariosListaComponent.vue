@@ -38,7 +38,7 @@
           <th>Linkedin</th>
           <th>Fecha creacion</th>
           <th>Ultimo Ingreso</th>
-        </tr>
+                  </tr>
         <tr v-for="usuario in pagination.datafilter">
           <td v-text='usuario.id'></td>
           <td v-text='usuario.nombrerol'></td>

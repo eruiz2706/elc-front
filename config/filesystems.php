@@ -66,6 +66,12 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'public_export' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/export_xls'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

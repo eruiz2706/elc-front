@@ -108,6 +108,8 @@ Route::middleware(['lang','auth','navcursos'])->group(function(){
   Route::get('cursos/abrir/{id}', 'backend\modulos\CursosController@abrir');
   Route::post('cursos/borrar', 'backend\modulos\CursosController@borrar');
   Route::post('cursos/replicar', 'backend\modulos\CursosController@replicar');
+  Route::post('cursos/exportar', 'backend\modulos\CursosController@exportar');
+  Route::get('cursos/exportar2', 'backend\modulos\CursosController@exportar2');
 
   Route::post('modulos/lista', 'backend\modulos\ModulosController@lista');
   Route::post('modulos/guardar', 'backend\modulos\ModulosController@guardar');
